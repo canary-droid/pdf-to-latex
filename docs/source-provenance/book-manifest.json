@@ -1,0 +1,5475 @@
+{
+  "schema_version": 1,
+  "kind": "source_preparation",
+  "label": "book_chapter_3",
+  "created_at_utc": "2026-10-17T05:17:30.810117+00:00",
+  "status": "prepared_not_converted_or_verified",
+  "pymupdf_version": "1.26.6",
+  "original": {
+    "path": "/workspace/scratch/e33f136319fd/source-inputs/Non Gaussian Merton Black Scholes Theory - Boyarchenko and Levendorskii.pdf",
+    "sha256": "b48ee347807ea38b399b4c76050270e15d98247ce3207e8e7a3af9bbeb399914",
+    "size_bytes": 15066787,
+    "physical_page_count": 421,
+    "original_file_copied": false
+  },
+  "selection": {
+    "page_start_1based": 89,
+    "page_end_1based": 118,
+    "selected_page_count": 30,
+    "whole_original_selected": false
+  },
+  "selected_pdf": {
+    "path": "source.pdf",
+    "sha256": "3f56ca665560dcf21f2fc09845812f353e22bf4c9c284de526a5d0abd25bcc46",
+    "size_bytes": 983610,
+    "note": "Selected-page derivative; original full-file hash remains authoritative. Document-level signatures/attachments and out-of-range links are not promised."
+  },
+  "metadata": {
+    "path": "metadata.json",
+    "sha256": "f990f9945f274e4ff316a2f6144aa2db1c2b5a808f873121985fdc1fab38c6fd",
+    "size_bytes": 964
+  },
+  "page_ledger": [
+    {
+      "original_physical_page_1based": 1,
+      "original_page_index0": 0,
+      "pdf_catalogue_label": "C",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 2,
+      "original_page_index0": 1,
+      "pdf_catalogue_label": "i",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 3,
+      "original_page_index0": 2,
+      "pdf_catalogue_label": "ii",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 4,
+      "original_page_index0": 3,
+      "pdf_catalogue_label": "iii",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 5,
+      "original_page_index0": 4,
+      "pdf_catalogue_label": "iv",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 6,
+      "original_page_index0": 5,
+      "pdf_catalogue_label": "v",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 7,
+      "original_page_index0": 6,
+      "pdf_catalogue_label": "vi",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 8,
+      "original_page_index0": 7,
+      "pdf_catalogue_label": "vii",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 9,
+      "original_page_index0": 8,
+      "pdf_catalogue_label": "viii",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 10,
+      "original_page_index0": 9,
+      "pdf_catalogue_label": "ix",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 11,
+      "original_page_index0": 10,
+      "pdf_catalogue_label": "x",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 12,
+      "original_page_index0": 11,
+      "pdf_catalogue_label": "xi",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 13,
+      "original_page_index0": 12,
+      "pdf_catalogue_label": "xii",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 14,
+      "original_page_index0": 13,
+      "pdf_catalogue_label": "xiii",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 15,
+      "original_page_index0": 14,
+      "pdf_catalogue_label": "xiv",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 16,
+      "original_page_index0": 15,
+      "pdf_catalogue_label": "xv",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 17,
+      "original_page_index0": 16,
+      "pdf_catalogue_label": "xvi",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 18,
+      "original_page_index0": 17,
+      "pdf_catalogue_label": "xvii",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 19,
+      "original_page_index0": 18,
+      "pdf_catalogue_label": "xviii",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 20,
+      "original_page_index0": 19,
+      "pdf_catalogue_label": "xix",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 21,
+      "original_page_index0": 20,
+      "pdf_catalogue_label": "xx",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 22,
+      "original_page_index0": 21,
+      "pdf_catalogue_label": "xxi",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 23,
+      "original_page_index0": 22,
+      "pdf_catalogue_label": "1",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 24,
+      "original_page_index0": 23,
+      "pdf_catalogue_label": "2",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 25,
+      "original_page_index0": 24,
+      "pdf_catalogue_label": "3",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 26,
+      "original_page_index0": 25,
+      "pdf_catalogue_label": "4",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 27,
+      "original_page_index0": 26,
+      "pdf_catalogue_label": "5",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 28,
+      "original_page_index0": 27,
+      "pdf_catalogue_label": "6",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 29,
+      "original_page_index0": 28,
+      "pdf_catalogue_label": "7",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 30,
+      "original_page_index0": 29,
+      "pdf_catalogue_label": "8",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 31,
+      "original_page_index0": 30,
+      "pdf_catalogue_label": "9",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 32,
+      "original_page_index0": 31,
+      "pdf_catalogue_label": "10",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 33,
+      "original_page_index0": 32,
+      "pdf_catalogue_label": "11",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 34,
+      "original_page_index0": 33,
+      "pdf_catalogue_label": "12",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 35,
+      "original_page_index0": 34,
+      "pdf_catalogue_label": "13",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 36,
+      "original_page_index0": 35,
+      "pdf_catalogue_label": "14",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 37,
+      "original_page_index0": 36,
+      "pdf_catalogue_label": "15",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 38,
+      "original_page_index0": 37,
+      "pdf_catalogue_label": "16",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 39,
+      "original_page_index0": 38,
+      "pdf_catalogue_label": "17",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 40,
+      "original_page_index0": 39,
+      "pdf_catalogue_label": "18",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 41,
+      "original_page_index0": 40,
+      "pdf_catalogue_label": "19",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 42,
+      "original_page_index0": 41,
+      "pdf_catalogue_label": "20",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 43,
+      "original_page_index0": 42,
+      "pdf_catalogue_label": "21",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 44,
+      "original_page_index0": 43,
+      "pdf_catalogue_label": "22",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 45,
+      "original_page_index0": 44,
+      "pdf_catalogue_label": "23",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 46,
+      "original_page_index0": 45,
+      "pdf_catalogue_label": "24",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 47,
+      "original_page_index0": 46,
+      "pdf_catalogue_label": "25",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 48,
+      "original_page_index0": 47,
+      "pdf_catalogue_label": "26",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 49,
+      "original_page_index0": 48,
+      "pdf_catalogue_label": "27",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 50,
+      "original_page_index0": 49,
+      "pdf_catalogue_label": "28",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 51,
+      "original_page_index0": 50,
+      "pdf_catalogue_label": "29",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 52,
+      "original_page_index0": 51,
+      "pdf_catalogue_label": "30",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 53,
+      "original_page_index0": 52,
+      "pdf_catalogue_label": "31",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 54,
+      "original_page_index0": 53,
+      "pdf_catalogue_label": "32",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 55,
+      "original_page_index0": 54,
+      "pdf_catalogue_label": "33",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 56,
+      "original_page_index0": 55,
+      "pdf_catalogue_label": "34",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 57,
+      "original_page_index0": 56,
+      "pdf_catalogue_label": "35",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 58,
+      "original_page_index0": 57,
+      "pdf_catalogue_label": "36",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 59,
+      "original_page_index0": 58,
+      "pdf_catalogue_label": "37",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 60,
+      "original_page_index0": 59,
+      "pdf_catalogue_label": "38",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 61,
+      "original_page_index0": 60,
+      "pdf_catalogue_label": "39",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 62,
+      "original_page_index0": 61,
+      "pdf_catalogue_label": "40",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 63,
+      "original_page_index0": 62,
+      "pdf_catalogue_label": "41",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 64,
+      "original_page_index0": 63,
+      "pdf_catalogue_label": "42",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 65,
+      "original_page_index0": 64,
+      "pdf_catalogue_label": "43",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 66,
+      "original_page_index0": 65,
+      "pdf_catalogue_label": "44",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 67,
+      "original_page_index0": 66,
+      "pdf_catalogue_label": "45",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 68,
+      "original_page_index0": 67,
+      "pdf_catalogue_label": "46",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 69,
+      "original_page_index0": 68,
+      "pdf_catalogue_label": "47",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 70,
+      "original_page_index0": 69,
+      "pdf_catalogue_label": "48",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 71,
+      "original_page_index0": 70,
+      "pdf_catalogue_label": "49",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 72,
+      "original_page_index0": 71,
+      "pdf_catalogue_label": "50",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 73,
+      "original_page_index0": 72,
+      "pdf_catalogue_label": "51",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 74,
+      "original_page_index0": 73,
+      "pdf_catalogue_label": "52",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 75,
+      "original_page_index0": 74,
+      "pdf_catalogue_label": "53",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 76,
+      "original_page_index0": 75,
+      "pdf_catalogue_label": "54",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 77,
+      "original_page_index0": 76,
+      "pdf_catalogue_label": "55",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 78,
+      "original_page_index0": 77,
+      "pdf_catalogue_label": "56",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 79,
+      "original_page_index0": 78,
+      "pdf_catalogue_label": "57",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 80,
+      "original_page_index0": 79,
+      "pdf_catalogue_label": "58",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 81,
+      "original_page_index0": 80,
+      "pdf_catalogue_label": "59",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 82,
+      "original_page_index0": 81,
+      "pdf_catalogue_label": "60",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 83,
+      "original_page_index0": 82,
+      "pdf_catalogue_label": "61",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 84,
+      "original_page_index0": 83,
+      "pdf_catalogue_label": "62",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 85,
+      "original_page_index0": 84,
+      "pdf_catalogue_label": "63",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 86,
+      "original_page_index0": 85,
+      "pdf_catalogue_label": "64",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 87,
+      "original_page_index0": 86,
+      "pdf_catalogue_label": "65",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 88,
+      "original_page_index0": 87,
+      "pdf_catalogue_label": "66",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 89,
+      "original_page_index0": 88,
+      "pdf_catalogue_label": "67",
+      "printed_page_label": null,
+      "scope": "selected",
+      "selected_page_1based": 1
+    },
+    {
+      "original_physical_page_1based": 90,
+      "original_page_index0": 89,
+      "pdf_catalogue_label": "68",
+      "printed_page_label": null,
+      "scope": "selected",
+      "selected_page_1based": 2
+    },
+    {
+      "original_physical_page_1based": 91,
+      "original_page_index0": 90,
+      "pdf_catalogue_label": "69",
+      "printed_page_label": null,
+      "scope": "selected",
+      "selected_page_1based": 3
+    },
+    {
+      "original_physical_page_1based": 92,
+      "original_page_index0": 91,
+      "pdf_catalogue_label": "70",
+      "printed_page_label": null,
+      "scope": "selected",
+      "selected_page_1based": 4
+    },
+    {
+      "original_physical_page_1based": 93,
+      "original_page_index0": 92,
+      "pdf_catalogue_label": "71",
+      "printed_page_label": null,
+      "scope": "selected",
+      "selected_page_1based": 5
+    },
+    {
+      "original_physical_page_1based": 94,
+      "original_page_index0": 93,
+      "pdf_catalogue_label": "72",
+      "printed_page_label": null,
+      "scope": "selected",
+      "selected_page_1based": 6
+    },
+    {
+      "original_physical_page_1based": 95,
+      "original_page_index0": 94,
+      "pdf_catalogue_label": "73",
+      "printed_page_label": null,
+      "scope": "selected",
+      "selected_page_1based": 7
+    },
+    {
+      "original_physical_page_1based": 96,
+      "original_page_index0": 95,
+      "pdf_catalogue_label": "74",
+      "printed_page_label": null,
+      "scope": "selected",
+      "selected_page_1based": 8
+    },
+    {
+      "original_physical_page_1based": 97,
+      "original_page_index0": 96,
+      "pdf_catalogue_label": "75",
+      "printed_page_label": null,
+      "scope": "selected",
+      "selected_page_1based": 9
+    },
+    {
+      "original_physical_page_1based": 98,
+      "original_page_index0": 97,
+      "pdf_catalogue_label": "76",
+      "printed_page_label": null,
+      "scope": "selected",
+      "selected_page_1based": 10
+    },
+    {
+      "original_physical_page_1based": 99,
+      "original_page_index0": 98,
+      "pdf_catalogue_label": "77",
+      "printed_page_label": null,
+      "scope": "selected",
+      "selected_page_1based": 11
+    },
+    {
+      "original_physical_page_1based": 100,
+      "original_page_index0": 99,
+      "pdf_catalogue_label": "78",
+      "printed_page_label": null,
+      "scope": "selected",
+      "selected_page_1based": 12
+    },
+    {
+      "original_physical_page_1based": 101,
+      "original_page_index0": 100,
+      "pdf_catalogue_label": "79",
+      "printed_page_label": null,
+      "scope": "selected",
+      "selected_page_1based": 13
+    },
+    {
+      "original_physical_page_1based": 102,
+      "original_page_index0": 101,
+      "pdf_catalogue_label": "80",
+      "printed_page_label": null,
+      "scope": "selected",
+      "selected_page_1based": 14
+    },
+    {
+      "original_physical_page_1based": 103,
+      "original_page_index0": 102,
+      "pdf_catalogue_label": "81",
+      "printed_page_label": null,
+      "scope": "selected",
+      "selected_page_1based": 15
+    },
+    {
+      "original_physical_page_1based": 104,
+      "original_page_index0": 103,
+      "pdf_catalogue_label": "82",
+      "printed_page_label": null,
+      "scope": "selected",
+      "selected_page_1based": 16
+    },
+    {
+      "original_physical_page_1based": 105,
+      "original_page_index0": 104,
+      "pdf_catalogue_label": "83",
+      "printed_page_label": null,
+      "scope": "selected",
+      "selected_page_1based": 17
+    },
+    {
+      "original_physical_page_1based": 106,
+      "original_page_index0": 105,
+      "pdf_catalogue_label": "84",
+      "printed_page_label": null,
+      "scope": "selected",
+      "selected_page_1based": 18
+    },
+    {
+      "original_physical_page_1based": 107,
+      "original_page_index0": 106,
+      "pdf_catalogue_label": "85",
+      "printed_page_label": null,
+      "scope": "selected",
+      "selected_page_1based": 19
+    },
+    {
+      "original_physical_page_1based": 108,
+      "original_page_index0": 107,
+      "pdf_catalogue_label": "86",
+      "printed_page_label": null,
+      "scope": "selected",
+      "selected_page_1based": 20
+    },
+    {
+      "original_physical_page_1based": 109,
+      "original_page_index0": 108,
+      "pdf_catalogue_label": "87",
+      "printed_page_label": null,
+      "scope": "selected",
+      "selected_page_1based": 21
+    },
+    {
+      "original_physical_page_1based": 110,
+      "original_page_index0": 109,
+      "pdf_catalogue_label": "88",
+      "printed_page_label": null,
+      "scope": "selected",
+      "selected_page_1based": 22
+    },
+    {
+      "original_physical_page_1based": 111,
+      "original_page_index0": 110,
+      "pdf_catalogue_label": "89",
+      "printed_page_label": null,
+      "scope": "selected",
+      "selected_page_1based": 23
+    },
+    {
+      "original_physical_page_1based": 112,
+      "original_page_index0": 111,
+      "pdf_catalogue_label": "90",
+      "printed_page_label": null,
+      "scope": "selected",
+      "selected_page_1based": 24
+    },
+    {
+      "original_physical_page_1based": 113,
+      "original_page_index0": 112,
+      "pdf_catalogue_label": "91",
+      "printed_page_label": null,
+      "scope": "selected",
+      "selected_page_1based": 25
+    },
+    {
+      "original_physical_page_1based": 114,
+      "original_page_index0": 113,
+      "pdf_catalogue_label": "92",
+      "printed_page_label": null,
+      "scope": "selected",
+      "selected_page_1based": 26
+    },
+    {
+      "original_physical_page_1based": 115,
+      "original_page_index0": 114,
+      "pdf_catalogue_label": "93",
+      "printed_page_label": null,
+      "scope": "selected",
+      "selected_page_1based": 27
+    },
+    {
+      "original_physical_page_1based": 116,
+      "original_page_index0": 115,
+      "pdf_catalogue_label": "94",
+      "printed_page_label": null,
+      "scope": "selected",
+      "selected_page_1based": 28
+    },
+    {
+      "original_physical_page_1based": 117,
+      "original_page_index0": 116,
+      "pdf_catalogue_label": "95",
+      "printed_page_label": null,
+      "scope": "selected",
+      "selected_page_1based": 29
+    },
+    {
+      "original_physical_page_1based": 118,
+      "original_page_index0": 117,
+      "pdf_catalogue_label": "96",
+      "printed_page_label": null,
+      "scope": "selected",
+      "selected_page_1based": 30
+    },
+    {
+      "original_physical_page_1based": 119,
+      "original_page_index0": 118,
+      "pdf_catalogue_label": "97",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 120,
+      "original_page_index0": 119,
+      "pdf_catalogue_label": "98",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 121,
+      "original_page_index0": 120,
+      "pdf_catalogue_label": "99",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 122,
+      "original_page_index0": 121,
+      "pdf_catalogue_label": "100",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 123,
+      "original_page_index0": 122,
+      "pdf_catalogue_label": "101",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 124,
+      "original_page_index0": 123,
+      "pdf_catalogue_label": "102",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 125,
+      "original_page_index0": 124,
+      "pdf_catalogue_label": "103",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 126,
+      "original_page_index0": 125,
+      "pdf_catalogue_label": "104",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 127,
+      "original_page_index0": 126,
+      "pdf_catalogue_label": "105",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 128,
+      "original_page_index0": 127,
+      "pdf_catalogue_label": "106",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 129,
+      "original_page_index0": 128,
+      "pdf_catalogue_label": "107",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 130,
+      "original_page_index0": 129,
+      "pdf_catalogue_label": "108",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 131,
+      "original_page_index0": 130,
+      "pdf_catalogue_label": "109",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 132,
+      "original_page_index0": 131,
+      "pdf_catalogue_label": "110",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 133,
+      "original_page_index0": 132,
+      "pdf_catalogue_label": "111",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 134,
+      "original_page_index0": 133,
+      "pdf_catalogue_label": "112",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 135,
+      "original_page_index0": 134,
+      "pdf_catalogue_label": "113",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 136,
+      "original_page_index0": 135,
+      "pdf_catalogue_label": "114",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 137,
+      "original_page_index0": 136,
+      "pdf_catalogue_label": "115",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 138,
+      "original_page_index0": 137,
+      "pdf_catalogue_label": "116",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 139,
+      "original_page_index0": 138,
+      "pdf_catalogue_label": "117",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 140,
+      "original_page_index0": 139,
+      "pdf_catalogue_label": "118",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 141,
+      "original_page_index0": 140,
+      "pdf_catalogue_label": "119",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 142,
+      "original_page_index0": 141,
+      "pdf_catalogue_label": "120",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 143,
+      "original_page_index0": 142,
+      "pdf_catalogue_label": "121",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 144,
+      "original_page_index0": 143,
+      "pdf_catalogue_label": "122",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 145,
+      "original_page_index0": 144,
+      "pdf_catalogue_label": "123",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 146,
+      "original_page_index0": 145,
+      "pdf_catalogue_label": "124",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 147,
+      "original_page_index0": 146,
+      "pdf_catalogue_label": "125",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 148,
+      "original_page_index0": 147,
+      "pdf_catalogue_label": "126",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 149,
+      "original_page_index0": 148,
+      "pdf_catalogue_label": "127",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 150,
+      "original_page_index0": 149,
+      "pdf_catalogue_label": "128",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 151,
+      "original_page_index0": 150,
+      "pdf_catalogue_label": "129",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 152,
+      "original_page_index0": 151,
+      "pdf_catalogue_label": "130",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 153,
+      "original_page_index0": 152,
+      "pdf_catalogue_label": "131",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 154,
+      "original_page_index0": 153,
+      "pdf_catalogue_label": "132",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 155,
+      "original_page_index0": 154,
+      "pdf_catalogue_label": "133",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 156,
+      "original_page_index0": 155,
+      "pdf_catalogue_label": "134",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 157,
+      "original_page_index0": 156,
+      "pdf_catalogue_label": "135",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 158,
+      "original_page_index0": 157,
+      "pdf_catalogue_label": "136",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 159,
+      "original_page_index0": 158,
+      "pdf_catalogue_label": "137",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 160,
+      "original_page_index0": 159,
+      "pdf_catalogue_label": "138",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 161,
+      "original_page_index0": 160,
+      "pdf_catalogue_label": "139",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 162,
+      "original_page_index0": 161,
+      "pdf_catalogue_label": "140",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 163,
+      "original_page_index0": 162,
+      "pdf_catalogue_label": "141",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 164,
+      "original_page_index0": 163,
+      "pdf_catalogue_label": "142",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 165,
+      "original_page_index0": 164,
+      "pdf_catalogue_label": "143",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 166,
+      "original_page_index0": 165,
+      "pdf_catalogue_label": "144",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 167,
+      "original_page_index0": 166,
+      "pdf_catalogue_label": "145",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 168,
+      "original_page_index0": 167,
+      "pdf_catalogue_label": "146",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 169,
+      "original_page_index0": 168,
+      "pdf_catalogue_label": "147",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 170,
+      "original_page_index0": 169,
+      "pdf_catalogue_label": "148",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 171,
+      "original_page_index0": 170,
+      "pdf_catalogue_label": "149",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 172,
+      "original_page_index0": 171,
+      "pdf_catalogue_label": "150",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 173,
+      "original_page_index0": 172,
+      "pdf_catalogue_label": "151",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 174,
+      "original_page_index0": 173,
+      "pdf_catalogue_label": "152",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 175,
+      "original_page_index0": 174,
+      "pdf_catalogue_label": "153",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 176,
+      "original_page_index0": 175,
+      "pdf_catalogue_label": "154",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 177,
+      "original_page_index0": 176,
+      "pdf_catalogue_label": "155",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 178,
+      "original_page_index0": 177,
+      "pdf_catalogue_label": "156",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 179,
+      "original_page_index0": 178,
+      "pdf_catalogue_label": "157",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 180,
+      "original_page_index0": 179,
+      "pdf_catalogue_label": "158",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 181,
+      "original_page_index0": 180,
+      "pdf_catalogue_label": "159",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 182,
+      "original_page_index0": 181,
+      "pdf_catalogue_label": "160",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 183,
+      "original_page_index0": 182,
+      "pdf_catalogue_label": "161",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 184,
+      "original_page_index0": 183,
+      "pdf_catalogue_label": "162",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 185,
+      "original_page_index0": 184,
+      "pdf_catalogue_label": "163",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 186,
+      "original_page_index0": 185,
+      "pdf_catalogue_label": "164",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 187,
+      "original_page_index0": 186,
+      "pdf_catalogue_label": "165",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 188,
+      "original_page_index0": 187,
+      "pdf_catalogue_label": "166",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 189,
+      "original_page_index0": 188,
+      "pdf_catalogue_label": "167",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 190,
+      "original_page_index0": 189,
+      "pdf_catalogue_label": "168",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 191,
+      "original_page_index0": 190,
+      "pdf_catalogue_label": "169",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 192,
+      "original_page_index0": 191,
+      "pdf_catalogue_label": "170",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 193,
+      "original_page_index0": 192,
+      "pdf_catalogue_label": "171",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 194,
+      "original_page_index0": 193,
+      "pdf_catalogue_label": "172",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 195,
+      "original_page_index0": 194,
+      "pdf_catalogue_label": "173",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 196,
+      "original_page_index0": 195,
+      "pdf_catalogue_label": "174",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 197,
+      "original_page_index0": 196,
+      "pdf_catalogue_label": "175",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 198,
+      "original_page_index0": 197,
+      "pdf_catalogue_label": "176",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 199,
+      "original_page_index0": 198,
+      "pdf_catalogue_label": "177",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 200,
+      "original_page_index0": 199,
+      "pdf_catalogue_label": "178",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 201,
+      "original_page_index0": 200,
+      "pdf_catalogue_label": "179",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 202,
+      "original_page_index0": 201,
+      "pdf_catalogue_label": "180",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 203,
+      "original_page_index0": 202,
+      "pdf_catalogue_label": "181",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 204,
+      "original_page_index0": 203,
+      "pdf_catalogue_label": "182",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 205,
+      "original_page_index0": 204,
+      "pdf_catalogue_label": "183",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 206,
+      "original_page_index0": 205,
+      "pdf_catalogue_label": "184",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 207,
+      "original_page_index0": 206,
+      "pdf_catalogue_label": "185",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 208,
+      "original_page_index0": 207,
+      "pdf_catalogue_label": "186",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 209,
+      "original_page_index0": 208,
+      "pdf_catalogue_label": "187",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 210,
+      "original_page_index0": 209,
+      "pdf_catalogue_label": "188",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 211,
+      "original_page_index0": 210,
+      "pdf_catalogue_label": "189",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 212,
+      "original_page_index0": 211,
+      "pdf_catalogue_label": "190",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 213,
+      "original_page_index0": 212,
+      "pdf_catalogue_label": "191",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 214,
+      "original_page_index0": 213,
+      "pdf_catalogue_label": "192",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 215,
+      "original_page_index0": 214,
+      "pdf_catalogue_label": "193",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 216,
+      "original_page_index0": 215,
+      "pdf_catalogue_label": "194",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 217,
+      "original_page_index0": 216,
+      "pdf_catalogue_label": "195",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 218,
+      "original_page_index0": 217,
+      "pdf_catalogue_label": "196",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 219,
+      "original_page_index0": 218,
+      "pdf_catalogue_label": "197",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 220,
+      "original_page_index0": 219,
+      "pdf_catalogue_label": "198",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 221,
+      "original_page_index0": 220,
+      "pdf_catalogue_label": "199",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 222,
+      "original_page_index0": 221,
+      "pdf_catalogue_label": "200",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 223,
+      "original_page_index0": 222,
+      "pdf_catalogue_label": "201",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 224,
+      "original_page_index0": 223,
+      "pdf_catalogue_label": "202",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 225,
+      "original_page_index0": 224,
+      "pdf_catalogue_label": "203",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 226,
+      "original_page_index0": 225,
+      "pdf_catalogue_label": "204",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 227,
+      "original_page_index0": 226,
+      "pdf_catalogue_label": "205",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 228,
+      "original_page_index0": 227,
+      "pdf_catalogue_label": "206",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 229,
+      "original_page_index0": 228,
+      "pdf_catalogue_label": "207",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 230,
+      "original_page_index0": 229,
+      "pdf_catalogue_label": "208",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 231,
+      "original_page_index0": 230,
+      "pdf_catalogue_label": "209",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 232,
+      "original_page_index0": 231,
+      "pdf_catalogue_label": "210",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 233,
+      "original_page_index0": 232,
+      "pdf_catalogue_label": "211",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 234,
+      "original_page_index0": 233,
+      "pdf_catalogue_label": "212",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 235,
+      "original_page_index0": 234,
+      "pdf_catalogue_label": "213",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 236,
+      "original_page_index0": 235,
+      "pdf_catalogue_label": "214",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 237,
+      "original_page_index0": 236,
+      "pdf_catalogue_label": "215",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 238,
+      "original_page_index0": 237,
+      "pdf_catalogue_label": "216",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 239,
+      "original_page_index0": 238,
+      "pdf_catalogue_label": "217",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 240,
+      "original_page_index0": 239,
+      "pdf_catalogue_label": "218",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 241,
+      "original_page_index0": 240,
+      "pdf_catalogue_label": "219",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 242,
+      "original_page_index0": 241,
+      "pdf_catalogue_label": "220",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 243,
+      "original_page_index0": 242,
+      "pdf_catalogue_label": "221",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 244,
+      "original_page_index0": 243,
+      "pdf_catalogue_label": "222",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 245,
+      "original_page_index0": 244,
+      "pdf_catalogue_label": "223",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 246,
+      "original_page_index0": 245,
+      "pdf_catalogue_label": "224",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 247,
+      "original_page_index0": 246,
+      "pdf_catalogue_label": "225",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 248,
+      "original_page_index0": 247,
+      "pdf_catalogue_label": "226",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 249,
+      "original_page_index0": 248,
+      "pdf_catalogue_label": "227",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 250,
+      "original_page_index0": 249,
+      "pdf_catalogue_label": "228",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 251,
+      "original_page_index0": 250,
+      "pdf_catalogue_label": "229",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 252,
+      "original_page_index0": 251,
+      "pdf_catalogue_label": "230",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 253,
+      "original_page_index0": 252,
+      "pdf_catalogue_label": "231",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 254,
+      "original_page_index0": 253,
+      "pdf_catalogue_label": "232",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 255,
+      "original_page_index0": 254,
+      "pdf_catalogue_label": "233",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 256,
+      "original_page_index0": 255,
+      "pdf_catalogue_label": "234",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 257,
+      "original_page_index0": 256,
+      "pdf_catalogue_label": "235",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 258,
+      "original_page_index0": 257,
+      "pdf_catalogue_label": "236",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 259,
+      "original_page_index0": 258,
+      "pdf_catalogue_label": "237",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 260,
+      "original_page_index0": 259,
+      "pdf_catalogue_label": "238",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 261,
+      "original_page_index0": 260,
+      "pdf_catalogue_label": "239",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 262,
+      "original_page_index0": 261,
+      "pdf_catalogue_label": "240",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 263,
+      "original_page_index0": 262,
+      "pdf_catalogue_label": "241",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 264,
+      "original_page_index0": 263,
+      "pdf_catalogue_label": "242",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 265,
+      "original_page_index0": 264,
+      "pdf_catalogue_label": "243",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 266,
+      "original_page_index0": 265,
+      "pdf_catalogue_label": "244",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 267,
+      "original_page_index0": 266,
+      "pdf_catalogue_label": "245",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 268,
+      "original_page_index0": 267,
+      "pdf_catalogue_label": "246",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 269,
+      "original_page_index0": 268,
+      "pdf_catalogue_label": "247",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 270,
+      "original_page_index0": 269,
+      "pdf_catalogue_label": "248",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 271,
+      "original_page_index0": 270,
+      "pdf_catalogue_label": "249",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 272,
+      "original_page_index0": 271,
+      "pdf_catalogue_label": "250",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 273,
+      "original_page_index0": 272,
+      "pdf_catalogue_label": "251",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 274,
+      "original_page_index0": 273,
+      "pdf_catalogue_label": "252",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 275,
+      "original_page_index0": 274,
+      "pdf_catalogue_label": "253",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 276,
+      "original_page_index0": 275,
+      "pdf_catalogue_label": "254",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 277,
+      "original_page_index0": 276,
+      "pdf_catalogue_label": "255",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 278,
+      "original_page_index0": 277,
+      "pdf_catalogue_label": "256",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 279,
+      "original_page_index0": 278,
+      "pdf_catalogue_label": "257",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 280,
+      "original_page_index0": 279,
+      "pdf_catalogue_label": "258",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 281,
+      "original_page_index0": 280,
+      "pdf_catalogue_label": "259",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 282,
+      "original_page_index0": 281,
+      "pdf_catalogue_label": "260",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 283,
+      "original_page_index0": 282,
+      "pdf_catalogue_label": "261",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 284,
+      "original_page_index0": 283,
+      "pdf_catalogue_label": "262",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 285,
+      "original_page_index0": 284,
+      "pdf_catalogue_label": "263",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 286,
+      "original_page_index0": 285,
+      "pdf_catalogue_label": "264",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 287,
+      "original_page_index0": 286,
+      "pdf_catalogue_label": "265",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 288,
+      "original_page_index0": 287,
+      "pdf_catalogue_label": "266",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 289,
+      "original_page_index0": 288,
+      "pdf_catalogue_label": "267",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 290,
+      "original_page_index0": 289,
+      "pdf_catalogue_label": "268",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 291,
+      "original_page_index0": 290,
+      "pdf_catalogue_label": "269",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 292,
+      "original_page_index0": 291,
+      "pdf_catalogue_label": "270",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 293,
+      "original_page_index0": 292,
+      "pdf_catalogue_label": "271",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 294,
+      "original_page_index0": 293,
+      "pdf_catalogue_label": "272",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 295,
+      "original_page_index0": 294,
+      "pdf_catalogue_label": "273",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 296,
+      "original_page_index0": 295,
+      "pdf_catalogue_label": "274",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 297,
+      "original_page_index0": 296,
+      "pdf_catalogue_label": "275",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 298,
+      "original_page_index0": 297,
+      "pdf_catalogue_label": "276",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 299,
+      "original_page_index0": 298,
+      "pdf_catalogue_label": "277",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 300,
+      "original_page_index0": 299,
+      "pdf_catalogue_label": "278",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 301,
+      "original_page_index0": 300,
+      "pdf_catalogue_label": "279",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 302,
+      "original_page_index0": 301,
+      "pdf_catalogue_label": "280",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 303,
+      "original_page_index0": 302,
+      "pdf_catalogue_label": "281",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 304,
+      "original_page_index0": 303,
+      "pdf_catalogue_label": "282",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 305,
+      "original_page_index0": 304,
+      "pdf_catalogue_label": "283",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 306,
+      "original_page_index0": 305,
+      "pdf_catalogue_label": "284",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 307,
+      "original_page_index0": 306,
+      "pdf_catalogue_label": "285",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 308,
+      "original_page_index0": 307,
+      "pdf_catalogue_label": "286",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 309,
+      "original_page_index0": 308,
+      "pdf_catalogue_label": "287",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 310,
+      "original_page_index0": 309,
+      "pdf_catalogue_label": "288",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 311,
+      "original_page_index0": 310,
+      "pdf_catalogue_label": "289",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 312,
+      "original_page_index0": 311,
+      "pdf_catalogue_label": "290",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 313,
+      "original_page_index0": 312,
+      "pdf_catalogue_label": "291",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 314,
+      "original_page_index0": 313,
+      "pdf_catalogue_label": "292",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 315,
+      "original_page_index0": 314,
+      "pdf_catalogue_label": "293",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 316,
+      "original_page_index0": 315,
+      "pdf_catalogue_label": "294",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 317,
+      "original_page_index0": 316,
+      "pdf_catalogue_label": "295",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 318,
+      "original_page_index0": 317,
+      "pdf_catalogue_label": "296",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 319,
+      "original_page_index0": 318,
+      "pdf_catalogue_label": "297",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 320,
+      "original_page_index0": 319,
+      "pdf_catalogue_label": "298",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 321,
+      "original_page_index0": 320,
+      "pdf_catalogue_label": "299",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 322,
+      "original_page_index0": 321,
+      "pdf_catalogue_label": "300",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 323,
+      "original_page_index0": 322,
+      "pdf_catalogue_label": "301",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 324,
+      "original_page_index0": 323,
+      "pdf_catalogue_label": "302",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 325,
+      "original_page_index0": 324,
+      "pdf_catalogue_label": "303",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 326,
+      "original_page_index0": 325,
+      "pdf_catalogue_label": "304",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 327,
+      "original_page_index0": 326,
+      "pdf_catalogue_label": "305",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 328,
+      "original_page_index0": 327,
+      "pdf_catalogue_label": "306",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 329,
+      "original_page_index0": 328,
+      "pdf_catalogue_label": "307",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 330,
+      "original_page_index0": 329,
+      "pdf_catalogue_label": "308",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 331,
+      "original_page_index0": 330,
+      "pdf_catalogue_label": "309",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 332,
+      "original_page_index0": 331,
+      "pdf_catalogue_label": "310",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 333,
+      "original_page_index0": 332,
+      "pdf_catalogue_label": "311",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 334,
+      "original_page_index0": 333,
+      "pdf_catalogue_label": "312",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 335,
+      "original_page_index0": 334,
+      "pdf_catalogue_label": "313",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 336,
+      "original_page_index0": 335,
+      "pdf_catalogue_label": "314",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 337,
+      "original_page_index0": 336,
+      "pdf_catalogue_label": "315",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 338,
+      "original_page_index0": 337,
+      "pdf_catalogue_label": "316",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 339,
+      "original_page_index0": 338,
+      "pdf_catalogue_label": "317",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 340,
+      "original_page_index0": 339,
+      "pdf_catalogue_label": "318",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 341,
+      "original_page_index0": 340,
+      "pdf_catalogue_label": "319",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 342,
+      "original_page_index0": 341,
+      "pdf_catalogue_label": "320",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 343,
+      "original_page_index0": 342,
+      "pdf_catalogue_label": "321",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 344,
+      "original_page_index0": 343,
+      "pdf_catalogue_label": "322",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 345,
+      "original_page_index0": 344,
+      "pdf_catalogue_label": "323",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 346,
+      "original_page_index0": 345,
+      "pdf_catalogue_label": "324",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 347,
+      "original_page_index0": 346,
+      "pdf_catalogue_label": "325",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 348,
+      "original_page_index0": 347,
+      "pdf_catalogue_label": "326",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 349,
+      "original_page_index0": 348,
+      "pdf_catalogue_label": "327",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 350,
+      "original_page_index0": 349,
+      "pdf_catalogue_label": "328",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 351,
+      "original_page_index0": 350,
+      "pdf_catalogue_label": "329",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 352,
+      "original_page_index0": 351,
+      "pdf_catalogue_label": "330",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 353,
+      "original_page_index0": 352,
+      "pdf_catalogue_label": "331",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 354,
+      "original_page_index0": 353,
+      "pdf_catalogue_label": "332",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 355,
+      "original_page_index0": 354,
+      "pdf_catalogue_label": "333",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 356,
+      "original_page_index0": 355,
+      "pdf_catalogue_label": "334",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 357,
+      "original_page_index0": 356,
+      "pdf_catalogue_label": "335",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 358,
+      "original_page_index0": 357,
+      "pdf_catalogue_label": "336",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 359,
+      "original_page_index0": 358,
+      "pdf_catalogue_label": "337",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 360,
+      "original_page_index0": 359,
+      "pdf_catalogue_label": "338",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 361,
+      "original_page_index0": 360,
+      "pdf_catalogue_label": "339",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 362,
+      "original_page_index0": 361,
+      "pdf_catalogue_label": "340",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 363,
+      "original_page_index0": 362,
+      "pdf_catalogue_label": "341",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 364,
+      "original_page_index0": 363,
+      "pdf_catalogue_label": "342",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 365,
+      "original_page_index0": 364,
+      "pdf_catalogue_label": "343",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 366,
+      "original_page_index0": 365,
+      "pdf_catalogue_label": "344",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 367,
+      "original_page_index0": 366,
+      "pdf_catalogue_label": "345",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 368,
+      "original_page_index0": 367,
+      "pdf_catalogue_label": "346",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 369,
+      "original_page_index0": 368,
+      "pdf_catalogue_label": "347",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 370,
+      "original_page_index0": 369,
+      "pdf_catalogue_label": "348",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 371,
+      "original_page_index0": 370,
+      "pdf_catalogue_label": "349",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 372,
+      "original_page_index0": 371,
+      "pdf_catalogue_label": "350",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 373,
+      "original_page_index0": 372,
+      "pdf_catalogue_label": "351",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 374,
+      "original_page_index0": 373,
+      "pdf_catalogue_label": "352",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 375,
+      "original_page_index0": 374,
+      "pdf_catalogue_label": "353",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 376,
+      "original_page_index0": 375,
+      "pdf_catalogue_label": "354",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 377,
+      "original_page_index0": 376,
+      "pdf_catalogue_label": "355",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 378,
+      "original_page_index0": 377,
+      "pdf_catalogue_label": "356",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 379,
+      "original_page_index0": 378,
+      "pdf_catalogue_label": "357",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 380,
+      "original_page_index0": 379,
+      "pdf_catalogue_label": "358",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 381,
+      "original_page_index0": 380,
+      "pdf_catalogue_label": "359",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 382,
+      "original_page_index0": 381,
+      "pdf_catalogue_label": "360",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 383,
+      "original_page_index0": 382,
+      "pdf_catalogue_label": "361",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 384,
+      "original_page_index0": 383,
+      "pdf_catalogue_label": "362",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 385,
+      "original_page_index0": 384,
+      "pdf_catalogue_label": "363",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 386,
+      "original_page_index0": 385,
+      "pdf_catalogue_label": "364",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 387,
+      "original_page_index0": 386,
+      "pdf_catalogue_label": "365",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 388,
+      "original_page_index0": 387,
+      "pdf_catalogue_label": "366",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 389,
+      "original_page_index0": 388,
+      "pdf_catalogue_label": "367",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 390,
+      "original_page_index0": 389,
+      "pdf_catalogue_label": "368",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 391,
+      "original_page_index0": 390,
+      "pdf_catalogue_label": "369",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 392,
+      "original_page_index0": 391,
+      "pdf_catalogue_label": "370",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 393,
+      "original_page_index0": 392,
+      "pdf_catalogue_label": "371",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 394,
+      "original_page_index0": 393,
+      "pdf_catalogue_label": "372",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 395,
+      "original_page_index0": 394,
+      "pdf_catalogue_label": "373",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 396,
+      "original_page_index0": 395,
+      "pdf_catalogue_label": "374",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 397,
+      "original_page_index0": 396,
+      "pdf_catalogue_label": "375",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 398,
+      "original_page_index0": 397,
+      "pdf_catalogue_label": "376",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 399,
+      "original_page_index0": 398,
+      "pdf_catalogue_label": "377",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 400,
+      "original_page_index0": 399,
+      "pdf_catalogue_label": "378",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 401,
+      "original_page_index0": 400,
+      "pdf_catalogue_label": "379",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 402,
+      "original_page_index0": 401,
+      "pdf_catalogue_label": "380",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 403,
+      "original_page_index0": 402,
+      "pdf_catalogue_label": "381",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 404,
+      "original_page_index0": 403,
+      "pdf_catalogue_label": "382",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 405,
+      "original_page_index0": 404,
+      "pdf_catalogue_label": "383",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 406,
+      "original_page_index0": 405,
+      "pdf_catalogue_label": "384",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 407,
+      "original_page_index0": 406,
+      "pdf_catalogue_label": "385",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 408,
+      "original_page_index0": 407,
+      "pdf_catalogue_label": "386",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 409,
+      "original_page_index0": 408,
+      "pdf_catalogue_label": "387",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 410,
+      "original_page_index0": 409,
+      "pdf_catalogue_label": "388",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 411,
+      "original_page_index0": 410,
+      "pdf_catalogue_label": "389",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 412,
+      "original_page_index0": 411,
+      "pdf_catalogue_label": "390",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 413,
+      "original_page_index0": 412,
+      "pdf_catalogue_label": "391",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 414,
+      "original_page_index0": 413,
+      "pdf_catalogue_label": "392",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 415,
+      "original_page_index0": 414,
+      "pdf_catalogue_label": "393",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 416,
+      "original_page_index0": 415,
+      "pdf_catalogue_label": "394",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 417,
+      "original_page_index0": 416,
+      "pdf_catalogue_label": "395",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 418,
+      "original_page_index0": 417,
+      "pdf_catalogue_label": "396",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 419,
+      "original_page_index0": 418,
+      "pdf_catalogue_label": "397",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 420,
+      "original_page_index0": 419,
+      "pdf_catalogue_label": "398",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    },
+    {
+      "original_physical_page_1based": 421,
+      "original_page_index0": 420,
+      "pdf_catalogue_label": "B",
+      "printed_page_label": null,
+      "scope": "outside_selected_scope",
+      "selected_page_1based": null
+    }
+  ],
+  "pages": [
+    {
+      "original_physical_page_1based": 89,
+      "selected_page_1based": 1,
+      "pdf_catalogue_label": "67",
+      "printed_page_label": null,
+      "geometry": {
+        "rotation_degrees": 0,
+        "displayed_rect_points": [
+          0.0,
+          0.0,
+          408.9599914550781,
+          607.6799926757812
+        ],
+        "cropbox_points": [
+          0.0,
+          0.0,
+          408.9599914550781,
+          607.6799926757812
+        ],
+        "mediabox_points": [
+          0.0,
+          0.0,
+          408.9599914550781,
+          607.6799926757812
+        ],
+        "rotation_matrix": [
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "derotation_matrix": [
+          1.0,
+          -0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "native_coordinate_frame": "PyMuPDF unrotated page coordinates in points",
+        "preview_coordinate_frame": "displayed (rotated) page coordinates in points"
+      },
+      "classification": {
+        "image_backed": true,
+        "image_count": 1,
+        "largest_single_image_page_fraction": 1.0,
+        "image_backed_threshold": 0.8,
+        "native_text_present": true,
+        "native_character_count": 1557,
+        "ocr_recommended": true,
+        "native_text_is_verified_ground_truth": false,
+        "note": "Routing heuristic only. Full-page imagery can coexist with damaged hidden OCR; selectable text is not mathematical ground truth. Tiled scans may evade the single-image heuristic."
+      },
+      "native_evidence": {
+        "path": "native/page-000089.json",
+        "sha256": "dd362e024212ef1e4daa8ca7679ec1f304d47c9e26f910d925c9db37de0ba710",
+        "size_bytes": 787923
+      },
+      "preview": {
+        "path": "previews/page-000089.png",
+        "sha256": "ab122b0acc2c0f808a542065571a383f39eebf2789b075e7d6573de641c69e78",
+        "size_bytes": 188842,
+        "dpi": 120,
+        "width": 682,
+        "height": 1013
+      }
+    },
+    {
+      "original_physical_page_1based": 90,
+      "selected_page_1based": 2,
+      "pdf_catalogue_label": "68",
+      "printed_page_label": null,
+      "geometry": {
+        "rotation_degrees": 0,
+        "displayed_rect_points": [
+          0.0,
+          0.0,
+          412.55999755859375,
+          610.0800170898438
+        ],
+        "cropbox_points": [
+          0.0,
+          0.0,
+          412.55999755859375,
+          610.0800170898438
+        ],
+        "mediabox_points": [
+          0.0,
+          0.0,
+          412.55999755859375,
+          610.0800170898438
+        ],
+        "rotation_matrix": [
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "derotation_matrix": [
+          1.0,
+          -0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "native_coordinate_frame": "PyMuPDF unrotated page coordinates in points",
+        "preview_coordinate_frame": "displayed (rotated) page coordinates in points"
+      },
+      "classification": {
+        "image_backed": true,
+        "image_count": 1,
+        "largest_single_image_page_fraction": 1.0,
+        "image_backed_threshold": 0.8,
+        "native_text_present": true,
+        "native_character_count": 1988,
+        "ocr_recommended": true,
+        "native_text_is_verified_ground_truth": false,
+        "note": "Routing heuristic only. Full-page imagery can coexist with damaged hidden OCR; selectable text is not mathematical ground truth. Tiled scans may evade the single-image heuristic."
+      },
+      "native_evidence": {
+        "path": "native/page-000090.json",
+        "sha256": "8c68cbb3863cf1a1668e117383d39f642290454806dbcf34b329f7ce62ab67dc",
+        "size_bytes": 1035612
+      },
+      "preview": {
+        "path": "previews/page-000090.png",
+        "sha256": "e5ddef06f9faf934fc9ad1d31486e8d32ce3aa1950aa0f2e9248fd5f1206bb4f",
+        "size_bytes": 211630,
+        "dpi": 120,
+        "width": 688,
+        "height": 1017
+      }
+    },
+    {
+      "original_physical_page_1based": 91,
+      "selected_page_1based": 3,
+      "pdf_catalogue_label": "69",
+      "printed_page_label": null,
+      "geometry": {
+        "rotation_degrees": 0,
+        "displayed_rect_points": [
+          0.0,
+          0.0,
+          408.9599914550781,
+          607.6799926757812
+        ],
+        "cropbox_points": [
+          0.0,
+          0.0,
+          408.9599914550781,
+          607.6799926757812
+        ],
+        "mediabox_points": [
+          0.0,
+          0.0,
+          408.9599914550781,
+          607.6799926757812
+        ],
+        "rotation_matrix": [
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "derotation_matrix": [
+          1.0,
+          -0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "native_coordinate_frame": "PyMuPDF unrotated page coordinates in points",
+        "preview_coordinate_frame": "displayed (rotated) page coordinates in points"
+      },
+      "classification": {
+        "image_backed": true,
+        "image_count": 1,
+        "largest_single_image_page_fraction": 1.0,
+        "image_backed_threshold": 0.8,
+        "native_text_present": true,
+        "native_character_count": 1110,
+        "ocr_recommended": true,
+        "native_text_is_verified_ground_truth": false,
+        "note": "Routing heuristic only. Full-page imagery can coexist with damaged hidden OCR; selectable text is not mathematical ground truth. Tiled scans may evade the single-image heuristic."
+      },
+      "native_evidence": {
+        "path": "native/page-000091.json",
+        "sha256": "bb689bf6b7999f0fdad3d8ec73ab986415ebd57ed7861b859aceed1f0c0caa33",
+        "size_bytes": 619881
+      },
+      "preview": {
+        "path": "previews/page-000091.png",
+        "sha256": "caacd6c63d8494be8b0c9b0163fc2a1249133f91aed62392bd3bf0f5e36c0448",
+        "size_bytes": 126801,
+        "dpi": 120,
+        "width": 682,
+        "height": 1013
+      }
+    },
+    {
+      "original_physical_page_1based": 92,
+      "selected_page_1based": 4,
+      "pdf_catalogue_label": "70",
+      "printed_page_label": null,
+      "geometry": {
+        "rotation_degrees": 0,
+        "displayed_rect_points": [
+          0.0,
+          0.0,
+          410.3999938964844,
+          608.6400146484375
+        ],
+        "cropbox_points": [
+          0.0,
+          0.0,
+          410.3999938964844,
+          608.6400146484375
+        ],
+        "mediabox_points": [
+          0.0,
+          0.0,
+          410.3999938964844,
+          608.6400146484375
+        ],
+        "rotation_matrix": [
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "derotation_matrix": [
+          1.0,
+          -0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "native_coordinate_frame": "PyMuPDF unrotated page coordinates in points",
+        "preview_coordinate_frame": "displayed (rotated) page coordinates in points"
+      },
+      "classification": {
+        "image_backed": true,
+        "image_count": 1,
+        "largest_single_image_page_fraction": 1.0,
+        "image_backed_threshold": 0.8,
+        "native_text_present": true,
+        "native_character_count": 1884,
+        "ocr_recommended": true,
+        "native_text_is_verified_ground_truth": false,
+        "note": "Routing heuristic only. Full-page imagery can coexist with damaged hidden OCR; selectable text is not mathematical ground truth. Tiled scans may evade the single-image heuristic."
+      },
+      "native_evidence": {
+        "path": "native/page-000092.json",
+        "sha256": "cfdea2c9ed2b37b4fcb97299e427a5b9480f1048c666d7ca2eb1011906b403cd",
+        "size_bytes": 1000251
+      },
+      "preview": {
+        "path": "previews/page-000092.png",
+        "sha256": "9d93b9de8ab12e8394d45b94ffcc6c397d49105d1e4b99e571b4a5abbb57953c",
+        "size_bytes": 192784,
+        "dpi": 120,
+        "width": 684,
+        "height": 1015
+      }
+    },
+    {
+      "original_physical_page_1based": 93,
+      "selected_page_1based": 5,
+      "pdf_catalogue_label": "71",
+      "printed_page_label": null,
+      "geometry": {
+        "rotation_degrees": 0,
+        "displayed_rect_points": [
+          0.0,
+          0.0,
+          410.1600036621094,
+          608.4000244140625
+        ],
+        "cropbox_points": [
+          0.0,
+          0.0,
+          410.1600036621094,
+          608.4000244140625
+        ],
+        "mediabox_points": [
+          0.0,
+          0.0,
+          410.1600036621094,
+          608.4000244140625
+        ],
+        "rotation_matrix": [
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "derotation_matrix": [
+          1.0,
+          -0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "native_coordinate_frame": "PyMuPDF unrotated page coordinates in points",
+        "preview_coordinate_frame": "displayed (rotated) page coordinates in points"
+      },
+      "classification": {
+        "image_backed": true,
+        "image_count": 1,
+        "largest_single_image_page_fraction": 1.0,
+        "image_backed_threshold": 0.8,
+        "native_text_present": true,
+        "native_character_count": 1738,
+        "ocr_recommended": true,
+        "native_text_is_verified_ground_truth": false,
+        "note": "Routing heuristic only. Full-page imagery can coexist with damaged hidden OCR; selectable text is not mathematical ground truth. Tiled scans may evade the single-image heuristic."
+      },
+      "native_evidence": {
+        "path": "native/page-000093.json",
+        "sha256": "e540a95d25aefa13d7c55b674f4cc2088662d3a7ed4a31f6984de0c8a1b082ed",
+        "size_bytes": 981361
+      },
+      "preview": {
+        "path": "previews/page-000093.png",
+        "sha256": "871215900f77e8959f7e27803674bf2aaa8553c361833dfabcc1f47a3c89753b",
+        "size_bytes": 170199,
+        "dpi": 120,
+        "width": 684,
+        "height": 1014
+      }
+    },
+    {
+      "original_physical_page_1based": 94,
+      "selected_page_1based": 6,
+      "pdf_catalogue_label": "72",
+      "printed_page_label": null,
+      "geometry": {
+        "rotation_degrees": 0,
+        "displayed_rect_points": [
+          0.0,
+          0.0,
+          411.6000061035156,
+          609.3599853515625
+        ],
+        "cropbox_points": [
+          0.0,
+          0.0,
+          411.6000061035156,
+          609.3599853515625
+        ],
+        "mediabox_points": [
+          0.0,
+          0.0,
+          411.6000061035156,
+          609.3599853515625
+        ],
+        "rotation_matrix": [
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "derotation_matrix": [
+          1.0,
+          -0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "native_coordinate_frame": "PyMuPDF unrotated page coordinates in points",
+        "preview_coordinate_frame": "displayed (rotated) page coordinates in points"
+      },
+      "classification": {
+        "image_backed": true,
+        "image_count": 1,
+        "largest_single_image_page_fraction": 1.0,
+        "image_backed_threshold": 0.8,
+        "native_text_present": true,
+        "native_character_count": 1552,
+        "ocr_recommended": true,
+        "native_text_is_verified_ground_truth": false,
+        "note": "Routing heuristic only. Full-page imagery can coexist with damaged hidden OCR; selectable text is not mathematical ground truth. Tiled scans may evade the single-image heuristic."
+      },
+      "native_evidence": {
+        "path": "native/page-000094.json",
+        "sha256": "4d70c431c6a1557386398341cce77284706ab3e0d1aa1a15432649ffad6b77bf",
+        "size_bytes": 859387
+      },
+      "preview": {
+        "path": "previews/page-000094.png",
+        "sha256": "10717912a83a6a4171fffdd93e3a9cd5a1b719a3f7c9dc994c627d07a21dacc0",
+        "size_bytes": 174645,
+        "dpi": 120,
+        "width": 686,
+        "height": 1016
+      }
+    },
+    {
+      "original_physical_page_1based": 95,
+      "selected_page_1based": 7,
+      "pdf_catalogue_label": "73",
+      "printed_page_label": null,
+      "geometry": {
+        "rotation_degrees": 0,
+        "displayed_rect_points": [
+          0.0,
+          0.0,
+          409.20001220703125,
+          607.6799926757812
+        ],
+        "cropbox_points": [
+          0.0,
+          0.0,
+          409.20001220703125,
+          607.6799926757812
+        ],
+        "mediabox_points": [
+          0.0,
+          0.0,
+          409.20001220703125,
+          607.6799926757812
+        ],
+        "rotation_matrix": [
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "derotation_matrix": [
+          1.0,
+          -0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "native_coordinate_frame": "PyMuPDF unrotated page coordinates in points",
+        "preview_coordinate_frame": "displayed (rotated) page coordinates in points"
+      },
+      "classification": {
+        "image_backed": true,
+        "image_count": 1,
+        "largest_single_image_page_fraction": 1.0,
+        "image_backed_threshold": 0.8,
+        "native_text_present": true,
+        "native_character_count": 901,
+        "ocr_recommended": true,
+        "native_text_is_verified_ground_truth": false,
+        "note": "Routing heuristic only. Full-page imagery can coexist with damaged hidden OCR; selectable text is not mathematical ground truth. Tiled scans may evade the single-image heuristic."
+      },
+      "native_evidence": {
+        "path": "native/page-000095.json",
+        "sha256": "c59364790772c2585ee7646c736bf971e54a6e6ff1e2e25324d5f9bdc4dab914",
+        "size_bytes": 502523
+      },
+      "preview": {
+        "path": "previews/page-000095.png",
+        "sha256": "bb72bb9a190e84960c19510aaffe09aec6a057fc25352e72dbf179689419589e",
+        "size_bytes": 134997,
+        "dpi": 120,
+        "width": 682,
+        "height": 1013
+      }
+    },
+    {
+      "original_physical_page_1based": 96,
+      "selected_page_1based": 8,
+      "pdf_catalogue_label": "74",
+      "printed_page_label": null,
+      "geometry": {
+        "rotation_degrees": 0,
+        "displayed_rect_points": [
+          0.0,
+          0.0,
+          409.44000244140625,
+          607.9199829101562
+        ],
+        "cropbox_points": [
+          0.0,
+          0.0,
+          409.44000244140625,
+          607.9199829101562
+        ],
+        "mediabox_points": [
+          0.0,
+          0.0,
+          409.44000244140625,
+          607.9199829101562
+        ],
+        "rotation_matrix": [
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "derotation_matrix": [
+          1.0,
+          -0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "native_coordinate_frame": "PyMuPDF unrotated page coordinates in points",
+        "preview_coordinate_frame": "displayed (rotated) page coordinates in points"
+      },
+      "classification": {
+        "image_backed": true,
+        "image_count": 1,
+        "largest_single_image_page_fraction": 1.0,
+        "image_backed_threshold": 0.8,
+        "native_text_present": true,
+        "native_character_count": 555,
+        "ocr_recommended": true,
+        "native_text_is_verified_ground_truth": false,
+        "note": "Routing heuristic only. Full-page imagery can coexist with damaged hidden OCR; selectable text is not mathematical ground truth. Tiled scans may evade the single-image heuristic."
+      },
+      "native_evidence": {
+        "path": "native/page-000096.json",
+        "sha256": "3037b5aa4af6ac9d2023f8d3b9fd4608182b98bfe78affa46ea066d0579d2247",
+        "size_bytes": 296646
+      },
+      "preview": {
+        "path": "previews/page-000096.png",
+        "sha256": "7981b9fd0eb303818886f76fb60990d46a54647028207110f60bc8c02c670415",
+        "size_bytes": 154171,
+        "dpi": 120,
+        "width": 683,
+        "height": 1014
+      }
+    },
+    {
+      "original_physical_page_1based": 97,
+      "selected_page_1based": 9,
+      "pdf_catalogue_label": "75",
+      "printed_page_label": null,
+      "geometry": {
+        "rotation_degrees": 0,
+        "displayed_rect_points": [
+          0.0,
+          0.0,
+          408.7200012207031,
+          607.4400024414062
+        ],
+        "cropbox_points": [
+          0.0,
+          0.0,
+          408.7200012207031,
+          607.4400024414062
+        ],
+        "mediabox_points": [
+          0.0,
+          0.0,
+          408.7200012207031,
+          607.4400024414062
+        ],
+        "rotation_matrix": [
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "derotation_matrix": [
+          1.0,
+          -0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "native_coordinate_frame": "PyMuPDF unrotated page coordinates in points",
+        "preview_coordinate_frame": "displayed (rotated) page coordinates in points"
+      },
+      "classification": {
+        "image_backed": true,
+        "image_count": 1,
+        "largest_single_image_page_fraction": 1.0,
+        "image_backed_threshold": 0.8,
+        "native_text_present": true,
+        "native_character_count": 793,
+        "ocr_recommended": true,
+        "native_text_is_verified_ground_truth": false,
+        "note": "Routing heuristic only. Full-page imagery can coexist with damaged hidden OCR; selectable text is not mathematical ground truth. Tiled scans may evade the single-image heuristic."
+      },
+      "native_evidence": {
+        "path": "native/page-000097.json",
+        "sha256": "397827b9335c81f78e9a928f1ba50a1131641910daec712891b75ed6d4851d84",
+        "size_bytes": 523444
+      },
+      "preview": {
+        "path": "previews/page-000097.png",
+        "sha256": "ef63a314d3d66a55b2d2b5c6d4f1f17f0b0465f9ff7bcd833e1e0344124d8368",
+        "size_bytes": 108369,
+        "dpi": 120,
+        "width": 682,
+        "height": 1013
+      }
+    },
+    {
+      "original_physical_page_1based": 98,
+      "selected_page_1based": 10,
+      "pdf_catalogue_label": "76",
+      "printed_page_label": null,
+      "geometry": {
+        "rotation_degrees": 0,
+        "displayed_rect_points": [
+          0.0,
+          0.0,
+          410.3999938964844,
+          608.6400146484375
+        ],
+        "cropbox_points": [
+          0.0,
+          0.0,
+          410.3999938964844,
+          608.6400146484375
+        ],
+        "mediabox_points": [
+          0.0,
+          0.0,
+          410.3999938964844,
+          608.6400146484375
+        ],
+        "rotation_matrix": [
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "derotation_matrix": [
+          1.0,
+          -0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "native_coordinate_frame": "PyMuPDF unrotated page coordinates in points",
+        "preview_coordinate_frame": "displayed (rotated) page coordinates in points"
+      },
+      "classification": {
+        "image_backed": true,
+        "image_count": 1,
+        "largest_single_image_page_fraction": 1.0,
+        "image_backed_threshold": 0.8,
+        "native_text_present": true,
+        "native_character_count": 932,
+        "ocr_recommended": true,
+        "native_text_is_verified_ground_truth": false,
+        "note": "Routing heuristic only. Full-page imagery can coexist with damaged hidden OCR; selectable text is not mathematical ground truth. Tiled scans may evade the single-image heuristic."
+      },
+      "native_evidence": {
+        "path": "native/page-000098.json",
+        "sha256": "40251a96c651cc7e409890c312c3f312760bd65b44c10e3b509f9edb7b835ce4",
+        "size_bytes": 554248
+      },
+      "preview": {
+        "path": "previews/page-000098.png",
+        "sha256": "69a92319dc97becdcae1b217c81d434ddac724da9a13fe2201aa8ff7a22842b1",
+        "size_bytes": 113745,
+        "dpi": 120,
+        "width": 684,
+        "height": 1015
+      }
+    },
+    {
+      "original_physical_page_1based": 99,
+      "selected_page_1based": 11,
+      "pdf_catalogue_label": "77",
+      "printed_page_label": null,
+      "geometry": {
+        "rotation_degrees": 0,
+        "displayed_rect_points": [
+          0.0,
+          0.0,
+          408.9599914550781,
+          607.6799926757812
+        ],
+        "cropbox_points": [
+          0.0,
+          0.0,
+          408.9599914550781,
+          607.6799926757812
+        ],
+        "mediabox_points": [
+          0.0,
+          0.0,
+          408.9599914550781,
+          607.6799926757812
+        ],
+        "rotation_matrix": [
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "derotation_matrix": [
+          1.0,
+          -0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "native_coordinate_frame": "PyMuPDF unrotated page coordinates in points",
+        "preview_coordinate_frame": "displayed (rotated) page coordinates in points"
+      },
+      "classification": {
+        "image_backed": true,
+        "image_count": 1,
+        "largest_single_image_page_fraction": 1.0,
+        "image_backed_threshold": 0.8,
+        "native_text_present": true,
+        "native_character_count": 1465,
+        "ocr_recommended": true,
+        "native_text_is_verified_ground_truth": false,
+        "note": "Routing heuristic only. Full-page imagery can coexist with damaged hidden OCR; selectable text is not mathematical ground truth. Tiled scans may evade the single-image heuristic."
+      },
+      "native_evidence": {
+        "path": "native/page-000099.json",
+        "sha256": "79764c96d0f6c99a3375257d5ef740b27c05ce97020193292f1d19fee7d1e77b",
+        "size_bytes": 815266
+      },
+      "preview": {
+        "path": "previews/page-000099.png",
+        "sha256": "da38ff9d156fbeecc47a12be550c53e295ec7a563da5fdc2f16517b7ef7289e9",
+        "size_bytes": 171191,
+        "dpi": 120,
+        "width": 682,
+        "height": 1013
+      }
+    },
+    {
+      "original_physical_page_1based": 100,
+      "selected_page_1based": 12,
+      "pdf_catalogue_label": "78",
+      "printed_page_label": null,
+      "geometry": {
+        "rotation_degrees": 0,
+        "displayed_rect_points": [
+          0.0,
+          0.0,
+          409.20001220703125,
+          607.6799926757812
+        ],
+        "cropbox_points": [
+          0.0,
+          0.0,
+          409.20001220703125,
+          607.6799926757812
+        ],
+        "mediabox_points": [
+          0.0,
+          0.0,
+          409.20001220703125,
+          607.6799926757812
+        ],
+        "rotation_matrix": [
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "derotation_matrix": [
+          1.0,
+          -0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "native_coordinate_frame": "PyMuPDF unrotated page coordinates in points",
+        "preview_coordinate_frame": "displayed (rotated) page coordinates in points"
+      },
+      "classification": {
+        "image_backed": true,
+        "image_count": 1,
+        "largest_single_image_page_fraction": 1.0,
+        "image_backed_threshold": 0.8,
+        "native_text_present": true,
+        "native_character_count": 1729,
+        "ocr_recommended": true,
+        "native_text_is_verified_ground_truth": false,
+        "note": "Routing heuristic only. Full-page imagery can coexist with damaged hidden OCR; selectable text is not mathematical ground truth. Tiled scans may evade the single-image heuristic."
+      },
+      "native_evidence": {
+        "path": "native/page-000100.json",
+        "sha256": "58e55df898090a5b58cf56505aea7da20953b43a0b5a2c6e28a4eb8f784a1407",
+        "size_bytes": 1048939
+      },
+      "preview": {
+        "path": "previews/page-000100.png",
+        "sha256": "4921d873256e27b552ae3395a43a57d3729c3c494b0c71e86921f4c6abe06db4",
+        "size_bytes": 197911,
+        "dpi": 120,
+        "width": 682,
+        "height": 1013
+      }
+    },
+    {
+      "original_physical_page_1based": 101,
+      "selected_page_1based": 13,
+      "pdf_catalogue_label": "79",
+      "printed_page_label": null,
+      "geometry": {
+        "rotation_degrees": 0,
+        "displayed_rect_points": [
+          0.0,
+          0.0,
+          408.7200012207031,
+          607.4400024414062
+        ],
+        "cropbox_points": [
+          0.0,
+          0.0,
+          408.7200012207031,
+          607.4400024414062
+        ],
+        "mediabox_points": [
+          0.0,
+          0.0,
+          408.7200012207031,
+          607.4400024414062
+        ],
+        "rotation_matrix": [
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "derotation_matrix": [
+          1.0,
+          -0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "native_coordinate_frame": "PyMuPDF unrotated page coordinates in points",
+        "preview_coordinate_frame": "displayed (rotated) page coordinates in points"
+      },
+      "classification": {
+        "image_backed": true,
+        "image_count": 1,
+        "largest_single_image_page_fraction": 1.0,
+        "image_backed_threshold": 0.8,
+        "native_text_present": true,
+        "native_character_count": 1629,
+        "ocr_recommended": true,
+        "native_text_is_verified_ground_truth": false,
+        "note": "Routing heuristic only. Full-page imagery can coexist with damaged hidden OCR; selectable text is not mathematical ground truth. Tiled scans may evade the single-image heuristic."
+      },
+      "native_evidence": {
+        "path": "native/page-000101.json",
+        "sha256": "5c9d73d8ad77d3f33929923815f82e18707fc3f158e81d123f58369bce935063",
+        "size_bytes": 877303
+      },
+      "preview": {
+        "path": "previews/page-000101.png",
+        "sha256": "85ec6186309eb7b5bd33e55bb7f714e3466827bae250878d5ab1aff8a1bec2c5",
+        "size_bytes": 195292,
+        "dpi": 120,
+        "width": 682,
+        "height": 1013
+      }
+    },
+    {
+      "original_physical_page_1based": 102,
+      "selected_page_1based": 14,
+      "pdf_catalogue_label": "80",
+      "printed_page_label": null,
+      "geometry": {
+        "rotation_degrees": 0,
+        "displayed_rect_points": [
+          0.0,
+          0.0,
+          409.44000244140625,
+          607.9199829101562
+        ],
+        "cropbox_points": [
+          0.0,
+          0.0,
+          409.44000244140625,
+          607.9199829101562
+        ],
+        "mediabox_points": [
+          0.0,
+          0.0,
+          409.44000244140625,
+          607.9199829101562
+        ],
+        "rotation_matrix": [
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "derotation_matrix": [
+          1.0,
+          -0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "native_coordinate_frame": "PyMuPDF unrotated page coordinates in points",
+        "preview_coordinate_frame": "displayed (rotated) page coordinates in points"
+      },
+      "classification": {
+        "image_backed": true,
+        "image_count": 1,
+        "largest_single_image_page_fraction": 1.0,
+        "image_backed_threshold": 0.8,
+        "native_text_present": true,
+        "native_character_count": 1584,
+        "ocr_recommended": true,
+        "native_text_is_verified_ground_truth": false,
+        "note": "Routing heuristic only. Full-page imagery can coexist with damaged hidden OCR; selectable text is not mathematical ground truth. Tiled scans may evade the single-image heuristic."
+      },
+      "native_evidence": {
+        "path": "native/page-000102.json",
+        "sha256": "05dd83e469ff4820c97c5a587439c874e46f0eb3081c031e09e8851c3e487fd9",
+        "size_bytes": 882521
+      },
+      "preview": {
+        "path": "previews/page-000102.png",
+        "sha256": "2ac149c4f1966635e750773aa4ff4dc6e0175e7226c00136d2b82141e741d411",
+        "size_bytes": 200796,
+        "dpi": 120,
+        "width": 683,
+        "height": 1014
+      }
+    },
+    {
+      "original_physical_page_1based": 103,
+      "selected_page_1based": 15,
+      "pdf_catalogue_label": "81",
+      "printed_page_label": null,
+      "geometry": {
+        "rotation_degrees": 0,
+        "displayed_rect_points": [
+          0.0,
+          0.0,
+          410.3999938964844,
+          608.6400146484375
+        ],
+        "cropbox_points": [
+          0.0,
+          0.0,
+          410.3999938964844,
+          608.6400146484375
+        ],
+        "mediabox_points": [
+          0.0,
+          0.0,
+          410.3999938964844,
+          608.6400146484375
+        ],
+        "rotation_matrix": [
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "derotation_matrix": [
+          1.0,
+          -0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "native_coordinate_frame": "PyMuPDF unrotated page coordinates in points",
+        "preview_coordinate_frame": "displayed (rotated) page coordinates in points"
+      },
+      "classification": {
+        "image_backed": true,
+        "image_count": 1,
+        "largest_single_image_page_fraction": 1.0,
+        "image_backed_threshold": 0.8,
+        "native_text_present": true,
+        "native_character_count": 1910,
+        "ocr_recommended": true,
+        "native_text_is_verified_ground_truth": false,
+        "note": "Routing heuristic only. Full-page imagery can coexist with damaged hidden OCR; selectable text is not mathematical ground truth. Tiled scans may evade the single-image heuristic."
+      },
+      "native_evidence": {
+        "path": "native/page-000103.json",
+        "sha256": "79a1c22df2b0d9b9bdb8ec52663d089efd3d093e07004834c626ac57c5552aee",
+        "size_bytes": 1011766
+      },
+      "preview": {
+        "path": "previews/page-000103.png",
+        "sha256": "da33e820b3c4a3412f6239de78014da2ad29e8d12d193e2034c59e3d87fbed0e",
+        "size_bytes": 201629,
+        "dpi": 120,
+        "width": 684,
+        "height": 1015
+      }
+    },
+    {
+      "original_physical_page_1based": 104,
+      "selected_page_1based": 16,
+      "pdf_catalogue_label": "82",
+      "printed_page_label": null,
+      "geometry": {
+        "rotation_degrees": 0,
+        "displayed_rect_points": [
+          0.0,
+          0.0,
+          408.7200012207031,
+          607.4400024414062
+        ],
+        "cropbox_points": [
+          0.0,
+          0.0,
+          408.7200012207031,
+          607.4400024414062
+        ],
+        "mediabox_points": [
+          0.0,
+          0.0,
+          408.7200012207031,
+          607.4400024414062
+        ],
+        "rotation_matrix": [
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "derotation_matrix": [
+          1.0,
+          -0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "native_coordinate_frame": "PyMuPDF unrotated page coordinates in points",
+        "preview_coordinate_frame": "displayed (rotated) page coordinates in points"
+      },
+      "classification": {
+        "image_backed": true,
+        "image_count": 1,
+        "largest_single_image_page_fraction": 1.0,
+        "image_backed_threshold": 0.8,
+        "native_text_present": true,
+        "native_character_count": 1358,
+        "ocr_recommended": true,
+        "native_text_is_verified_ground_truth": false,
+        "note": "Routing heuristic only. Full-page imagery can coexist with damaged hidden OCR; selectable text is not mathematical ground truth. Tiled scans may evade the single-image heuristic."
+      },
+      "native_evidence": {
+        "path": "native/page-000104.json",
+        "sha256": "153af7ea054cfc56c78ecb11272bb92044d3a6c922eed5021ca23bbd319ffc5b",
+        "size_bytes": 755583
+      },
+      "preview": {
+        "path": "previews/page-000104.png",
+        "sha256": "0994bd253966611e1b59cf53b594e4733db875a081ba5684e3cd787c5e1a87c4",
+        "size_bytes": 157739,
+        "dpi": 120,
+        "width": 682,
+        "height": 1013
+      }
+    },
+    {
+      "original_physical_page_1based": 105,
+      "selected_page_1based": 17,
+      "pdf_catalogue_label": "83",
+      "printed_page_label": null,
+      "geometry": {
+        "rotation_degrees": 0,
+        "displayed_rect_points": [
+          0.0,
+          0.0,
+          409.20001220703125,
+          607.6799926757812
+        ],
+        "cropbox_points": [
+          0.0,
+          0.0,
+          409.20001220703125,
+          607.6799926757812
+        ],
+        "mediabox_points": [
+          0.0,
+          0.0,
+          409.20001220703125,
+          607.6799926757812
+        ],
+        "rotation_matrix": [
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "derotation_matrix": [
+          1.0,
+          -0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "native_coordinate_frame": "PyMuPDF unrotated page coordinates in points",
+        "preview_coordinate_frame": "displayed (rotated) page coordinates in points"
+      },
+      "classification": {
+        "image_backed": true,
+        "image_count": 1,
+        "largest_single_image_page_fraction": 1.0,
+        "image_backed_threshold": 0.8,
+        "native_text_present": true,
+        "native_character_count": 1829,
+        "ocr_recommended": true,
+        "native_text_is_verified_ground_truth": false,
+        "note": "Routing heuristic only. Full-page imagery can coexist with damaged hidden OCR; selectable text is not mathematical ground truth. Tiled scans may evade the single-image heuristic."
+      },
+      "native_evidence": {
+        "path": "native/page-000105.json",
+        "sha256": "199df8db335f6f6f808f6323529dcb44138a72a497580ed4fc642936816ea611",
+        "size_bytes": 1006579
+      },
+      "preview": {
+        "path": "previews/page-000105.png",
+        "sha256": "fd6c89416594c459fea7c7469ce67df3aa86d0b37a88d49e529b2a8d2bdfb139",
+        "size_bytes": 205111,
+        "dpi": 120,
+        "width": 682,
+        "height": 1013
+      }
+    },
+    {
+      "original_physical_page_1based": 106,
+      "selected_page_1based": 18,
+      "pdf_catalogue_label": "84",
+      "printed_page_label": null,
+      "geometry": {
+        "rotation_degrees": 0,
+        "displayed_rect_points": [
+          0.0,
+          0.0,
+          411.1199951171875,
+          608.8800048828125
+        ],
+        "cropbox_points": [
+          0.0,
+          0.0,
+          411.1199951171875,
+          608.8800048828125
+        ],
+        "mediabox_points": [
+          0.0,
+          0.0,
+          411.1199951171875,
+          608.8800048828125
+        ],
+        "rotation_matrix": [
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "derotation_matrix": [
+          1.0,
+          -0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "native_coordinate_frame": "PyMuPDF unrotated page coordinates in points",
+        "preview_coordinate_frame": "displayed (rotated) page coordinates in points"
+      },
+      "classification": {
+        "image_backed": true,
+        "image_count": 1,
+        "largest_single_image_page_fraction": 1.0,
+        "image_backed_threshold": 0.8,
+        "native_text_present": true,
+        "native_character_count": 1706,
+        "ocr_recommended": true,
+        "native_text_is_verified_ground_truth": false,
+        "note": "Routing heuristic only. Full-page imagery can coexist with damaged hidden OCR; selectable text is not mathematical ground truth. Tiled scans may evade the single-image heuristic."
+      },
+      "native_evidence": {
+        "path": "native/page-000106.json",
+        "sha256": "99e49527275383ec313fae44858b55476e7505d44edcea0b198cd04166634c1d",
+        "size_bytes": 911641
+      },
+      "preview": {
+        "path": "previews/page-000106.png",
+        "sha256": "dc847a72da7c32dd757d8bedeb987e9c5942550b0d3ef9e62e4e5594a06e6fb1",
+        "size_bytes": 193069,
+        "dpi": 120,
+        "width": 686,
+        "height": 1015
+      }
+    },
+    {
+      "original_physical_page_1based": 107,
+      "selected_page_1based": 19,
+      "pdf_catalogue_label": "85",
+      "printed_page_label": null,
+      "geometry": {
+        "rotation_degrees": 0,
+        "displayed_rect_points": [
+          0.0,
+          0.0,
+          409.20001220703125,
+          607.6799926757812
+        ],
+        "cropbox_points": [
+          0.0,
+          0.0,
+          409.20001220703125,
+          607.6799926757812
+        ],
+        "mediabox_points": [
+          0.0,
+          0.0,
+          409.20001220703125,
+          607.6799926757812
+        ],
+        "rotation_matrix": [
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "derotation_matrix": [
+          1.0,
+          -0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "native_coordinate_frame": "PyMuPDF unrotated page coordinates in points",
+        "preview_coordinate_frame": "displayed (rotated) page coordinates in points"
+      },
+      "classification": {
+        "image_backed": true,
+        "image_count": 1,
+        "largest_single_image_page_fraction": 1.0,
+        "image_backed_threshold": 0.8,
+        "native_text_present": true,
+        "native_character_count": 1806,
+        "ocr_recommended": true,
+        "native_text_is_verified_ground_truth": false,
+        "note": "Routing heuristic only. Full-page imagery can coexist with damaged hidden OCR; selectable text is not mathematical ground truth. Tiled scans may evade the single-image heuristic."
+      },
+      "native_evidence": {
+        "path": "native/page-000107.json",
+        "sha256": "49bdf23e2fbc15526a18b5ddf490263724e906c3642995cf2e3ed821ec7763fe",
+        "size_bytes": 949922
+      },
+      "preview": {
+        "path": "previews/page-000107.png",
+        "sha256": "0b50e32b2c9cc45423d11bd748027a13f05b93f8d659e24409066e3f51f3423a",
+        "size_bytes": 208552,
+        "dpi": 120,
+        "width": 682,
+        "height": 1013
+      }
+    },
+    {
+      "original_physical_page_1based": 108,
+      "selected_page_1based": 20,
+      "pdf_catalogue_label": "86",
+      "printed_page_label": null,
+      "geometry": {
+        "rotation_degrees": 0,
+        "displayed_rect_points": [
+          0.0,
+          0.0,
+          410.3999938964844,
+          608.6400146484375
+        ],
+        "cropbox_points": [
+          0.0,
+          0.0,
+          410.3999938964844,
+          608.6400146484375
+        ],
+        "mediabox_points": [
+          0.0,
+          0.0,
+          410.3999938964844,
+          608.6400146484375
+        ],
+        "rotation_matrix": [
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "derotation_matrix": [
+          1.0,
+          -0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "native_coordinate_frame": "PyMuPDF unrotated page coordinates in points",
+        "preview_coordinate_frame": "displayed (rotated) page coordinates in points"
+      },
+      "classification": {
+        "image_backed": true,
+        "image_count": 1,
+        "largest_single_image_page_fraction": 1.0,
+        "image_backed_threshold": 0.8,
+        "native_text_present": true,
+        "native_character_count": 1626,
+        "ocr_recommended": true,
+        "native_text_is_verified_ground_truth": false,
+        "note": "Routing heuristic only. Full-page imagery can coexist with damaged hidden OCR; selectable text is not mathematical ground truth. Tiled scans may evade the single-image heuristic."
+      },
+      "native_evidence": {
+        "path": "native/page-000108.json",
+        "sha256": "3f4751f9a4df57f2007e4ba11dc24842601e120e841aa7655d719f3f9c807aa2",
+        "size_bytes": 863185
+      },
+      "preview": {
+        "path": "previews/page-000108.png",
+        "sha256": "86ab0a8ed2a5e49a27e484cdf936f35a0e3388cb35fed0948546807034b22a73",
+        "size_bytes": 175921,
+        "dpi": 120,
+        "width": 684,
+        "height": 1015
+      }
+    },
+    {
+      "original_physical_page_1based": 109,
+      "selected_page_1based": 21,
+      "pdf_catalogue_label": "87",
+      "printed_page_label": null,
+      "geometry": {
+        "rotation_degrees": 0,
+        "displayed_rect_points": [
+          0.0,
+          0.0,
+          409.44000244140625,
+          607.9199829101562
+        ],
+        "cropbox_points": [
+          0.0,
+          0.0,
+          409.44000244140625,
+          607.9199829101562
+        ],
+        "mediabox_points": [
+          0.0,
+          0.0,
+          409.44000244140625,
+          607.9199829101562
+        ],
+        "rotation_matrix": [
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "derotation_matrix": [
+          1.0,
+          -0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "native_coordinate_frame": "PyMuPDF unrotated page coordinates in points",
+        "preview_coordinate_frame": "displayed (rotated) page coordinates in points"
+      },
+      "classification": {
+        "image_backed": true,
+        "image_count": 1,
+        "largest_single_image_page_fraction": 1.0,
+        "image_backed_threshold": 0.8,
+        "native_text_present": true,
+        "native_character_count": 2148,
+        "ocr_recommended": true,
+        "native_text_is_verified_ground_truth": false,
+        "note": "Routing heuristic only. Full-page imagery can coexist with damaged hidden OCR; selectable text is not mathematical ground truth. Tiled scans may evade the single-image heuristic."
+      },
+      "native_evidence": {
+        "path": "native/page-000109.json",
+        "sha256": "2ef8110c1e589500b5be5e1d273453b258327328d9d83c9863e550bdd068619a",
+        "size_bytes": 1113368
+      },
+      "preview": {
+        "path": "previews/page-000109.png",
+        "sha256": "628af10e313595c07fabbfaecd6c5a76695bcba16f1791e69046145881872bb1",
+        "size_bytes": 234410,
+        "dpi": 120,
+        "width": 683,
+        "height": 1014
+      }
+    },
+    {
+      "original_physical_page_1based": 110,
+      "selected_page_1based": 22,
+      "pdf_catalogue_label": "88",
+      "printed_page_label": null,
+      "geometry": {
+        "rotation_degrees": 0,
+        "displayed_rect_points": [
+          0.0,
+          0.0,
+          408.9599914550781,
+          607.6799926757812
+        ],
+        "cropbox_points": [
+          0.0,
+          0.0,
+          408.9599914550781,
+          607.6799926757812
+        ],
+        "mediabox_points": [
+          0.0,
+          0.0,
+          408.9599914550781,
+          607.6799926757812
+        ],
+        "rotation_matrix": [
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "derotation_matrix": [
+          1.0,
+          -0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "native_coordinate_frame": "PyMuPDF unrotated page coordinates in points",
+        "preview_coordinate_frame": "displayed (rotated) page coordinates in points"
+      },
+      "classification": {
+        "image_backed": true,
+        "image_count": 1,
+        "largest_single_image_page_fraction": 1.0,
+        "image_backed_threshold": 0.8,
+        "native_text_present": true,
+        "native_character_count": 2111,
+        "ocr_recommended": true,
+        "native_text_is_verified_ground_truth": false,
+        "note": "Routing heuristic only. Full-page imagery can coexist with damaged hidden OCR; selectable text is not mathematical ground truth. Tiled scans may evade the single-image heuristic."
+      },
+      "native_evidence": {
+        "path": "native/page-000110.json",
+        "sha256": "ab3990f2a731c8cf280f8a1d98c7514e27205464e1236ac52a08ace3ca275c09",
+        "size_bytes": 1108717
+      },
+      "preview": {
+        "path": "previews/page-000110.png",
+        "sha256": "bd81dc0148846d6b907fb421963ebaa5d591e8437f6deeeb0e57bda394a25f6e",
+        "size_bytes": 234648,
+        "dpi": 120,
+        "width": 682,
+        "height": 1013
+      }
+    },
+    {
+      "original_physical_page_1based": 111,
+      "selected_page_1based": 23,
+      "pdf_catalogue_label": "89",
+      "printed_page_label": null,
+      "geometry": {
+        "rotation_degrees": 0,
+        "displayed_rect_points": [
+          0.0,
+          0.0,
+          409.44000244140625,
+          607.9199829101562
+        ],
+        "cropbox_points": [
+          0.0,
+          0.0,
+          409.44000244140625,
+          607.9199829101562
+        ],
+        "mediabox_points": [
+          0.0,
+          0.0,
+          409.44000244140625,
+          607.9199829101562
+        ],
+        "rotation_matrix": [
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "derotation_matrix": [
+          1.0,
+          -0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "native_coordinate_frame": "PyMuPDF unrotated page coordinates in points",
+        "preview_coordinate_frame": "displayed (rotated) page coordinates in points"
+      },
+      "classification": {
+        "image_backed": true,
+        "image_count": 1,
+        "largest_single_image_page_fraction": 1.0,
+        "image_backed_threshold": 0.8,
+        "native_text_present": true,
+        "native_character_count": 1381,
+        "ocr_recommended": true,
+        "native_text_is_verified_ground_truth": false,
+        "note": "Routing heuristic only. Full-page imagery can coexist with damaged hidden OCR; selectable text is not mathematical ground truth. Tiled scans may evade the single-image heuristic."
+      },
+      "native_evidence": {
+        "path": "native/page-000111.json",
+        "sha256": "65cda3079cd5bece0364004c7cd4381756f7f206a9ed3fd0f5d9c43fdaf1ee61",
+        "size_bytes": 737222
+      },
+      "preview": {
+        "path": "previews/page-000111.png",
+        "sha256": "22af7a553a028fee10d8cc9beb081c29c5588de0120add6a6448dbc78d5636cc",
+        "size_bytes": 175981,
+        "dpi": 120,
+        "width": 683,
+        "height": 1014
+      }
+    },
+    {
+      "original_physical_page_1based": 112,
+      "selected_page_1based": 24,
+      "pdf_catalogue_label": "90",
+      "printed_page_label": null,
+      "geometry": {
+        "rotation_degrees": 0,
+        "displayed_rect_points": [
+          0.0,
+          0.0,
+          408.9599914550781,
+          607.6799926757812
+        ],
+        "cropbox_points": [
+          0.0,
+          0.0,
+          408.9599914550781,
+          607.6799926757812
+        ],
+        "mediabox_points": [
+          0.0,
+          0.0,
+          408.9599914550781,
+          607.6799926757812
+        ],
+        "rotation_matrix": [
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "derotation_matrix": [
+          1.0,
+          -0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "native_coordinate_frame": "PyMuPDF unrotated page coordinates in points",
+        "preview_coordinate_frame": "displayed (rotated) page coordinates in points"
+      },
+      "classification": {
+        "image_backed": true,
+        "image_count": 1,
+        "largest_single_image_page_fraction": 1.0,
+        "image_backed_threshold": 0.8,
+        "native_text_present": true,
+        "native_character_count": 1326,
+        "ocr_recommended": true,
+        "native_text_is_verified_ground_truth": false,
+        "note": "Routing heuristic only. Full-page imagery can coexist with damaged hidden OCR; selectable text is not mathematical ground truth. Tiled scans may evade the single-image heuristic."
+      },
+      "native_evidence": {
+        "path": "native/page-000112.json",
+        "sha256": "1abcad42614cbd38b568a003c7be3fa4a9f6822e588869d4ed9fc26a2a4136fd",
+        "size_bytes": 794581
+      },
+      "preview": {
+        "path": "previews/page-000112.png",
+        "sha256": "51db99b287456c3ea96fb0f6eab29f747ccc6a029869e45f320412c73aead139",
+        "size_bytes": 156212,
+        "dpi": 120,
+        "width": 682,
+        "height": 1013
+      }
+    },
+    {
+      "original_physical_page_1based": 113,
+      "selected_page_1based": 25,
+      "pdf_catalogue_label": "91",
+      "printed_page_label": null,
+      "geometry": {
+        "rotation_degrees": 0,
+        "displayed_rect_points": [
+          0.0,
+          0.0,
+          409.20001220703125,
+          607.6799926757812
+        ],
+        "cropbox_points": [
+          0.0,
+          0.0,
+          409.20001220703125,
+          607.6799926757812
+        ],
+        "mediabox_points": [
+          0.0,
+          0.0,
+          409.20001220703125,
+          607.6799926757812
+        ],
+        "rotation_matrix": [
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "derotation_matrix": [
+          1.0,
+          -0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "native_coordinate_frame": "PyMuPDF unrotated page coordinates in points",
+        "preview_coordinate_frame": "displayed (rotated) page coordinates in points"
+      },
+      "classification": {
+        "image_backed": true,
+        "image_count": 1,
+        "largest_single_image_page_fraction": 1.0,
+        "image_backed_threshold": 0.8,
+        "native_text_present": true,
+        "native_character_count": 1794,
+        "ocr_recommended": true,
+        "native_text_is_verified_ground_truth": false,
+        "note": "Routing heuristic only. Full-page imagery can coexist with damaged hidden OCR; selectable text is not mathematical ground truth. Tiled scans may evade the single-image heuristic."
+      },
+      "native_evidence": {
+        "path": "native/page-000113.json",
+        "sha256": "a40b331134a26be85091971ea5ab97698cb8ba46907dc2e7395a3e240177c3d8",
+        "size_bytes": 982563
+      },
+      "preview": {
+        "path": "previews/page-000113.png",
+        "sha256": "b6437a3b2f9801fd4f4a6fd4519253704b7eb52459674775733f86c28b3fd2d0",
+        "size_bytes": 201070,
+        "dpi": 120,
+        "width": 682,
+        "height": 1013
+      }
+    },
+    {
+      "original_physical_page_1based": 114,
+      "selected_page_1based": 26,
+      "pdf_catalogue_label": "92",
+      "printed_page_label": null,
+      "geometry": {
+        "rotation_degrees": 0,
+        "displayed_rect_points": [
+          0.0,
+          0.0,
+          410.6400146484375,
+          608.8800048828125
+        ],
+        "cropbox_points": [
+          0.0,
+          0.0,
+          410.6400146484375,
+          608.8800048828125
+        ],
+        "mediabox_points": [
+          0.0,
+          0.0,
+          410.6400146484375,
+          608.8800048828125
+        ],
+        "rotation_matrix": [
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "derotation_matrix": [
+          1.0,
+          -0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "native_coordinate_frame": "PyMuPDF unrotated page coordinates in points",
+        "preview_coordinate_frame": "displayed (rotated) page coordinates in points"
+      },
+      "classification": {
+        "image_backed": true,
+        "image_count": 1,
+        "largest_single_image_page_fraction": 1.0,
+        "image_backed_threshold": 0.8,
+        "native_text_present": true,
+        "native_character_count": 1587,
+        "ocr_recommended": true,
+        "native_text_is_verified_ground_truth": false,
+        "note": "Routing heuristic only. Full-page imagery can coexist with damaged hidden OCR; selectable text is not mathematical ground truth. Tiled scans may evade the single-image heuristic."
+      },
+      "native_evidence": {
+        "path": "native/page-000114.json",
+        "sha256": "88bba8efba90ec42bdd791f8ef5683537c275f3da58a83ef86af5296904dca9c",
+        "size_bytes": 909921
+      },
+      "preview": {
+        "path": "previews/page-000114.png",
+        "sha256": "9075d96620f3164977c1acbf45997684ead6695f9bc762c5f22cc443beadd676",
+        "size_bytes": 176714,
+        "dpi": 120,
+        "width": 685,
+        "height": 1015
+      }
+    },
+    {
+      "original_physical_page_1based": 115,
+      "selected_page_1based": 27,
+      "pdf_catalogue_label": "93",
+      "printed_page_label": null,
+      "geometry": {
+        "rotation_degrees": 0,
+        "displayed_rect_points": [
+          0.0,
+          0.0,
+          410.3999938964844,
+          608.6400146484375
+        ],
+        "cropbox_points": [
+          0.0,
+          0.0,
+          410.3999938964844,
+          608.6400146484375
+        ],
+        "mediabox_points": [
+          0.0,
+          0.0,
+          410.3999938964844,
+          608.6400146484375
+        ],
+        "rotation_matrix": [
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "derotation_matrix": [
+          1.0,
+          -0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "native_coordinate_frame": "PyMuPDF unrotated page coordinates in points",
+        "preview_coordinate_frame": "displayed (rotated) page coordinates in points"
+      },
+      "classification": {
+        "image_backed": true,
+        "image_count": 1,
+        "largest_single_image_page_fraction": 1.0,
+        "image_backed_threshold": 0.8,
+        "native_text_present": true,
+        "native_character_count": 1292,
+        "ocr_recommended": true,
+        "native_text_is_verified_ground_truth": false,
+        "note": "Routing heuristic only. Full-page imagery can coexist with damaged hidden OCR; selectable text is not mathematical ground truth. Tiled scans may evade the single-image heuristic."
+      },
+      "native_evidence": {
+        "path": "native/page-000115.json",
+        "sha256": "a8433567fce1810fee2ebd9df92b93c5b3ff3debc3b0e3fca715a88cc0e6cf73",
+        "size_bytes": 727459
+      },
+      "preview": {
+        "path": "previews/page-000115.png",
+        "sha256": "5ae9bd7e9af4230d31cd8bd10e349fb4450b3edd81c54f856a3e9abedbad2c4e",
+        "size_bytes": 140002,
+        "dpi": 120,
+        "width": 684,
+        "height": 1015
+      }
+    },
+    {
+      "original_physical_page_1based": 116,
+      "selected_page_1based": 28,
+      "pdf_catalogue_label": "94",
+      "printed_page_label": null,
+      "geometry": {
+        "rotation_degrees": 0,
+        "displayed_rect_points": [
+          0.0,
+          0.0,
+          408.239990234375,
+          607.2000122070312
+        ],
+        "cropbox_points": [
+          0.0,
+          0.0,
+          408.239990234375,
+          607.2000122070312
+        ],
+        "mediabox_points": [
+          0.0,
+          0.0,
+          408.239990234375,
+          607.2000122070312
+        ],
+        "rotation_matrix": [
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "derotation_matrix": [
+          1.0,
+          -0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "native_coordinate_frame": "PyMuPDF unrotated page coordinates in points",
+        "preview_coordinate_frame": "displayed (rotated) page coordinates in points"
+      },
+      "classification": {
+        "image_backed": true,
+        "image_count": 1,
+        "largest_single_image_page_fraction": 1.0,
+        "image_backed_threshold": 0.8,
+        "native_text_present": true,
+        "native_character_count": 1830,
+        "ocr_recommended": true,
+        "native_text_is_verified_ground_truth": false,
+        "note": "Routing heuristic only. Full-page imagery can coexist with damaged hidden OCR; selectable text is not mathematical ground truth. Tiled scans may evade the single-image heuristic."
+      },
+      "native_evidence": {
+        "path": "native/page-000116.json",
+        "sha256": "ac0e9cd68b9bfc600b3876d18fcc2a7c865db944babd35948e1350af61edd412",
+        "size_bytes": 989587
+      },
+      "preview": {
+        "path": "previews/page-000116.png",
+        "sha256": "9f692d4d67ccd960824af54d2e88e88cb76a9f5dcae858f47445a30e09382b93",
+        "size_bytes": 208897,
+        "dpi": 120,
+        "width": 681,
+        "height": 1012
+      }
+    },
+    {
+      "original_physical_page_1based": 117,
+      "selected_page_1based": 29,
+      "pdf_catalogue_label": "95",
+      "printed_page_label": null,
+      "geometry": {
+        "rotation_degrees": 0,
+        "displayed_rect_points": [
+          0.0,
+          0.0,
+          408.9599914550781,
+          607.6799926757812
+        ],
+        "cropbox_points": [
+          0.0,
+          0.0,
+          408.9599914550781,
+          607.6799926757812
+        ],
+        "mediabox_points": [
+          0.0,
+          0.0,
+          408.9599914550781,
+          607.6799926757812
+        ],
+        "rotation_matrix": [
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "derotation_matrix": [
+          1.0,
+          -0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "native_coordinate_frame": "PyMuPDF unrotated page coordinates in points",
+        "preview_coordinate_frame": "displayed (rotated) page coordinates in points"
+      },
+      "classification": {
+        "image_backed": true,
+        "image_count": 1,
+        "largest_single_image_page_fraction": 1.0,
+        "image_backed_threshold": 0.8,
+        "native_text_present": true,
+        "native_character_count": 1597,
+        "ocr_recommended": true,
+        "native_text_is_verified_ground_truth": false,
+        "note": "Routing heuristic only. Full-page imagery can coexist with damaged hidden OCR; selectable text is not mathematical ground truth. Tiled scans may evade the single-image heuristic."
+      },
+      "native_evidence": {
+        "path": "native/page-000117.json",
+        "sha256": "7cfd7520d89bc61c76187d4a024141f054df49bedb0104492e658f1318be83ed",
+        "size_bytes": 853305
+      },
+      "preview": {
+        "path": "previews/page-000117.png",
+        "sha256": "fa1dfb594f7c0bf3f6ab860b206e6b0038f6f8ed128dd92d4f2bda4d8a80696e",
+        "size_bytes": 186031,
+        "dpi": 120,
+        "width": 682,
+        "height": 1013
+      }
+    },
+    {
+      "original_physical_page_1based": 118,
+      "selected_page_1based": 30,
+      "pdf_catalogue_label": "96",
+      "printed_page_label": null,
+      "geometry": {
+        "rotation_degrees": 0,
+        "displayed_rect_points": [
+          0.0,
+          0.0,
+          408.7200012207031,
+          607.4400024414062
+        ],
+        "cropbox_points": [
+          0.0,
+          0.0,
+          408.7200012207031,
+          607.4400024414062
+        ],
+        "mediabox_points": [
+          0.0,
+          0.0,
+          408.7200012207031,
+          607.4400024414062
+        ],
+        "rotation_matrix": [
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "derotation_matrix": [
+          1.0,
+          -0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "native_coordinate_frame": "PyMuPDF unrotated page coordinates in points",
+        "preview_coordinate_frame": "displayed (rotated) page coordinates in points"
+      },
+      "classification": {
+        "image_backed": true,
+        "image_count": 1,
+        "largest_single_image_page_fraction": 1.0,
+        "image_backed_threshold": 0.8,
+        "native_text_present": true,
+        "native_character_count": 214,
+        "ocr_recommended": true,
+        "native_text_is_verified_ground_truth": false,
+        "note": "Routing heuristic only. Full-page imagery can coexist with damaged hidden OCR; selectable text is not mathematical ground truth. Tiled scans may evade the single-image heuristic."
+      },
+      "native_evidence": {
+        "path": "native/page-000118.json",
+        "sha256": "7111f2b739e15e1ca1715c6920b962ad5f2b667382a73520d0a40d8f24a49bc8",
+        "size_bytes": 109053
+      },
+      "preview": {
+        "path": "previews/page-000118.png",
+        "sha256": "0ee5dea12d925bfbe34465883f7fccd52bae6644ea5f112c03a81737dcc6b257",
+        "size_bytes": 28553,
+        "dpi": 120,
+        "width": 682,
+        "height": 1013
+      }
+    }
+  ],
+  "review_crops": []
+}

@@ -1,0 +1,14 @@
+{
+  "local_only": true,
+  "base_url": "http://192.168.1.100:8888/v1",
+  "model": null,
+  "peer_ssh_alias": null,
+  "request_timeout_seconds": 120,
+  "max_output_tokens": 2048,
+  "window_pages": 8,
+  "overlap_pages": 1,
+  "minimum_available_gib_basic": 8,
+  "minimum_available_gib_standard": 64,
+  "conversion_timeout_seconds": 3600,
+  "max_review_candidates": 8
+}

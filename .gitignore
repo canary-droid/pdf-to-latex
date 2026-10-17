@@ -1,0 +1,46 @@
+# Project environments, model assets and generated runs
+.venv*/
+/model-cache/
+/mineru-state/
+/runs/
+/results/
+/setup-logs/
+
+# Uploaded paper/book inputs and their generated extraction data stay local.
+# The small provenance records are copied into docs/source-provenance/.
+/inputs/
+
+# Machine-specific settings and credentials
+/config.local.json
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.codex/auth.json
+.codex/history.jsonl
+.codex/sessions/
+
+# Reproducible caches and build intermediates
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.DS_Store
+Thumbs.db
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+
+# Large checkpoints should never enter this source repository.
+*.safetensors
+*.gguf
+*.pt
+*.pth
+
+# Deliberately no blanket *.pdf or docs/ ignore: retain project reports.

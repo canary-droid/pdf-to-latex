@@ -1,0 +1,11 @@
+check_id,original_physical_pages,window_attempt,block_or_equation_ids,outcome,observed_error,source_reading,converter_reading,system_flagged,reviewer,minutes,notes
+P01,paper:2,,,not_checked,,,,,,,
+P02,paper:4,,,not_checked,,,,,,,
+P03,paper:5,,,not_checked,,,,,,,
+P04,paper:6,,,not_checked,,,,,,,
+P05,paper:17,,,not_checked,,,,,,,
+B01,book:91,,,not_checked,,,,,,,
+B02,book:92,,,not_checked,,,,,,,
+B03,book:95,,,not_checked,,,,,,,
+B04,book:97,,,not_checked,,,,,,,
+B05,book:114;117;118,,,not_checked,,,,,,,

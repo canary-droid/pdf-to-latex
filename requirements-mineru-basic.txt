@@ -1,0 +1,2 @@
+# Candidate pin from upstream release 11 October 2026; ARM64 execution is unrun.
+mineru==4.0.12

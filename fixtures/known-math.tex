@@ -1,0 +1,37 @@
+\documentclass{article}
+\usepackage{amsmath,amssymb,graphicx}
+\usepackage[margin=25mm]{geometry}
+\begin{document}
+\section*{Known-source transcription fixture}
+This is an artificial regression fixture, not a representative paper.
+Inline distinctions: $x_i$, $x^i$, $x_i^2$, $\mathbf{x}$, $x'$, $\bar{x}$,
+$-1$, $1/252$, and $\nu\ne v$. Keep the condition $a>0$ with the equation.
+\begin{equation}\tag{F.1}
+ I(a)=\int_0^{\infty} e^{-a x}\,dx=\frac{1}{a},\qquad a>0.
+\end{equation}
+\begin{equation}\tag{F.2}
+ A=\begin{pmatrix}1&-2\\3&4\end{pmatrix},\qquad
+ f(x)=\begin{cases}x^2,&x\ge0,\\-x,&x<0.\end{cases}
+\end{equation}
+\begin{center}
+\begin{tabular}{lrr}
+Case & Time (years) & Rate (basis points)\\\hline
+A & $1/252$ & $-12.5$\\
+B & $2/252$ & $10.0$\\
+\end{tabular}
+\end{center}
+Table note: the rate is in basis points; it is not a decimal interest rate.
+\paragraph{Algorithm.} Initialise $n=0$ and $u_0=1$. Stop when
+$|u_{n+1}-u_n|<10^{-8}$ or $n=100$, and report which condition ended the loop.
+\newpage
+\section*{Continuation and notation}
+The condition $a>0$ in (F.1) remains necessary. No new assumption is added here.
+\begin{align}
+ (x+y)^2 &= x^2+2xy+y^2,\tag{F.3}\\
+ \mathbb{E}[X\mid\mathcal F_t]&=\int_{\mathbb R}x\,p_t(x)\,dx.\tag{F.4}
+\end{align}
+\noindent\rotatebox{90}{Rotated label: $\alpha_1\ne\alpha^1$}
+\quad A rotated label must remain attached to its evidence region.
+\paragraph{Proof text.} Preserve this paragraph in full. Do not replace it with
+a summary. A suspected source error should be reported separately.
+\end{document}
