@@ -63,6 +63,28 @@ def bundle_run(run):
     return path
 
 
+def isolation_probe(mode):
+    evidence = {'requested': mode, 'description': isolation_description(mode),
+                'namespace_established': False}
+    if mode == 'none':
+        return {**evidence, 'status': 'deliberately_not_run', 'supported': None}
+    try:
+        if sys.platform != 'linux':
+            raise OSError('Linux unshare required for namespace mode')
+        check = subprocess.run(['unshare', '--user', '--map-root-user', '--net', 'true'],
+                               capture_output=True, text=True, timeout=10)
+        return {**evidence, 'status': 'passed' if check.returncode == 0 else 'failed',
+                'supported': check.returncode == 0, 'stderr': check.stderr,
+                'note': 'Availability probe only; not evidence of worker isolation.'}
+    except (OSError, subprocess.SubprocessError) as exc:
+        return {**evidence, 'status': 'failed', 'supported': False, 'stderr': str(exc)}
+
+
+def isolation_description(mode):
+    return ('local processing; no OS network isolation' if mode == 'none'
+            else 'Linux user+network namespace requested; worker launch must succeed')
+
+
 def cmd_preflight(args):
     c = config(args); run = new_run('preflight')
     print('Preflight:',run,flush=True)
@@ -70,11 +92,8 @@ def cmd_preflight(args):
     peer = args.peer or c.get('peer_ssh_alias')
     if peer: atomic_json(run/'peer-inventory.json', remote_inventory(peer))
     atomic_json(run/'configuration.json', c)
-    try:
-        ns = subprocess.run(['unshare','--user','--map-root-user','--net','true'], capture_output=True, text=True, timeout=10) if sys.platform=='linux' else None
-    except (OSError,subprocess.SubprocessError): ns=None
-    atomic_json(run/'network-isolation.json', {'supported': bool(ns and ns.returncode==0),
-        'stderr': ns.stderr if ns else 'Linux unshare required for conversion'})
+    isolation = isolation_probe(args.ocr_isolation)
+    atomic_json(run/'network-isolation.json', isolation)
     selected_sources('both')
     cases = read_json(ROOT/'fixtures/vision/manifest.json')
     if isinstance(cases, dict): cases = cases['cases']
@@ -82,7 +101,7 @@ def cmd_preflight(args):
         case['image_path'] = str(contained(ROOT/'fixtures/vision', Path(case['image_path']).name))
         if sha(case['image_path'])!=case['sha256']: raise ValueError('Changed vision fixture')
     result = probe_model(make_client(c), run/'model', cases)
-    atomic_json(run/'summary.json', {'scope':'endpoint_capabilities_only','model':result,
+    atomic_json(run/'summary.json', {'scope':'endpoint_capabilities_only','model':result,'ocr_isolation':isolation,
         'converter_inference':'not_run','spark_fidelity':'unmeasured',
         'note':'Vision qualification only tests simple images, not mathematical OCR.'})
     print('Text:',result['text']['status'],'; JSON:',result['strict_json']['status'],
@@ -118,6 +137,11 @@ def runtime_signature(python, models):
         if f.is_file() and not any(x in {'.cache','.locks'} for x in f.relative_to(models).parts) and not f.name.endswith('.lock'):
             records.append({'path':f.relative_to(models).as_posix(),'bytes':f.stat().st_size,'sha256':sha(f)})
     return {'packages':packages,'model_files':records,'worker_sha256':sha(ROOT/'probe/mineru_worker.py')}
+
+
+def converter_executable(value):
+    """Keep the venv entry point: resolving its symlink loses the venv context."""
+    return Path(value).expanduser().absolute()
 
 
 def completed_integrity(run, record):
@@ -161,7 +185,7 @@ def execute_window(command, attempt, minimum, timeout):
 def cmd_convert(args):
     import fitz
     c=config(args); sources=selected_sources(args.source)
-    python=Path(args.converter_python).expanduser().resolve()
+    python=converter_executable(args.converter_python)
     models=Path(args.models_dir).expanduser().resolve()
     minimum=int((args.min_free_gib if args.min_free_gib is not None else c['minimum_available_gib_'+args.tier])*1024**3)
     if minimum<1024**3: raise ValueError('Minimum headroom must be at least 1 GiB.')
@@ -170,7 +194,7 @@ def cmd_convert(args):
     sig=runtime_signature(python,models)
     settings={'tier':args.tier,'sources':sources,'window_pages':c['window_pages'],'overlap_pages':c['overlap_pages'],
               'runtime':sig,'minimum_available_bytes':minimum,'timeout':c['conversion_timeout_seconds'],
-              'code_hashes':{p.name:sha(p) for p in sorted((ROOT/'probe').glob('*.py'))},'network_isolation':'Linux user+network namespace'}
+              'code_hashes':{p.name:sha(p) for p in sorted((ROOT/'probe').glob('*.py'))},'ocr_isolation':args.ocr_isolation,'network_isolation':isolation_description(args.ocr_isolation)}
     key=fingerprint(settings)
     run=get_run(args.resume) if args.resume else new_run('convert-'+args.tier)
     if args.resume:
@@ -180,14 +204,11 @@ def cmd_convert(args):
         state={'fingerprint':key,'settings':settings,'units':{},'status':'created'}
         atomic_json(run/'state.json',state)
     print('Conversion run:',run,flush=True)
-    # Hard egress boundary: never silently replace an unavailable network namespace.
-    try:
-        check=subprocess.run(['unshare','--user','--map-root-user','--net','true'],capture_output=True,text=True,timeout=10)
-        isolation_error=check.stderr if check.returncode else None
-    except (OSError,subprocess.SubprocessError) as exc:
-        isolation_error=str(exc)
-    if isolation_error is not None:
-        state.update(status='blocked_network_isolation',reason=isolation_error)
+    isolation = isolation_probe(args.ocr_isolation)
+    state['ocr_isolation'] = isolation
+    atomic_json(run/'state.json', state)
+    if isolation['status'] == 'failed':
+        state.update(status='blocked_network_isolation',reason=isolation.get('stderr', 'Namespace unavailable'))
         atomic_json(run/'state.json',state); bundle_run(run)
         print('Network namespace unavailable. No conversion started. See README troubleshooting.'); return 3
     for source_id,source in sources.items():
@@ -214,15 +235,25 @@ def cmd_convert(args):
                     'owner':window['owned_start']<=selected<=window['owned_end']})
             atomic_json(attempt/'page-map.json',mapping)
             record={'status':'running','source_id':source_id,'window':window,'attempt':attempt.relative_to(run).as_posix(),
+                'ocr_isolation':{**isolation, 'worker_namespace_status':'not_started',
+                                 'namespace_established':False if args.ocr_isolation == 'none' else None},
                 'evidence_files':[{'path':n,'sha256':sha(attempt/n)} for n in ('input.pdf','page-map.json')]}
             state['units'][unit]=record; state['status']='running';atomic_json(run/'state.json',state)
-            cmd=['unshare','--user','--map-root-user','--net',str(python),str(ROOT/'probe/mineru_worker.py'),
+            cmd=[str(python),str(ROOT/'probe/mineru_worker.py'),
                  '--input',str(attempt/'input.pdf'),'--output',str(attempt/'output'),'--tier',args.tier,
                  '--ocr-mode',source['ocr_mode'],'--models-dir',str(models)]
+            if args.ocr_isolation == 'namespace':
+                cmd=['unshare','--user','--map-root-user','--net']+cmd
             if args.tier=='standard': cmd+=['--engine','vllm']
             atomic_json(attempt/'command.json',cmd)
             print('Converting',unit,'with adjacent context',flush=True)
             record['status']=execute_window(cmd,attempt,minimum,c['conversion_timeout_seconds'])
+            record['ocr_isolation']['worker_namespace_status'] = (
+                'not_requested' if args.ocr_isolation == 'none' else
+                'established_for_successful_worker' if record['status'] == 'completed' else 'not_confirmed')
+            record['ocr_isolation']['namespace_established'] = (
+                False if args.ocr_isolation == 'none' else
+                True if record['status'] == 'completed' else None)
             if record['status']=='completed':
                 try:
                     summary=read_json(attempt/'output/summary.json')
@@ -246,12 +277,64 @@ def cmd_convert(args):
     report_run(run);bundle_run(run);return 0
 
 
+def namespace_probe_evidence(evidence):
+    # A probe says nothing about whether a later worker entered its namespace.
+    return {key:evidence[key] for key in ('status', 'supported', 'stderr', 'note') if key in evidence}
+
+
+def isolation_report(run, state):
+    """Read historical attempts without migrating or rewriting their evidence."""
+    requested = state['settings'].get('ocr_isolation', 'not_recorded')
+    probe = state.get('ocr_isolation', {'status':'not_recorded'})
+    result = {'requested':requested,
+              'description':isolation_description(requested) if requested in ('none', 'namespace') else 'Isolation mode not recorded',
+              'namespace_probe':namespace_probe_evidence(probe), 'attempts':{}}
+    records = {rec['attempt']:rec for rec in state['units'].values()}
+    # Retried units can leave completed or interrupted attempts outside state['units'].
+    for attempt in sorted((run/'attempts').glob('*')):
+        attempt = contained(run, attempt.relative_to(run))
+        if not attempt.is_dir():
+            continue
+        relative = attempt.relative_to(run).as_posix()
+        completion = contained(run, attempt/'completion.json')
+        if completion.is_file():
+            records[relative] = read_json(completion)
+        else:
+            records.setdefault(relative, {'status':'completion_not_recorded'})
+    for relative, record in sorted(records.items()):
+        contained(run, relative)
+        evidence = record.get('ocr_isolation', {})
+        mode = evidence.get('requested', 'not_recorded')
+        status = evidence.get('worker_namespace_status', 'not_recorded')
+        if mode == 'none':
+            established, description = False, 'local processing; no OS network isolation'
+        elif mode == 'namespace' and status == 'established_for_successful_worker' and evidence.get('namespace_established') is True:
+            established, description = True, 'Namespace established for this worker, inferred from successful execution through unshare.'
+        else:
+            established = None
+            description = 'Unknown whether the worker established a namespace; execution evidence is insufficient. Worker failure alone does not prove namespace setup failed.'
+        result['attempts'][relative] = {
+            'attempt_status':record['status'], 'requested':mode,
+            'namespace_probe':namespace_probe_evidence(evidence),
+            'worker':{'status':status, 'namespace_established':established, 'description':description},
+            'recorded_evidence':evidence}
+    return result
+
+
 def report_run(run):
     state=read_json(run/'state.json')
     sections=['<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width">',
         '<title>PDF to LaTeX probe review</title><style>body{font:16px system-ui;max-width:1100px;margin:2em auto;padding:1em}pre{white-space:pre-wrap;background:#f1f4f7;padding:1em}iframe{width:100%;height:700px}article{border-top:1px solid #ccc;margin-top:2em}a{color:#17608b}</style>',
         '<h1>Compatibility and fidelity probe</h1><p>Status: '+html.escape(state['status'])+'</p>',
         '<p>Conversion is unreviewed. Page accounting, editable mathematics, compilation and source fidelity are separate. Adjacent context repeats in window outputs; this is not an assembled book.</p>']
+    isolation = isolation_report(run, state)
+    sections.append('<p>Requested OCR isolation: '+html.escape(isolation['requested'])+' — '+html.escape(isolation['description'])+'</p>')
+    sections.append('<p>Namespace availability probe: '+html.escape(isolation['namespace_probe'].get('status', 'not_recorded'))+'. This is not evidence of worker isolation.</p>')
+    sections.append('<h2>Worker isolation evidence by attempt</h2>')
+    for relative, evidence in isolation['attempts'].items():
+        sections.append('<section><h3>'+html.escape(relative)+'</h3><p>Requested: '+html.escape(evidence['requested'])+
+                        '; attempt status: '+html.escape(evidence['attempt_status'])+'</p><p>'+html.escape(evidence['worker']['description'])+
+                        '</p><details><summary>Recorded probe and worker evidence</summary><pre>'+html.escape(json.dumps(evidence, indent=2))+'</pre></details></section>')
     coverage={}
     for name,rec in state['units'].items():
         source=rec['source_id'];coverage.setdefault(source,[])
@@ -264,7 +347,7 @@ def report_run(run):
         md=run/rel/'output/document.md'
         if md.is_file(): sections.append('<details><summary>Recognised Markdown / LaTeX text</summary><pre>'+html.escape(md.read_text(encoding='utf-8',errors='replace')[:120000])+'</pre></details>')
         sections.append('</article>')
-    quality={'status':state['status'],'coverage':{},'editability':'requires_source_review','compilation':'not_run',
+    quality={'ocr_isolation':isolation,'status':state['status'],'coverage':{},'editability':'requires_source_review','compilation':'not_run',
              'fidelity':'unreviewed','note':'Owned-page counts are accounting only, not proof of correct transcription.'}
     for key,s in state['settings']['sources'].items():
         got=coverage.get(key,[]); quality['coverage'][key]={'expected':s['pages'],'accounted_by_successful_windows':len(set(got)),
@@ -332,20 +415,79 @@ def cmd_review(args):
     bundle_run(out);return 0 if succeeded else 2
 
 
+def cmd_export(args):
+    from .portable_export import export_saved
+    run = get_run(args.run)
+    out = new_run('export-english-math')
+    export_saved(ROOT, run, out, args.source)
+    print('Portable derivative:', out)
+    print('Inspection report:', out/'review.html')
+    bundle_run(out)
+    return 0
+
+
+def cmd_review_dispatch(args):
+    from .saved_pages import converter_idle
+    converter_idle(ROOT)
+    if args.mode == 'candidates':
+        if not args.preflight:
+            raise ValueError('Candidate review requires --preflight')
+        if args.preview_only or args.preview or args.crop_plan:
+            raise ValueError('Preview/crop options require --mode pages')
+        return cmd_review(args)
+    from .page_review import page_limits, review_pages, write_preview
+    from .local_model import validate_base_url
+    c = config(args)
+    run = get_run(args.run)
+    if args.preview_only:
+        if not c.get('model'):
+            raise ValueError('Preview requires --model with the intended exact local alias; no discovery is performed offline')
+        out = new_run('review-input')
+        ready = write_preview(ROOT, run, out, args.source, c['model'], validate_base_url(c['base_url']),
+                              page_limits(args), args.crop_plan)
+    else:
+        if not args.preview or not args.preflight:
+            raise ValueError('Page review requires --preview and a passing image --preflight; prepare offline inputs first')
+        if args.crop_plan:
+            raise ValueError('Crop selection belongs to --preview-only; live review uses the saved preview')
+        print('Using the page selection and request budgets recorded in the saved preview.')
+        out = new_run('review-pages')
+        ready = review_pages(ROOT, run, get_run(args.preview), get_run(args.preflight), out, c)
+    print('Page review run:', out)
+    print('Inspection report:', out/'review.html')
+    bundle_run(out)
+    return 0 if ready else 2
+
+
 def parser():
     p=argparse.ArgumentParser(description='Local-only PDF-to-LaTeX compatibility probe')
     p.add_argument('--config',help='JSON configuration; default config.example.json')
     sub=p.add_subparsers(dest='command',required=True)
     q=sub.add_parser('preflight',help='Read-only inventory and bounded local GLM checks; no installs/conversion')
+    q.add_argument('--ocr-isolation',choices=['namespace','none'],default='namespace',help='OCR isolation policy; none explicitly selects local processing without OS network isolation')
     q.add_argument('--peer',help='Optional configured SSH alias for one-shot second-node inventory')
     q.add_argument('--base-url');q.add_argument('--model');q.set_defaults(func=cmd_preflight)
-    q=sub.add_parser('convert',help='Local MinerU windows; network-isolated child, no model-server changes')
+    q=sub.add_parser('convert',help='Local MinerU windows; explicit OCR isolation policy, no model-server changes')
+    q.add_argument('--ocr-isolation',choices=['namespace','none'],default='namespace',help='Default namespace fails closed; none launches the local worker directly')
     q.add_argument('--source',default='both');q.add_argument('--tier',choices=['basic','standard'],default='basic')
     q.add_argument('--converter-python',default=str(ROOT/'.venv-mineru/bin/python'))
     q.add_argument('--models-dir',default=str(ROOT/'model-cache'));q.add_argument('--resume')
     q.add_argument('--min-free-gib',type=float);q.add_argument('--quiet-window-confirmed',action='store_true');q.set_defaults(func=cmd_convert)
-    q=sub.add_parser('review',help='Bounded GLM proposals for converter candidates; never applies changes')
-    q.add_argument('--run',required=True);q.add_argument('--preflight',required=True);q.set_defaults(func=cmd_review)
+    q=sub.add_parser('export',help='Portable English/math derivative from completed saved OCR; no inference')
+    q.add_argument('--run',required=True);q.add_argument('--source',default='fixture-native,fixture-scan')
+    q.add_argument('--profile',choices=['english-math'],default='english-math');q.set_defaults(func=cmd_export)
+    q=sub.add_parser('review',help='Bounded UNACCEPTED candidate/page proposals; never applies changes')
+    q.add_argument('--run',required=True);q.add_argument('--preflight')
+    q.add_argument('--mode',choices=['candidates','pages'],default='candidates')
+    q.add_argument('--preview-only',action='store_true',help='Render/save exact page inputs offline; no model requests')
+    q.add_argument('--preview',help='Existing complete page input preview to send')
+    q.add_argument('--source',default='fixture-native,fixture-scan')
+    q.add_argument('--crop-plan',help='JSON mapping page IDs to explicit normalized crops/clockwise rotations')
+    q.add_argument('--max-pages',type=int,default=4,help='Offline preview page limit (1–4)')
+    q.add_argument('--max-page-characters',type=int,default=48000,help='Offline preview character limit; live review uses saved budgets')
+    q.add_argument('--page-max-tokens',type=int,default=8192,help='Offline preview output budget (1024–16384); live review uses saved budget')
+    q.add_argument('--page-timeout',type=int,default=300,help='Offline preview timeout in seconds (1–600); live review uses saved budget')
+    q.add_argument('--base-url');q.add_argument('--model');q.set_defaults(func=cmd_review_dispatch)
     q=sub.add_parser('report');q.add_argument('--run',required=True);q.set_defaults(func=lambda a:report_run(get_run(a.run)) or 0)
     q=sub.add_parser('bundle');q.add_argument('--run',required=True);q.set_defaults(func=lambda a:bundle_run(a.run) and 0)
     return p

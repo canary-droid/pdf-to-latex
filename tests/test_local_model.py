@@ -13,14 +13,15 @@ import tempfile
 import threading
 import time
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from urllib.parse import urlsplit
 import zlib
 
 from probe.local_model import LocalClient, ProbeError, parse_json_response, probe_model, validate_base_url
 
 
-def completion(content, *, finish="stop", model="actual-model", **message_extra):
+def completion(content, *, finish="stop", model="glm53", **message_extra):
     return {"model": model, "choices": [{"finish_reason": finish, "message": {"role": "assistant", "content": content, **message_extra}}],
             "usage": {"prompt_tokens": 4, "completion_tokens": 2, "completion_tokens_details": {"reasoning_tokens": 1}}}
 
@@ -138,7 +139,7 @@ class LocalModelTests(unittest.TestCase):
 
     def test_proxy_environment_is_ignored_and_key_not_saved(self):
         key = "test-key-must-never-appear-in-files"
-        with MockServer([models("glm53"), reply("LOCAL_OK", reasoning_content="private reasoning example")]) as server:
+        with MockServer([models("glm53"), reply("LOCAL_OK", model="actual-model", reasoning_content="private reasoning example")]) as server:
             with patch.dict(os.environ, {"HTTP_PROXY": "http://8.8.8.8:9999", "HTTPS_PROXY": "http://8.8.8.8:9999", "ALL_PROXY": "http://8.8.8.8:9999", "LOCAL_MODEL_API_KEY": key}):
                 client = LocalClient(server.url)
                 client.discover_model(self.directory)
@@ -212,6 +213,77 @@ class LocalModelTests(unittest.TestCase):
             self.assertEqual(len(server.requests), 6)
         self.assertTrue((self.directory / "result" / "capabilities.json").exists())
 
+    def identity_probe(self, mismatched_label=None):
+        """Exercise real parsing/evidence writes with HTTP bytes, without sockets."""
+        cases = self.vision_cases()
+        contents = [("text", "LOCAL_OK"), ("strict_json", '{"probe":"LOCAL_OK"}')]
+        contents += [(f"vision_{case['case_id']}", json.dumps({"digits": case["expected"]}))
+                     for case in cases]
+        payloads = [models("glm53")[1]]
+        payloads += [completion(content, model="glm53-other" if label == mismatched_label else "glm53")
+                     for label, content in contents]
+        responses = []
+        for payload in payloads:
+            body = json.dumps(payload).encode()
+            response = Mock(status=200)
+            response.getheader.return_value = str(len(body))
+            response.getheaders.return_value = [("Content-Length", str(len(body)))]
+            response.read1.side_effect = io.BytesIO(body).read1
+            responses.append(response)
+        connection = Mock(sock=None)
+        connection.getresponse.side_effect = responses
+        client = LocalClient("http://127.0.0.1/v1", model="glm53")
+        with patch.object(client, "_connection", return_value=(connection, urlsplit(client.base_url))):
+            report = probe_model(client, self.directory / "result", cases)
+        self.assertEqual(connection.request.call_count, 6)
+        self.assertEqual(json.loads((self.directory / "result/capabilities.json").read_text()), report)
+        return report
+
+    def assert_identity_failure(self, result):
+        self.assertEqual(result["status"], "failed")
+        self.assertEqual(result["actual_model"], "glm53-other")
+        self.assertIn("Model identity mismatch", result["reason"])
+        self.assertIn("selected 'glm53'", result["reason"])
+        self.assertIn("response reported 'glm53-other'", result["reason"])
+        attempt = Path(result["attempt_dir"])
+        raw = json.loads((attempt / "response.raw").read_bytes())
+        self.assertEqual(raw["model"], "glm53-other")
+        self.assertEqual(json.loads((attempt / "request.json").read_text())["body"]["model"], "glm53")
+        self.assertEqual(json.loads((attempt / "record.json").read_text())["actual_model"], "glm53-other")
+        self.assertNotIn("qualification", result)
+
+    def test_preflight_rejects_mismatched_text_model(self):
+        report = self.identity_probe("text")
+        self.assert_identity_failure(report["text"])
+        self.assertEqual(report["strict_json"]["status"], "passed")
+        self.assertEqual(report["vision"]["status"], "qualified")
+
+    def test_preflight_rejects_mismatched_json_model(self):
+        report = self.identity_probe("strict_json")
+        self.assert_identity_failure(report["strict_json"])
+        self.assertEqual(report["text"]["status"], "passed")
+        self.assertEqual(report["vision"]["status"], "qualified")
+
+    def test_preflight_rejects_mismatched_image_model(self):
+        # Every image, including the blank control, must match the selected ID.
+        for case in ("vision_case_0", "vision_case_1", "vision_case_2"):
+            with self.subTest(case=case):
+                report = self.identity_probe(case)
+                index = int(case[-1])
+                self.assert_identity_failure(report["vision"]["cases"][index])
+                self.assertEqual(report["vision"]["status"], "failed")
+                self.assertEqual(report["text"]["status"], "passed")
+                self.assertEqual(report["strict_json"]["status"], "passed")
+
+    def test_preflight_matching_model_qualifies_all_capabilities(self):
+        report = self.identity_probe()
+        self.assertEqual(report["text"]["status"], "passed")
+        self.assertEqual(report["strict_json"]["status"], "passed")
+        self.assertEqual(report["vision"]["status"], "qualified")
+        for result in [report["text"], report["strict_json"], *report["vision"]["cases"]]:
+            self.assertEqual(result["actual_model"], report["selected_model"])
+            self.assertNotIn("reason", result)
+
     def test_vision_mismatch_does_not_erase_text_success(self):
         cases = self.vision_cases()
         responses = [models("glm53"), reply("LOCAL_OK"), reply('{"probe":"LOCAL_OK"}'), reply('{"digits":"451932"}'), reply('{"digits":"WRONG"}'), reply('{"digits":""}')]
@@ -278,7 +350,8 @@ class LocalModelTests(unittest.TestCase):
             config = {"local_only": True, "base_url": server.url, "model": None,
                       "peer_ssh_alias": None, "request_timeout_seconds": 2, "max_output_tokens": 333}
             (self.directory / "config.example.json").write_text(json.dumps(config), encoding="utf-8")
-            args = argparse.Namespace(config=None, peer=None, base_url=None, model=None)
+            args = cli.parser().parse_args(["preflight"])
+            self.assertEqual(args.ocr_isolation, "namespace")
             namespace_result = type("Completed", (), {"returncode": 0, "stderr": ""})()
             with patch.object(cli, "ROOT", self.directory), patch.object(cli, "inventory", return_value={"scope": "mock"}), patch.object(cli.subprocess, "run", return_value=namespace_result), contextlib.redirect_stdout(io.StringIO()):
                 exit_code = cli.cmd_preflight(args)

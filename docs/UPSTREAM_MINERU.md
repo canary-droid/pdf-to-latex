@@ -101,9 +101,12 @@ The controller runs the isolated interpreter with `--input PDF --output EMPTYDIR
 is explicit opt-in, needs a qualified CUDA/vLLM installation and sufficient free
 memory, and never falls back to another engine. The worker selects ONNX CPU for
 small models in both modes. The root controller owns original-book window/page
-mapping, process resource limits, timeout, process-group cleanup and an actual
-network namespace. Loopback may need to be enabled inside that namespace for
-native vLLM local IPC; a failed runtime must be reported, not retried online.
+mapping, process resource limits, timeout and process-group cleanup. Since the
+18 October 2026 operator decision, `--ocr-isolation namespace` (default) requires
+an actual network namespace; explicit `--ocr-isolation none` launches the same
+worker directly: local processing; no OS network isolation. The Python guard is
+best effort in either mode. Loopback may be needed inside a selected namespace
+for native vLLM IPC; failures never trigger fallback to a different isolation mode.
 
 `--probe-runtime --output EMPTYDIR --tier ... --models-dir ROOT` checks packages,
 device availability and model readiness/hashes without opening a PDF or running

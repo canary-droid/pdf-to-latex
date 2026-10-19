@@ -54,6 +54,13 @@ class WorkerContractTests(unittest.TestCase):
                 self.assertFalse(config["llm_aided"]["features"]["title_leveling"])
                 self.assertEqual(os.environ.get("HOME"), original_home)
                 self.assertEqual(os.environ["CUDA_VISIBLE_DEVICES"], "")
+                self.assertEqual(config["llm_aided"]["base_url"], "")
+                self.assertFalse(config["llm_aided"]["features"]["cross_page_table_cell_merge"])
+                self.assertEqual(os.environ["MINERU_MODEL_SOURCE"], "local")
+                self.assertEqual(os.environ["HF_HUB_OFFLINE"], "1")
+                self.assertEqual(os.environ["TRANSFORMERS_OFFLINE"], "1")
+                self.assertEqual(os.environ["HF_HUB_DISABLE_TELEMETRY"], "1")
+                self.assertEqual(os.environ["VLLM_NO_USAGE_STATS"], "1")
 
     def test_python_guard_blocks_non_loopback_before_connect(self):
         code = (
@@ -61,7 +68,7 @@ class WorkerContractTests(unittest.TestCase):
             f"s=importlib.util.spec_from_file_location('w',{str(MODULE)!r})\n"
             "w=importlib.util.module_from_spec(s);s.loader.exec_module(w)\n"
             "w.install_socket_audit_guard()\n"
-            "try:\n socket.socket().connect(('192.0.2.1',9))\n"
+            "try:\n socket.getaddrinfo('192.0.2.1',9)\n"
             "except PermissionError:\n print('blocked')\n"
             "else:\n raise RuntimeError('guard did not block')\n"
         )

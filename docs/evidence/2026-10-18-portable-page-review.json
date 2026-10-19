@@ -1,0 +1,150 @@
+{
+  "date": "2026-10-18",
+  "source_run": "runs/convert-basic-20261018T182257Z-c99779",
+  "source_run_files": 45,
+  "source_run_manifest_sha256_before": "ef0ae9abc7aea73b17df3e8cbe65db3dc5b80a9ff5a1b6c21f2a99f570a52149",
+  "source_run_manifest_sha256_after": "ef0ae9abc7aea73b17df3e8cbe65db3dc5b80a9ff5a1b6c21f2a99f570a52149",
+  "source_run_unchanged": true,
+  "original_bundle": {
+    "path": "results/convert-basic-20261018T182257Z-c99779-20261018T183538Z-1df4ed-upload.zip",
+    "present": true,
+    "sha256": "50f847f3d9dd616cf0e3133f05ce28524f090878fcc47ab0d888d2414f447f32"
+  },
+  "export": {
+    "path": "runs/export-english-math-20261018T204408Z-59d26b",
+    "summary": {
+      "status": "exported_unreviewed",
+      "pages": 4,
+      "represented_blocks": 32,
+      "unresolved_blocks": 2,
+      "omitted_blocks": 0,
+      "compilation": "not_run",
+      "fidelity": "unreviewed"
+    }
+  },
+  "preview": {
+    "path": "runs/review-input-20261018T204409Z-301420",
+    "summary": {
+      "source_run": "/home/mdi/projects/pdf-to-latex/runs/convert-basic-20261018T182257Z-c99779",
+      "source_state_sha256": "40cc7dc397f3025a234859c4467909d23dd9f2667a692c756986f278f661ecee",
+      "sources": "fixture-native,fixture-scan",
+      "model": "glm53-regular",
+      "endpoint": "http://192.168.1.100:8888/v1",
+      "limits": {
+        "max_pages": 4,
+        "max_page_characters": 48000,
+        "max_detail_crops": 4,
+        "page_max_edge": 1400,
+        "crop_max_edge": 1200,
+        "max_image_bytes": 1048576,
+        "max_image_pixels": 2000000,
+        "max_request_bytes": 2097152,
+        "max_output_tokens": 8192,
+        "timeout_seconds": 300,
+        "max_proposals_per_page": 100
+      },
+      "crop_plan": {
+        "fixture-native-p0002": [
+          {
+            "bbox": [
+              0.1,
+              0.195,
+              0.145,
+              0.35
+            ],
+            "rotation": 90,
+            "reason": "Explicit upright view of the vertical aside region; retain original page and unrotated detail."
+          }
+        ],
+        "fixture-scan-p0002": [
+          {
+            "bbox": [
+              0.1,
+              0.195,
+              0.145,
+              0.35
+            ],
+            "rotation": 90,
+            "reason": "Explicit upright view of the vertical aside region; retain original page and unrotated detail."
+          }
+        ]
+      },
+      "pages": [
+        {
+          "page_id": "fixture-native-p0001",
+          "status": "ready",
+          "source_attempt": "attempts/fixture-native-0001-0002-f69a5acf",
+          "budgets": {
+            "characters": 11248,
+            "request_bytes": 154313,
+            "images": 4,
+            "output_tokens": 8192,
+            "timeout_seconds": 300
+          }
+        },
+        {
+          "page_id": "fixture-native-p0002",
+          "status": "ready",
+          "source_attempt": "attempts/fixture-native-0001-0002-f69a5acf",
+          "budgets": {
+            "characters": 10743,
+            "request_bytes": 162714,
+            "images": 5,
+            "output_tokens": 8192,
+            "timeout_seconds": 300
+          }
+        },
+        {
+          "page_id": "fixture-scan-p0001",
+          "status": "ready",
+          "source_attempt": "attempts/fixture-scan-0001-0002-fc8a15dd",
+          "budgets": {
+            "characters": 11193,
+            "request_bytes": 187808,
+            "images": 4,
+            "output_tokens": 8192,
+            "timeout_seconds": 300
+          }
+        },
+        {
+          "page_id": "fixture-scan-p0002",
+          "status": "ready",
+          "source_attempt": "attempts/fixture-scan-0001-0002-fc8a15dd",
+          "budgets": {
+            "characters": 10677,
+            "request_bytes": 162623,
+            "images": 5,
+            "output_tokens": 8192,
+            "timeout_seconds": 300
+          }
+        }
+      ],
+      "status": "ready",
+      "mathematical_vision": "unqualified",
+      "known_source_used": false
+    }
+  },
+  "bundles": [
+    {
+      "path": "results/export-english-math-20261018T204408Z-59d26b-upload.zip",
+      "sha256": "f73315145d1ed33bc713d552c9e8a0fb2d09d25784343c9b3d2820f393c1d3a9"
+    },
+    {
+      "path": "results/review-input-20261018T204409Z-301420-upload.zip",
+      "sha256": "a498e1800252bd760db6eb8d20e2de1ddeb70866cfeccffc601c0ed7f99e91aa"
+    }
+  ],
+  "validation": {
+    "focused_tests": 12,
+    "focused_passed": 12,
+    "suite_entries": 85,
+    "suite_passed": 70,
+    "suite_errors": 15,
+    "error_cause": "sandbox denies creation of mock loopback HTTP sockets",
+    "compilation": "not_run; no pdflatex/xelatex/lualatex found",
+    "live_ocr": "not_run",
+    "live_glm": "not_run",
+    "service_management": "not_run",
+    "proposals_accepted": 0
+  }
+}

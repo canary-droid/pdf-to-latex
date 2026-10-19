@@ -149,18 +149,22 @@ class LocalClient:
     A caller may alternatively supply api_key explicitly after reading its own
     environment. Only one request per instance can run at a time. Timeout is a
     per-request wall-clock deadline (including response-body reading); there is
-    no automatic retry. max_tokens is capped at 4096 for these tiny probes.
+    no automatic retry. Capability/candidate probes cap output at 4096 tokens;
+    explicit page_review purpose permits up to 16384 with the same transport limits.
     """
 
     def __init__(self, base_url, model=None, api_key=None, timeout=120,
-                 max_tokens=2048, max_response_bytes=2 * 1024 * 1024):
+                 max_tokens=2048, max_response_bytes=2 * 1024 * 1024, purpose="capability_probe"):
         self.base_url = validate_base_url(base_url)
         if model is not None and (not isinstance(model, str) or not model.strip() or len(model) > 512):
             raise ValueError("model must be a nonempty model ID, at most 512 characters.")
         if isinstance(timeout, bool) or not isinstance(timeout, (int, float)) or not math.isfinite(timeout) or not 0 < timeout <= 600:
             raise ValueError("timeout must be between 0 and 600 seconds.")
-        if isinstance(max_tokens, bool) or not isinstance(max_tokens, int) or not 1 <= max_tokens <= 4096:
-            raise ValueError("max_tokens must be an integer between 1 and 4096.")
+        if purpose not in ("capability_probe", "page_review"):
+            raise ValueError("Unknown local request purpose.")
+        token_limit = 16384 if purpose == "page_review" else 4096
+        if isinstance(max_tokens, bool) or not isinstance(max_tokens, int) or not 1 <= max_tokens <= token_limit:
+            raise ValueError(f"max_tokens must be an integer between 1 and {token_limit}.")
         if isinstance(max_response_bytes, bool) or not isinstance(max_response_bytes, int) or not 1024 <= max_response_bytes <= 8 * 1024 * 1024:
             raise ValueError("max_response_bytes must be between 1024 and 8388608.")
         self.requested_model = model
@@ -391,6 +395,16 @@ def _evidence(result):
     return {key: value for key, value in result.items() if key != "content"}
 
 
+def _require_model_identity(result, selected_model):
+    """Fail this capability without discarding the reported response evidence."""
+    if result.get("actual_model") != selected_model:
+        result["status"] = "failed"
+        result["reason"] = (f"Model identity mismatch: selected {selected_model!r}, "
+                            f"response reported {result.get('actual_model')!r}; "
+                            "this response cannot qualify the selected model.")
+        result.pop("qualification", None)
+
+
 def _failure(error, *, unsupported=False):
     return {"status": "unsupported" if unsupported and error.status in (400, 404, 415, 422) else "failed",
             "reason": str(error), "attempt_dir": error.attempt_dir, "http_status": error.status}
@@ -440,7 +454,8 @@ def probe_model(client, output_dir, vision_cases=None):
     expected, and kind ('digits' or 'blank'). Use generated random digits that
     occur only in the pixels, not in filenames/prompts visible to the model.
     Qualification needs >=2 different digit cases, a blank, distinct image
-    hashes and IDs, and every exact response. Failures do not erase text success.
+    hashes and IDs, and every exact response. Each capability also requires an
+    exact response model ID match. Failures do not erase unrelated success.
     """
     output = Path(output_dir)
     output.mkdir(parents=True, exist_ok=True)
@@ -470,6 +485,7 @@ def probe_model(client, output_dir, vision_cases=None):
         report["text"] = {"status": "passed" if result["content"].strip() == "LOCAL_OK" else "failed", **_evidence(result)}
         if report["text"]["status"] != "passed":
             report["text"]["reason"] = "Assistant content did not exactly match the sentinel."
+        _require_model_identity(report["text"], report["selected_model"])
     except ProbeError as error:
         report["text"] = _failure(error)
     save()
@@ -483,6 +499,7 @@ def probe_model(client, output_dir, vision_cases=None):
                                  "qualification": "One strict-schema request was accepted and its result validated; schema enforcement on all future outputs is not proven."}
         if not passed:
             report["strict_json"]["reason"] = "Assistant content was not exactly the required JSON object."
+        _require_model_identity(report["strict_json"], report["selected_model"])
     except ProbeError as error:
         report["strict_json"] = _failure(error, unsupported=True)
     save()
@@ -513,6 +530,7 @@ def probe_model(client, output_dir, vision_cases=None):
                 entry["status"] = "passed" if exact else "failed"
                 if not exact:
                     entry["reason"] = "Vision response did not exactly match this image/control."
+                _require_model_identity(entry, report["selected_model"])
             except ProbeError as error:
                 entry.update(_failure(error, unsupported=True))
             report["vision"]["cases"].append(entry)

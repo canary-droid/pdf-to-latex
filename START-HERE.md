@@ -5,6 +5,15 @@ existing local GLM endpoint and local specialist OCR software. It has no cloud
 model adapter and never calls OpenRouter. It does not stop, restart, reconfigure
 or install anything into TensorFold.
 
+**18 October fixture checkpoint:** Basic OCR of both fixtures has completed.
+For portable export, offline page-input preview and the next GLM experiment,
+follow [docs/SPARK-OPERATIONS.md](docs/SPARK-OPERATIONS.md), which identifies the
+actual saved run and gives the operator's existing stop/start commands. Reuse
+the completed OCR; do not rerun conversion to pick up export changes. On this
+deployment OCR and GLM use separate memory phases. The sequence below remains
+the general initial setup workflow; the immediate experiment starts from saved
+fixture evidence and keeps all GLM proposals unaccepted.
+
 ## 1. Start on the head Spark, with the model free
 
 Extract the ZIP into a new directory, for example
@@ -20,7 +29,7 @@ alias is not proof of the underlying weights; confirm it against your launcher.
 In a terminal inside the extracted `pdf2tex-probe-v0.1` folder, run:
 
 ```bash
-python3 probe.py preflight --peer spark-92a4
+python3 probe.py preflight --ocr-isolation none --peer spark-92a4
 ```
 
 `spark-92a4` is your previously reported second-node SSH alias. If that alias is
@@ -40,7 +49,7 @@ If discovery finds several GLM aliases, the result explains the ambiguity. Rerun
 with the **exact intended ID returned by your server**, for example:
 
 ```bash
-python3 probe.py preflight --peer spark-92a4 --model YOUR_EXACT_SERVED_MODEL_ID
+python3 probe.py preflight --ocr-isolation none --peer spark-92a4 --model YOUR_EXACT_SERVED_MODEL_ID
 ```
 
 The example placeholder is not a model name. Use `--base-url` only if the actual
@@ -90,21 +99,27 @@ before dispatch; arrange an idle window and use the existing model launcher only
 after identifying its correct stop/restart procedure.
 
 ```bash
-.venv-control/bin/python probe.py convert --source fixture-native,fixture-scan
-.venv-control/bin/python probe.py convert --source both
+.venv-control/bin/python probe.py convert --ocr-isolation none --source fixture-native,fixture-scan
+.venv-control/bin/python probe.py convert --ocr-isolation none --source both
 ```
 
 Run the second command only after inspecting the fixture outputs. Each command
 prints a run directory and a result ZIP. Inputs are processed in windows of eight
 owned pages with one adjacent context page on each side. Completed windows are
-retained and verified before reuse. The converter child runs in a separate Linux
-network namespace, with no Internet/LAN route; missing assets fail rather than
-downloading or invoking a cloud service.
+retained and verified before reuse. The commands above explicitly select the
+18 October 2026 trial decision: **local processing; no OS network isolation**.
+The namespace availability test is deliberately not run; the same local SDK
+worker runs directly with cached assets, blank external endpoints, disabled cloud
+stages, offline/telemetry settings and its best-effort Python network guard.
+Missing assets fail rather than downloading. This is not an OS egress boundary.
 
-If the system refuses that network namespace, the probe stops with
-`blocked_network_isolation` and preserves diagnostics. It does **not** disable
-AppArmor, use sudo, give the worker Docker access, or retry online. See README
-for the bounded administrator-side alternatives.
+Omitting `--ocr-isolation` retains the default `namespace` mode. Namespace failure
+stops with `blocked_network_isolation`; there is no automatic fallback to `none`.
+Keep the selected mode on resume; changing modes requires a new run. Do not
+change AppArmor, host permissions or Codex sandbox settings for this trial.
+Reuse valid existing endpoint evidence: implementing or trying this OCR option
+does not require another GLM preflight. Historical endpoint success establishes
+neither OCR execution nor mathematical fidelity.
 
 Open `review.html` in the printed conversion run directory. It links source-window
 PDFs, page maps, raw data, Markdown and the converter's native LaTeX. Extracted
@@ -115,7 +130,7 @@ not an assembled final article/book. Compilation has not been performed.
 Resume the same run with exactly the same settings:
 
 ```bash
-.venv-control/bin/python probe.py convert --source both --resume runs/EXACT_CONVERSION_DIRECTORY
+.venv-control/bin/python probe.py convert --ocr-isolation none --source both --resume runs/EXACT_CONVERSION_DIRECTORY
 ```
 
 Use the real directory printed by the earlier command. Changed source, code,

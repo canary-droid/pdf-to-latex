@@ -50,6 +50,7 @@ class CLIIntegrationTests(unittest.TestCase):
         atomic_json(self.config, {"local_only": True, "window_pages": 4, "overlap_pages": 1,
                                  "minimum_available_gib_basic": 2,
                                  "conversion_timeout_seconds": 30})
+        self.isolation_mode = "namespace"
         self.executions = []
         self.worker_status = "completed"
         self.summary_transform = lambda data: data
@@ -76,7 +77,11 @@ class CLIIntegrationTests(unittest.TestCase):
 
     def _fake_worker(self, command, attempt, minimum, timeout):
         self.executions.append(Path(attempt))
-        self.assertEqual(command[:4], ["unshare", "--user", "--map-root-user", "--net"])
+        if self.isolation_mode == "namespace":
+            self.assertEqual(command[:4], ["unshare", "--user", "--map-root-user", "--net"])
+        else:
+            self.assertEqual(command[0], str(Path(sys.executable).absolute()))
+            self.assertFalse(any(item in ("unshare", "bwrap") for item in command))
         output = Path(command[command.index("--output") + 1])
         self.assertEqual(output, attempt / "output")
         output.mkdir()
@@ -94,10 +99,13 @@ class CLIIntegrationTests(unittest.TestCase):
         (attempt / "worker.log").write_text("Synthetic converter; no inference executed.\n", encoding="utf-8")
         return self.worker_status
 
-    def _convert(self, resume=None):
+    def _convert(self, resume=None, isolation=None):
         before = set((self.root / "runs").glob("convert-*")) if (self.root / "runs").exists() else set()
         args = ["--config", str(self.config), "convert", "--source", "paper",
                 "--converter-python", sys.executable, "--models-dir", str(self.root / "models")]
+        if isolation is not None:
+            self.isolation_mode = isolation
+            args += ["--ocr-isolation", isolation]
         if resume is not None:
             args += ["--resume", str(resume)]
         with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
@@ -106,6 +114,41 @@ class CLIIntegrationTests(unittest.TestCase):
         if resume is not None:
             return code, resume
         return code, next(iter(created)) if created else None
+
+    def test_none_skips_namespace_and_persists_mode_and_refuses_changed_resume(self):
+        self.namespace_mock.side_effect = FileNotFoundError("namespace tools unavailable")
+        code, run = self._convert(isolation="none")
+        self.assertEqual(code, 0)
+        self.namespace_mock.assert_not_called()
+        state = read_json(run / "state.json")
+        self.assertEqual(state["settings"]["ocr_isolation"], "none")
+        self.assertEqual(state["ocr_isolation"]["status"], "deliberately_not_run")
+        for attempt in self.executions:
+            evidence = read_json(attempt / "completion.json")["ocr_isolation"]
+            self.assertFalse(evidence["namespace_established"])
+            self.assertEqual(evidence["worker_namespace_status"], "not_requested")
+        self.assertIn("local processing; no OS network isolation", (run / "review.html").read_text())
+        report = read_json(run / "quality-report.json")["ocr_isolation"]
+        self.assertEqual(report["requested"], "none")
+        self.assertEqual(report["namespace_probe"]["status"], "deliberately_not_run")
+        self.assertTrue(all(item["worker"]["namespace_established"] is False
+                            for item in report["attempts"].values()))
+        before = (run / "state.json").read_bytes()
+        self.executions.clear()
+        code, _ = self._convert(run, isolation="namespace")
+        self.assertEqual(code, 2)
+        self.assertEqual(self.executions, [])
+        self.assertEqual((run / "state.json").read_bytes(), before)
+        self.namespace_mock.assert_not_called()
+
+    def test_explicit_namespace_failure_never_falls_back(self):
+        self.namespace_mock.side_effect = FileNotFoundError("unshare missing")
+        code, run = self._convert(isolation="namespace")
+        self.assertEqual(code, 3)
+        self.worker_mock.assert_not_called()
+        evidence = read_json(run / "state.json")["ocr_isolation"]
+        self.assertEqual(evidence["status"], "failed")
+        self.assertFalse(evidence["namespace_established"])
 
     def test_windows_own_each_selected_page_once_and_keep_real_adjacent_context(self):
         code, run = self._convert()

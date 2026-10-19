@@ -1,0 +1,8 @@
+{
+  "fixture-native-p0002": [
+    {"bbox": [0.10, 0.195, 0.145, 0.35], "rotation": 90, "reason": "Explicit upright view of the vertical aside region; retain original page and unrotated detail."}
+  ],
+  "fixture-scan-p0002": [
+    {"bbox": [0.10, 0.195, 0.145, 0.35], "rotation": 90, "reason": "Explicit upright view of the vertical aside region; retain original page and unrotated detail."}
+  ]
+}

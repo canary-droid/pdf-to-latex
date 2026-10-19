@@ -4,6 +4,15 @@ Start with **START-HERE.md**. This package implements design 1.1's milestone 0B;
 it is a bounded diagnostic package, not the later application. All inference is
 local. No OpenRouter feature or credential is supported.
 
+For the completed fixture OCR and the next page-review experiment, use
+[docs/SPARK-OPERATIONS.md](docs/SPARK-OPERATIONS.md). `export --run ...` creates a
+portable English/math derivative from saved OCR. `review --mode pages
+--preview-only --run ... --model ...` prepares complete page inputs offline;
+`review --mode pages --run ... --preview ... --preflight ... --model ...` sends
+them serially to the validated local model and saves UNACCEPTED proposals. No
+command applies proposals. The runbook gives actual saved paths, bounds and the
+separate OCR/GLM memory-phase procedure. Candidate review remains the default.
+
 ## Inputs and provenance
 
 `sources.json` fixes hashes, page counts, OCR modes and original-page mappings.
@@ -28,16 +37,22 @@ API keys are not stored. Model output is data, never a shell command.
 The converter is a separate process in its own Python environment. It uses the
 stateless local MinerU SDK, private configuration, predownloaded weights, explicit
 CPU ONNX for Basic, disabled LLM-aided processing and no remote VLM URL. OS
-network isolation is required: `unshare --user --map-root-user --net`. Namespace
-root maps to the ordinary invoking user; it is not host-root access. The worker
-also rejects non-loopback Python socket calls and disables applicable provider
-telemetry, but those are not substitutes for OS egress isolation. No converter
-fallback is launched on a failure.
+network isolation defaults to `--ocr-isolation namespace`, using
+`unshare --user --map-root-user --net`. Namespace root maps to the ordinary
+invoking user, not host root. Namespace failure stops conversion without fallback.
 
-If user/network namespaces are unavailable, send the saved diagnostics. An
-administrator can assess the existing sandbox/AppArmor configuration or provide
-a separately owned isolated runtime/service with no egress. This package does
-not silently weaken host protections and does not include a bypass option.
+The operator decision of 18 October 2026 permits explicit `--ocr-isolation none`
+on `preflight` and `convert`: **local processing; no OS network isolation**.
+This trial uses that mode. It skips the namespace probe and launches the same
+local worker directly. Local cached assets, disabled external endpoints and
+cloud stages, offline/telemetry settings and the Python socket guard still apply.
+The guard is best effort and cannot constrain native-code networking as an OS
+namespace can. No host security or Codex sandbox changes are required or authorised.
+Preflight records a deliberate skip, never a passing namespace test. Run settings,
+attempt records and reports retain the selected mode; resume requires the same
+mode and unchanged runtime, source, code and output evidence. Older runs are
+preserved; code/settings changes can require a new run.
+
 Rootless GPU or a particular ARM64 container is not assumed qualified. The worker
 must have a writable project/model bookkeeping area; MinerU uses `.locks` even
 with ready local weights. Master originals and approved releases stay outside
@@ -88,8 +103,8 @@ Paths above are placeholders. The controller initially requires 64 GiB available
 on the conversion node; the worker also checks local CUDA availability. These
 are probe policies, not inferred fit guarantees. The worker selects native local
 vLLM, never another engine. Native vLLM may need loopback enabled inside its
-otherwise isolated namespace; a failure is reported for qualification, not
-retried online. Two Sparks are not a transparent 256 GB GPU. Only the existing
+namespace when namespace mode is selected; a failure is reported for qualification,
+not retried with a different isolation mode. Two Sparks are not a transparent 256 GB GPU. Only the existing
 GLM service distributes over both; OCR runs on the node executing this command.
 
 A satisfactory Basic path can proceed without Standard. Specialist recognition
