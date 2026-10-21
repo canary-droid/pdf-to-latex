@@ -114,6 +114,20 @@ class LocalModelTests(unittest.TestCase):
             with self.subTest(options=options), self.assertRaises(ValueError):
                 LocalClient("http://127.0.0.1/v1", **options)
 
+    def test_invalid_page_effort_and_nonpage_override_rejected_before_network(self):
+        for purpose in ('capability_probe','page_review'):
+            client = LocalClient('http://127.0.0.1/v1',purpose=purpose)
+            client.model = 'glm53'
+            with patch.object(client,'_request',side_effect=AssertionError('No dispatch')) as request:
+                for value in ('extreme','none','LOW','',None,True,[],{}):
+                    with self.subTest(purpose=purpose,value=value), self.assertRaises(ValueError):
+                        client.chat([],self.directory,'invalid',reasoning_effort=value)
+                if purpose == 'capability_probe':
+                    for effort in ('low','medium'):
+                        with self.assertRaisesRegex(ValueError,'only supported for page review'):
+                            client.chat([],self.directory,'invalid',reasoning_effort=effort)
+                request.assert_not_called()
+
     def test_model_selection_ambiguous_and_exact(self):
         with MockServer([models("glm53-fast", "glm53-regular"), models("glm53-fast", "glm53-regular")]) as server:
             client = LocalClient(server.url)
@@ -236,6 +250,9 @@ class LocalModelTests(unittest.TestCase):
         with patch.object(client, "_connection", return_value=(connection, urlsplit(client.base_url))):
             report = probe_model(client, self.directory / "result", cases)
         self.assertEqual(connection.request.call_count, 6)
+        for call in connection.request.call_args_list:
+            if call.args[0] == 'POST':
+                self.assertNotIn('reasoning_effort',json.loads(call.kwargs['body']))
         self.assertEqual(json.loads((self.directory / "result/capabilities.json").read_text()), report)
         return report
 

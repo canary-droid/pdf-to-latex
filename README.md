@@ -9,9 +9,20 @@ For the completed fixture OCR and the next page-review experiment, use
 portable English/math derivative from saved OCR. `review --mode pages
 --preview-only --run ... --model ...` prepares complete page inputs offline;
 `review --mode pages --run ... --preview ... --preflight ... --model ...` sends
-them serially to the validated local model and saves UNACCEPTED proposals. No
-command applies proposals. The runbook gives actual saved paths, bounds and the
+them serially to the validated local model and saves UNACCEPTED proposals.
+`accept-plan` creates an unselected, hash-bound catalog; `apply-accepted --plan ...`
+applies only an explicit operator selection to a new derivative, with deletion
+and dependent-group accounting. `review --mode regions --preview-only` prepares
+selected-block comparisons from that derivative; whole-page review remains available. The runbook gives actual saved paths, bounds and the
 separate OCR/GLM memory-phase procedure. Candidate review remains the default.
+
+The current Klebaner trial uses `review-batch --preview-only` to prepare an
+explicit owned-page range with block and visual-omission coverage, then
+`review-batch --preview ... --preflight ...` to run sequentially. It checkpoints
+each request, permits at most one retry per unit across resumes, and never
+accepts proposals. `batch-status --run ...` monitors a live job without taking
+its writer lock. See the runbook for the prepared 100-page Flash Next inputs,
+fresh preflight, persistent terminal, resume and partial-bundle commands.
 
 ## Inputs and provenance
 
@@ -108,7 +119,9 @@ not retried with a different isolation mode. Two Sparks are not a transparent 25
 GLM service distributes over both; OCR runs on the node executing this command.
 
 A satisfactory Basic path can proceed without Standard. Specialist recognition
-models are expected; GLM remains the only general-purpose LLM in this probe.
+models are expected. The original probe targets GLM; the explicitly authorized
+Flash Next experiments use their separately qualified exact local alias, as
+recorded in the operator runbook. There is no automatic model substitution.
 
 ## Results and commands
 

@@ -12,7 +12,9 @@ actual saved run and gives the operator's existing stop/start commands. Reuse
 the completed OCR; do not rerun conversion to pick up export changes. On this
 deployment OCR and GLM use separate memory phases. The sequence below remains
 the general initial setup workflow; the immediate experiment starts from saved
-fixture evidence and keeps all GLM proposals unaccepted.
+fixture evidence. Review commands keep proposals unaccepted; the separate
+explicit-selection command can now apply authorized proposals to a new derivative.
+The current operator runbook covers that bounded follow-up and its focused review.
 
 ## 1. Start on the head Spark, with the model free
 

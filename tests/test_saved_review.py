@@ -1,11 +1,14 @@
 """Saved-data export/page review tests. Synthetic PDFs, fake GLM; no network/OCR."""
 import copy
+import contextlib
+import io
 import json
 from pathlib import Path
 import shutil
 import tempfile
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
+from urllib.parse import urlsplit
 
 import fitz
 
@@ -96,12 +99,140 @@ class SavedReviewTests(unittest.TestCase):
         FakeClient.actual_model = 'glm-test'
         self.before = files_manifest(self.run)
 
-    def make_preview(self, limits=None, crop_plan=None):
+    def make_preview(self, limits=None, crop_plan=None, reasoning_effort='server-default'):
         output = self.root/('preview-'+str(len(list(self.root.glob('preview-*')))))
         output.mkdir()
         ready = write_preview(self.root,self.run,output,'fixture-native,fixture-scan','glm-test',
-                              self.config['base_url'],limits or dict(LIMITS),crop_plan)
+                              self.config['base_url'],limits or dict(LIMITS),crop_plan,
+                              reasoning_effort=reasoning_effort)
         return ready, output
+
+    def serialized_review(self, preview):
+        """Use the real client/HTTP serialization with an in-memory connection."""
+        outgoing = []
+
+        def connection(client):
+            transport = Mock(sock=None)
+
+            def request(method, path, body=None, headers=None):
+                if method == 'GET':
+                    value = {'data':[{'id':'glm-test'}]}
+                else:
+                    payload = json.loads(body)
+                    outgoing.append(payload)
+                    page = json.loads(payload['messages'][0]['content'][0]['text'].split('COMPLETE PAGE DATA:\n')[1])
+                    answer = {'page_id':page['page_id'],'complete':True,
+                              'reviewed_block_ids':[b['id'] for b in page['blocks']],'proposals':[]}
+                    value = {'model':'glm-test','choices':[{'finish_reason':'stop',
+                             'message':{'role':'assistant','content':json.dumps(answer)}}]}
+                raw = json.dumps(value).encode()
+                response = Mock(status=200)
+                response.getheader.return_value = str(len(raw))
+                response.getheaders.return_value = [('Content-Length',str(len(raw)))]
+                response.read1.side_effect = io.BytesIO(raw).read1
+                transport.getresponse.return_value = response
+
+            transport.request.side_effect = request
+            return transport, urlsplit(client.base_url)
+
+        output = self.root/('review-'+str(len(list(self.root.glob('review-*')))))
+        output.mkdir()
+        with patch.object(LocalClient,'_connection',connection):
+            ready = review_pages(self.root,self.run,preview,self.preflight,output,self.config)
+        self.assertTrue(ready)
+        return output, outgoing
+
+    def refresh_preview_manifest(self, preview):
+        atomic_json(preview/'artifact-manifest.json',
+                    [entry for entry in files_manifest(preview) if entry['path'] != 'artifact-manifest.json'])
+
+    def test_effort_preview_matches_actual_outgoing_request(self):
+        _, baseline = self.make_preview()
+        for effort in ('server-default','low','medium','high','max'):
+            with self.subTest(effort=effort):
+                _, preview = self.make_preview(reasoning_effort=effort)
+                self.assertEqual(verify_preview(preview)['reasoning_effort'],effort)
+                before = files_manifest(preview)
+                output, outgoing = self.serialized_review(preview)
+                self.assertEqual(len(outgoing),4)
+                for record, sent in zip(verify_preview(preview)['pages'],outgoing):
+                    relative = Path('pages')/record['page_id']
+                    prepared = read_json(preview/relative/'request.json')
+                    self.assertEqual(sent,prepared)
+                    attempts = list((output/relative).glob('attempts/*/request.json'))
+                    self.assertEqual(len(attempts),1)
+                    self.assertEqual(read_json(attempts[0])['body'],prepared)
+                    self.assertEqual(read_json(output/relative/'request.json'),prepared)
+                    self.assertEqual((preview/relative/'page.json').read_bytes(),
+                                     (baseline/relative/'page.json').read_bytes())
+                    unchanged = {k:v for k,v in prepared.items() if k != 'reasoning_effort'}
+                    self.assertEqual(unchanged,read_json(baseline/relative/'request.json'))
+                    if effort == 'server-default':
+                        self.assertNotIn('reasoning_effort',sent)
+                    else:
+                        self.assertEqual(sent['reasoning_effort'],effort)
+                self.assertEqual(read_json(output/'summary.json')['reasoning_effort'],effort)
+                self.assertEqual(read_json(output/'provenance.json')['reasoning_effort'],effort)
+                self.assertEqual(files_manifest(preview),before)
+
+    def test_effort_survives_unsupported_schema_wrapper(self):
+        _, preview = self.make_preview(reasoning_effort='low')
+        caps = read_json(self.preflight/'model/capabilities.json')
+        caps['strict_json']['status'] = 'unsupported'
+        atomic_json(self.preflight/'model/capabilities.json',caps)
+        output, outgoing = self.serialized_review(preview)
+        for record, sent in zip(verify_preview(preview)['pages'],outgoing):
+            prepared = read_json(preview/'pages'/record['page_id']/'request.json')
+            prepared.pop('response_format')
+            self.assertEqual(sent,prepared)
+            self.assertEqual(sent['reasoning_effort'],'low')
+            self.assertEqual(read_json(output/'pages'/record['page_id']/'request.json'),sent)
+
+    def test_legacy_preview_sends_no_effort_and_stays_unchanged(self):
+        _, preview = self.make_preview()
+        metadata = read_json(preview/'preview.json')
+        del metadata['reasoning_effort']
+        atomic_json(preview/'preview.json',metadata)
+        self.refresh_preview_manifest(preview)
+        before = files_manifest(preview)
+        output, outgoing = self.serialized_review(preview)
+        self.assertTrue(all('reasoning_effort' not in request for request in outgoing))
+        self.assertEqual(read_json(output/'summary.json')['reasoning_effort'],'server-default')
+        self.assertEqual(files_manifest(preview),before)
+
+    def test_invalid_or_inconsistent_saved_effort_fails_before_discovery(self):
+        _, preview = self.make_preview(reasoning_effort='low')
+        metadata = read_json(preview/'preview.json')
+        first = preview/'pages'/metadata['pages'][0]['page_id']/'request.json'
+        original = read_json(first)
+        for selection, wire in (('medium','low'),(None,'low'),([], 'low'),
+                                ('low','high'),('low',None),('server-default','server-default'),
+                                ('server-default',None)):
+            with self.subTest(selection=selection,wire=wire):
+                atomic_json(preview/'preview.json',{**metadata,'reasoning_effort':selection})
+                atomic_json(first,{**original,'reasoning_effort':wire})
+                self.refresh_preview_manifest(preview)
+                factory = Mock(side_effect=AssertionError('Must not create client'))
+                with self.assertRaisesRegex(ValueError,'reasoning effort'):
+                    review_pages(self.root,self.run,preview,self.preflight,self.root/'unused',self.config,factory)
+                factory.assert_not_called()
+        for invalid in ('extreme',None,False,[]):
+            with self.subTest(invalid=invalid), self.assertRaises(ValueError):
+                self.make_preview(reasoning_effort=invalid)
+
+    def test_effort_cli_choices_and_preview_only_scope(self):
+        base = ['review','--mode','pages','--run','unused']
+        self.assertIsNone(cli.parser().parse_args(base).page_reasoning_effort)
+        self.assertFalse(hasattr(cli.parser().parse_args(['preflight']),'page_reasoning_effort'))
+        for effort in ('server-default','low','medium','high','max'):
+            args = cli.parser().parse_args(base+['--preview-only','--page-reasoning-effort',effort])
+            self.assertEqual(args.page_reasoning_effort,effort)
+        with contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit):
+            cli.parser().parse_args(base+['--page-reasoning-effort','extreme'])
+        for args in (base+['--page-reasoning-effort','low'],
+                     ['review','--run','unused','--preview-only','--page-reasoning-effort','server-default']):
+            with self.assertRaisesRegex(ValueError,'requires --mode pages --preview-only'):
+                cli.cmd_review_dispatch(cli.parser().parse_args(args))
 
     def run_review(self, preview):
         output = self.root/('review-'+str(len(list(self.root.glob('review-*')))))

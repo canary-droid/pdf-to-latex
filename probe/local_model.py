@@ -29,7 +29,14 @@ import uuid
 MAX_REQUEST_BYTES = 2 * 1024 * 1024
 MAX_IMAGE_BYTES = 1024 * 1024
 MAX_IMAGE_PIXELS = 2_000_000
+PAGE_REASONING_EFFORTS = ("server-default", "low", "medium", "high", "max")
 _PNG = b"\x89PNG\r\n\x1a\n"
+
+
+def validate_page_reasoning_effort(value):
+    if not isinstance(value, str) or value not in PAGE_REASONING_EFFORTS:
+        raise ValueError("Page reasoning effort must be server-default, low, medium, high or max.")
+    return value
 
 
 class ProbeError(RuntimeError):
@@ -172,6 +179,7 @@ class LocalClient:
         self.timeout = float(timeout)
         self.max_tokens = max_tokens
         self.max_response_bytes = max_response_bytes
+        self.purpose = purpose
         self._key = api_key if api_key is not None else os.environ.get("LOCAL_MODEL_API_KEY")
         if self._key is not None and (not isinstance(self._key, str) or any(c in self._key for c in "\r\n")):
             raise ValueError("The API key must be a single-line string.")
@@ -327,13 +335,18 @@ class LocalClient:
         self.model = selected
         return {"status": "passed", "selected_model": selected, "available_models": ids, **evidence}
 
-    def chat(self, messages, output_dir, label, response_format=None):
+    def chat(self, messages, output_dir, label, response_format=None, *, reasoning_effort="server-default"):
         """Return content and non-reasoning metadata; raw response stays on disk."""
+        validate_page_reasoning_effort(reasoning_effort)
+        if reasoning_effort != "server-default" and self.purpose != "page_review":
+            raise ValueError("Explicit reasoning effort is only supported for page review.")
         if not self.model:
             raise ProbeError("Discover/select the local model before requesting a completion.")
         payload = {"model": self.model, "messages": messages, "max_tokens": self.max_tokens, "stream": False}
         if response_format is not None:
             payload["response_format"] = response_format
+        if reasoning_effort != "server-default":
+            payload["reasoning_effort"] = reasoning_effort
         data, evidence = self._request("POST", "/chat/completions", payload, output_dir, label)
         attempt_dir = Path(evidence["attempt_dir"])
         try:

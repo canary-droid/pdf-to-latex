@@ -14,7 +14,7 @@ import uuid
 import zipfile
 
 from .common import atomic_json, check_manifest, contained, files_manifest, fingerprint, read_json, sha, windows, writer_lock
-from .local_model import LocalClient, ProbeError, probe_model, parse_json_response
+from .local_model import LocalClient, ProbeError, probe_model, parse_json_response, PAGE_REASONING_EFFORTS
 from .system_probe import inventory, memory_inventory, memory_policy, remote_inventory, ResourceMonitor
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -322,6 +322,11 @@ def isolation_report(run, state):
 
 
 def report_run(run):
+    if (run/'binding.json').is_file() and (run/'inputs/batch.json').is_file():
+        from .batch_review import write_report
+        write_report(run,run/'inputs',read_json(run/'inputs/batch.json'),read_json(run/'state.json'))
+        print('Batch report:',run/'review.html')
+        return
     state=read_json(run/'state.json')
     sections=['<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width">',
         '<title>PDF to LaTeX probe review</title><style>body{font:16px system-ui;max-width:1100px;margin:2em auto;padding:1em}pre{white-space:pre-wrap;background:#f1f4f7;padding:1em}iframe{width:100%;height:700px}article{border-top:1px solid #ccc;margin-top:2em}a{color:#17608b}</style>',
@@ -426,7 +431,33 @@ def cmd_export(args):
     return 0
 
 
+def cmd_accept_plan(args):
+    from .acceptance import make_plan
+    plan = make_plan(ROOT,get_run(args.run),get_run(args.review),get_run(args.preview))
+    out = new_run('acceptance-plan')
+    atomic_json(out/'selection.json',plan)
+    print('Unselected proposal catalog:',out/'selection.json')
+    print('Nothing accepted. Explicitly select operations, authorization and dependent groups before applying.')
+    return 0
+
+
+def cmd_apply_accepted(args):
+    from .acceptance import apply_accepted
+    out = new_run('accepted-derivative')
+    apply_accepted(ROOT,Path(args.plan).resolve(),out)
+    print('Accepted derivative:',out)
+    print('Before/after report:',out/'review.html')
+    bundle_run(out)
+    return 0
+
+
 def cmd_review_dispatch(args):
+    if args.page_reasoning_effort is not None and (args.mode not in ('pages','regions') or not args.preview_only):
+        raise ValueError('--page-reasoning-effort requires --mode pages --preview-only or --mode regions --preview-only; live review uses the saved selection')
+    if (args.block_selection or args.derivative) and (args.mode != 'regions' or not args.preview_only):
+        raise ValueError('--block-selection and --derivative require --mode regions --preview-only')
+    if args.mode == 'regions' and args.crop_plan:
+        raise ValueError('Focused crops are taken from selected blocks; --crop-plan is for whole pages')
     from .saved_pages import converter_idle
     converter_idle(ROOT)
     if args.mode == 'candidates':
@@ -442,21 +473,91 @@ def cmd_review_dispatch(args):
     if args.preview_only:
         if not c.get('model'):
             raise ValueError('Preview requires --model with the intended exact local alias; no discovery is performed offline')
-        out = new_run('review-input')
-        ready = write_preview(ROOT, run, out, args.source, c['model'], validate_base_url(c['base_url']),
-                              page_limits(args), args.crop_plan)
+        if args.mode == 'regions':
+            from .focused_review import write_focused_preview
+            if not args.block_selection:
+                raise ValueError('Focused preview requires --block-selection; use --source for saved OCR or --derivative for accepted drafts')
+            out = new_run('review-regions-input')
+            ready = write_focused_preview(ROOT,run,out,get_run(args.derivative) if args.derivative else None,args.block_selection,
+                c['model'],validate_base_url(c['base_url']),page_limits(args),
+                reasoning_effort=args.page_reasoning_effort or 'server-default',sources=args.source)
+        else:
+            out = new_run('review-input')
+            ready = write_preview(ROOT, run, out, args.source, c['model'], validate_base_url(c['base_url']),
+                              page_limits(args), args.crop_plan,
+                              reasoning_effort=args.page_reasoning_effort or 'server-default')
     else:
         if not args.preview or not args.preflight:
             raise ValueError('Page review requires --preview and a passing image --preflight; prepare offline inputs first')
         if args.crop_plan:
             raise ValueError('Crop selection belongs to --preview-only; live review uses the saved preview')
+        metadata = read_json(get_run(args.preview)/'preview.json')
+        if metadata.get('review_mode','pages') != args.mode:
+            raise ValueError('Review mode differs from saved preview')
         print('Using the page selection and request budgets recorded in the saved preview.')
-        out = new_run('review-pages')
+        out = new_run('review-regions' if args.mode == 'regions' else 'review-pages')
         ready = review_pages(ROOT, run, get_run(args.preview), get_run(args.preflight), out, c)
     print('Page review run:', out)
     print('Inspection report:', out/'review.html')
     bundle_run(out)
     return 0 if ready else 2
+
+
+def cmd_review_batch(args):
+    from types import SimpleNamespace
+    from .batch_inputs import prepare_batch
+    from .batch_review import execute_batch
+    from .page_review import page_limits
+    from .saved_pages import converter_idle
+    converter_idle(ROOT)
+    c=config(args)
+    preparation=(args.source,args.first_page,args.page_count,args.page_max_tokens,
+                 args.page_timeout,args.page_reasoning_effort,args.max_page_characters)
+    if args.preview_only:
+        if args.resume or args.preview or args.preflight or not args.run or not args.source or args.page_count is None:
+            raise ValueError('Batch preparation requires --run, --source and --page-count; no resume/preflight/preview')
+        limits=page_limits(SimpleNamespace(max_pages=1,
+            max_page_characters=args.max_page_characters if args.max_page_characters is not None else 48000,
+            page_max_tokens=args.page_max_tokens if args.page_max_tokens is not None else 16384,
+            page_timeout=args.page_timeout if args.page_timeout is not None else 600))
+        out=new_run('review-batch-input')
+        print('Batch preview:',out,flush=True)
+        prepare_batch(ROOT,get_run(args.run),out,args.source,args.first_page if args.first_page is not None else 1,
+                      args.page_count,c.get('model'),c['base_url'],limits,args.page_reasoning_effort or 'medium')
+        print('Inspection report:',out/'review.html',flush=True)
+        bundle_run(out)
+        return 0
+    if any(value is not None for value in preparation):
+        raise ValueError('Batch selection/settings belong to --preview-only; live and resume use sealed inputs')
+    if args.resume:
+        out=get_run(args.resume);binding=read_json(out/'binding.json')
+        preview=get_run(args.preview or binding['preview_run'])
+        preflight=get_run(args.preflight or binding['preflight_run'])
+    else:
+        if not args.preview or not args.preflight:
+            raise ValueError('Batch launch requires --preview and a qualified --preflight')
+        preview=get_run(args.preview);preflight=get_run(args.preflight)
+        out=new_run('review-batch')
+    meta=read_json(preview/'batch.json')
+    if args.run and str(get_run(args.run))!=meta['source_run']:
+        raise ValueError('Batch conversion differs from prepared source')
+    print('Batch review run:',out,flush=True)
+    previous=signal.getsignal(signal.SIGTERM)
+    def interrupted(signum, frame):
+        raise KeyboardInterrupt
+    signal.signal(signal.SIGTERM,interrupted)
+    try:
+        code=execute_batch(ROOT,preview,preflight,out,c,resume=bool(args.resume))
+    finally:
+        signal.signal(signal.SIGTERM,previous)
+    print('Inspection report:',out/'review.html',flush=True)
+    bundle_run(out)
+    return code
+
+
+def cmd_batch_status(args):
+    from .batch_review import show_status
+    return show_status(get_run(args.run))
 
 
 def parser():
@@ -476,18 +577,38 @@ def parser():
     q=sub.add_parser('export',help='Portable English/math derivative from completed saved OCR; no inference')
     q.add_argument('--run',required=True);q.add_argument('--source',default='fixture-native,fixture-scan')
     q.add_argument('--profile',choices=['english-math'],default='english-math');q.set_defaults(func=cmd_export)
+    q=sub.add_parser('accept-plan',help='Prepare an unselected hash-bound saved-proposal catalog; no acceptance')
+    q.add_argument('--run',required=True);q.add_argument('--review',required=True);q.add_argument('--preview',required=True)
+    q.set_defaults(func=cmd_accept_plan)
+    q=sub.add_parser('apply-accepted',help='Apply only an explicit bound selection to a new portable derivative')
+    q.add_argument('--plan',required=True);q.set_defaults(func=cmd_apply_accepted)
     q=sub.add_parser('review',help='Bounded UNACCEPTED candidate/page proposals; never applies changes')
     q.add_argument('--run',required=True);q.add_argument('--preflight')
-    q.add_argument('--mode',choices=['candidates','pages'],default='candidates')
+    q.add_argument('--mode',choices=['candidates','pages','regions'],default='candidates')
     q.add_argument('--preview-only',action='store_true',help='Render/save exact page inputs offline; no model requests')
     q.add_argument('--preview',help='Existing complete page input preview to send')
     q.add_argument('--source',default='fixture-native,fixture-scan')
     q.add_argument('--crop-plan',help='JSON mapping page IDs to explicit normalized crops/clockwise rotations')
+    q.add_argument('--block-selection',help='Focused preview JSON with block_ids only (1–4 regions)')
+    q.add_argument('--derivative',help='Optional verified accepted derivative; omit to review saved OCR selected by --source')
     q.add_argument('--max-pages',type=int,default=4,help='Offline preview page limit (1–4)')
     q.add_argument('--max-page-characters',type=int,default=48000,help='Offline preview character limit; live review uses saved budgets')
     q.add_argument('--page-max-tokens',type=int,default=8192,help='Offline preview output budget (1024–16384); live review uses saved budget')
     q.add_argument('--page-timeout',type=int,default=300,help='Offline preview timeout in seconds (1–600); live review uses saved budget')
+    q.add_argument('--page-reasoning-effort',choices=PAGE_REASONING_EFFORTS,
+                   help='Offline page preview reasoning effort; omitted/server-default sends no override; live review uses saved selection')
     q.add_argument('--base-url');q.add_argument('--model');q.set_defaults(func=cmd_review_dispatch)
+    q=sub.add_parser('review-batch',help='Prepare or resume a bounded serial saved-page review; no automatic acceptance')
+    q.add_argument('--run',help='Completed source conversion (required for offline preparation)')
+    q.add_argument('--preview-only',action='store_true');q.add_argument('--preview');q.add_argument('--preflight')
+    q.add_argument('--resume',help='Existing batch result directory; retains attempt counts and successful work')
+    q.add_argument('--source');q.add_argument('--first-page',type=int);q.add_argument('--page-count',type=int)
+    q.add_argument('--page-max-tokens',type=int);q.add_argument('--page-timeout',type=int)
+    q.add_argument('--max-page-characters',type=int)
+    q.add_argument('--page-reasoning-effort',choices=PAGE_REASONING_EFFORTS)
+    q.add_argument('--base-url');q.add_argument('--model');q.set_defaults(func=cmd_review_batch)
+    q=sub.add_parser('batch-status',help='Read the latest durable batch checkpoint, including while it runs')
+    q.add_argument('--run',required=True);q.set_defaults(func=cmd_batch_status)
     q=sub.add_parser('report');q.add_argument('--run',required=True);q.set_defaults(func=lambda a:report_run(get_run(a.run)) or 0)
     q=sub.add_parser('bundle');q.add_argument('--run',required=True);q.set_defaults(func=lambda a:bundle_run(a.run) and 0)
     return p
@@ -496,6 +617,8 @@ def parser():
 def main(argv=None):
     args=parser().parse_args(argv)
     try:
+        if args.command=='batch-status':
+            return args.func(args)
         with writer_lock(ROOT/'runs'): return args.func(args)
     except KeyboardInterrupt:
         print('Interrupted; completed units remain available for resume.',file=sys.stderr);return 130

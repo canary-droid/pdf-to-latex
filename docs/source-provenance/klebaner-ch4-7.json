@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "kind": "source_registration_summary",
+  "status": "prepared_not_converted",
+  "source_id": "klebaner-ch4-7",
+  "author": "Klebaner",
+  "title": "Introduction to Stochastic Calculus with Applications",
+  "edition": "second",
+  "authorization": "User explicitly authorized this additional 120-page selection; existing sources retained.",
+  "prepared_at_utc": "2026-10-20T00:45:17.592281+00:00",
+  "preparation_workflow": "probe.documents.prepare_source",
+  "pymupdf_version": "1.26.6",
+  "original": {
+    "pdf": "inputs/klebaner-original/source.pdf",
+    "pages": 431,
+    "sha256": "4df3fd75e2c040875bb14d4540caaced3eefd5a836f0419837e619abd3c72934"
+  },
+  "selection": {
+    "pdf": "inputs/klebaner-ch4-7/source.pdf",
+    "pages": 120,
+    "sha256": "61102519b11535ee11e817d7b6f5b357e87435429b231c144c0e82f6dc6f80e4",
+    "original_physical_page_start_1based": 106,
+    "original_physical_page_end_1based": 225,
+    "printed_page_span": "91–210",
+    "printed_span_basis": "Operator supplied; native text corroborates first/last numbers and chapter openings; separator pages have no visible page number in extracted text.",
+    "intentional_separator_physical_pages": [
+      137,
+      197
+    ],
+    "separator_selected_pages": [
+      32,
+      92
+    ]
+  },
+  "chapters": [
+    {
+      "chapter": 4,
+      "original_physical_pages": [
+        106,
+        137
+      ],
+      "selected_pages": [
+        1,
+        32
+      ],
+      "page_count": 32
+    },
+    {
+      "chapter": 5,
+      "original_physical_pages": [
+        138,
+        163
+      ],
+      "selected_pages": [
+        33,
+        58
+      ],
+      "page_count": 26
+    },
+    {
+      "chapter": 6,
+      "original_physical_pages": [
+        164,
+        197
+      ],
+      "selected_pages": [
+        59,
+        92
+      ],
+      "page_count": 34
+    },
+    {
+      "chapter": 7,
+      "original_physical_pages": [
+        198,
+        225
+      ],
+      "selected_pages": [
+        93,
+        120
+      ],
+      "page_count": 28
+    }
+  ],
+  "ocr_mode": "auto",
+  "ocr_mode_reason": "All 120 selected pages contain native text and fonts; none is classified as image-backed. Use operator-requested auto routing, unlike the existing book entry which remains forced ocr. Native text is not verified mathematical ground truth.",
+  "manifest": {
+    "path": "inputs/klebaner-ch4-7/manifest.json",
+    "sha256": "f4773c940d25c3a1ae49042155b8c630a4714888c4d16df07eededef42db323f"
+  },
+  "raw_validation": {
+    "path": "inputs/klebaner-ch4-7/preparation-validation.json",
+    "sha256": "07bcadd31cf4394045051ccb99297eacdc8271021cadf477139a11d78bba6d42"
+  },
+  "checks": {
+    "original_hash_and_431_pages": "passed",
+    "selection_120_pages_and_exact_mapping": "passed",
+    "all_selected_page_native_text_geometry_and_72dpi_pixels_equal_original": "passed",
+    "prepared_artifact_hashes_checked": 242,
+    "source_loading": "probe.cli.selected_sources passed for new source and all five entries",
+    "existing_four_source_entries": "unchanged",
+    "pre_existing_evidence_files_unchanged": 1274,
+    "input_files_confirmed_git_ignored": 245,
+    "document_preparation_tests": "10 passed"
+  },
+  "conversion": "not_run",
+  "glm_inference": "not_run",
+  "operator_command": ".venv-control/bin/python probe.py convert --source klebaner-ch4-7 --tier basic --ocr-isolation none"
+}

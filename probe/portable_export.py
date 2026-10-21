@@ -104,13 +104,70 @@ def render_block(block):
     raise ValueError('Unsupported block kind: ' + kind)
 
 
-def export_saved(root, run, out, sources):
+def accepted_fragment(text):
+    """Validate the deliberately small supported replacement grammar, without repair.
+
+    Display math reuses the OCR math allowlist. Prose permits inline math and an
+    outer rotatebox only; document commands, files, arbitrary environments and
+    nested text macros are deferred. This is validation, not a TeX sandbox.
+    """
+    if not isinstance(text, str) or not text.strip():
+        raise ValueError('Empty replacement requires explicit delete operation')
+    packages = set()
+    body = text.strip()
+    rotated = re.fullmatch(r'\\rotatebox\{(0|90|180|270)\}\{(.*)\}', body, re.S)
+    if rotated:
+        body = rotated.group(2)
+        packages.add('graphicx')
+    if body.startswith(r'\[') and body.endswith(r'\]'):
+        _, needed = math_fragment(body[2:-2])
+        return text, packages | needed
+    # Match inline math, the ordinary TeX space escape, and escaped punctuation.
+    pos = 0
+    while pos < len(body):
+        if body.startswith(r'\(', pos) or body[pos] == '$':
+            opening, closing = (r'\(', r'\)') if body.startswith(r'\(', pos) else ('$', '$')
+            end = body.find(closing, pos + len(opening))
+            if end < 0:
+                raise ValueError('Unbalanced inline math in replacement')
+            _, needed = math_fragment(body[pos+len(opening):end])
+            packages |= needed
+            pos = end + len(closing)
+        elif body[pos] == '\\' and pos+1 < len(body) and body[pos+1] in ' %&#_{}':
+            pos += 2
+        elif (32 <= ord(body[pos]) <= 126 or body[pos] in '\n\r\t') and body[pos] not in '\\{}%&#_^~':
+            pos += 1
+        else:
+            raise ValueError('Unsupported replacement prose/macro; defer this proposal')
+    return text, packages
+
+
+def export_saved(root, run, out, sources, *, accepted_edits=None, unresolved_issues=None):
     pages = saved_pages(root, run, sources)
+    edits = accepted_edits or {}
+    issues = unresolved_issues or []
+    blocks = {b['id']:b for p in pages for b in p['blocks']}
+    if set(edits) - set(blocks):
+        raise ValueError('Unknown edit target')
+    # Validate the entire edit set before emitting any page; no partial groups.
+    for edit in edits.values():
+        if edit['operation'] == 'replace':
+            accepted_fragment(edit['latex'])
+        elif edit['operation'] != 'delete' or edit['latex'] != '':
+            raise ValueError('Unsupported edit operation or nonempty deletion')
     copy_evidence(run, pages, out)
     inventory = []
     sections = ['<!doctype html><meta charset="utf-8"><title>Portable OCR derivative</title>',
                 '<h1>Portable OCR derivative — UNREVIEWED</h1>',
                 '<p>No mathematical corrections or acceptance. Compilation not run. Native OCR is retained in evidence/.</p>']
+    if edits:
+        sections[1:3] = ['<h1>Derivative with explicitly accepted corrections</h1>',
+            '<p>Only the recorded selections were applied. Unchanged content remains unreviewed. '
+            'Compilation NOT RUN. Original proposals remain UNACCEPTED in saved evidence; '
+            '<a href="acceptance.json">separate acceptance record</a> | '
+            '<a href="review-evidence/review.html">original review and detail crops</a>.</p>']
+    if issues:
+        sections.append('<h2>Unresolved issues — no correction applied</h2><pre>'+html.escape(json.dumps(issues,ensure_ascii=False,indent=2))+'</pre>')
     for page in pages:
         folder = out/'pages'/page['page_id']
         folder.mkdir(parents=True)
@@ -126,12 +183,29 @@ def export_saved(root, run, out, sources):
                      'bbox_pdf_points':block['bbox_pdf_points'],
                      'coordinate_system':page['coordinate_system'], 'status':'represented', 'reason':None}
             try:
-                fragment, needed = render_block(block)
-                if not fragment.strip():
+                before, _ = render_block(block)
+            except ValueError:
+                before = None
+            edit = edits.get(block['id'])
+            entry.update(before_latex=before, latex=before, operation='unchanged')
+            if edit:
+                entry.update(operation=edit['operation'], proposal_id=edit['proposal_id'], latex=edit['latex'])
+            try:
+                if edit and edit['operation'] == 'delete':
+                    entry.update(status='explicitly_deleted', reason='Explicitly accepted deletion; original block retained in evidence and inventory')
+                    body.append('% Explicitly deleted source block: '+block['id']+'\n')
+                    fragment, needed = '', set()
+                elif edit:
+                    fragment, needed = accepted_fragment(edit['latex'])
+                    entry.update(status='applied', reason='Explicitly accepted replacement')
+                else:
+                    fragment, needed = render_block(block)
+                if not fragment.strip() and entry['status'] != 'explicitly_deleted':
                     raise ValueError('Empty recognition; source region must be reviewed')
                 packages |= needed
-                body.append('% Source block: '+block['id']+'\n'+fragment+'\n')
-                if block['kind'] == 'aside_text':
+                if entry['status'] != 'explicitly_deleted':
+                    body.append('% Source block: '+block['id']+'\n'+fragment+'\n')
+                if block['kind'] == 'aside_text' and not edit:
                     entry.update(status='unresolved', reason='Aside recognition included verbatim; rotated/substantive transcription requires source review')
             except ValueError as exc:
                 entry.update(status='unresolved', reason=str(exc))
@@ -147,6 +221,9 @@ def export_saved(root, run, out, sources):
                 entry['source_region_image'] = 'pages/'+page['page_id']+'/'+crop_name
             inventory.append(entry)
             sections.append('<article><h3>'+html.escape(block['id'])+' — '+entry['status']+'</h3><p>'+html.escape(entry['reason'] or 'Included without mathematical repair; unreviewed')+'</p><pre>'+html.escape(json.dumps(block['native'],ensure_ascii=False,indent=2))+'</pre></article>')
+            if edits:
+                sections.append('<p>Before LaTeX:</p><pre>'+html.escape(before or '(unresolved; raw recognition above)')+
+                    '</pre><p>After LaTeX:</p><pre>'+html.escape(entry['latex'] if entry['latex'] else '(explicit deletion)' if edit else '(unresolved)')+'</pre>')
         document = ['% Portable English/math draft. Source fidelity UNREVIEWED; compilation NOT RUN.',
                     r'\documentclass[11pt]{article}']
         document += [r'\usepackage{'+package+'}' for package in sorted(packages)]
@@ -156,7 +233,8 @@ def export_saved(root, run, out, sources):
         document.append(r'\end{document}')
         (folder/'document.tex').write_text('\n\n'.join(document)+'\n',encoding='utf-8')
         atomic_json(folder/'export-settings.json', {'profile':'english-math-v1', 'packages':sorted(packages),
-            'body_rewrites':[], 'unsupported_policy':'explicit unresolved content, raw recognition and source image',
+            'body_rewrites':[{'block_id':b['id'], **edits[b['id']]} for b in page['blocks'] if b['id'] in edits],
+            'unsupported_policy':'explicit unresolved content, raw recognition and source image',
             'compilation':'not_run'})
     atomic_json(out/'inventory.json', inventory)
     atomic_json(out/'provenance.json', {'source_run':str(run), 'source_state_sha256':sha(run/'state.json'),
@@ -164,6 +242,9 @@ def export_saved(root, run, out, sources):
     atomic_json(out/'summary.json', {'status':'exported_unreviewed', 'pages':len(pages),
                 'represented_blocks':sum(x['status']=='represented' for x in inventory),
                 'unresolved_blocks':sum(x['status']=='unresolved' for x in inventory),
+                'applied_replacements':sum(x['status']=='applied' for x in inventory),
+                'explicitly_deleted_blocks':sum(x['status']=='explicitly_deleted' for x in inventory),
+                'unresolved_issues':issues,
                 'omitted_blocks':0, 'compilation':'not_run', 'fidelity':'unreviewed'})
     (out/'review.html').write_text('\n'.join(sections),encoding='utf-8')
     atomic_json(out/'artifact-manifest.json', files_manifest(out))
