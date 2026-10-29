@@ -1,0 +1,6 @@
+{
+  "version": 1,
+  "source_id": "klebaner-ch4-7",
+  "development_original_pages": [106, 116, 126, 136, 146, 156, 166, 170, 176, 186, 196, 205],
+  "holdout_original_pages": [206, 212, 218, 225]
+}

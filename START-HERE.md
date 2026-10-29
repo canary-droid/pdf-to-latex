@@ -1,8 +1,20 @@
 # PDF to LaTeX: first local probe
 
+For the current 25 October eight-passage calibration, use
+[the candidate-only GLM-first runbook](docs/CANDIDATE-CRITIC.md), then its offline
+costed selection for optional MiMo second opinions. The earlier twelve-passage
+comparison is completed and frozen. Gatheral has arrived; see the
+[intake and integration plan](docs/GATHERAL-PLAN.md) for the remaining protected
+whole-book adapter work. The original first-probe description below is historical.
+
+For the 23 October recovery/critic milestone, start with
+[the current operator sequence](docs/RECOVERY-CRITIC-TRIAL.md). It reuses saved OCR
+and prepared inputs; no new conversion or model/dependency installation is part
+of offline preparation. The original first-probe instructions below are historical.
+
 This is version 0.1 of the **probe package**, built from design 1.1. It uses your
-existing local GLM endpoint and local specialist OCR software. It has no cloud
-model adapter and never calls OpenRouter. It does not stop, restart, reconfigure
+existing local GLM endpoint and local specialist OCR software. That original
+conversion workflow never calls OpenRouter. It does not stop, restart, reconfigure
 or install anything into TensorFold.
 
 **18 October fixture checkpoint:** Basic OCR of both fixtures has completed.

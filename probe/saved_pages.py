@@ -16,7 +16,23 @@ def valid_bbox(value):
             and value[0] < value[2] and value[1] < value[3])
 
 
-def saved_pages(root, run, sources):
+def page_blocks(page, *, verified_blank=False):
+    """Middle 2.0 omits default empty lists; only accept a verified blank here.
+
+    Keep the historical strict reader default. Chapter preparation explicitly
+    supplies its source-checked blank-page manifest; no evidence is rewritten.
+    """
+    blocks = page.get('blocks')
+    if blocks is None and 'blocks' not in page and verified_blank:
+        return []
+    if not isinstance(blocks, list):
+        raise ValueError('Structured page has no complete block list')
+    if verified_blank and blocks:
+        raise ValueError('Verified blank page unexpectedly contains recognized blocks')
+    return blocks
+
+
+def saved_pages(root, run, sources, *, verified_blank_pages=()):
     from .cli import completed_integrity
     import fitz
     state = read_json(run / 'state.json')
@@ -64,13 +80,17 @@ def saved_pages(root, run, sources):
                         raise ValueError('Duplicate owned page: ' + str(identity))
                     seen.add(identity)
                     page = next(p for p in native_pages if p['page_idx'] == index)
-                    if not isinstance(page.get('blocks'), list):
-                        raise ValueError('Structured page has no complete block list')
+                    try:
+                        native_blocks = page_blocks(page, verified_blank=(name, selected) in verified_blank_pages)
+                    except ValueError as exc:
+                        raise ValueError(f'{exc}; source={name}, physical_pdf_page={mapped["original_physical_page"]}, '
+                            f'selected_page={selected}, window={unit}, local_page_idx={index}, '
+                            f'record={attempt / "output/middle_json.json"}') from exc
                     if pdf[index].rotation:
                         raise ValueError('Rotated PDF page metadata requires coordinate qualification before this profile can render it.')
                     page_id = f'{name}-p{selected:04d}'
                     blocks = []
-                    for order, block in enumerate(page['blocks']):
+                    for order, block in enumerate(native_blocks):
                         if not isinstance(block, dict) or not isinstance(block.get('type'), str):
                             raise ValueError('Invalid structured block')
                         if block.get('bbox') is not None and not valid_bbox(block['bbox']):

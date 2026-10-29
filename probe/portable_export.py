@@ -17,6 +17,23 @@ BASE_MATH = set('frac sqrt left right int iint iiint oint sum prod lim infty sin
 AMS_MATH = set('text tag tag* dfrac tfrac binom dbinom tbinom operatorname overset underset substack eqref boxed'.split())
 AMS_SYMBOLS = set('mathbb mathfrak varnothing lesssim gtrsim nleq ngeq'.split())
 ENVIRONMENTS = {'array', 'matrix', 'pmatrix', 'bmatrix', 'vmatrix', 'Vmatrix', 'cases', 'aligned', 'gathered', 'split'}
+BASE_MATH.update('liminf limsup wedge vee ge le ldots cdots dots Big Bigl Bigr big bigl bigr bigg biggl biggr Bigg Biggl Biggr downarrow uparrow'.split())
+BASE_MATH.update({'textbf','textit','negthinspace'})
+AMS_MATH.add('boldsymbol')
+PROSE_COMMANDS = {'textbf', 'textit', 'textsc', 'emph', 'texttt', 'textnormal',
+                  'section', 'subsection', 'paragraph', 'footnote'}
+LITERAL_COMMANDS = {'textbackslash', 'textasciitilde', 'textasciicircum'}
+PROSE_SPACING = {'quad', 'qquad', 'thinspace'}
+# Explicit pdfLaTeX UTF-8/T1 repertoire; no guessed Unicode-to-math conversion.
+UNICODE_PROSE = set('ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿŒœŠšŽž–—‘’“”')
+ENGINE_POLICY = 'pdflatex-utf8-t1-latin-v1'
+
+
+def prose_characters(value):
+    if any((ord(c) > 126 and c not in UNICODE_PROSE) or
+           (ord(c) < 32 and c not in '\n\r') for c in value):
+        raise ValueError('Unsupported Unicode/control character in prose; raw recognition retained')
+    return {'inputenc', 'fontenc'} if any(ord(c) > 126 for c in value) else set()
 
 
 def escape_text(text):
@@ -26,9 +43,11 @@ def escape_text(text):
 def math_fragment(text):
     if not isinstance(text, str) or not text.strip():
         raise ValueError('Empty/image-only mathematics is not editable transcription')
-    if any(ord(c) > 126 or (ord(c) < 32 and c not in '\n\t\r') for c in text):
+    if any(ord(c) > 126 or (ord(c) < 32 and c not in '\n\r') for c in text):
         raise ValueError('Unsupported Unicode/control character in math; raw recognition retained')
-    commands = set(re.findall(r'\\([A-Za-z]+)', text))
+    # Consume escaped backslashes as tokens: \\\\ferential is a line break,
+    # not a macro named ferential. Its ambiguous hyphenation stays unchanged.
+    commands = {m.group(1) for m in re.finditer(r'\\([A-Za-z]+)|\\[^A-Za-z]', text) if m.group(1)}
     unknown = commands - BASE_MATH - AMS_MATH - AMS_SYMBOLS
     if unknown:
         raise ValueError('Unsupported math macros: ' + ', '.join(sorted(unknown)))
@@ -73,8 +92,7 @@ def inline_content(content):
             raise ValueError('Unsupported nested inline span; complete native data retained')
         value = span['content']
         if span['type'] == 'text':
-            if any(ord(c) > 126 or (ord(c) < 32 and c not in '\n\t\r') for c in value):
-                raise ValueError('Unsupported Unicode/control character in prose; raw recognition retained')
+            packages |= prose_characters(value)
             rendered = escape_text(value)
             for style in span.get('styles', []):
                 if style not in ('bold', 'italic'):
@@ -105,12 +123,7 @@ def render_block(block):
 
 
 def accepted_fragment(text):
-    """Validate the deliberately small supported replacement grammar, without repair.
-
-    Display math reuses the OCR math allowlist. Prose permits inline math and an
-    outer rotatebox only; document commands, files, arbitrary environments and
-    nested text macros are deferred. This is validation, not a TeX sandbox.
-    """
+    """Parse a bounded text/math grammar without rewriting. Not a TeX sandbox."""
     if not isinstance(text, str) or not text.strip():
         raise ValueError('Empty replacement requires explicit delete operation')
     packages = set()
@@ -122,24 +135,110 @@ def accepted_fragment(text):
     if body.startswith(r'\[') and body.endswith(r'\]'):
         _, needed = math_fragment(body[2:-2])
         return text, packages | needed
-    # Match inline math, the ordinary TeX space escape, and escaped punctuation.
-    pos = 0
-    while pos < len(body):
-        if body.startswith(r'\(', pos) or body[pos] == '$':
-            opening, closing = (r'\(', r'\)') if body.startswith(r'\(', pos) else ('$', '$')
-            end = body.find(closing, pos + len(opening))
-            if end < 0:
-                raise ValueError('Unbalanced inline math in replacement')
-            _, needed = math_fragment(body[pos+len(opening):end])
-            packages |= needed
-            pos = end + len(closing)
-        elif body[pos] == '\\' and pos+1 < len(body) and body[pos+1] in ' %&#_{}':
-            pos += 2
-        elif (32 <= ord(body[pos]) <= 126 or body[pos] in '\n\r\t') and body[pos] not in '\\{}%&#_^~':
-            pos += 1
-        else:
-            raise ValueError('Unsupported replacement prose/macro; defer this proposal')
+    packages |= prose_characters(body)
+
+    def parse(pos, nested=False, depth=0):
+        if depth > 64:
+            raise ValueError('Excessively nested prose')
+        while pos < len(body):
+            c = body[pos]
+            if c == '}':
+                if nested:
+                    return pos + 1
+                raise ValueError('Unbalanced prose braces')
+            if c == '{':
+                pos = parse(pos + 1, True, depth + 1)
+            elif body.startswith(r'\(', pos) or c == '$':
+                opening, closing = (r'\(', r'\)') if c == '\\' else ('$', '$')
+                start = pos + len(opening)
+                # Escaped punctuation does not close a math span.
+                match = re.search(r'(?<!\\)' + re.escape(closing), body[start:])
+                if match is None:
+                    raise ValueError('Unbalanced inline math in replacement')
+                end = start + match.start()
+                _, needed = math_fragment(body[start:end])
+                packages.update(needed)
+                pos = end + len(closing)
+            elif c == '\\':
+                if pos + 1 < len(body) and body[pos+1] in ' %&#_{}$\\':
+                    pos += 2
+                    continue
+                accent = re.match(r'''\\[\'`"^~=.]''', body[pos:]) or re.match(r'\\[uvHckbd]\b', body[pos:])
+                if accent:
+                    pos += len(accent.group())
+                    while pos < len(body) and body[pos] == ' ': pos += 1
+                    arg = re.match(r'(?:\{(?:[A-Za-z]|\\[ij])\}|[A-Za-z])', body[pos:])
+                    if not arg:
+                        raise ValueError('Unsupported/malformed prose accent argument')
+                    pos += len(arg.group())
+                    continue
+                command = re.match(r'\\([A-Za-z]+)(\*?)', body[pos:])
+                if not command:
+                    raise ValueError('Unsupported prose escape')
+                name, star = command.groups()
+                if name in PROSE_SPACING and not star:
+                    pos += len(command.group())
+                    continue
+                if name not in PROSE_COMMANDS | LITERAL_COMMANDS or (star and name not in {'section','subsection','paragraph'}):
+                    raise ValueError('Unsupported replacement prose macro: ' + name)
+                pos += len(command.group())
+                while pos < len(body) and body[pos] in ' \n\r': pos += 1
+                if pos >= len(body) or body[pos] != '{':
+                    raise ValueError('Missing prose command argument: ' + name)
+                if name in LITERAL_COMMANDS:
+                    if body[pos:pos+2] != '{}': raise ValueError('Literal command requires empty argument')
+                    pos += 2
+                else:
+                    pos = parse(pos + 1, True, depth + 1)
+            elif c in '%&#_^~':
+                raise ValueError('Raw TeX control or mathematics outside math mode')
+            else:
+                pos += 1
+        if nested:
+            raise ValueError('Unbalanced prose braces')
+        return pos
+
+    parse(0)
     return text, packages
+
+
+def typed_fragment(text, kind='latex_fragment'):
+    """Explicit typed transformation; callers retain the original proposal bytes.
+
+    Legacy callers use complete LaTeX. Only a verified equation block/contract
+    can supply math_body. Never infer a math body from punctuation or backslashes.
+    """
+    if kind == 'math_body':
+        _, packages = math_fragment(text)
+        return {'latex': '\\[\n' + text + '\n\\]', 'packages': sorted(packages),
+                'fragment_kind':kind, 'transformation':'add_display_wrappers', 'original':text}
+    if kind != 'latex_fragment':
+        raise ValueError('Unsupported fragment kind')
+    _, packages = accepted_fragment(text)
+    return {'latex':text, 'packages':sorted(packages), 'fragment_kind':kind,
+            'transformation':'none', 'original':text}
+
+
+def safe_compiler_fragment(text):
+    """Allow malformed syntax to reach the isolated compiler, never new commands.
+
+    This is an additional admission filter; container isolation is still required.
+    It does not certify syntax or make the fragment eligible for final export.
+    """
+    if not isinstance(text,str) or len(text)>48000 or '\x00' in text:return False
+    commands={m.group(1) for m in re.finditer(r'\\([A-Za-z]+)|\\[^A-Za-z]',text) if m.group(1)}
+    allowed=BASE_MATH|AMS_MATH|AMS_SYMBOLS|PROSE_COMMANDS|LITERAL_COMMANDS|PROSE_SPACING|set('uvHckbdij')
+    if commands-allowed:return False
+    return all(name in ENVIRONMENTS for name in re.findall(r'\\(?:begin|end)\s*\{([^}]+)\}',text))
+
+
+def portable_document(body, packages, notice='Experimental UNACCEPTED draft; compilation not yet assessed.'):
+    """Shared portable template for exports and isolated compiler fixtures."""
+    lines = ['% ' + notice, r'\documentclass[11pt]{article}']
+    for package in sorted(set(packages)):
+        option = '[utf8]' if package == 'inputenc' else '[T1]' if package == 'fontenc' else ''
+        lines.append(r'\usepackage' + option + '{' + package + '}')
+    return '\n\n'.join([*lines, r'\begin{document}', *body, r'\end{document}']) + '\n'
 
 
 def export_saved(root, run, out, sources, *, accepted_edits=None, unresolved_issues=None):
@@ -224,14 +323,10 @@ def export_saved(root, run, out, sources, *, accepted_edits=None, unresolved_iss
             if edits:
                 sections.append('<p>Before LaTeX:</p><pre>'+html.escape(before or '(unresolved; raw recognition above)')+
                     '</pre><p>After LaTeX:</p><pre>'+html.escape(entry['latex'] if entry['latex'] else '(explicit deletion)' if edit else '(unresolved)')+'</pre>')
-        document = ['% Portable English/math draft. Source fidelity UNREVIEWED; compilation NOT RUN.',
-                    r'\documentclass[11pt]{article}']
-        document += [r'\usepackage{'+package+'}' for package in sorted(packages)]
-        document += [r'\begin{document}', *body]
         if unresolved:
-            document += [r'\section*{Unresolved content — source review required}'.replace('—','--'), *unresolved]
-        document.append(r'\end{document}')
-        (folder/'document.tex').write_text('\n\n'.join(document)+'\n',encoding='utf-8')
+            body += [r'\section*{Unresolved content -- source review required}', *unresolved]
+        (folder/'document.tex').write_text(portable_document(body, packages,
+            'Portable English/math draft. Source fidelity UNREVIEWED; compilation NOT RUN.'),encoding='utf-8')
         atomic_json(folder/'export-settings.json', {'profile':'english-math-v1', 'packages':sorted(packages),
             'body_rewrites':[{'block_id':b['id'], **edits[b['id']]} for b in page['blocks'] if b['id'] in edits],
             'unsupported_policy':'explicit unresolved content, raw recognition and source image',

@@ -161,22 +161,30 @@ class LocalClient:
     """
 
     def __init__(self, base_url, model=None, api_key=None, timeout=120,
-                 max_tokens=2048, max_response_bytes=2 * 1024 * 1024, purpose="capability_probe"):
+                 max_tokens=2048, max_response_bytes=2 * 1024 * 1024, purpose="capability_probe",
+                 connect_timeout=10, stop_requested=None):
         self.base_url = validate_base_url(base_url)
         if model is not None and (not isinstance(model, str) or not model.strip() or len(model) > 512):
             raise ValueError("model must be a nonempty model ID, at most 512 characters.")
-        if isinstance(timeout, bool) or not isinstance(timeout, (int, float)) or not math.isfinite(timeout) or not 0 < timeout <= 600:
-            raise ValueError("timeout must be between 0 and 600 seconds.")
-        if purpose not in ("capability_probe", "page_review"):
+        if purpose not in ("capability_probe", "page_review", "text_critic", "chapter", "simple_chapter"):
             raise ValueError("Unknown local request purpose.")
-        token_limit = 16384 if purpose == "page_review" else 4096
+        timeout_limit = 2700 if purpose == "chapter" else 900 if purpose == "text_critic" else 600
+        unbounded_generation = purpose == 'simple_chapter' and timeout is None
+        if not unbounded_generation and (isinstance(timeout, bool) or not isinstance(timeout, (int, float)) or not math.isfinite(timeout) or not 0 < timeout <= timeout_limit):
+            raise ValueError(f"timeout must be between 0 and {timeout_limit} seconds.")
+        if isinstance(connect_timeout, bool) or not isinstance(connect_timeout, (int, float)) or not math.isfinite(connect_timeout) or connect_timeout <= 0:
+            raise ValueError('connect_timeout must be positive and finite')
+        token_limit = 1048576 if purpose == 'simple_chapter' else 131072 if purpose == "chapter" else 32768 if purpose == "text_critic" else 16384 if purpose == "page_review" else 4096
         if isinstance(max_tokens, bool) or not isinstance(max_tokens, int) or not 1 <= max_tokens <= token_limit:
             raise ValueError(f"max_tokens must be an integer between 1 and {token_limit}.")
-        if isinstance(max_response_bytes, bool) or not isinstance(max_response_bytes, int) or not 1024 <= max_response_bytes <= 8 * 1024 * 1024:
-            raise ValueError("max_response_bytes must be between 1024 and 8388608.")
+        response_limit = 256 * 1024 * 1024 if purpose == 'simple_chapter' else 8 * 1024 * 1024
+        if isinstance(max_response_bytes, bool) or not isinstance(max_response_bytes, int) or not 1024 <= max_response_bytes <= response_limit:
+            raise ValueError(f"max_response_bytes must be between 1024 and {response_limit}.")
         self.requested_model = model
         self.model = None
-        self.timeout = float(timeout)
+        self.timeout = None if unbounded_generation else float(timeout)
+        self.connect_timeout = float(connect_timeout)
+        self.stop_requested = stop_requested
         self.max_tokens = max_tokens
         self.max_response_bytes = max_response_bytes
         self.purpose = purpose
@@ -202,13 +210,17 @@ class LocalClient:
             # for an IPv6-only listener; arbitrary hostname aliases are banned.
             connect_host = "127.0.0.1"
         if parsed.scheme == "https":
-            connection = _PinnedHTTPSConnection(connect_host, port, hostname, self.timeout)
+            connection = _PinnedHTTPSConnection(connect_host, port, hostname, self.connect_timeout if self.timeout is None else self.timeout)
         else:
-            connection = http.client.HTTPConnection(connect_host, port, timeout=self.timeout)
+            connection = http.client.HTTPConnection(connect_host, port, timeout=self.connect_timeout if self.timeout is None else self.timeout)
         return connection, parsed
 
     def _request(self, method, endpoint, payload, output_dir, label):
-        if (method, endpoint) not in (("GET", "/models"), ("POST", "/chat/completions")):
+        health = self.purpose in ("chapter", "simple_chapter") and (method, endpoint) == ("GET", "/health")
+        streaming = self.purpose == 'simple_chapter' and bool(payload and payload.get('stream'))
+        if self.timeout is None and not streaming:
+            raise ValueError('No-deadline mode is only permitted for simple chapter streaming generation')
+        if not health and (method, endpoint) not in (("GET", "/models"), ("POST", "/chat/completions")):
             raise ValueError("Only model discovery and chat completion endpoints are allowed.")
         body = None if payload is None else json.dumps(payload, ensure_ascii=False, allow_nan=False).encode("utf-8")
         if body is not None and len(body) > MAX_REQUEST_BYTES:
@@ -220,37 +232,57 @@ class LocalClient:
             attempt_dir = attempts / f"{time.time_ns()}_{safe_label}_{uuid.uuid4().hex[:8]}"
             attempt_dir.mkdir()
             headers = {"Accept": "application/json", "Content-Type": "application/json", "User-Agent": "pdf2tex-local-probe/0.1"}
+            if streaming: headers['Accept'] = 'text/event-stream'
             if self._key:
                 headers["Authorization"] = f"Bearer {self._key}"
             recorded_headers = {key: ("[REDACTED]" if key == "Authorization" else value) for key, value in headers.items()}
-            request_record = {"method": method, "url": self.base_url + endpoint, "headers": recorded_headers, "body": payload}
+            parsed_base = urlsplit(self.base_url)
+            url = f'{parsed_base.scheme}://{parsed_base.netloc}/health' if health else self.base_url + endpoint
+            request_record = {"method": method, "url": url, "headers": recorded_headers, "body": payload}
             # Write before network dispatch, preserving evidence even on failure.
             (attempt_dir / "request.json").write_text(self._redact(json.dumps(request_record, indent=2, ensure_ascii=False)) + "\n", encoding="utf-8")
-            record = {"started_at": _now(), "status": "running", "http_status": None, "label": label}
+            record = {"started_at": _now(), "status": "running", "http_status": None, "label": label,
+                      'connection_timeout_seconds': self.connect_timeout if self.timeout is None else self.timeout,
+                      'generation_deadline_seconds': self.timeout, 'stage': 'connection_establishment'}
             _json_dump(attempt_dir / "record.json", record)
             start = time.monotonic()
-            deadline = start + self.timeout
+            deadline = None if self.timeout is None else start + self.timeout
             connection = None
+            transport_socket = None
             deadline_timer = None
             raw = bytearray()
             status = None
+            collector = None; received = 0; watcher = None; watcher_done = threading.Event(); unsupported_stream = False
             try:
                 connection, parsed = self._connection()
                 def expire_socket():
                     # A socket timeout alone resets on each received packet;
                     # this also bounds slow/trickled HTTP headers and bodies.
-                    current_socket = connection.sock
+                    current_socket = connection.sock if connection.sock is not None else transport_socket
                     if current_socket is not None:
                         try:
                             current_socket.shutdown(socket.SHUT_RDWR)
                         except OSError:
                             pass
-                deadline_timer = threading.Timer(max(0.001, deadline - time.monotonic()), expire_socket)
-                deadline_timer.daemon = True
-                deadline_timer.start()
+                if deadline is not None:
+                    deadline_timer = threading.Timer(max(0.001, deadline - time.monotonic()), expire_socket)
+                    deadline_timer.daemon = True
+                    deadline_timer.start()
+                if self.stop_requested is not None:
+                    def watch_stop():
+                        while not watcher_done.wait(.2):
+                            if self.stop_requested(): expire_socket(); return
+                    watcher = threading.Thread(target=watch_stop, daemon=True); watcher.start()
                 connection.connect()
+                transport_socket = connection.sock
+                record['stage'] = 'generation' if method == 'POST' else 'response'
 
                 def remaining():
+                    if self.stop_requested is not None and self.stop_requested():
+                        raise ProbeError('Operator stop requested; partial response retained')
+                    if deadline is None:
+                        if connection.sock is not None: connection.sock.settimeout(None)
+                        return
                     seconds = deadline - time.monotonic()
                     if seconds <= 0:
                         raise TimeoutError("Local request deadline exceeded.")
@@ -260,12 +292,18 @@ class LocalClient:
                 remaining()
                 # An explicit Host header retains localhost for HTTPS/name-based APIs.
                 headers["Host"] = parsed.netloc
-                connection.request(method, parsed.path + endpoint, body=body, headers=headers)
+                connection.request(method, endpoint if health else parsed.path + endpoint, body=body, headers=headers)
                 remaining()
                 response = connection.getresponse()
                 status = response.status
                 record["http_status"] = status
                 record["response_headers"] = {key.lower(): self._redact(value) for key, value in response.getheaders() if key.lower() in ("content-type", "content-length", "x-request-id", "retry-after")}
+                if streaming and 200 <= status < 300:
+                    if 'text/event-stream' not in (response.getheader('Content-Type') or ''):
+                        unsupported_stream = True
+                    else:
+                        from .chapter_stream import ChapterStream
+                        collector = ChapterStream(attempt_dir, self.model, _strict_json, self._key)
                 content_length = response.getheader("Content-Length")
                 if content_length is not None:
                     try:
@@ -277,20 +315,31 @@ class LocalClient:
                 while True:
                     remaining()
                     # read1 allows the deadline to be rechecked between socket reads.
-                    part = response.read1(min(65536, self.max_response_bytes + 1 - len(raw)))
+                    part = response.read1(min(65536, self.max_response_bytes + 1 - received))
                     if not part:
                         break
-                    raw.extend(part)
-                    if len(raw) > self.max_response_bytes:
+                    received += len(part)
+                    if collector: collector.feed(part)
+                    else: raw.extend(part)
+                    if received > self.max_response_bytes:
                         raise ProbeError("Response exceeds the configured byte limit.", status=status)
-                if content_length is not None and len(raw) != int(content_length):
+                    if collector and collector.done:
+                        break  # explicit protocol end, not a generation timeout
+                remaining()
+                if collector and not collector.done:
+                    record['transport_error'] = 'stream_connection_ended_without_completion'
+                    raise ProbeError('Stream connection ended before [DONE]; partial response retained', status=status)
+                if content_length is not None and received != int(content_length):
                     raise ProbeError("Incomplete HTTP response body.", status=status)
                 if 300 <= status < 400:
                     raise ProbeError("Redirect refused; use the actual local API base URL.", status=status)
                 if not 200 <= status < 300:
                     raise ProbeError(f"Local API returned HTTP {status}; see retained raw response.", status=status)
+                if unsupported_stream:
+                    raise ProbeError('Streaming requested but server did not return text/event-stream; raw response retained', status=status)
                 try:
-                    data = _strict_json(self._redact(bytes(raw)).decode("utf-8"))
+                    data = (_strict_json(self._redact(json.dumps(collector.response(), ensure_ascii=False))) if collector
+                            else _strict_json(self._redact(bytes(raw)).decode("utf-8")))
                 except (ValueError, UnicodeDecodeError) as error:
                     raise ProbeError("Local API response is not complete strict JSON.", status=status) from error
                 if not isinstance(data, dict):
@@ -300,20 +349,35 @@ class LocalClient:
                               "started_at": record["started_at"], "latency_seconds": time.monotonic() - start}
             except Exception as error:
                 record["status"] = "failed"
-                message = self._redact(str(error))
+                if isinstance(error, (OSError, http.client.HTTPException)):
+                    record['transport_error'] = type(error).__name__
+                message = self._redact('Operator stop requested; partial response retained' if self.stop_requested and self.stop_requested() else str(error))
                 record["error"] = message
                 if isinstance(error, ProbeError):
                     raise ProbeError(message, attempt_dir=attempt_dir, status=error.status or status) from error
                 raise ProbeError(f"Local request failed: {message}", attempt_dir=attempt_dir, status=status) from error
             finally:
+                watcher_done.set()
                 if deadline_timer is not None:
                     deadline_timer.cancel()
                 if connection is not None:
                     connection.close()
-                (attempt_dir / "response.raw").write_bytes(self._redact(bytes(raw)))
+                if collector:
+                    collector.close()
+                    record.update(actual_model=collector.actual_model, finish_reason=collector.finish,
+                                  usage=_numeric_usage(collector.usage), stream_done=collector.done,
+                                  stream_events=collector.chunks)
+                else: (attempt_dir / "response.raw").write_bytes(self._redact(bytes(raw)))
                 record["finished_at"] = _now()
                 record["latency_seconds"] = time.monotonic() - start
                 _json_dump(attempt_dir / "record.json", record)
+
+    def chapter_health(self, output_dir):
+        """Read the existing TensorFold root health endpoint; chapter mode only."""
+        if self.purpose not in ('chapter', 'simple_chapter'):
+            raise ValueError('Health admission is only available to chapter mode')
+        data, evidence = self._request('GET', '/health', None, output_dir, 'health')
+        return data, evidence
 
     def discover_model(self, output_dir):
         """Return selected model and evidence; never guess between model IDs."""
@@ -335,14 +399,18 @@ class LocalClient:
         self.model = selected
         return {"status": "passed", "selected_model": selected, "available_models": ids, **evidence}
 
-    def chat(self, messages, output_dir, label, response_format=None, *, reasoning_effort="server-default"):
+    def chat(self, messages, output_dir, label, response_format=None, *, reasoning_effort="server-default", stream=False):
         """Return content and non-reasoning metadata; raw response stays on disk."""
-        validate_page_reasoning_effort(reasoning_effort)
-        if reasoning_effort != "server-default" and self.purpose != "page_review":
-            raise ValueError("Explicit reasoning effort is only supported for page review.")
+        if self.purpose == 'simple_chapter' and reasoning_effort != 'server-default':
+            from .chapter_editorial import validate_effort
+            validate_effort(reasoning_effort)
+        else:validate_page_reasoning_effort(reasoning_effort)
+        if reasoning_effort != "server-default" and self.purpose not in ("page_review", "text_critic", "simple_chapter"):
+            raise ValueError("Explicit reasoning effort is only supported for page review or text critic.")
         if not self.model:
             raise ProbeError("Discover/select the local model before requesting a completion.")
-        payload = {"model": self.model, "messages": messages, "max_tokens": self.max_tokens, "stream": False}
+        if stream and self.purpose != 'simple_chapter': raise ValueError('Streaming is only enabled for the simple chapter route')
+        payload = {"model": self.model, "messages": messages, "max_tokens": self.max_tokens, "stream": stream}
         if response_format is not None:
             payload["response_format"] = response_format
         if reasoning_effort != "server-default":

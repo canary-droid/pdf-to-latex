@@ -1,9 +1,278 @@
 # Spark operations: saved OCR, portable export and page review
 
-Updated 20 October 2026 (Europe/London). Run these operator commands from the normal terminal on the
+Updated 25 October 2026 (Europe/London). Run these operator commands from the normal terminal on the
 head Spark. Codex's development sandbox has no network access. This runbook
 records existing launchers; the converter never manages services automatically.
 No credentials belong in this repository.
+
+## Current prepared trial: eight candidate-only GLM passages (25 October)
+
+Use [CANDIDATE-CRITIC.md](CANDIDATE-CRITIC.md): GLM first, current candidate once,
+then an offline cost/selection review before at most four MiMo second opinions.
+The wrapper captures readiness paths automatically and supports status/pause/resume.
+All follow-ups share sealed parent/global/time limits; prior USD 0.1717154424 paid
+spending is retained under the USD 10 ceiling. No local failure triggers cloud
+fallback. The old [twelve-passage comparison](GLM-MIMO-CRITIC-PILOT.md) is complete;
+do not replay either arm. Xiaomi's documented 30-day retention remains accepted,
+without training opt-ins or account-setting changes. Qwen still reviews images.
+Gatheral has arrived and is readable: see [its concrete integration plan](GATHERAL-PLAN.md).
+Whole-book recovery/assembly orchestration is not yet implemented.
+
+The DeepSeek overnight development stage finished gate_failed (9/12 final valid,
+three exhausted responses); reserved material was not consumed. Do not relaunch
+that historical continuation as part of the new comparison.
+
+## Historical preparation: frozen overnight critic continuation (24 October)
+
+The revised gate passed 7/8 first, 8/8 final and 7/8 complete claimed coverage.
+The new offline continuation freezes 12 development reviews, then 19 callable
+reserved reviews only after the declared 9/12, 12/12, 9/12 technical checkpoint.
+g16-Y remains unavailable; the reserved set has nine paired comparisons plus
+unpaired g16-X. All findings stay UNACCEPTED and technical success is not accuracy.
+
+Use the current first section of [RECOVERY-CRITIC-TRIAL.md](RECOVERY-CRITIC-TRIAL.md)
+for actual prepared paths, tests, both-node workload checks, exact regular DeepSeek
+identity, tmux, fresh TEXT-ONLY readiness, the bound launcher, pause/resume and
+separate development/reserved inspection views. Medium / 32768 / 900 and the passed
+generic protocol are unchanged. Limits are 31 baseline plus 16 shared recoveries,
+two extras per parent, one eight-hour deadline including pauses. No prompt or
+candidate tuning occurs between stages; future tuning needs new reserved material.
+This has been prepared only, with no live calls by Codex. Speed work is deferred.
+
+## Historical preparation: critic repair follow-up (now passed)
+
+The first eight-unit text-critic gate failed. A new eight-unit diagnostic trial
+preserves the exact original/candidate passages and neutral labels while improving
+verbatim quotations, targeted repair, relevance/context handling and provisional
+reporting. Failed-feedback accounting is corrected in a new derived report.
+
+Use the current first section of [RECOVERY-CRITIC-TRIAL.md](RECOVERY-CRITIC-TRIAL.md)
+for actual paths, full tests, read-only workload/deployment checks, fresh TEXT-ONLY
+readiness and the new gate. Requested medium, 32768 tokens, 900 seconds; at most
+8 baseline + 8 recovery calls, two extras per unit, four-hour admission. The saved
+regular deployment supports the allowance, but effective medium semantics and
+live completion remain untested. Lower-effort recovery stays disabled; speed work
+is deferred. Do not resume the failed old run or admit remaining/reserved groups.
+All evidence and proposals remain unchanged/UNACCEPTED.
+
+## Historical preparation: first regular DeepSeek text gate (now failed)
+
+The Qwen continuation is complete. A bounded Codex audit assessed all 31 final
+proposals: 27 experimentally applied, four deferred, all still UNACCEPTED.
+The whole-paragraph loss in v105 is blocked and the complete original retained.
+Three other OCR blocks remain explicitly unresolved; g16-Y is unavailable.
+The initial four critic pairs are prepared and available, with unchanged frozen
+selection/prompts/settings and no source images or audit diagnoses in requests.
+
+Use the current first section of [RECOVERY-CRITIC-TRIAL.md](RECOVERY-CRITIC-TRIAL.md)
+for actual artifact paths, tests, optional isolated compilation, workload checks,
+verified regular DeepSeek launcher, fresh text-only readiness and the eight-call
+gate. Do not launch later development/reserved groups yet. Candidate compilation
+was blocked by Docker socket access; neither heading proposal has yet been tested
+separately. Technical success never establishes mathematical accuracy.
+
+## Historical preparation: remaining 243 Qwen regions (now completed)
+
+The v005-only repair completed with one export-feedback call. Its replacement
+is exportable and its proposed TeX compiled; the original OCR failed compilation.
+All proposals remain UNACCEPTED, with uncertain proposals deferred.
+
+Use the first section of [RECOVERY-CRITIC-TRIAL.md](RECOVERY-CRITIC-TRIAL.md) for
+the actual new linked continuation, tests, fresh Qwen readiness, mandatory
+compiler arguments, tmux launch, monitoring, pause/resume and partial/final ZIPs.
+It inherits 24 baseline calls plus one recovery call without replay, and preserves
+all 243 pending inputs/order/settings. The original 267/80/two-per-region/six-hour
+limits remain cumulative, with 839.61 seconds already consumed. Earlier runs and
+code identities are preserved. This continuation was prepared only; no new live
+calls or compiler execution occurred during preparation.
+
+## Historical preparation: v005 export repair only (24 October)
+
+The original Qwen gate completed 24 calls with valid JSON/claimed coverage and
+eight proposals: seven pairs compiled, one export-invalid proposal was skipped,
+and no recovery ran. Technical gate success did not establish exportability or
+fidelity. The export-feedback gap is now fixed offline, using the existing shared
+limits and preserving every original sealed call and all 243 pending inputs.
+
+The historical repair section of [RECOVERY-CRITIC-TRIAL.md](RECOVERY-CRITIC-TRIAL.md) records
+full tests, fresh exact-Qwen readiness, mandatory qualified compiler arguments,
+and the actual v005-only repair derivative. It has at most two remaining feedback
+calls, inherits elapsed time and budgets, and cannot replay the gate or launch
+other regions. All proposals remain UNACCEPTED. Inspect and bundle the repair,
+then stop. No new live response or real compilation has been tested by Codex.
+
+## Historical preparation: shared recovery and separate text critic (23 October)
+
+Use [RECOVERY-CRITIC-TRIAL.md](RECOVERY-CRITIC-TRIAL.md) for the exact normal-terminal
+sequence: full tests, read-only OCR/workload checks, the qualified isolated compiler,
+existing model controls, fresh exact Qwen text/vision readiness and the 24-case gate.
+The 23 October compiler-fix refresh was prepared with new paths; its operator
+scope was **gate only, then bundle and stop for inspection**. Later reference covers
+continuation, evaluation candidate, then fresh DeepSeek text-only readiness
+and the paired critic gate/development/reserved phases. All actual prepared paths,
+tmux logs, pause/resume, compiler choice and compact bundles are recorded there.
+No inference or service operation was performed during preparation.
+
+The new Qwen protocol covers the same 267 recognized regions with at most 80
+additional calls, at most two per region across all recovery methods, and six
+cumulative review hours. The frozen critic recipe has 20 page-disjoint passage
+groups (ten development/ten reserved), at most 40 baseline plus 24 recovery calls,
+and four hours. The optional fifteen-case DeepSeek schema diagnostic is separate.
+Images remain authoritative for printed content; the text critic cannot replace
+visual review. Technical validity, compilation and mathematical fidelity remain
+separate. No full-page omission claim follows from these recognized regions.
+
+The user's 23 October policy permits clear, recorded local editorial repairs in
+an experimental derivative. The printed extra closing parenthesis is eligible;
+ambiguous mathematical changes are not low-risk punctuation. Original evidence
+and final acceptance/conflict rules remain unchanged. Raw proposals are never
+automatically finally accepted. Earlier source-faithfulness assessments below
+retain their historical policy context.
+
+## Historical preparation: DeepSeek vs Qwen Arm A (22 October)
+
+23 October observation: the operator completed this comparison, 256 usable / 11
+failed. Its eleven failures were schema/JSON, not timeouts or token exhaustion.
+Do not relaunch the historical run. The following describes its preparation state.
+
+The separate DeepSeek path is prepared offline, with zero model or readiness
+calls. Use [the exact DeepSeek operator commands](DEEPSEEK-ARM-A-TRIAL.md) for
+the full 190-test suite, tmux, live wrapper, status, explicit resume and bundling.
+Prepared run: `runs/deepseek-arm-a-trial-20261022T180153Z-0ee3cf`; sealed preview:
+`runs/deepseek-arm-a-input-20261022T180153Z-4d91d8`. Do not prepare a duplicate.
+
+It copies all 267 historical Qwen A requests, changing only model to
+`DeepSeek-V4.1-Flash-TF` at `http://127.0.0.1:8894/v1`. No native-text additions,
+answers or diagnoses enter the requests. Medium effort, 16,384 output tokens,
+600-second timeout and omitted sampling/response_format are retained. Different
+deployments may interpret defaults differently; this is not a quantization-only
+comparison. One attempt per region, an initial 9/12 usability gate and eight-hour
+cumulative admission budget bound the trial. Proposals remain UNACCEPTED.
+
+The operator's first-launch smoke record is successful and bound at launch; it
+does not replace fresh project preflight or establish mathematical accuracy.
+The wrapper checks OCR exit and requires both Text passed and vision qualified,
+including exact model identity in discovery and successful/failed responses.
+Unsupported strict JSON is recorded and allowed, while other preflight failures
+block dispatch. Optional `--wait-ready 3600` polls only `/models` before preflight,
+also requiring matching SMOKE-PASS evidence; STOP or another model stops it.
+No services, deployment settings or completed evidence are changed.
+
+## Historical paired Qwen native evidence (21 October preparation)
+
+22 October observation: the operator-run trial below completed all 534 attempts:
+476 structurally completed, 58 failed. Each arm has 238 completed / 29 failed;
+Arm A failures are 26 schema, two JSON and one token-limit failure. All cases,
+including failures, are retained in the DeepSeek comparison. Do not relaunch
+Qwen from these historical instructions or switch services for this task.
+
+The 21 October offline preparation record was: all 267 existing regions,
+534 maximum sequential review requests, 48 priority regions first, no automatic
+retries, a 9/12-per-arm reliability gate after twelve pairs and a cumulative
+nine-hour admission budget. No GLM server switch is required.
+
+The [Task 5 operator instructions](QWEN-NATIVE-TRIAL.md) preserve the then-current
+166-test suite, tmux launch, monitoring, resume and bundling procedure.
+The prepared live directory is `runs/qwen-native-trial-20261021T062027Z-a1f40a`;
+its sealed preview is `runs/qwen-native-input-20261021T062027Z-c025fd`.
+The launcher checks converter exit and fresh exact-model readiness through project
+APIs, captures the actual preflight directory and requires both Text passed and
+vision qualified. It never starts/stops services or accepts proposals. The prior
+Task 4 evidence and historical commands below remain unchanged in purpose.
+
+## Completed offline experiment: positioned native-text assistance
+
+Task 3 was committed/pushed by the operator as `7b62030`; the operator reports
+all 133 checkpoint tests passed in the normal terminal. The 100-page batch and
+the agreed eight-page extended audit are complete. Their historical launch
+instructions below are not instructions to rerun them or change services.
+
+Task 4 adds an explicit opt-in module, separate from the default converter:
+`python -m probe.native_text_pilot`. It reads registered PDF characters, bounding
+boxes and font metadata alongside validated saved MinerU blocks. Both are
+fallible evidence. Native alternatives never become accepted OCR or LaTeX;
+no OCR, model requests, external services or model-server changes occur.
+
+Actual completed pilot: `runs/native-text-pilot-20261021T052347Z-094634`.
+Development covers original PDF 106/116/126/136/146/156/166/170/176/186/196/205;
+holdout covers 206/212/218/225. All 267 recognized blocks are compared, with
+selected/original page numbers and block IDs retained. Rules, code/helper hashes,
+source bindings and development artifacts were sealed before holdout. The
+holdout command refuses changed evidence or rules and never overwrites a stage.
+
+All 15 MinerU worker summaries already reported `parse_mode: txt`, MinerU 4.0.12.
+Installed Basic maps to medium effort, combining native prose with independent
+formula recognition; enabling text mode is not the intervention. PyMuPDF 1.26.6
+supplies a separate positioned character view, not mathematical reconstruction.
+
+Observed workload: 160/206 development regions and 42/61 holdout regions flagged;
+all 16 pages contain flags. There are 196 exact/anchor matches, 61 geometry-only
+regions, ten ambiguous regions and no wholly empty native regions. Twenty-three
+non-whitespace characters remain outside OCR region assignments. Missing glyphs
+and formula structure still occur inside nonempty regions. Many disagreements
+are representation differences rather than OCR defects. The later-section
+holdout is unscored, not a random or independently labelled accuracy benchmark.
+
+The 12-region source inspection confirms useful fragments in the known page-106
+paragraph, but also lost math glyphs/scripts, overlapping-character contamination
+and a missed styling/math-mode issue in one of five unflagged controls. Four
+unflagged controls showed no content discrepancy. No control showed a confirmed
+changed mathematical value or punctuation. This does not establish whole-book
+accuracy, review-time savings or compilability. Keep the tool as an optional
+inspection aid; production replacement/triage integration is not supported yet.
+
+Open local outputs (these commands send nothing):
+
+```bash
+xdg-open runs/native-text-pilot-20261021T052347Z-094634/report.html
+xdg-open runs/native-text-pilot-20261021T052347Z-094634/inspection.html
+xdg-open runs/native-text-pilot-20261021T052347Z-094634/review-pack/report.html
+```
+
+The full report links all comparisons, raw positioned extraction, crops and
+unassigned-character ledgers. The inspection report separates evaluator findings
+from neutral reviewer inputs. The compact ZIP is
+`results/native-text-pilot-20261021T052347Z-094634-inspection.zip`.
+Its `review-pack/` subdirectory contains at most twelve regions, source context,
+OCR and native alternatives, with no flag diagnoses, control labels, expected
+answers or model corrections. Evaluator notes live separately under `evaluator/`.
+Preparing this movable pack does not authorize sending it anywhere.
+
+To reproduce offline, create a NEW development run and use its printed path.
+Do not run holdout or pack again against the completed pilot above:
+
+```bash
+cd /home/mdi/projects/pdf-to-latex
+.venv-control/bin/python -m probe.native_text_pilot development \
+  --run runs/convert-basic-20261020T075104Z-48fd90 \
+  --sample docs/native-text-pilot-sample.json
+read -r -p 'Paste the actual new Pilot directory: ' native_pilot
+.venv-control/bin/python -m probe.native_text_pilot holdout --pilot "$native_pilot"
+.venv-control/bin/python -m probe.native_text_pilot pack \
+  --pilot "$native_pilot" --selection docs/native-text-pilot-review.json
+```
+
+Development extracts only its twelve pages; holdout extracts its four pages
+after verifying the frozen rules and artifacts. Pack selects twelve recorded
+regions without inference; it does not generate human assessment or transmit
+anything. The supplied selection contains block IDs only. The current evaluator
+record and compact inspection archive were assembled separately after source
+inspection; these commands do not fabricate new evaluation labels.
+
+Ten new tests and 27 existing document/saved-review tests passed offline. Run the
+full current suite personally; expect 143 tests and `OK` without failures/errors:
+
+```bash
+.venv-control/bin/python -m unittest discover -s tests -v
+```
+
+The 15 loopback-server tests were not repeated in the restricted sandbox; the
+previously observed socket restriction was not worked around. Rotated PDF pages
+and unequal source/window geometry are explicitly refused; nonzero cropbox
+offsets on these unrotated pages are verified and handled in crop-relative points.
+Ligatures and line-end hyphens remain literal. General math reconstruction,
+style-sensitive flags, dehyphenation and automatic application are not implemented.
+See [the selected evidence record](evidence/klebaner-native-text-pilot-20261021.md).
 
 ## Operating rule and current evidence
 
@@ -26,9 +295,14 @@ output budget on every page. A subsequent two-page native trial completed only
 page 2; its four proposals remain UNACCEPTED. See the dated project state for
 the preserved results.
 
-## Current trial: resumable 100-page Klebaner review
+## Completed 100-page Klebaner trial: historical launch instructions
 
-Prepared offline on 20 October 2026; **no batch inference has run**. The actual
+Prepared offline on 20 October 2026 and subsequently executed and audited:
+`runs/review-batch-20261020T202648Z-7e5476` has 360 completed / 36 failed units,
+with 119 UNACCEPTED proposals. The eight-page extended audit is complete at
+`runs/extended-audit-20261021T032917Z-a0c430`; see the latest PROJECT-STATE entries.
+The following commands preserve the launch procedure, not a request to rerun it.
+The original
 preview is `runs/review-batch-input-20261020T195337Z-32f118`, with inspection ZIP
 `results/review-batch-input-20261020T195337Z-32f118-upload.zip` (about 300 MB).
 It covers exactly selected pages 1–100 / original physical PDF 106–205 of

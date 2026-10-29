@@ -1,0 +1,111 @@
+{
+  "parent": "/home/mdi/projects/pdf-to-latex/runs/editorial-chapters-trial-20261028T072031Z-41483c",
+  "assessment": "Codex source-image and local-algebra assessment, not full-section fidelity certification",
+  "images": [
+    {
+      "path": "inspection-images/gatheral-p120.png",
+      "sha256": "c0637d1d02827550d3f7a8b93277c392f65a5576834cf4f83025d56aa71a4d65"
+    },
+    {
+      "path": "inspection-images/gatheral-p128.png",
+      "sha256": "d358dc8a2639515b3c9280f78ec3ae3909b59088fc2829503fb4dbf6b8749b8e"
+    }
+  ],
+  "rows": [
+    {
+      "source_key": "gatheral-07-s01",
+      "key": "gatheral-07-s01",
+      "source_label": "critic-call-013",
+      "source_sha256": "12812663d2950168e8143e7d014ecd84d5375961907b744277bfcd0a0d4d80f7",
+      "text_fingerprint": "5ca03716ec10f371b112fda75a11706e1a152dc1a60fdfd910554d296edd13c1",
+      "edits": [
+        {
+          "id": "G7-caption",
+          "old": "\\(\\tilde{\\sigma}_{BS}^{2}(k,T) \\approx \\bigl[\\tilde{\\nu}_{loc}(0,0) + \\nu_{loc}(k,T)\\bigr]/2\\)",
+          "new": "\\(\\sigma_{BS}^{2}(k,T) \\approx \\bigl[\\nu_{loc}(0,0) + \\nu_{loc}(k,T)\\bigr]/2\\)"
+        },
+        {
+          "id": "G7-caption-note",
+          "old": "where \\(\\tilde{x}\\) represents",
+          "new": "\n\\par\\smallskip\\noindent{\\small\\textbf{Codex extraction correction [G7-caption].}\nSource image PDF 120 / printed 89 has no tildes on $\\sigma$ or $\\nu$ in\nFigure 7.1. Removed those extraction-added accents; the printed\n$\\tilde{x}$ in the proof is retained.}\\par\nwhere \\(\\tilde{x}\\) represents"
+        },
+        {
+          "id": "G7-reference",
+          "old": "\\glmcorr{C3; printed p.~89, closing paragraph of this subsection}\n{Source error (both extractions agree). Original reading: ``\\ldots derived\nearlier in Chapter~7 for the Heston model''. Impossible self-reference:\nthis is Chapter~7, and the short-dated skew is derived here for the first\ntime. The Heston skew, equation (3.19), was derived in Chapter~3, as this\nchapter itself states twice later on (``the one we already derived for the\nHeston model in Chapter~3''; ``Looking back at equation (3.19)''), and the\nshort-time limit \\(\\rho\\eta/2\\) of that formula for \\(\\beta(\\nu)=1\\)\nmatches (7.3). Changed ``Chapter~7'' to ``Chapter~3''.}\n\n",
+          "new": "\\par\\smallskip\\noindent{\\small\\textbf{GLM cross-reference correction, checked by Codex [G7-reference].}\nThe printed closing paragraph says Chapter 7. The earlier Heston implied-variance\nskew derivation is in Chapter 3, equation (3.19) (PDF 66 / printed 35);\nits short-time slope is $\\rho\\eta/2$ for $\\beta(\\nu)=1$, agreeing with (7.3).\nRetained Chapter 3 on that evidence. Referring to an earlier part of the same\nchapter is not inherently impossible.}\\par\n\n"
+        },
+        {
+          "id": "current-log-only",
+          "old": "\\clearpage\n\n\\section*{Editorial corrections and accuracy notes}\n\\noindent\\textit{Annotation --- not part of the original text. Scope:\nChapter 7 introduction and SHORT EXPIRATIONS only (printed pp.~87--89;\nPDF pp.~118--120). Register: \\texttt{gatheral-07-s01-convert-call-012}.}\\par\\smallskip\n\n\\textbf{Applied material corrections (visible notes C1--C3 above).}\n\\begin{itemize}\n\\item \\textbf{C1} (\\texttt{gatheral-07-s01-convert-call-012-7099c8cc43};\nprinted p.~87, display after the \\(dZ_2\\) decomposition --- source error).\nBook prints \\(\\alpha(\\nu,t)\\), \\(\\beta(\\nu,t)\\) although the text\nexplicitly specializes to \\(\\alpha,\\beta\\) independent of \\(t\\); (7.1)\nuses \\(\\alpha(\\nu),\\beta(\\nu)\\), the display's own last term reads\n\\(\\beta(\\nu)\\), and all later displays use \\(\\alpha(\\nu),\\beta(\\nu)\\).\nApplied \\(\\alpha(\\nu,t)\\to\\alpha(\\nu)\\), \\(\\beta(\\nu,t)\\to\\beta(\\nu)\\).\n\\item \\textbf{C2} (\\texttt{gatheral-07-s01-convert-call-012-137d7900f2};\nprinted p.~88, lemma proof --- source error, coefficient). Book prints\n``a roughly constant \\(\\beta(\\nu_0)\\)''; from (7.2) that slope is\n\\(\\rho\\eta\\,\\beta(\\nu_0)\\), and the proof's own formal display and (7.3)\nboth carry \\(\\rho\\eta\\). Inserted \\(\\rho\\eta\\); original wording recorded\nin note C2.\n\\item \\textbf{C3} (\\texttt{gatheral-07-s01-convert-call-012-8d5d70a04c};\nprinted p.~89, closing paragraph --- source error, cross-reference). Book\nprints ``derived earlier in Chapter~7 for the Heston model'' --- an\nimpossible self-reference (this is Chapter~7; the short-dated skew is\nderived here for the first time). The Heston skew (3.19) was derived in\nChapter~3, as stated twice later in this chapter, and its \\(T\\to0\\) limit\n\\(\\rho\\eta/2\\) for \\(\\beta(\\nu)=1\\) matches (7.3). Changed to\n``Chapter~3''.\n\\end{itemize}\n\n\\textbf{Extraction repairs (silent in the document; not source errors).}\n\\begin{itemize}\n\\item Drop-cap ``F'' lost by MinerU in the chapter's opening word;\nrestored as ``From'' (drop cap visible on PDF p.~118).\n\\item End-of-proof tombstone (\\(\\sqcap\\!\\sqcup\\), PDF p.~120) garbled to an\ninvalid character by MinerU; restored as \\(\\square\\).\n\\end{itemize}\n\n\\textbf{Extraction disagreement resolved (log only; no mathematical\nimpact).} Figure 7.1 caption (printed p.~89): MinerU shows tildes on\n\\(\\tilde{\\sigma}^{2}_{BS}(k,T)\\) and \\(\\tilde{\\nu}_{loc}(0,0)\\); the PDF\ntext layer shows none there (accents are routinely lost in jumbled caption\ntext, in contrast with extracted ``\\(\\tilde{x}\\)'' in body text). Kept\nMinerU's tildes, per the preferred structured extraction for mathematical\nlayout.\n\n\\textbf{Preserved as printed.} No punctuation after ``\\(\\beta(\\nu)=1\\)''\nbefore ``we see'' (printed p.~89); both extractions agree; cosmetic, left\nverbatim.\n\n\\textbf{Image-inspection wishlist.} Printed p.~89: Figure 7.1 caption\n(confirm the two tildes) and the closing paragraph (confirm the missing\npunctuation). Printed p.~88: proof sentence (confirm \\(\\rho\\eta\\) is\ntruly absent in print).\n\n\\textbf{Consistency checks passed.} \\(\\varphi=\\sqrt{1-\\rho^{2}}\\) gives an\northogonal decomposition \\(dZ_2=\\rho\\,dZ_1+\\varphi\\,dZ_1^{*}\\);\neliminating \\(\\sqrt{\\nu}\\,dZ_1 = dx + \\frac{\\nu}{2}\\,dt\\) reproduces the\nfollowing two displays. (7.2) follows from\n\\(\\mathbb{E}[\\nu+d\\nu\\mid dx]\\) using \\(\\int_{0}^{t}\\nu_s\\,ds\\approx\\nu_0 t\\).\nThe straight-line most-probable path \\(\\tilde{x}_t=x_T\\,t/T\\) gives\n\\(\\int_{0}^{T}\\tilde{x}_t\\,dt=\\frac{1}{2}x_T T\\), hence the factor\n\\(\\frac{1}{2}\\) in (7.3). (7.3) agrees with the Medvedev--Scaillet\nshort-dated skew (7.6) later in this chapter via\n\\(b(\\sigma)=\\eta\\,\\beta(\\sigma^{2})/2\\), \\(\\sigma=\\sqrt{\\nu}\\).\n\n\\smallskip\n\\noindent\\textbf{Unresolved issues: none in this section.}\n\n",
+          "new": ""
+        }
+      ],
+      "items": [
+        {
+          "id": "G7-caption",
+          "text": "Applied: removed extraction-added tildes from Figure 7.1 sigma/nu only. Source image PDF120/printed89 inspected; proof tilde x retained.",
+          "status": "applied_source_verified",
+          "category": "material",
+          "attribution": "Codex source-image/local-algebra assessment",
+          "independent_verification": true
+        },
+        {
+          "id": "G7-slope",
+          "text": "Retained GLM C2: differentiating (7.2) with respect to x gives rho eta beta(nu_0). Visible in-section note retains original and correction.",
+          "status": "applied_local_derivation",
+          "category": "material",
+          "attribution": "Codex source-image/local-algebra assessment",
+          "independent_verification": true
+        },
+        {
+          "id": "G7-reference",
+          "text": "Retained Chapter 3 reference to actual Heston derivation (3.19), PDF66/printed35. Removed invalid impossible-self-reference rationale.",
+          "status": "applied_source_verified",
+          "category": "material",
+          "attribution": "Codex source-image/local-algebra assessment",
+          "independent_verification": true
+        },
+        {
+          "id": "G7-time-dependence",
+          "text": "Retained GLM C1: surrounding specialization makes alpha/beta time independent. Original GLM note retained; no new mathematical edit.",
+          "status": "retained_glm_claim",
+          "category": "material",
+          "attribution": "Codex source-image/local-algebra assessment",
+          "independent_verification": false
+        }
+      ]
+    },
+    {
+      "source_key": "pilot-gatheral-07-s05",
+      "key": "gatheral-07-s05",
+      "source_label": "critic-call-037",
+      "source_sha256": "da70ada4c731e8a4faa6472c6f33f4f9f66a9d3950aeb4d8cc0cadea500a40d6",
+      "text_fingerprint": "054b0003cc4d7bcabe06ee21d283debc17b8449180224aa2c92313c992ef0785",
+      "edits": [
+        {
+          "id": "G7-Lewis",
+          "old": "\\noindent{\\small\\textbf{GLM unresolved issue (second-order coefficients in\n(7.12)).} As printed, $J^{(3)}\\to 3\\rho\\,\\overline{\\nu}^{\\,2\\phi}/(2\\lambda^3)\\neq 0$\nas $t\\to 0$ (its brace tends to $3$), whereas the braces of $J^{(1)}$ and\n$J^{(4)}$ vanish as $t\\to 0$. Since $\\beta_0$ contains\n$-\\frac{1}{2}\\,J^{(3)}/(\\nu t^2)\\,(1+\\frac{1}{4}\\nu t)$ and $\\beta_2$ contains\n$\\frac{1}{2}\\,J^{(3)}/(\\nu^2 t^3)$, both would diverge (like $t^{-2}$ and\n$t^{-3}$) as $t\\to 0$. This contradicts the finite short-time limits implied\nby the Medvedev--Scaillet expansion (7.5): for the Example-4 process (where\n$b(\\sigma)=\\eta\\sigma^{2\\phi-1}/2$) the $k^2$ coefficient of implied variance\nmust approach the finite value\n$\\eta^2\\overline{\\nu}^{\\,2\\phi-2}\\big[\\tfrac{1}{12}+\\rho^2\\big(\\tfrac{\\phi-1}{6}-\\tfrac{1}{16}\\big)\\big]$,\nwhich contains no term linear in $\\rho$, whereas the printed $\\beta_2$ has no\n$\\rho$-independent term at all and its only $\\rho$-linear piece is the\n$J^{(3)}$ term. The quoted $J^{(3)}$ and/or the $\\mathrm{O}(\\eta^2)$\ncoefficients of (7.12) are therefore misprinted (in the book and/or this\ntranscription); the correct form cannot be recovered by local derivation\nalone. Evidence needed: Lewis (2000), pp.~142--144 --- equation (3.14)\nitself and the definitions of $J^{(2)}$, $J^{(3)}$, $J^{(4)}$ --- to verify\nthe $\\mathrm{O}(\\eta^2)$ coefficients. The first-order result used below is\nunaffected.}\\par\n\n",
+          "new": "\\noindent{\\small\\textbf{GLM unresolved issue, qualified by Codex source-image and local-limit checks [G7-Lewis].}\nThe source image at physical PDF 128 / printed 97 confirms the displayed\n$J^{(3)}$ brace $3/2+\\lambda t+2e^{-\\lambda t}-e^{-2\\lambda t}/2$;\nit tends to $3$. For $\\rho\\ne0$ and nonzero volatility of volatility, positive\n$\\nu=\\bar\\nu$ and $\\lambda>0$, its contribution to the displayed $\\beta_2$\nis of order $t^{-3}$. The other displayed terms cannot cancel it:\n$J^{(1)}=O(t^2)$ and $J^{(4)}=O(t^3)$, so their contributions to $\\beta_2$\nare bounded. This is a substantive inconsistency in the printed formula,\nnot merely an OCR discrepancy. No corrected coefficient is invented here.\nThe earlier GLM claim that $\\beta_0$ must also diverge is not independently\nestablished: $J^{(2)}$ is not defined in this section, so cancellation there\nhas not been excluded. Lewis (2000), pp.~142--144, equation (3.14) and the\nunderlying $J^{(n)}$ definitions are needed to settle the precise correction.\nThe printed formulas remain available as flagged knowledge-base content;\nthe first-order calculation below is retained.}\\par\n\n"
+        }
+      ],
+      "items": [
+        {
+          "id": "G7-Lewis",
+          "text": "Open source inconsistency: PDF128/printed97 J3 brace tends to 3; beta2 diverges for nonzero rho/eta, positive variance/lambda. J1=O(t^2), J4=O(t^3), so no displayed cancellation. Beta0 not independently settled because J2 undefined. Need Lewis(2000) pp142\u2013144 and definitions; no coefficient invented.",
+          "status": "open",
+          "category": "material",
+          "attribution": "Codex source-image/local-algebra assessment",
+          "independent_verification": true
+        },
+        {
+          "id": "G7-first-order",
+          "text": "No change: first-order skew follows eta J1/(nu t^2), matching beta(nu)=nu^(phi-1/2). Retained clean GLM consistency note.",
+          "status": "informational",
+          "category": "contextual_observation",
+          "attribution": "Codex source-image/local-algebra assessment",
+          "independent_verification": true
+        }
+      ]
+    }
+  ]
+}

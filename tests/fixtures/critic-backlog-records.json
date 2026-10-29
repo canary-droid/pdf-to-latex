@@ -1,0 +1,1443 @@
+{
+  "c03": {
+    "local": [
+      {
+        "id": "c03:f1",
+        "category": "sign_or_bound",
+        "anchor_ids": [
+          "a-b0bbb05ca8d5d5097a6497ba856edafd",
+          "a-ca9f206d97d9b17551b0cf4bab1a90da"
+        ],
+        "consequence": "The stochastic-integral exponent in both displayed equations of the Feynman-Kac proof sketch carries the wrong sign. As written, the expression attributed to f(X(T),T) is NOT the solution of the linear SDE d f(X(t),t) = r(X(t),t) f(X(t),t) dt + dM(t) obtained from (6.22) via It\u00f4's formula. The final conclusion C(x,t) = f(x,t) is unaffected (a bounded integrand against a martingale has zero mean with either sign), but the intermediate derivation equations are materially incorrect as transcribed.",
+        "support": "Solving dY(t) = r(t) Y(t) dt + dM(t) on [t,T] with integrating factor e^{-\u222b_0^u r} gives Y(T) = Y(t) e^{\u222b_t^T r du} + \u222b_t^T e^{\u222b_s^T r du} dM(s). Differentiating the candidate's expression F(T) = f(X(t),t) e^{A(T)} + e^{A(T)} \u222b_t^T e^{\u222b_t^s r du} dM(s), where A(T) = \u222b_t^T r du, yields dF = r F dT + e^{2A(T)} dM(T): the martingale coefficient is e^{2\u222b_t^T r du} instead of the required e^{\u222b_t^T r du} = (\u2202f/\u2202x)(X(T),T) \u03c3(X(T),T) prefactor. Hence the candidate's a-b0bb... does not satisfy the SDE it is claimed to solve, and correspondingly the martingale term in a-ca9f... should read \u222b_t^T e^{-\u222b_t^s r(X(u),u)du} dM(s) (obtained by dividing the correct solution by e^{\u222b_t^T r}). The two candidate equations are internally consistent with each other, so the error is either a consistent transcription of a misprinted source or a source-author slip; a source-image check is needed to distinguish these.",
+        "proposed_correction": "In a-b0bbb05ca8d5d5097a6497ba856edafd, replace the stochastic term e^{\u222b_t^T r(X(u),u)du} \u222b_t^T e^{\u222b_t^s r(X(u),u)du} dM(s) with \u222b_t^T e^{\u222b_s^T r(X(u),u)du} dM(s) (equivalently, e^{\u222b_t^T r} \u222b_t^T e^{-\u222b_t^s r} dM(s)). In a-ca9f206d97d9b17551b0cf4bab1a90da, replace e^{\u222b_t^s r(X(u),u)du} with e^{-\u222b_t^s r(X(u),u)du}. Retain all surrounding text; only the exponent signs change.",
+        "severity": "medium",
+        "uncertain": true,
+        "context_required": [
+          "Equation (5.32) of Chapter 5 and the source image of the current page (original physical page 170) to determine whether the printed source carries the same sign"
+        ],
+        "next_action": "source_image_review",
+        "claim_origin": "undetermined",
+        "stable_id": "finding-1405cd323f1ff3f2494d60b4",
+        "draft_sha256": "0a3e3d2e4faf60e87543ee84d5cd7a1e448833f4cc54715c6781587a02bc1b97",
+        "candidate_sha256": "8a60ae7132215c943386564f3d014e9ff6d568a01204bfbe5a2e6b1a31f3f6b2",
+        "acceptance": "UNACCEPTED",
+        "quotes": [
+          {
+            "anchor_id": "a-b0bbb05ca8d5d5097a6497ba856edafd",
+            "block_id": "klebaner-ch4-7-p0065:b14",
+            "text": "$f ( X ( T ) , T ) = f ( X ( t ) , t ) e ^ { \\int _ { t } ^ { T } r ( X ( u ) , u ) d u } + e ^ { \\int _ { t } ^ { T } r ( X ( u ) , u ) d u } \\int _ { t } ^ { T } e ^ { \\int _ { t } ^ { s } r ( X ( u ) , u ) d u } d M ( s ) .$",
+            "start": 0,
+            "end": 227,
+            "source_location": {
+              "source_id": "klebaner-ch4-7",
+              "page": {
+                "local_page_idx": 1,
+                "selected_page": 65,
+                "original_physical_page": 170,
+                "owner": true
+              },
+              "bbox": [
+                0.069,
+                0.606,
+                0.928,
+                0.651
+              ],
+              "reading_order": 14,
+              "text_basis": "current_candidate",
+              "format": "portable_latex"
+            },
+            "span_sha256": "d279ea4aea0da25516909ef06fdab0bf982928b3c79be860756f243dbe67b321",
+            "source_block_sha256": "e57508286b5e4aa7fe260f0aceab80eeea34b12ed315b80c1133cd0f4a84c5b8",
+            "role": "target"
+          },
+          {
+            "anchor_id": "a-ca9f206d97d9b17551b0cf4bab1a90da",
+            "block_id": "klebaner-ch4-7-p0065:b16",
+            "text": "\\[\ng ( X ( T ) ) e ^ { - \\int _ { t } ^ { T } r ( X ( u ) , u ) d u } = f ( X ( t ) , t ) + \\int _ { t } ^ { T } e ^ { \\int _ { t } ^ { s } r ( X ( u ) , u ) d u } d M ( s ) .\n\\]",
+            "start": 0,
+            "end": 178,
+            "source_location": {
+              "source_id": "klebaner-ch4-7",
+              "page": {
+                "local_page_idx": 1,
+                "selected_page": 65,
+                "original_physical_page": 170,
+                "owner": true
+              },
+              "bbox": [
+                0.134,
+                0.697,
+                0.863,
+                0.743
+              ],
+              "reading_order": 16,
+              "text_basis": "current_candidate",
+              "format": "portable_latex"
+            },
+            "span_sha256": "e5c270d4c735936122fc9f36fe1a1c437dab7a8b30a191800301c52716135ee8",
+            "source_block_sha256": "7fb3eacf87f983e5af6b7b896f4e77921277cf011abfbd0a71ab8ed27983c77a",
+            "role": "target"
+          }
+        ]
+      },
+      {
+        "id": "c03:f2",
+        "category": "suspected_transcription",
+        "anchor_ids": [
+          "a-8e3a7d0e9f56c61bd0392e1a27531362"
+        ],
+        "consequence": "The internal cross-reference 'see (5.32) in Section 5.22' points to a section number that does not fit the book's numbering scheme for Chapter 5 (sections are numbered 5.1, 5.2, ...). If taken literally, readers would be directed to a nonexistent section; the intended target is most plausibly the section containing equation (5.32).",
+        "support": "Klebaner's Chapter 5 does not contain a 'Section 5.22'; a duplicated digit in OCR/segmentation is the likely cause. The cross-referenced equation number (5.32) is itself plausible. This is a reference-integrity issue, not a mathematical one.",
+        "proposed_correction": "If the source image confirms, read 'Section 5.2' (or the section in which (5.32) actually appears) instead of 'Section 5.22'. Do not alter the surrounding sentence otherwise.",
+        "severity": "low",
+        "uncertain": true,
+        "context_required": [
+          "Source image of original physical page 170, and the chapter 5 table of contents / page containing equation (5.32) to confirm the correct section number"
+        ],
+        "next_action": "source_image_review",
+        "claim_origin": "suspected_transcription",
+        "stable_id": "finding-d73775e6d8e24a990427c9fc",
+        "draft_sha256": "0a3e3d2e4faf60e87543ee84d5cd7a1e448833f4cc54715c6781587a02bc1b97",
+        "candidate_sha256": "8a60ae7132215c943386564f3d014e9ff6d568a01204bfbe5a2e6b1a31f3f6b2",
+        "acceptance": "UNACCEPTED",
+        "quotes": [
+          {
+            "anchor_id": "a-8e3a7d0e9f56c61bd0392e1a27531362",
+            "block_id": "klebaner-ch4-7-p0065:b13",
+            "text": "This is a linear SDE of Langevin type for \\(f ( X ( t ) , t )\\) where \\(B ( t )\\) is replaced by \\(M ( t )\\) . Integrating this SDE between t and \\(T ,\\) and using \\(T \\geq t\\) as a time variable and t as the origin (see (5.32) in Section 5.22) we obtain",
+            "start": 0,
+            "end": 254,
+            "source_location": {
+              "source_id": "klebaner-ch4-7",
+              "page": {
+                "local_page_idx": 1,
+                "selected_page": 65,
+                "original_physical_page": 170,
+                "owner": true
+              },
+              "bbox": [
+                0.068,
+                0.533,
+                0.932,
+                0.595
+              ],
+              "reading_order": 13,
+              "text_basis": "current_candidate",
+              "format": "portable_latex"
+            },
+            "span_sha256": "c87855e19d7ead62297af50b843dd847e9ee01566fb5aaa238e7f072f4042488",
+            "source_block_sha256": "574ab95c9e5d1a4bdd6d07a2c0741bfa79b4363e0fc328975d226cd46d000267",
+            "role": "target"
+          }
+        ]
+      }
+    ],
+    "second": [
+      {
+        "id": "c03:f1",
+        "category": "sign_or_bound",
+        "anchor_ids": [
+          "a-293d36d0087bc94d15e800b691673031",
+          "a-8e3a7d0e9f56c61bd0392e1a27531362",
+          "a-b0bbb05ca8d5d5097a6497ba856edafd",
+          "a-ca9f206d97d9b17551b0cf4bab1a90da"
+        ],
+        "consequence": "RETAINED unchanged after reassessment; the added context does not supply (5.32), and the defect is visible from the candidate's own displays. Both formulas that follow the line claiming to integrate the linear SDE use a positive inner exponent exp(+integral from t to s of r). With that sign the displayed expression does not solve the stated SDE df = r f dt + dM unless r is identically zero, so the derivation as written is invalid. The theorem's conclusion nevertheless survives: with either sign the stochastic integrand is bounded (r bounded on [t,T]) so the integral has zero conditional mean and taking expectations still yields C = f. The defect is confined to the two proof displays and the claim that they are the integrated SDE.",
+        "support": "Derivation: set R(t,s)=integral from t to s of r(X(u),u) du and Y(s)=f(X(s),s), so the stated SDE is dY=rY ds+dM. With U(s)=Y(s)exp(-R(t,s)), Ito's product rule gives dU=exp(-R(t,s))(rY ds+dM)+Y(-r exp(-R(t,s)) ds)=exp(-R(t,s)) dM, hence Y(T)=Y(t)exp(R(t,T))+exp(R(t,T))*integral from t to T of exp(-R(t,s)) dM(s). The candidate instead puts exp(+R(t,s)) inside the stochastic integral; differentiating that expression gives diffusion coefficient exp(2R(t,T)) rather than the 1 required by df=r f dt+dM, already failing for constant r=c nonzero. The second display is algebraically consistent with the first after multiplication by exp(-R(t,T)), so both carry the same wrong inner sign; the outer factor exp(R(t,T)) and the discount factor exp(-R(t,T)) are correct. Sign conclusion is internal to the candidate and does not depend on the unavailable (5.32).",
+        "proposed_correction": "In both displays replace the inner exponential factor exp(+ integral from t to s of r(X(u),u) du) by exp(- integral from t to s of r(X(u),u) du); keep the outer factor exp(integral from t to T of r(X(u),u) du) and all other terms unchanged. Equivalently, in the un-rearranged formula write the integral with exp(integral from s to T of r(X(u),u) du). Because the printed page cannot be inspected here, confirm against the source image or against equation (5.32) before altering text; if the printed page already carries the minus sign, this is a transcription repair rather than an author correction.",
+        "severity": "medium",
+        "uncertain": true,
+        "context_required": [
+          "Equation (5.32) in the cited section of Chapter 5",
+          "Source image of the two displayed solution formulas"
+        ],
+        "next_action": "source_image_review",
+        "claim_origin": "undetermined",
+        "stable_id": "finding-f8d5335679dd623e955fc183",
+        "draft_sha256": "0a3e3d2e4faf60e87543ee84d5cd7a1e448833f4cc54715c6781587a02bc1b97",
+        "candidate_sha256": "8a60ae7132215c943386564f3d014e9ff6d568a01204bfbe5a2e6b1a31f3f6b2",
+        "acceptance": "UNACCEPTED",
+        "quotes": [
+          {
+            "anchor_id": "a-293d36d0087bc94d15e800b691673031",
+            "block_id": "klebaner-ch4-7-p0065:b12",
+            "text": "\\[\nd f ( X ( t ) , t ) = r ( X ( t ) , t ) f ( X ( t ) , t ) d t + d M ( t ) .\n\\]",
+            "start": 0,
+            "end": 81,
+            "source_location": {
+              "source_id": "klebaner-ch4-7",
+              "page": {
+                "local_page_idx": 1,
+                "selected_page": 65,
+                "original_physical_page": 170,
+                "owner": true
+              },
+              "bbox": [
+                0.251,
+                0.504,
+                0.747,
+                0.525
+              ],
+              "reading_order": 12,
+              "text_basis": "current_candidate",
+              "format": "portable_latex"
+            },
+            "span_sha256": "fb68265096fb0fbc9e02038a8ec12d5051d33aca70fc82870e99148434daf2cc",
+            "source_block_sha256": "914e56b47f55e4c690193a9d33fb261e89d427fbc8200f99c2d1c7b93d42a631",
+            "role": "target"
+          },
+          {
+            "anchor_id": "a-8e3a7d0e9f56c61bd0392e1a27531362",
+            "block_id": "klebaner-ch4-7-p0065:b13",
+            "text": "This is a linear SDE of Langevin type for \\(f ( X ( t ) , t )\\) where \\(B ( t )\\) is replaced by \\(M ( t )\\) . Integrating this SDE between t and \\(T ,\\) and using \\(T \\geq t\\) as a time variable and t as the origin (see (5.32) in Section 5.22) we obtain",
+            "start": 0,
+            "end": 254,
+            "source_location": {
+              "source_id": "klebaner-ch4-7",
+              "page": {
+                "local_page_idx": 1,
+                "selected_page": 65,
+                "original_physical_page": 170,
+                "owner": true
+              },
+              "bbox": [
+                0.068,
+                0.533,
+                0.932,
+                0.595
+              ],
+              "reading_order": 13,
+              "text_basis": "current_candidate",
+              "format": "portable_latex"
+            },
+            "span_sha256": "c87855e19d7ead62297af50b843dd847e9ee01566fb5aaa238e7f072f4042488",
+            "source_block_sha256": "574ab95c9e5d1a4bdd6d07a2c0741bfa79b4363e0fc328975d226cd46d000267",
+            "role": "target"
+          },
+          {
+            "anchor_id": "a-b0bbb05ca8d5d5097a6497ba856edafd",
+            "block_id": "klebaner-ch4-7-p0065:b14",
+            "text": "$f ( X ( T ) , T ) = f ( X ( t ) , t ) e ^ { \\int _ { t } ^ { T } r ( X ( u ) , u ) d u } + e ^ { \\int _ { t } ^ { T } r ( X ( u ) , u ) d u } \\int _ { t } ^ { T } e ^ { \\int _ { t } ^ { s } r ( X ( u ) , u ) d u } d M ( s ) .$",
+            "start": 0,
+            "end": 227,
+            "source_location": {
+              "source_id": "klebaner-ch4-7",
+              "page": {
+                "local_page_idx": 1,
+                "selected_page": 65,
+                "original_physical_page": 170,
+                "owner": true
+              },
+              "bbox": [
+                0.069,
+                0.606,
+                0.928,
+                0.651
+              ],
+              "reading_order": 14,
+              "text_basis": "current_candidate",
+              "format": "portable_latex"
+            },
+            "span_sha256": "d279ea4aea0da25516909ef06fdab0bf982928b3c79be860756f243dbe67b321",
+            "source_block_sha256": "e57508286b5e4aa7fe260f0aceab80eeea34b12ed315b80c1133cd0f4a84c5b8",
+            "role": "target"
+          },
+          {
+            "anchor_id": "a-ca9f206d97d9b17551b0cf4bab1a90da",
+            "block_id": "klebaner-ch4-7-p0065:b16",
+            "text": "\\[\ng ( X ( T ) ) e ^ { - \\int _ { t } ^ { T } r ( X ( u ) , u ) d u } = f ( X ( t ) , t ) + \\int _ { t } ^ { T } e ^ { \\int _ { t } ^ { s } r ( X ( u ) , u ) d u } d M ( s ) .\n\\]",
+            "start": 0,
+            "end": 178,
+            "source_location": {
+              "source_id": "klebaner-ch4-7",
+              "page": {
+                "local_page_idx": 1,
+                "selected_page": 65,
+                "original_physical_page": 170,
+                "owner": true
+              },
+              "bbox": [
+                0.134,
+                0.697,
+                0.863,
+                0.743
+              ],
+              "reading_order": 16,
+              "text_basis": "current_candidate",
+              "format": "portable_latex"
+            },
+            "span_sha256": "e5c270d4c735936122fc9f36fe1a1c437dab7a8b30a191800301c52716135ee8",
+            "source_block_sha256": "7fb3eacf87f983e5af6b7b896f4e77921277cf011abfbd0a71ab8ed27983c77a",
+            "role": "target"
+          }
+        ]
+      },
+      {
+        "id": "c03:f2",
+        "category": "reference",
+        "anchor_ids": [
+          "a-8e3a7d0e9f56c61bd0392e1a27531362"
+        ],
+        "consequence": "RETAINED unchanged; the reassessment supplies no Chapter 5 material. The integration step is justified by an equation number and a section number of atypical form ('Section 5.22'). If the section number is damaged or wrong, the reader cannot locate the linear-SDE solution being invoked, which is the result whose sign is in question (c03:f1).",
+        "support": "Chapter 5 remains unavailable in both the original and the added context, so (5.32) and the heading could not be checked. Cross-reference OCR damage is demonstrably possible in this material: the supplied context for Theorem 6.6 renders a displayed reference as '(delta.D)'. A section numbered 5.22 alongside equation (5.32) is also consistent with a misread of 'Section 5.2'. Both possibilities remain open.",
+        "proposed_correction": "Verify the printed numbering of the cited section and equation. If the source reads Section 5.2 (or another heading preceding (5.32)), restore that number; otherwise retain as printed. Do not change the citation without checking the source image or the earlier chapter pages.",
+        "severity": "low",
+        "uncertain": true,
+        "context_required": [
+          "Chapter 5 heading structure and equation (5.32)"
+        ],
+        "next_action": "source_image_review",
+        "claim_origin": "suspected_transcription",
+        "stable_id": "finding-a0020ea9668fc34940b191eb",
+        "draft_sha256": "0a3e3d2e4faf60e87543ee84d5cd7a1e448833f4cc54715c6781587a02bc1b97",
+        "candidate_sha256": "8a60ae7132215c943386564f3d014e9ff6d568a01204bfbe5a2e6b1a31f3f6b2",
+        "acceptance": "UNACCEPTED",
+        "quotes": [
+          {
+            "anchor_id": "a-8e3a7d0e9f56c61bd0392e1a27531362",
+            "block_id": "klebaner-ch4-7-p0065:b13",
+            "text": "This is a linear SDE of Langevin type for \\(f ( X ( t ) , t )\\) where \\(B ( t )\\) is replaced by \\(M ( t )\\) . Integrating this SDE between t and \\(T ,\\) and using \\(T \\geq t\\) as a time variable and t as the origin (see (5.32) in Section 5.22) we obtain",
+            "start": 0,
+            "end": 254,
+            "source_location": {
+              "source_id": "klebaner-ch4-7",
+              "page": {
+                "local_page_idx": 1,
+                "selected_page": 65,
+                "original_physical_page": 170,
+                "owner": true
+              },
+              "bbox": [
+                0.068,
+                0.533,
+                0.932,
+                0.595
+              ],
+              "reading_order": 13,
+              "text_basis": "current_candidate",
+              "format": "portable_latex"
+            },
+            "span_sha256": "c87855e19d7ead62297af50b843dd847e9ee01566fb5aaa238e7f072f4042488",
+            "source_block_sha256": "574ab95c9e5d1a4bdd6d07a2c0741bfa79b4363e0fc328975d226cd46d000267",
+            "role": "target"
+          }
+        ]
+      },
+      {
+        "id": "c03:f3",
+        "category": "domain_or_assumption",
+        "anchor_ids": [
+          "a-73cde66ae2c9782fc7a310b875ab8076",
+          "a-9fc2cf52448de317faa3a375dc3b4c52",
+          "a-866a64bd429e880e3e0bd10cfbe858dd",
+          "a-aca6964c9daf4c05a9fd93777c455481"
+        ],
+        "consequence": "REVISED but RETAINED: the added context does not close the gap and makes it narrower to state precisely. The theorem assumes only bounded r and g and then says 'assume that there is a solution' of the terminal-value PDE, without naming a regularity class; the proof applies Ito's formula to f(X(t),t) and uses f_x sigma as martingale coefficient, and concludes uniqueness. The newly supplied Theorem 6.3 block states moment-generating-function conditions on |X(0)| and |X(t)|, not differentiability hypotheses on f, so the needed hypotheses are still not visible in the supplied material. This remains an unverified hypothesis gap, not a demonstrated error.",
+        "support": "The added blocks (klebaner-ch4-7-p0061:b1-b3) show Theorem 6.3 as an MGF statement followed by display (6.8) defining M_f; the intervening or following statements that would relate Theorem 6.3 to f are not in the supplied blocks (the block ends with 'In this case' before (6.8)), so theorem completeness cannot be inferred. The context anchor a-62bd555fd9bea23b36e7d63057abb16c (saved_OCR_context_unverified) attributes the needed derivative assumptions to 'Theorem 6.3', which does not match the visible content of the supplied Theorem 6.3 block; that mismatch may reflect missing blocks, a damaged cross-reference, or a genuine mis-reference, and cannot be resolved here. Independently of that question, boundedness of r and g alone does not give the C^{2,1}-type regularity the Ito display presupposes, and the zero-mean martingale step also needs integrability of f_x sigma (or of its quadratic variation).",
+        "proposed_correction": "Pending the full statement of Theorem 6.3 and the definition of L_t, state in the theorem or proof the solution class for the terminal-value equation (e.g. f once continuously differentiable in t and twice in x as required by the applicable Ito hypothesis) and cite the correct theorem at the Ito step. Do not alter the theorem text until the continuation of Theorem 6.3 and the definition of L_t are supplied; if the cross-reference really points to an MGF theorem, correct the reference only after checking the source.",
+        "severity": "low",
+        "uncertain": true,
+        "context_required": [
+          "Continuation of Theorem 6.3 beyond the supplied MGF block",
+          "Definition of L_t and sigma in the surrounding chapter"
+        ],
+        "next_action": "supply_context",
+        "claim_origin": "undetermined",
+        "stable_id": "finding-6bd923446ab5e49946e99a46",
+        "draft_sha256": "0a3e3d2e4faf60e87543ee84d5cd7a1e448833f4cc54715c6781587a02bc1b97",
+        "candidate_sha256": "8a60ae7132215c943386564f3d014e9ff6d568a01204bfbe5a2e6b1a31f3f6b2",
+        "acceptance": "UNACCEPTED",
+        "quotes": [
+          {
+            "anchor_id": "a-73cde66ae2c9782fc7a310b875ab8076",
+            "block_id": "klebaner-ch4-7-p0065:b4",
+            "text": "\\textbf{Theorem 6.8 (Feynman-Kac Formula)} For given bounded functions \\(r ( x , t )\\) and \\(g ( x )\\) let",
+            "start": 0,
+            "end": 106,
+            "source_location": {
+              "source_id": "klebaner-ch4-7",
+              "page": {
+                "local_page_idx": 1,
+                "selected_page": 65,
+                "original_physical_page": 170,
+                "owner": true
+              },
+              "bbox": [
+                0.069,
+                0.148,
+                0.942,
+                0.189
+              ],
+              "reading_order": 4,
+              "text_basis": "current_candidate",
+              "format": "portable_latex"
+            },
+            "span_sha256": "31ea4e969d0cb4168eb487c58d03b92249ad08a6c2314d226cccd5e365c71535",
+            "source_block_sha256": "53f4d6213f1c5c69a0ad5154a9a934cabf86bb76d7ee66e33b88c79d94138e69",
+            "role": "target"
+          },
+          {
+            "anchor_id": "a-9fc2cf52448de317faa3a375dc3b4c52",
+            "block_id": "klebaner-ch4-7-p0065:b9",
+            "text": "Proof: We give a sketch of the proof by using It\u00f4\u2019s formula coupled with solutions of a linear SDE. Take a solution to (6.22) and apply It\u00f4\u2019s formula",
+            "start": 0,
+            "end": 149,
+            "source_location": {
+              "source_id": "klebaner-ch4-7",
+              "page": {
+                "local_page_idx": 1,
+                "selected_page": 65,
+                "original_physical_page": 170,
+                "owner": true
+              },
+              "bbox": [
+                0.068,
+                0.361,
+                0.93,
+                0.402
+              ],
+              "reading_order": 9,
+              "text_basis": "current_candidate",
+              "format": "portable_latex"
+            },
+            "span_sha256": "ebef3ba191eee943ce42d93165d5a1d6260a1eb587e3f74b962a994c362cf967",
+            "source_block_sha256": "43d0e028b12079608ac2ee13d6fedfe340666c089d79bd25e44893f1476a490f",
+            "role": "target"
+          },
+          {
+            "anchor_id": "a-866a64bd429e880e3e0bd10cfbe858dd",
+            "block_id": "klebaner-ch4-7-p0065:b10",
+            "text": "\\[\nd f ( X ( t ) , t ) = \\Big ( \\frac { \\partial f } { \\partial t } ( X ( t ) , t ) + L _ { t } f ( X ( t ) , t ) \\Big ) d t + \\frac { \\partial f } { \\partial x } ( X ( t ) , t ) \\sigma ( X ( t ) , t ) d B ( t ) .\n\\]",
+            "start": 0,
+            "end": 216,
+            "source_location": {
+              "source_id": "klebaner-ch4-7",
+              "page": {
+                "local_page_idx": 1,
+                "selected_page": 65,
+                "original_physical_page": 170,
+                "owner": true
+              },
+              "bbox": [
+                0.081,
+                0.413,
+                0.914,
+                0.454
+              ],
+              "reading_order": 10,
+              "text_basis": "current_candidate",
+              "format": "portable_latex"
+            },
+            "span_sha256": "1095ab8e9663477426d8a729ae06406f0f70865d3b08c1a25af0decfcfe53571",
+            "source_block_sha256": "71d4829ce3dcd6dcbb60e7c553777e96b0179df47a6e81e791e24220b316a902",
+            "role": "target"
+          },
+          {
+            "anchor_id": "a-aca6964c9daf4c05a9fd93777c455481",
+            "block_id": "klebaner-ch4-7-p0065:b8",
+            "text": "Then the solution is unique and \\(C ( x , t )\\) is that solution.",
+            "start": 0,
+            "end": 65,
+            "source_location": {
+              "source_id": "klebaner-ch4-7",
+              "page": {
+                "local_page_idx": 1,
+                "selected_page": 65,
+                "original_physical_page": 170,
+                "owner": true
+              },
+              "bbox": [
+                0.072,
+                0.33,
+                0.693,
+                0.349
+              ],
+              "reading_order": 8,
+              "text_basis": "current_candidate",
+              "format": "portable_latex"
+            },
+            "span_sha256": "85a5f745a07e79bee91cc3f58943bff99fc6249e70e89510932a38a5cd2fad09",
+            "source_block_sha256": "afdfeecac5569799ca8a663fea316ebc97a1716fde2fb5c93aed557976aa1860",
+            "role": "target"
+          }
+        ]
+      }
+    ]
+  },
+  "c05": {
+    "local": [
+      {
+        "id": "c05:f1",
+        "category": "suspected_transcription",
+        "anchor_ids": [
+          "a-128a17534ee2e58ed9d09910f83e1198",
+          "a-ce328cd41b3f5d98da56e5d1d33f54ac"
+        ],
+        "consequence": "Equation (7.28) as transcribed reads liminf_n E(M(t\u2227\u03c4_n)|F_s) = M(s\u2227\u03c4_n), leaving the index n free on the right-hand side of an identity whose left-hand side has already taken liminf over n. As written the chain is ill-formed and the next step (a-ce328cd41b3f5d98da56e5d1d33f54ac, 'Taking limits as n\u2192\u221e we obtain E(M(t)|F_s) \u2264 M(s)') does not follow: for each fixed n the middle expression equals M(s\u2227\u03c4_n), and it is the liminf of these values that must be evaluated. Since \u03c4_n is a localizing (increasing, \u03c4_n\u2192\u221e) sequence, s\u2227\u03c4_n = s for all sufficiently large n, so liminf_n M(s\u2227\u03c4_n) = M(s); without the liminf the conclusion E(M(t)|F_s) \u2264 M(s) cannot be reached. The mathematical content of the proof survives, but the displayed identity is materially wrong as printed in the candidate.",
+        "support": "Fatou's lemma for conditional expectations (valid since M(t\u2227\u03c4_n) \u2265 0) gives E(liminf_n M(t\u2227\u03c4_n) | F_s) \u2264 liminf_n E(M(t\u2227\u03c4_n)|F_s). Each E(M(t\u2227\u03c4_n)|F_s) = M(s\u2227\u03c4_n) by the martingale property of the stopped process. Therefore the right-hand side should be liminf_n M(s\u2227\u03c4_n), which equals M(s) because for n large enough \u03c4_n > s (\u03c4_n \u2191 \u221e a.s.). The candidate's '= M(s\u2227\u03c4_n)' with the liminf already absorbed on the left is the suspect step.",
+        "proposed_correction": "In (7.28), replace the final equality with a liminf that carries the index, e.g. '... \u2264 liminf_n E(M(t\u2227\u03c4_n)|F_s) = liminf_n M(s\u2227\u03c4_n) = M(s)', or equivalently note that E(M(t\u2227\u03c4_n)|F_s) = M(s\u2227\u03c4_n) for each n and that liminf_n M(s\u2227\u03c4_n) = M(s). Retain the surrounding text unchanged; confirm against the source image which exact form the book prints.",
+        "severity": "medium",
+        "uncertain": true,
+        "context_required": [
+          "Source image of klebaner-ch4-7 page 212 (local_page_idx 3), equation (7.28), to distinguish transcription damage from a source-author slip."
+        ],
+        "next_action": "source_image_review",
+        "claim_origin": "suspected_transcription",
+        "stable_id": "finding-415a7b88250a6a7949bb1a4e",
+        "draft_sha256": "c7410654bff0c5ffcf7805a5c1d052a77c9912925e71ffe2ddde763d2bdd48a2",
+        "candidate_sha256": "8a60ae7132215c943386564f3d014e9ff6d568a01204bfbe5a2e6b1a31f3f6b2",
+        "acceptance": "UNACCEPTED",
+        "quotes": [
+          {
+            "anchor_id": "a-128a17534ee2e58ed9d09910f83e1198",
+            "block_id": "klebaner-ch4-7-p0107:b8",
+            "text": "\\[\n\\operatorname { E } \\bigl ( \\liminf _ { n \\to \\infty } M ( t \\wedge \\tau _ { n } ) | \\mathcal { F } _ { s } \\bigr ) \\leq \\liminf _ { n \\to \\infty } \\operatorname { E } \\bigl ( M ( t \\wedge \\tau _ { n } ) | \\mathcal { F } _ { s } \\bigr ) = M ( s \\wedge \\tau _ { n } ) ,\\tag{7.28}\n\\]",
+            "start": 0,
+            "end": 284,
+            "source_location": {
+              "source_id": "klebaner-ch4-7",
+              "page": {
+                "local_page_idx": 3,
+                "selected_page": 107,
+                "original_physical_page": 212,
+                "owner": true
+              },
+              "bbox": [
+                0.109,
+                0.418,
+                0.928,
+                0.448
+              ],
+              "reading_order": 8,
+              "text_basis": "current_candidate",
+              "format": "portable_latex"
+            },
+            "span_sha256": "3d5acdddfafb8faef5d2a33d0ca3f0fda42258e32ad202feaa9052ac0e31d227",
+            "source_block_sha256": "1ca3aa82f0aa30d1683d8363e7aff02caf9822297be6fa2b36329e043fa1018c",
+            "role": "target"
+          },
+          {
+            "anchor_id": "a-ce328cd41b3f5d98da56e5d1d33f54ac",
+            "block_id": "klebaner-ch4-7-p0107:b9",
+            "text": "Taking limits as \\(n \\rightarrow \\infty\\) we obtain \\(\\operatorname { E } \\bigl ( M ( t ) | \\mathcal { F } _ { s } \\bigr ) \\leq M ( s )\\) almost surely.",
+            "start": 0,
+            "end": 152,
+            "source_location": {
+              "source_id": "klebaner-ch4-7",
+              "page": {
+                "local_page_idx": 3,
+                "selected_page": 107,
+                "original_physical_page": 212,
+                "owner": true
+              },
+              "bbox": [
+                0.07,
+                0.463,
+                0.849,
+                0.485
+              ],
+              "reading_order": 9,
+              "text_basis": "current_candidate",
+              "format": "portable_latex"
+            },
+            "span_sha256": "cdc98524990ec257e8cfe934bc713db2db1d8c3b79ab90c9673e2d057033cfbd",
+            "source_block_sha256": "3aedd89a2a7bbabd938126cf957885ca6c76bd7e16f3339e3a1cfda943cba62a",
+            "role": "target"
+          }
+        ]
+      },
+      {
+        "id": "c05:f2",
+        "category": "derivation",
+        "anchor_ids": [
+          "a-0040678c0db7f4fba2d6cfb7b7eaa9d9",
+          "a-e57fa3511866bcb787e8ee347447fd8c"
+        ],
+        "consequence": "No error: the biconditional in Theorem 7.24 is consistent with Theorem 7.23 as transcribed. Recorded as verification support, since the cited auxiliary Theorem 7.3 is unavailable; the statement holds independently of it, so the theorem statement itself is sound even while the book's derivation route remains unchecked.",
+        "support": "By Theorem 7.23 (a-e57fa3511866bcb787e8ee347447fd8c) M is a supermartingale on [0,T], so E M(T) \u2264 E M(t) \u2264 M(0) for every t, and E(M(T)|F_t) \u2264 M(t). If E M(T) = M(0), then E M(t) = M(0) for all t. For s < t: E(M(t)|F_s) \u2264 M(s) and both sides have expectation M(0) (E[M(M(t)|F_s)] = E M(t) = M(0) = E M(s)), so the non-negative random variable M(s) \u2212 E(M(t)|F_s) has zero expectation and vanishes a.s., giving the martingale property. The converse is trivial. Hence the 'if and only if E M(T) = M(0)' claim is correct.",
+        "proposed_correction": "",
+        "severity": "info",
+        "uncertain": false,
+        "context_required": [],
+        "next_action": "supply_context",
+        "claim_origin": "candidate",
+        "stable_id": "finding-c12042d36f296906bd6b37d5",
+        "draft_sha256": "c7410654bff0c5ffcf7805a5c1d052a77c9912925e71ffe2ddde763d2bdd48a2",
+        "candidate_sha256": "8a60ae7132215c943386564f3d014e9ff6d568a01204bfbe5a2e6b1a31f3f6b2",
+        "acceptance": "UNACCEPTED",
+        "quotes": [
+          {
+            "anchor_id": "a-0040678c0db7f4fba2d6cfb7b7eaa9d9",
+            "block_id": "klebaner-ch4-7-p0107:b11",
+            "text": "\\textbf{Theorem 7.24} A non-negative local martingale \\(M ( t ) ,   0 \\leq t \\leq T\\) , is a martingale if and only if \\(\\mathrm { E } M ( T ) = M ( 0 )\\)",
+            "start": 0,
+            "end": 154,
+            "source_location": {
+              "source_id": "klebaner-ch4-7",
+              "page": {
+                "local_page_idx": 3,
+                "selected_page": 107,
+                "original_physical_page": 212,
+                "owner": true
+              },
+              "bbox": [
+                0.069,
+                0.537,
+                0.929,
+                0.578
+              ],
+              "reading_order": 11,
+              "text_basis": "current_candidate",
+              "format": "portable_latex"
+            },
+            "span_sha256": "63a1eca0d2f75420a3b5e66eba7c7843223ebcbc94f63fde1a706f944dfa6a87",
+            "source_block_sha256": "7f0a225c3c6ea7cb87e1c0958f0558b4ac26abc84bd1376712b7908b2f867b4a",
+            "role": "target"
+          },
+          {
+            "anchor_id": "a-e57fa3511866bcb787e8ee347447fd8c",
+            "block_id": "klebaner-ch4-7-p0107:b4",
+            "text": "\\textbf{Theorem 7.23} A non-negative local martingale \\(M ( t ) ,   0 \\leq t \\leq T\\) , is a supermartingale, that is, \\(\\mathrm { E } M ( t ) < \\infty\\) , and for any \\(s < t ,   \\mathrm { E } ( M ( t ) | \\mathcal { F } _ { s } ) \\leq M ( s )\\)",
+            "start": 0,
+            "end": 245,
+            "source_location": {
+              "source_id": "klebaner-ch4-7",
+              "page": {
+                "local_page_idx": 3,
+                "selected_page": 107,
+                "original_physical_page": 212,
+                "owner": true
+              },
+              "bbox": [
+                0.069,
+                0.175,
+                0.93,
+                0.217
+              ],
+              "reading_order": 4,
+              "text_basis": "current_candidate",
+              "format": "portable_latex"
+            },
+            "span_sha256": "267ee5e70b0a61df9fe4a6b15a21e2b9de2c0e5ce77408591349673837d4a405",
+            "source_block_sha256": "40653b95360bdde0ee982d6e8c936a36fad7a0069ae369c8d01daba3daf287f1",
+            "role": "target"
+          }
+        ]
+      },
+      {
+        "id": "c05:f3",
+        "category": "domain_or_assumption",
+        "anchor_ids": [
+          "a-e57fa3511866bcb787e8ee347447fd8c"
+        ],
+        "consequence": "Low-severity quantifier looseness in the Theorem 7.23 statement: supermartingale integrability should read 'E M(t) < \u221e for all t \u2208 [0, T]', whereas the transcription states only 'E M(t) < \u221e'. The subsequent proof does establish E M(t) \u2264 E M(0) < \u221e for each fixed t (via a-f1df384e8ef753b825601e70e4ed6997), so the mathematical content is intact; this is flagged only because the pointwise-in-t quantifier is material to the definition of supermartingale. May be cosmetic in the original; check the source image before editing.",
+        "support": "Definition of supermartingale requires E|M(t)| < \u221e for every t; for a non-negative M this is E M(t) < \u221e for every t. The candidate's phrasing fixes no t and asserts no range.",
+        "proposed_correction": "If the source permits, render as 'E M(t) < \u221e for all 0 \u2264 t \u2264 T'. Do not edit without source confirmation.",
+        "severity": "low",
+        "uncertain": true,
+        "context_required": [
+          "Source image of the Theorem 7.23 statement on klebaner-ch4-7 page 212."
+        ],
+        "next_action": "source_image_review",
+        "claim_origin": "undetermined",
+        "stable_id": "finding-fa0a8ad8ab3ee90a61580997",
+        "draft_sha256": "c7410654bff0c5ffcf7805a5c1d052a77c9912925e71ffe2ddde763d2bdd48a2",
+        "candidate_sha256": "8a60ae7132215c943386564f3d014e9ff6d568a01204bfbe5a2e6b1a31f3f6b2",
+        "acceptance": "UNACCEPTED",
+        "quotes": [
+          {
+            "anchor_id": "a-e57fa3511866bcb787e8ee347447fd8c",
+            "block_id": "klebaner-ch4-7-p0107:b4",
+            "text": "\\textbf{Theorem 7.23} A non-negative local martingale \\(M ( t ) ,   0 \\leq t \\leq T\\) , is a supermartingale, that is, \\(\\mathrm { E } M ( t ) < \\infty\\) , and for any \\(s < t ,   \\mathrm { E } ( M ( t ) | \\mathcal { F } _ { s } ) \\leq M ( s )\\)",
+            "start": 0,
+            "end": 245,
+            "source_location": {
+              "source_id": "klebaner-ch4-7",
+              "page": {
+                "local_page_idx": 3,
+                "selected_page": 107,
+                "original_physical_page": 212,
+                "owner": true
+              },
+              "bbox": [
+                0.069,
+                0.175,
+                0.93,
+                0.217
+              ],
+              "reading_order": 4,
+              "text_basis": "current_candidate",
+              "format": "portable_latex"
+            },
+            "span_sha256": "267ee5e70b0a61df9fe4a6b15a21e2b9de2c0e5ce77408591349673837d4a405",
+            "source_block_sha256": "40653b95360bdde0ee982d6e8c936a36fad7a0069ae369c8d01daba3daf287f1",
+            "role": "target"
+          }
+        ]
+      }
+    ],
+    "second": [
+      {
+        "id": "c05:f1",
+        "category": "index_or_notation",
+        "anchor_ids": [
+          "a-128a17534ee2e58ed9d09910f83e1198"
+        ],
+        "consequence": "Display (7.28) is not a well-typed chain: its left side E(liminf_{n} M(t\u2227\u03c4_n) | F_s) is free of n (it equals E(M(t)|F_s)), while the final term M(s\u2227\u03c4_n) still carries the free index n after a liminf has been taken. As printed, the conditional Fatou bound cannot be read as yielding E(M(t)|F_s) \u2264 M(s); the limit operation on the right is missing, so the derivation only works after the reader silently repairs the display.",
+        "support": "For s < t and each n, the stopped process M(t\u2227\u03c4_n) is a martingale, so E(M(t\u2227\u03c4_n) | F_s) = M(s\u2227\u03c4_n). Hence liminf_n E(M(t\u2227\u03c4_n) | F_s) = lim_n M(s\u2227\u03c4_n) = M(s) (using \u03c4_n \u2191 \u221e and right-continuity). The candidate instead writes '... = M(s\u2227\u03c4_n)', with no liminf/lim and with n left free on the right of an equality whose left side has already been passed to the limit. The following anchor explicitly says 'Taking limits as n \u2192 \u221e we obtain E(M(t)|F_s) \u2264 M(s)', which presupposes the limit that is absent in (7.28).",
+        "proposed_correction": "Replace the last term of (7.28) by the limit operation: \\(\\operatorname { E } \\bigl ( \\liminf _ { n \\to \\infty } M ( t \\wedge \\tau _ { n } ) | \\mathcal { F } _ { s } \\bigr ) \\leq \\liminf _ { n \\to \\infty } \\operatorname { E } \\bigl ( M ( t \\wedge \\tau _ { n } ) | \\mathcal { F } _ { s } \\bigr ) = \\lim _ { n \\to \\infty } M ( s \\wedge \\tau _ { n } ) = M ( s )\\) (or equivalently write \\(\\liminf _ { n \\to \\infty } M ( s \\wedge \\tau _ { n } )\\) in place of \\(M ( s \\wedge \\tau _ { n } )\\)). Retain this as provisional until the source image confirms whether the omission is transcription damage or a source typo; do not alter the surrounding text without that check.",
+        "severity": "medium",
+        "uncertain": true,
+        "context_required": [
+          "source image of selected page 107, display (7.28)"
+        ],
+        "next_action": "source_image_review",
+        "claim_origin": "undetermined",
+        "stable_id": "finding-7f412adcf21fc800037f7a1e",
+        "draft_sha256": "c7410654bff0c5ffcf7805a5c1d052a77c9912925e71ffe2ddde763d2bdd48a2",
+        "candidate_sha256": "8a60ae7132215c943386564f3d014e9ff6d568a01204bfbe5a2e6b1a31f3f6b2",
+        "acceptance": "UNACCEPTED",
+        "quotes": [
+          {
+            "anchor_id": "a-128a17534ee2e58ed9d09910f83e1198",
+            "block_id": "klebaner-ch4-7-p0107:b8",
+            "text": "\\[\n\\operatorname { E } \\bigl ( \\liminf _ { n \\to \\infty } M ( t \\wedge \\tau _ { n } ) | \\mathcal { F } _ { s } \\bigr ) \\leq \\liminf _ { n \\to \\infty } \\operatorname { E } \\bigl ( M ( t \\wedge \\tau _ { n } ) | \\mathcal { F } _ { s } \\bigr ) = M ( s \\wedge \\tau _ { n } ) ,\\tag{7.28}\n\\]",
+            "start": 0,
+            "end": 284,
+            "source_location": {
+              "source_id": "klebaner-ch4-7",
+              "page": {
+                "local_page_idx": 3,
+                "selected_page": 107,
+                "original_physical_page": 212,
+                "owner": true
+              },
+              "bbox": [
+                0.109,
+                0.418,
+                0.928,
+                0.448
+              ],
+              "reading_order": 8,
+              "text_basis": "current_candidate",
+              "format": "portable_latex"
+            },
+            "span_sha256": "3d5acdddfafb8faef5d2a33d0ca3f0fda42258e32ad202feaa9052ac0e31d227",
+            "source_block_sha256": "1ca3aa82f0aa30d1683d8363e7aff02caf9822297be6fa2b36329e043fa1018c",
+            "role": "target"
+          }
+        ]
+      },
+      {
+        "id": "c05:f2",
+        "category": "domain_or_assumption",
+        "anchor_ids": [
+          "a-0040678c0db7f4fba2d6cfb7b7eaa9d9"
+        ],
+        "consequence": "Theorem 7.24's criterion 'E M(T) = M(0)' is ill-typed, and the 'only if' direction literally false, if M(0) is an F_0-measurable but non-constant random variable: a martingale only guarantees E M(T) = E M(0), not E M(T) = M(0). The theorem needs M(0) deterministic (as for stochastic exponentials starting at 1) or a conditional formulation.",
+        "support": "Counterexample to the literal statement with random M(0): let X be integrable, non-constant, F_0-measurable, and set M(t) = X for all 0 \u2264 t \u2264 T. Then M is a (hence a non-negative local, if X \u2265 0) martingale, but E M(T) = E X \u2260 X = M(0) a.s. The martingale property of the stopped process used in the preceding proof also yields only E M(T) \u2264 E M(0) with equality of expectations, consistent with the supermartingale argument. The general-correct form is E(M(T) | F_0) = M(0) a.s., or E M(T) = E M(0) together with Theorem 7.23.",
+        "proposed_correction": "Add the hypothesis that M(0) is deterministic (state 'with deterministic M(0)'), or replace the condition by \\(\\operatorname { E } ( M ( T ) | \\mathcal { F } _ { 0 } ) = M ( 0 )\\) almost surely. Any such change is a mathematical alteration of the theorem statement and must be confirmed against the source and local conventions before application.",
+        "severity": "low",
+        "uncertain": true,
+        "context_required": [
+          "earlier definition of local martingale and convention on M(0)",
+          "Theorem 7.3 (full statement)"
+        ],
+        "next_action": "human_math_review",
+        "claim_origin": "suspected_source_author",
+        "stable_id": "finding-934acc68b8e8b78968c7fed8",
+        "draft_sha256": "c7410654bff0c5ffcf7805a5c1d052a77c9912925e71ffe2ddde763d2bdd48a2",
+        "candidate_sha256": "8a60ae7132215c943386564f3d014e9ff6d568a01204bfbe5a2e6b1a31f3f6b2",
+        "acceptance": "UNACCEPTED",
+        "quotes": [
+          {
+            "anchor_id": "a-0040678c0db7f4fba2d6cfb7b7eaa9d9",
+            "block_id": "klebaner-ch4-7-p0107:b11",
+            "text": "\\textbf{Theorem 7.24} A non-negative local martingale \\(M ( t ) ,   0 \\leq t \\leq T\\) , is a martingale if and only if \\(\\mathrm { E } M ( T ) = M ( 0 )\\)",
+            "start": 0,
+            "end": 154,
+            "source_location": {
+              "source_id": "klebaner-ch4-7",
+              "page": {
+                "local_page_idx": 3,
+                "selected_page": 107,
+                "original_physical_page": 212,
+                "owner": true
+              },
+              "bbox": [
+                0.069,
+                0.537,
+                0.929,
+                0.578
+              ],
+              "reading_order": 11,
+              "text_basis": "current_candidate",
+              "format": "portable_latex"
+            },
+            "span_sha256": "63a1eca0d2f75420a3b5e66eba7c7843223ebcbc94f63fde1a706f944dfa6a87",
+            "source_block_sha256": "7f0a225c3c6ea7cb87e1c0958f0558b4ac26abc84bd1376712b7908b2f867b4a",
+            "role": "target"
+          }
+        ]
+      },
+      {
+        "id": "c05:f3",
+        "category": "reference",
+        "anchor_ids": [
+          "a-c687464b10287c971d653ca55ae077ca"
+        ],
+        "consequence": "The asserted derivation of Theorem 7.24 from Theorem 7.23 plus Theorem 7.3 cannot be verified from the supplied material, because the statement of Theorem 7.3 is not present in the bounded context. This is a missing input, not evidence that the author's step is wrong.",
+        "support": "The only content of the cross-reference is the sentence 'From this result and Theorem 7.3 we obtain'; no earlier theorem text is included in the supplied blocks. Independent check of Theorem 7.24's statement is reported separately at c05:f2.",
+        "proposed_correction": "",
+        "severity": "info",
+        "uncertain": true,
+        "context_required": [
+          "Theorem 7.3 (full statement)"
+        ],
+        "next_action": "supply_context",
+        "claim_origin": "candidate",
+        "stable_id": "finding-314cf7b75e45ab5525387eba",
+        "draft_sha256": "c7410654bff0c5ffcf7805a5c1d052a77c9912925e71ffe2ddde763d2bdd48a2",
+        "candidate_sha256": "8a60ae7132215c943386564f3d014e9ff6d568a01204bfbe5a2e6b1a31f3f6b2",
+        "acceptance": "UNACCEPTED",
+        "quotes": [
+          {
+            "anchor_id": "a-c687464b10287c971d653ca55ae077ca",
+            "block_id": "klebaner-ch4-7-p0107:b10",
+            "text": "From this result and Theorem 7.3 we obtain",
+            "start": 0,
+            "end": 42,
+            "source_location": {
+              "source_id": "klebaner-ch4-7",
+              "page": {
+                "local_page_idx": 3,
+                "selected_page": 107,
+                "original_physical_page": 212,
+                "owner": true
+              },
+              "bbox": [
+                0.069,
+                0.504,
+                0.567,
+                0.524
+              ],
+              "reading_order": 10,
+              "text_basis": "current_candidate",
+              "format": "portable_latex"
+            },
+            "span_sha256": "46c417301e362f6fb001b14200a816fe969ad38ebb68348f65a68f8e20769cc0",
+            "source_block_sha256": "f6189302db02e0dcaed18b97084ff7416c998841a0a51c9be2dc7e19c9c0bb74",
+            "role": "target"
+          }
+        ]
+      }
+    ]
+  },
+  "c06": {
+    "input.json": {
+      "protocol": "critic-anchors-v2",
+      "group_id": "c06",
+      "candidate_sha256": "8a60ae7132215c943386564f3d014e9ff6d568a01204bfbe5a2e6b1a31f3f6b2",
+      "draft_sha256": "970f23f2b32dcefaf8d45e867aafa173ce4e1ba41deae7f0b63c09ffd385b47b",
+      "targets": [
+        {
+          "candidate_sha256": "8a60ae7132215c943386564f3d014e9ff6d568a01204bfbe5a2e6b1a31f3f6b2",
+          "block_id": "klebaner-ch4-7-p0100:b5",
+          "source_block_sha256": "354f39eb167664d11ebe7fe6159ab2e58b0362a8fbd2896af587072cb0b04b06",
+          "text_sha256": "83d147b4483ae2e43ee85addab016cc8f6e65bd5128950f1294a72ed564f42ae",
+          "text": "Theorem 7.16 Let $M(t)$ be a martingale and $\\tau$ a finite stopping time. If $\\mathrm{E}|M(\\tau)|<\\infty$, and",
+          "start": 0,
+          "end": 111,
+          "source_location": {
+            "source_id": "klebaner-ch4-7",
+            "page": {
+              "local_page_idx": 4,
+              "selected_page": 100,
+              "original_physical_page": 205,
+              "owner": true
+            },
+            "bbox": [
+              0.068,
+              0.239,
+              0.934,
+              0.278
+            ],
+            "reading_order": 5,
+            "text_basis": "current_candidate",
+            "format": "portable_latex"
+          },
+          "role": "target",
+          "id": "a-d46c2a69f973291cd7e8f0b04f576763"
+        },
+        {
+          "candidate_sha256": "8a60ae7132215c943386564f3d014e9ff6d568a01204bfbe5a2e6b1a31f3f6b2",
+          "block_id": "klebaner-ch4-7-p0100:b6",
+          "source_block_sha256": "49ac57166cecc2ac2d9d338a6f5553a184fc511fbe8e4c148f1d825c63e0847e",
+          "text_sha256": "73ab0a0d85b06de0f7c8f485c12e06013054354b7944ab28d6261b461e12e6bc",
+          "text": "\\[\n\\operatorname* { l i m } _ { t \\to \\infty } \\operatorname { E } \\bigl ( M ( t ) I ( \\tau > t ) \\bigr ) = 0 ,\\tag{7.8}\n\\]",
+          "start": 0,
+          "end": 123,
+          "source_location": {
+            "source_id": "klebaner-ch4-7",
+            "page": {
+              "local_page_idx": 4,
+              "selected_page": 100,
+              "original_physical_page": 205,
+              "owner": true
+            },
+            "bbox": [
+              0.348,
+              0.277,
+              0.927,
+              0.306
+            ],
+            "reading_order": 6,
+            "text_basis": "current_candidate",
+            "format": "portable_latex"
+          },
+          "role": "target",
+          "id": "a-9eb69be0665a97e0bb89afacefa483bf"
+        },
+        {
+          "candidate_sha256": "8a60ae7132215c943386564f3d014e9ff6d568a01204bfbe5a2e6b1a31f3f6b2",
+          "block_id": "klebaner-ch4-7-p0100:b7",
+          "source_block_sha256": "06f0faf0d74e33691ef1a77e7b9a2c97f8ed1b181202106a8a81725f019a98eb",
+          "text_sha256": "6148cf7b121fdd5acae5729fc8e4f411958ce4d55c9a42a088038199cb6c16dc",
+          "text": "then \\(\\mathrm { E } M ( \\tau ) = \\mathrm { E } M ( 0 )\\)",
+          "start": 0,
+          "end": 57,
+          "source_location": {
+            "source_id": "klebaner-ch4-7",
+            "page": {
+              "local_page_idx": 4,
+              "selected_page": 100,
+              "original_physical_page": 205,
+              "owner": true
+            },
+            "bbox": [
+              0.07,
+              0.314,
+              0.329,
+              0.335
+            ],
+            "reading_order": 7,
+            "text_basis": "current_candidate",
+            "format": "portable_latex"
+          },
+          "role": "target",
+          "id": "a-ca5676ae2cb94d7ad809e6f0260830eb"
+        },
+        {
+          "candidate_sha256": "8a60ae7132215c943386564f3d014e9ff6d568a01204bfbe5a2e6b1a31f3f6b2",
+          "block_id": "klebaner-ch4-7-p0100:b8",
+          "source_block_sha256": "b610d3d51949037ed0baabc57aa9ec182041e3c623c789d8234dd1c1bffc9105",
+          "text_sha256": "6bdacb0276e001cebe51ddac59bb871adcc90b3fc5236d6f72bcca6344e3889e",
+          "text": "Proof: Write \\(M ( \\tau \\wedge t )\\) as",
+          "start": 0,
+          "end": 39,
+          "source_location": {
+            "source_id": "klebaner-ch4-7",
+            "page": {
+              "local_page_idx": 4,
+              "selected_page": 100,
+              "original_physical_page": 205,
+              "owner": true
+            },
+            "bbox": [
+              0.068,
+              0.346,
+              0.393,
+              0.367
+            ],
+            "reading_order": 8,
+            "text_basis": "current_candidate",
+            "format": "portable_latex"
+          },
+          "role": "target",
+          "id": "a-615a7d5f0060b3f26a0a22a09075d5bd"
+        },
+        {
+          "candidate_sha256": "8a60ae7132215c943386564f3d014e9ff6d568a01204bfbe5a2e6b1a31f3f6b2",
+          "block_id": "klebaner-ch4-7-p0100:b9",
+          "source_block_sha256": "64d7983665b1fde937789ef2d13273cba356597f3f8b28ae698944f2e36cd010",
+          "text_sha256": "707b858f3109811cf0e5aca3395dfadc9405a25824c7a11cc1d6a50d59bb5b0b",
+          "text": "\\[\nM ( \\tau \\wedge t ) = M ( t ) I ( t < \\tau ) + M ( \\tau ) I ( t \\geq \\tau ) .\\tag{7.9}\n\\]",
+          "start": 0,
+          "end": 92,
+          "source_location": {
+            "source_id": "klebaner-ch4-7",
+            "page": {
+              "local_page_idx": 4,
+              "selected_page": 100,
+              "original_physical_page": 205,
+              "owner": true
+            },
+            "bbox": [
+              0.262,
+              0.383,
+              0.926,
+              0.405
+            ],
+            "reading_order": 9,
+            "text_basis": "current_candidate",
+            "format": "portable_latex"
+          },
+          "role": "target",
+          "id": "a-4d438bbb2ce942f433e4f798ca74d213"
+        },
+        {
+          "candidate_sha256": "8a60ae7132215c943386564f3d014e9ff6d568a01204bfbe5a2e6b1a31f3f6b2",
+          "block_id": "klebaner-ch4-7-p0100:b10",
+          "source_block_sha256": "e1c32c61f087b819778442d694c2b0fe3a12b6a16735303c002fa565b3771346",
+          "text_sha256": "806f4964df1935a13cc78d05a91d3762ccb8822642228592665400dec9939075",
+          "text": "Using Basic Stopping Result (7.7), \\(\\mathrm { E } M ( \\tau \\wedge t ) = \\mathrm { E } M ( 0 )\\) . Taking expectations in (7.9), we have",
+          "start": 0,
+          "end": 136,
+          "source_location": {
+            "source_id": "klebaner-ch4-7",
+            "page": {
+              "local_page_idx": 4,
+              "selected_page": 100,
+              "original_physical_page": 205,
+              "owner": true
+            },
+            "bbox": [
+              0.066,
+              0.42,
+              0.93,
+              0.46
+            ],
+            "reading_order": 10,
+            "text_basis": "current_candidate",
+            "format": "portable_latex"
+          },
+          "role": "target",
+          "id": "a-8d4932d475c666f15ddb607176c81857"
+        },
+        {
+          "candidate_sha256": "8a60ae7132215c943386564f3d014e9ff6d568a01204bfbe5a2e6b1a31f3f6b2",
+          "block_id": "klebaner-ch4-7-p0100:b11",
+          "source_block_sha256": "b7f57b0b9f7126a4b9ce769255d5e70ed90a068e1983840e05b33818a474e5b4",
+          "text_sha256": "06580ce2db642532c44c5cc98d721995733e3283a3fbc9bd1ba1c1247902118c",
+          "text": "\\[\n\\operatorname { E } M ( 0 ) = \\operatorname { E } \\bigl ( M ( t ) I ( t < \\tau ) \\bigr ) + \\operatorname { E } \\bigl ( M ( \\tau ) I ( t \\geq \\tau ) \\bigr ) .\\tag{7.10}\n\\]",
+          "start": 0,
+          "end": 173,
+          "source_location": {
+            "source_id": "klebaner-ch4-7",
+            "page": {
+              "local_page_idx": 4,
+              "selected_page": 100,
+              "original_physical_page": 205,
+              "owner": true
+            },
+            "bbox": [
+              0.231,
+              0.475,
+              0.927,
+              0.498
+            ],
+            "reading_order": 11,
+            "text_basis": "current_candidate",
+            "format": "portable_latex"
+          },
+          "role": "target",
+          "id": "a-9513811b3b47fee0273eca3862afaff7"
+        },
+        {
+          "candidate_sha256": "8a60ae7132215c943386564f3d014e9ff6d568a01204bfbe5a2e6b1a31f3f6b2",
+          "block_id": "klebaner-ch4-7-p0100:b12",
+          "source_block_sha256": "19d3c890f503ec599f368111862e0d307de293567784cf00ba8c7dcfd7baf194",
+          "text_sha256": "421fb8c9ded016db7796389915ce7f71f42a27bf9355cd7c980f1cae6bc3f629",
+          "text": "Now take the limit in (7.10) as \\(t \\rightarrow \\infty\\) . Since \\(\\tau\\) is finite, \\(I ( t \\geq \\tau ) \\to I ( \\tau <\\) \\(\\infty ) = 1. \\quad |M(\\tau)|I(t \\geq \\tau) \\leq |M(\\tau)|\\) , integrable. Hence \\(E \\big ( M ( \\tau ) I ( t \\geq \\tau ) \\big ) \\to\\) \\(\\mathrm { E } M ( \\tau )\\) by dominated convergence. It is assumed that \\(\\mathrm { E } \\big ( M ( t ) I ( t < \\tau ) \\big ) \\to 0\\) as \\(t \\rightarrow \\infty\\) , and the result follows.",
+          "start": 0,
+          "end": 446,
+          "source_location": {
+            "source_id": "klebaner-ch4-7",
+            "page": {
+              "local_page_idx": 4,
+              "selected_page": 100,
+              "original_physical_page": 205,
+              "owner": true
+            },
+            "bbox": [
+              0.067,
+              0.512,
+              0.93,
+              0.595
+            ],
+            "reading_order": 12,
+            "text_basis": "current_candidate",
+            "format": "portable_latex"
+          },
+          "role": "target",
+          "id": "a-bceba68d99abe34fa684283db66a2b22"
+        }
+      ],
+      "context_anchors": [
+        {
+          "candidate_sha256": "8a60ae7132215c943386564f3d014e9ff6d568a01204bfbe5a2e6b1a31f3f6b2",
+          "block_id": "klebaner-ch4-7-p0099:b4",
+          "source_block_sha256": "6556233f40cb54280a2797886c393d0117a7910434c586ccdd33c90bb32881d1",
+          "text_sha256": "913000cada34c93dbd709fc4d00253fec09d5c70c576e54b908c2007baa55b75",
+          "text": "\\textbf{Theorem 7.14} If M(t) is a martingale and \\(\\tau\\) is a stopping time, then the stopped process \\(M ( \\tau \\wedge t )\\) is a martingale. Moreover,",
+          "start": 0,
+          "end": 154,
+          "source_location": {
+            "source_id": "klebaner-ch4-7",
+            "page": {
+              "local_page_idx": 3,
+              "selected_page": 99,
+              "original_physical_page": 204,
+              "owner": true
+            },
+            "bbox": [
+              0.068,
+              0.293,
+              0.932,
+              0.334
+            ],
+            "reading_order": 4,
+            "text_basis": "saved_OCR_context_unverified",
+            "format": "portable_latex"
+          },
+          "role": "context",
+          "id": "a-0fdd2f6fbb9990163099719986d78c0a"
+        },
+        {
+          "candidate_sha256": "8a60ae7132215c943386564f3d014e9ff6d568a01204bfbe5a2e6b1a31f3f6b2",
+          "block_id": "klebaner-ch4-7-p0099:b5",
+          "source_block_sha256": "38763e29b44e31756e2f75a22d999961fa1b1059685da79745b79629e84c3e4d",
+          "text_sha256": "4a732797f032adac63e4dbc60e7efe56e8037e1e7d1cae44843192228a92b949",
+          "text": "\\[\n\\mathrm { E } M ( \\tau \\wedge t ) = \\mathrm { E } M ( 0 ) .\\tag{7.7}\n\\]",
+          "start": 0,
+          "end": 74,
+          "source_location": {
+            "source_id": "klebaner-ch4-7",
+            "page": {
+              "local_page_idx": 3,
+              "selected_page": 99,
+              "original_physical_page": 204,
+              "owner": true
+            },
+            "bbox": [
+              0.378,
+              0.345,
+              0.927,
+              0.366
+            ],
+            "reading_order": 5,
+            "text_basis": "saved_OCR_context_unverified",
+            "format": "portable_latex"
+          },
+          "role": "context",
+          "id": "a-08daa2e24276a956171cb19a5bdde0d8"
+        },
+        {
+          "candidate_sha256": "8a60ae7132215c943386564f3d014e9ff6d568a01204bfbe5a2e6b1a31f3f6b2",
+          "block_id": "klebaner-ch4-7-p0099:b6",
+          "source_block_sha256": "368e550a40ec802e92886f0b1a809cac8ba5e0fe99c3315be0fc3889a373585b",
+          "text_sha256": "7e2f0da53e62233b2fe562ac49eb2b671b901d64e9b4d571c8527b7ac88f0ea0",
+          "text": "This result was proved in discrete time (see Theorem 3.39). We refer to (7.7) as the Basic Stopping equation.",
+          "start": 0,
+          "end": 109,
+          "source_location": {
+            "source_id": "klebaner-ch4-7",
+            "page": {
+              "local_page_idx": 3,
+              "selected_page": 99,
+              "original_physical_page": 204,
+              "owner": true
+            },
+            "bbox": [
+              0.068,
+              0.379,
+              0.928,
+              0.42
+            ],
+            "reading_order": 6,
+            "text_basis": "saved_OCR_context_unverified",
+            "format": "portable_latex"
+          },
+          "role": "context",
+          "id": "a-3a68e1778a0d439d920e3c6684af901a"
+        }
+      ],
+      "context_status": [
+        {
+          "reference": "equation 7.7",
+          "key": "equation 7.7",
+          "reason": "Explicit local reference",
+          "status": "added",
+          "candidates": [
+            "klebaner-ch4-7-p0099:b5"
+          ],
+          "added_blocks": [
+            "klebaner-ch4-7-p0099:b4",
+            "klebaner-ch4-7-p0099:b5",
+            "klebaner-ch4-7-p0099:b6"
+          ],
+          "boundary_status": "labelled block plus available adjacent whole blocks; theorem/proof completeness not inferred"
+        },
+        {
+          "reference": "theorem 7.16",
+          "key": "theorem 7.16",
+          "reason": "Explicit local reference",
+          "status": "already_supplied",
+          "candidates": [
+            "klebaner-ch4-7-p0100:b5"
+          ],
+          "added_blocks": []
+        }
+      ],
+      "bibliography": {
+        "coverage": "unknown",
+        "source_identity": {
+          "source_id": "klebaner-ch4-7",
+          "prepared_pdf_sha256": "61102519b11535ee11e817d7b6f5b357e87435429b231c144c0e82f6dc6f80e4",
+          "candidate_sha256": "8a60ae7132215c943386564f3d014e9ff6d568a01204bfbe5a2e6b1a31f3f6b2",
+          "source_manifest": "inputs/klebaner-ch4-7/manifest.json"
+        },
+        "consultation": "No external sources consulted; supplied citations remain exact. Local lookup is partial."
+      }
+    },
+    "assistant-response.json": {
+      "content": "```json\n{\n  \"protocol\": \"critic-anchors-v2\",\n  \"group_id\": \"c06\",\n  \"candidate_sha256\": \"8a60ae7132215c943386564f3d014e9ff6d568a01204bfbe5a2e6b1a31f3f6b2\",\n  \"draft_sha256\": \"970f23f2b32dcefaf8d45e867aafa173ce4e1ba41deae7f0b63c09ffd385b47b\",\n  \"coverage\": \"complete\",\n  \"reviewed_anchor_ids\": [\n    \"a-d46c2a69f973291cd7e8f0b04f576763\",\n    \"a-9eb69be0665a97e0bb89afacefa483bf\",\n    \"a-ca5676ae2cb94d7ad809e6f0260830eb\",\n    \"a-615a7d5f0060b3f26a0a22a09075d5bd\",\n    \"a-4d438bbb2ce942f433e4f798ca74d213\",\n    \"a-8d4932d475c666f15ddb607176c81857\",\n    \"a-9513811b3b47fee0273eca3862afaff7\",\n    \"a-bceba68d99abe34fa684283db66a2b22\"\n  ],\n  \"context_needed\": [],\n  \"findings\": [],\n  \"notes\": \"All eight target blocks were checked for material mathematical content. Theorem 7.16 (a-d46c2a69f973291cd7e8f0b04f576763) states the optional stopping conclusion EM(tau) = EM(0) under E|M(tau)| < infinity and condition (7.8) lim_{t->inf} E(M(t) I(tau > t)) = 0 (a-9eb69be0665a97e0bb89afacefa483bf). The proof decomposition (7.9) M(tau\u2227t) = M(t) I(t < tau) + M(tau) I(t >= tau) (a-4d438bbb2ce942f433e4f798ca74d213) is a pointwise identity (on {t < tau}, tau\u2227t = t; on {t >= tau}, tau\u2227t = tau), and I(tau > t) = I(t < tau) matches hypothesis (7.8). Application of the Basic Stopping equation (7.7), supplied as context a-08daa2e24276a956171cb19a5bdde0d8 via Theorem 7.14 (a-0fdd2f6fbb9990163099719986d78c0a), to the bounded stopping time tau\u2227t yields E M(tau\u2227t) = E M(0) (a-8d4932d475c666f15ddb607176c81857), giving (7.10) (a-9513811b3b47fee0273eca3862afaff7). The limit argument (a-bceba68d99abe34fa684283db66a2b22) is sound: since tau is finite a.s., I(t >= tau) -> I(tau < infinity) = 1 a.s.; the bound |M(tau)| I(t >= tau) <= |M(tau)| with E|M(tau)| < infinity justifies dominated convergence, so E(M(tau) I(t >= tau)) -> E M(tau); combined with the assumed E(M(t) I(t < tau)) -> 0, (7.10) gives EM(0) = EM(tau). Signs, indicators, integrability hypotheses, and the internal cross-reference to (7.7) are all consistent. The spaced-out '\\\\operatorname*{l i m}' token in (7.8) and the OCR line-wrap artifact around 'I(tau < infinity) = 1' in the final proof block are cosmetic and do not alter the mathematical reading. Empty findings indicate no material problem detected in the supplied material, not certified correctness of the underlying source.\"\n}\n```",
+      "attempt_dir": "/home/mdi/projects/pdf-to-latex/runs/candidate-critic-trial-20261025T133737Z-95be74/calls/0007/attempts/1792961953618054005_c06_c05975cc",
+      "http_status": 200,
+      "started_at": "2026-10-25T20:59:13.618306+00:00",
+      "latency_seconds": 56.613643728080206,
+      "actual_model": "glm53-regular",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 5717,
+        "completion_tokens": 2799,
+        "total_tokens": 8516,
+        "prompt_tokens_details": {
+          "cached_tokens": 384
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1823
+        }
+      }
+    },
+    "outcome.json": {
+      "status": "failed",
+      "failure": {
+        "kind": "schema",
+        "errors": [
+          {
+            "path": "$.notes",
+            "message": "unexpected field; return a data instance, not a schema"
+          }
+        ],
+        "actual_model": "glm53-regular",
+        "http_status": 200,
+        "finish_reason": "stop",
+        "content": "```json\n{\n  \"protocol\": \"critic-anchors-v2\",\n  \"group_id\": \"c06\",\n  \"candidate_sha256\": \"8a60ae7132215c943386564f3d014e9ff6d568a01204bfbe5a2e6b1a31f3f6b2\",\n  \"draft_sha256\": \"970f23f2b32dcefaf8d45e867aafa173ce4e1ba41deae7f0b63c09ffd385b47b\",\n  \"coverage\": \"complete\",\n  \"reviewed_anchor_ids\": [\n    \"a-d46c2a69f973291cd7e8f0b04f576763\",\n    \"a-9eb69be0665a97e0bb89afacefa483bf\",\n    \"a-ca5676ae2cb94d7ad809e6f0260830eb\",\n    \"a-615a7d5f0060b3f26a0a22a09075d5bd\",\n    \"a-4d438bbb2ce942f433e4f798ca74d213\",\n    \"a-8d4932d475c666f15ddb607176c81857\",\n    \"a-9513811b3b47fee0273eca3862afaff7\",\n    \"a-bceba68d99abe34fa684283db66a2b22\"\n  ],\n  \"context_needed\": [],\n  \"findings\": [],\n  \"notes\": \"All eight target blocks were checked for material mathematical content. Theorem 7.16 (a-d46c2a69f973291cd7e8f0b04f576763) states the optional stopping conclusion EM(tau) = EM(0) under E|M(tau)| < infinity and condition (7.8) lim_{t->inf} E(M(t) I(tau > t)) = 0 (a-9eb69be0665a97e0bb89afacefa483bf). The proof decomposition (7.9) M(tau\u2227t) = M(t) I(t < tau) + M(tau) I(t >= tau) (a-4d438bbb2ce942f433e4f798ca74d213) is a pointwise identity (on {t < tau}, tau\u2227t = t; on {t >= tau}, tau\u2227t = tau), and I(tau > t) = I(t < tau) matches hypothesis (7.8). Application of the Basic Stopping equation (7.7), supplied as context a-08daa2e24276a956171cb19a5bdde0d8 via Theorem 7.14 (a-0fdd2f6fbb9990163099719986d78c0a), to the bounded stopping time tau\u2227t yields E M(tau\u2227t) = E M(0) (a-8d4932d475c666f15ddb607176c81857), giving (7.10) (a-9513811b3b47fee0273eca3862afaff7). The limit argument (a-bceba68d99abe34fa684283db66a2b22) is sound: since tau is finite a.s., I(t >= tau) -> I(tau < infinity) = 1 a.s.; the bound |M(tau)| I(t >= tau) <= |M(tau)| with E|M(tau)| < infinity justifies dominated convergence, so E(M(tau) I(t >= tau)) -> E M(tau); combined with the assumed E(M(t) I(t < tau)) -> 0, (7.10) gives EM(0) = EM(tau). Signs, indicators, integrability hypotheses, and the internal cross-reference to (7.7) are all consistent. The spaced-out '\\\\operatorname*{l i m}' token in (7.8) and the OCR line-wrap artifact around 'I(tau < infinity) = 1' in the final proof block are cosmetic and do not alter the mathematical reading. Empty findings indicate no material problem detected in the supplied material, not certified correctness of the underlying source.\"\n}\n```",
+        "usage": {
+          "prompt_tokens": 5717,
+          "completion_tokens": 2799,
+          "total_tokens": 8516,
+          "prompt_tokens_details": {
+            "cached_tokens": 384
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 1823
+          }
+        },
+        "latency_seconds": 56.61397296108771,
+        "anchor_repair_origin": {
+          "content": "```json\n{\n  \"protocol\": \"critic-anchors-v2\",\n  \"group_id\": \"c06\",\n  \"candidate_sha256\": \"8a60ae7132215c943386564f3d014e9ff6d568a01204bfbe5a2e6b1a31f3f6b2\",\n  \"draft_sha256\": \"970f23f2b32dcefaf8d45e867aafa173ce4e1ba41deae7f0b63c09ffd385b47b\",\n  \"coverage\": \"complete\",\n  \"reviewed_anchor_ids\": [\n    \"a-d46c2a69f973291cd7e8f0b04f576763\",\n    \"a-9eb69be0665a97e0bb89afacefa483bf\",\n    \"a-ca5676ae2cb94d7ad809e6f0260830eb\",\n    \"a-615a7d5f0060b3f26a0a22a09075d5bd\",\n    \"a-4d438bbb2ce942f433e4f798ca74d213\",\n    \"a-8d4932d475c666f15ddb607176c81857\",\n    \"a-9513811b3b47fee0273eca3862afaff7\",\n    \"a-bceba68d99abe34fa684283db66a2b22\"\n  ],\n  \"context_needed\": [],\n  \"findings\": [],\n  \"notes\": \"All eight target blocks were checked for material mathematical content. Theorem 7.16 (a-d46c2a69f973291cd7e8f0b04f576763) states the optional stopping conclusion EM(tau) = EM(0) under E|M(tau)| < infinity and condition (7.8) lim_{t->inf} E(M(t) I(tau > t)) = 0 (a-9eb69be0665a97e0bb89afacefa483bf). The proof decomposition (7.9) M(tau\u2227t) = M(t) I(t < tau) + M(tau) I(t >= tau) (a-4d438bbb2ce942f433e4f798ca74d213) is a pointwise identity (on {t < tau}, tau\u2227t = t; on {t >= tau}, tau\u2227t = tau), and I(tau > t) = I(t < tau) matches hypothesis (7.8). Application of the Basic Stopping equation (7.7), supplied as context a-08daa2e24276a956171cb19a5bdde0d8 via Theorem 7.14 (a-0fdd2f6fbb9990163099719986d78c0a), to the bounded stopping time tau\u2227t yields E M(tau\u2227t) = E M(0) (a-8d4932d475c666f15ddb607176c81857), giving (7.10) (a-9513811b3b47fee0273eca3862afaff7). The limit argument (a-bceba68d99abe34fa684283db66a2b22) is sound: since tau is finite a.s., I(t >= tau) -> I(tau < infinity) = 1 a.s.; the bound |M(tau)| I(t >= tau) <= |M(tau)| with E|M(tau)| < infinity justifies dominated convergence, so E(M(tau) I(t >= tau)) -> E M(tau); combined with the assumed E(M(t) I(t < tau)) -> 0, (7.10) gives EM(0) = EM(tau). Signs, indicators, integrability hypotheses, and the internal cross-reference to (7.7) are all consistent. The spaced-out '\\\\operatorname*{l i m}' token in (7.8) and the OCR line-wrap artifact around 'I(tau < infinity) = 1' in the final proof block are cosmetic and do not alter the mathematical reading. Empty findings indicate no material problem detected in the supplied material, not certified correctness of the underlying source.\"\n}\n```",
+          "actual_model": "glm53-regular",
+          "finish_reason": "stop",
+          "errors": [
+            {
+              "path": "$.notes",
+              "message": "unexpected field; return a data instance, not a schema"
+            }
+          ]
+        }
+      },
+      "acceptance": "UNACCEPTED",
+      "provisional_diagnostics": {
+        "status": "unavailable",
+        "validated_findings": [],
+        "invalid_findings": [],
+        "quote_feedback": [],
+        "acceptance": "UNACCEPTED",
+        "qualification": "Provisional only; no response completion or mathematical correctness credit"
+      }
+    }
+  },
+  "context_rows": [
+    {
+      "block_id": "klebaner-ch4-7-p0061:b1",
+      "text": "151",
+      "source_block_sha256": "150bfd7d3077c97861ba5addad3f7c34ddd334ed4e8935c0f70d984de4a3b60f",
+      "format": "portable_latex",
+      "basis": "current_candidate",
+      "unresolved": false,
+      "source_location": {
+        "source_id": "klebaner-ch4-7",
+        "page": {
+          "local_page_idx": 5,
+          "selected_page": 61,
+          "original_physical_page": 166,
+          "owner": true
+        },
+        "bbox": [
+          0.886,
+          0.046,
+          0.928,
+          0.063
+        ],
+        "reading_order": 1
+      }
+    },
+    {
+      "block_id": "klebaner-ch4-7-p0061:b2",
+      "text": "\\textbf{Theorem 6.3} Let \\(X ( t )\\) satisfy conditions of the previous Theorem 6.2. If \\(| X ( 0 ) |\\) possesses moment generating function \\(\\mathrm { E } e ^ { u | X ( 0 ) | } < \\infty\\), for all real \\(u\\), then so does \\(| X ( t ) |\\), \\(\\mathrm { E } e ^ { u | X ( t ) | } < \\infty\\) for all \\(t \\geq 0\\). In this case",
+      "source_block_sha256": "29d4367ec631c643bd8a063aaaedfe5d4199201d763937082899a5d154dc1674",
+      "format": "portable_latex",
+      "basis": "current_candidate",
+      "unresolved": false,
+      "source_location": {
+        "source_id": "klebaner-ch4-7",
+        "page": {
+          "local_page_idx": 5,
+          "selected_page": 61,
+          "original_physical_page": 166,
+          "owner": true
+        },
+        "bbox": [
+          0.069,
+          0.086,
+          0.935,
+          0.147
+        ],
+        "reading_order": 2
+      }
+    },
+    {
+      "block_id": "klebaner-ch4-7-p0061:b3",
+      "text": "\\[\nM _ { f } ( t ) = f ( X ( t ) , t ) - \\int _ { 0 } ^ { t } \\Big ( L _ { u } f + \\frac { \\partial f } { \\partial t } \\Big ) ( X ( u ) , u ) d u \\tag{6.8}\n\\]",
+      "source_block_sha256": "3c6b7de176e3b7923bc7497fe54c16136c51385f1b390c7ad6593567243a02e3",
+      "format": "portable_latex",
+      "basis": "current_candidate",
+      "unresolved": false,
+      "source_location": {
+        "source_id": "klebaner-ch4-7",
+        "page": {
+          "local_page_idx": 5,
+          "selected_page": 61,
+          "original_physical_page": 166,
+          "owner": true
+        },
+        "bbox": [
+          0.222,
+          0.158,
+          0.928,
+          0.203
+        ],
+        "reading_order": 3
+      }
+    },
+    {
+      "block_id": "klebaner-ch4-7-p0061:b4",
+      "text": "is a martingale for all \\(f ( x , t )   \\in   C ^ { 2 , 1 }\\) , satisfying the following condition: for any t, there exist constants \\(c _ { t }\\) and \\(k _ { t }\\) such that for all \\(x ,\\) all \\(t > 0\\) , and all \\(0 \\leq u \\leq t\\)",
+      "source_block_sha256": "f5fbb5b7a1cb814c944078737a57ef32bd16a1fa77a5923a4963472095331488",
+      "format": "portable_latex",
+      "basis": "current_candidate",
+      "unresolved": false,
+      "source_location": {
+        "source_id": "klebaner-ch4-7",
+        "page": {
+          "local_page_idx": 5,
+          "selected_page": 61,
+          "original_physical_page": 166,
+          "owner": true
+        },
+        "bbox": [
+          0.069,
+          0.215,
+          0.934,
+          0.276
+        ],
+        "reading_order": 4
+      }
+    },
+    {
+      "block_id": "klebaner-ch4-7-p0061:b5",
+      "text": "\\[\n\\operatorname* { m a x } \\bigg ( \\Big | \\frac { \\partial f ( x , u ) } { \\partial t } \\Big | , \\; \\Big | \\frac { \\partial f ( x , u ) } { \\partial x } \\Big | , \\; \\Big | \\frac { \\partial ^ { 2 } f ( x , t ) } { \\partial x ^ { 2 } } \\Big | \\bigg ) \\leq c _ { t } e ^ { k _ { t } | x | } .\\tag{6.9}\n\\]",
+      "source_block_sha256": "8bc7867a049c79a5a9bc8748bb0d987f36c7855fcdd53d2931d75ff23c47d513",
+      "format": "portable_latex",
+      "basis": "current_candidate",
+      "unresolved": false,
+      "source_location": {
+        "source_id": "klebaner-ch4-7",
+        "page": {
+          "local_page_idx": 5,
+          "selected_page": 61,
+          "original_physical_page": 166,
+          "owner": true
+        },
+        "bbox": [
+          0.203,
+          0.285,
+          0.927,
+          0.329
+        ],
+        "reading_order": 5
+      }
+    },
+    {
+      "block_id": "klebaner-ch4-7-p0061:b6",
+      "text": "Proof: The proof is given in Pinsky (1995) for bounded coefficients of the SDE, but it can be extended for this case. We give the proof when the diffusion \\(X ( t )   =   B ( t )\\) is Brownian motion. Let \\(X ( t )   =   B ( t )\\) , then by \\(\\mathrm { I t } \\hat { \\mathrm { o } }   ^ { \\prime } \\mathrm { s }\\) formula \\(M _ { f } ( t )\\) is given by",
+      "source_block_sha256": "869f8556265e7d828ff80d8bfb6e6e6a043f4dc0a5d6fd410bf1c1ccd652c162",
+      "format": "portable_latex",
+      "basis": "current_candidate",
+      "unresolved": false,
+      "source_location": {
+        "source_id": "klebaner-ch4-7",
+        "page": {
+          "local_page_idx": 5,
+          "selected_page": 61,
+          "original_physical_page": 166,
+          "owner": true
+        },
+        "bbox": [
+          0.067,
+          0.341,
+          0.932,
+          0.423
+        ],
+        "reading_order": 6
+      }
+    },
+    {
+      "block_id": "klebaner-ch4-7-p0061:b7",
+      "text": "\\[\nM _ { f } ( t ) = \\int _ { 0 } ^ { t } \\frac { \\partial f ( B ( s ) , s ) } { \\partial x } d B ( s ) .\\tag{6.10}\n\\]",
+      "source_block_sha256": "3d897025d13e83e9e8761f2c1191a3d8086bbd77c204e14d637197753762077f",
+      "format": "portable_latex",
+      "basis": "current_candidate",
+      "unresolved": false,
+      "source_location": {
+        "source_id": "klebaner-ch4-7",
+        "page": {
+          "local_page_idx": 5,
+          "selected_page": 61,
+          "original_physical_page": 166,
+          "owner": true
+        },
+        "bbox": [
+          0.325,
+          0.433,
+          0.928,
+          0.479
+        ],
+        "reading_order": 7
+      }
+    }
+  ]
+}

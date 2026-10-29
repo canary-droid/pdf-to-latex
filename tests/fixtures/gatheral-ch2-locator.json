@@ -1,0 +1,12 @@
+{
+  "role": "Known development example, not an untouched evaluation set. Never loaded by model request preparation.",
+  "source_pdf_sha256": "6010ddf7fe8456398d35dc7d94b16d1f8c853da5e1671d763c7f92083169a988",
+  "physical_pdf_page": 53,
+  "printed_page": 22,
+  "native_text_footnote": "\u2217See Chapter 5 of Kloeden and Platen (1992) for a discussion of It \u02c6o-Taylor expan-\nsions.\n",
+  "mineru_footnote": "{\\footnotesize\\color{DocVortexGray} \u2217See Chapter  of Kloeden and Platen (1992) for a discussion of Ito-Taylor expan- \u02c6 sions.\\par}",
+  "conversion_notes": "\nA few remarks on choices made during conversion:\n\n- **Numbering:** Every tagged equation (2.1)\u2013(2.19) uses `\\tag{}` so the numbers match the source exactly; displays without numbers in the extraction (e.g., the Fourier transform definition, the $a$, $b_j$, $r_\\pm$, $g$ definitions) are left unnumbered.\n- **OCR repairs:** Restored the dropped initial \"I\" (\"In this chapter\"), the accents in \"It\u00f4-Taylor\" and \"J\u00e4ckel\", and normalized stray `v`/`\\upsilon` glyphs to `\\nu` (each noted with a comment in the source). The stray page-number artifact \"5\" was removed.\n- **Footnote:** The Kloeden\u2013Platen footnote is attached to its marker in the Milstein paragraph; its chapter number is missing in the extraction, so it appears as an ellipsis \u2014 you may want to fill it in from your PDF.\n- **No figures/captions** occur in this chapter, so none were needed.",
+  "draft_sha256": "b886ec63a520cb81176f28e2432abf6547ccf4356529863e64342353516fd48c",
+  "saved_call": "call-008",
+  "visual_check": "Codex inspected original PDF 53 source page; Chapter 5 is visibly printed."
+}

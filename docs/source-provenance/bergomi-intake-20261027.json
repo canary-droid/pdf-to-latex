@@ -1,0 +1,184 @@
+{
+  "date": "2026-10-27",
+  "source_id": "bergomi",
+  "pdf": "inputs/bergomi/source.pdf",
+  "bytes": 105214331,
+  "sha256": "35fd11fb3fe46e9c3de01db6b22dc1e2c848c04b352121fe13c3ccf0fba38413",
+  "pages": 520,
+  "title": "Stochastic Volatility Modeling",
+  "author": "Lorenzo Bergomi",
+  "publisher": "Chapman & Hall/CRC, Taylor & Francis Group",
+  "copyright_year": 2016,
+  "pdf_version_date": "20151105",
+  "pdf_ebook_isbn": "978-1-4822-4407-6",
+  "edition": "2016 CRC Press PDF publication; no numbered edition statement on inspected title/copyright pages",
+  "visual_checks_physical_pages": [
+    6,
+    7,
+    8,
+    520
+  ],
+  "contents_physical_pages": [
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "chapters": [
+    {
+      "chapter": 1,
+      "title": "Introduction",
+      "physical_pdf_start": 18,
+      "physical_pdf_end": 41,
+      "printed_start": 1,
+      "printed_end": 24,
+      "boundary_basis": "PDF bookmarks, contents and native chapter-opening text checked"
+    },
+    {
+      "chapter": 2,
+      "title": "Local volatility",
+      "physical_pdf_start": 42,
+      "physical_pdf_end": 119,
+      "printed_start": 25,
+      "printed_end": 102,
+      "boundary_basis": "PDF bookmarks, contents and native chapter-opening text checked"
+    },
+    {
+      "chapter": 3,
+      "title": "Forward-start options",
+      "physical_pdf_start": 120,
+      "physical_pdf_end": 149,
+      "printed_start": 103,
+      "printed_end": 132,
+      "boundary_basis": "PDF bookmarks, contents and native chapter-opening text checked"
+    },
+    {
+      "chapter": 4,
+      "title": "Stochastic volatility \u2013 introduction",
+      "physical_pdf_start": 150,
+      "physical_pdf_end": 167,
+      "printed_start": 133,
+      "printed_end": 150,
+      "boundary_basis": "PDF bookmarks, contents and native chapter-opening text checked"
+    },
+    {
+      "chapter": 5,
+      "title": "Variance swaps",
+      "physical_pdf_start": 168,
+      "physical_pdf_end": 217,
+      "printed_start": 151,
+      "printed_end": 200,
+      "boundary_basis": "PDF bookmarks, contents and native chapter-opening text checked"
+    },
+    {
+      "chapter": 6,
+      "title": "An example of one-factor dynamics: the Heston model",
+      "physical_pdf_start": 218,
+      "physical_pdf_end": 233,
+      "printed_start": 201,
+      "printed_end": 216,
+      "boundary_basis": "PDF bookmarks, contents and native chapter-opening text checked"
+    },
+    {
+      "chapter": 7,
+      "title": "Forward variance models",
+      "physical_pdf_start": 234,
+      "physical_pdf_end": 323,
+      "printed_start": 217,
+      "printed_end": 306,
+      "boundary_basis": "PDF bookmarks, contents and native chapter-opening text checked"
+    },
+    {
+      "chapter": 8,
+      "title": "The smile of stochastic volatility models",
+      "physical_pdf_start": 324,
+      "physical_pdf_end": 373,
+      "printed_start": 307,
+      "printed_end": 356,
+      "boundary_basis": "PDF bookmarks, contents and native chapter-opening text checked"
+    },
+    {
+      "chapter": 9,
+      "title": "Linking static and dynamic properties of stochastic volatility models",
+      "physical_pdf_start": 374,
+      "physical_pdf_end": 407,
+      "printed_start": 357,
+      "printed_end": 390,
+      "boundary_basis": "PDF bookmarks, contents and native chapter-opening text checked"
+    },
+    {
+      "chapter": 10,
+      "title": "What causes equity smiles?",
+      "physical_pdf_start": 408,
+      "physical_pdf_end": 437,
+      "printed_start": 391,
+      "printed_end": 420,
+      "boundary_basis": "PDF bookmarks, contents and native chapter-opening text checked"
+    },
+    {
+      "chapter": 11,
+      "title": "Multi-asset stochastic volatility",
+      "physical_pdf_start": 438,
+      "physical_pdf_end": 469,
+      "printed_start": 421,
+      "printed_end": 452,
+      "boundary_basis": "PDF bookmarks, contents and native chapter-opening text checked"
+    },
+    {
+      "chapter": 12,
+      "title": "Local-stochastic volatility models",
+      "physical_pdf_start": 470,
+      "physical_pdf_end": 511,
+      "printed_start": 453,
+      "printed_end": 494,
+      "boundary_basis": "PDF bookmarks, contents and native chapter-opening text checked"
+    }
+  ],
+  "front_matter_physical": [
+    1,
+    17
+  ],
+  "epilogue_physical": [
+    512,
+    513
+  ],
+  "bibliography_physical": [
+    514,
+    519
+  ],
+  "back_cover_physical": [
+    520,
+    520
+  ],
+  "source_limitation": "Contents lists Index at printed 503; supplied PDF ends with bibliography printed 502 (physical 519), then back cover 520. No index pages in supplied file.",
+  "declared_blank_pages": [
+    5,
+    119,
+    149,
+    217,
+    323,
+    373,
+    407,
+    437,
+    469
+  ],
+  "empty_native_text_pages": [
+    1,
+    520
+  ],
+  "blank_caveat": "Empty-text pages 1 and 520 are image covers, not blanks. All physical pages, including declared blanks, retained for OCR; no content page dropped.",
+  "selection": "All 520 physical PDF pages, identity original-page mapping",
+  "ocr_mode": "auto",
+  "ocr_mode_reason": "Native selectable text present; retain native-text-aware mode, as Gatheral, rather than forced OCR.",
+  "native_cache": "inputs/bergomi/intake",
+  "cache_manifest_sha256": "a2c435803055a281e923b62bb85232e2767e59c5e407c21df08899dff13d0c83",
+  "windows": 65,
+  "owned_pages_per_window": 8,
+  "adjacent_context_pages": 1,
+  "native_text_characters": 1013219,
+  "status": "prepared only; no MinerU or GLM calls in Codex session"
+}

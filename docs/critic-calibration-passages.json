@@ -1,0 +1,190 @@
+{
+  "schema": "candidate-passages-v1",
+  "candidate": "runs/evaluation-candidate-20261024T140145Z-6343d9",
+  "candidate_manifest_sha256": "a26ba0453c40ccdb4621fa23c86a4c67a3fbfec3d5acfe269d8d94de7b08e0f5",
+  "candidate_sha256": "8a60ae7132215c943386564f3d014e9ff6d568a01204bfbe5a2e6b1a31f3f6b2",
+  "boundary_status": "reviewed",
+  "assessment": "Codex boundary/source assessment; not human mathematical verification.",
+  "passages": [
+    {
+      "id": "c01",
+      "block_ids": [
+        "klebaner-ch4-7-p0021:b11",
+        "klebaner-ch4-7-p0021:b12",
+        "klebaner-ch4-7-p0021:b13",
+        "klebaner-ch4-7-p0021:b14",
+        "klebaner-ch4-7-p0021:b15"
+      ],
+      "boundary_reviewed": true,
+      "boundary_basis": "Complete Ito theorem, hypotheses and two displayed identities.",
+      "context_references": [],
+      "selection_reason_outside_model_inputs": "Source-image-inspected no-discrepancy-observed control; not proof of correctness.",
+      "original_physical_pages": [
+        126
+      ]
+    },
+    {
+      "id": "c02",
+      "block_ids": [
+        "klebaner-ch4-7-p0041:b2",
+        "klebaner-ch4-7-p0041:b3",
+        "klebaner-ch4-7-p0041:b4",
+        "klebaner-ch4-7-p0041:b5",
+        "klebaner-ch4-7-p0041:b6",
+        "klebaner-ch4-7-p0041:b7",
+        "klebaner-ch4-7-p0041:b8",
+        "klebaner-ch4-7-p0041:b9",
+        "klebaner-ch4-7-p0041:b10",
+        "klebaner-ch4-7-p0041:b11"
+      ],
+      "boundary_reviewed": true,
+      "boundary_basis": "Complete stochastic-exponential derivation and differential relations.",
+      "context_references": [],
+      "selection_reason_outside_model_inputs": "Source-image-inspected no-discrepancy-observed control; not proof of correctness.",
+      "original_physical_pages": [
+        146
+      ]
+    },
+    {
+      "id": "c03",
+      "block_ids": [
+        "klebaner-ch4-7-p0065:b2",
+        "klebaner-ch4-7-p0065:b3",
+        "klebaner-ch4-7-p0065:b4",
+        "klebaner-ch4-7-p0065:b5",
+        "klebaner-ch4-7-p0065:b6",
+        "klebaner-ch4-7-p0065:b7",
+        "klebaner-ch4-7-p0065:b8",
+        "klebaner-ch4-7-p0065:b9",
+        "klebaner-ch4-7-p0065:b10",
+        "klebaner-ch4-7-p0065:b11",
+        "klebaner-ch4-7-p0065:b12",
+        "klebaner-ch4-7-p0065:b13",
+        "klebaner-ch4-7-p0065:b14",
+        "klebaner-ch4-7-p0065:b15",
+        "klebaner-ch4-7-p0065:b16",
+        "klebaner-ch4-7-p0065:b17"
+      ],
+      "boundary_reviewed": true,
+      "boundary_basis": "Feynman-Kac statement, assumptions and proof through its concluding formula.",
+      "context_references": [],
+      "selection_reason_outside_model_inputs": "Substantive sign and consistency challenge from prior independent assessment.",
+      "original_physical_pages": [
+        170
+      ]
+    },
+    {
+      "id": "c04",
+      "block_ids": [
+        "klebaner-ch4-7-p0061:b2",
+        "klebaner-ch4-7-p0061:b3",
+        "klebaner-ch4-7-p0061:b4",
+        "klebaner-ch4-7-p0061:b5",
+        "klebaner-ch4-7-p0061:b6",
+        "klebaner-ch4-7-p0061:b7",
+        "klebaner-ch4-7-p0061:b8",
+        "klebaner-ch4-7-p0061:b9",
+        "klebaner-ch4-7-p0061:b10",
+        "klebaner-ch4-7-p0061:b11",
+        "klebaner-ch4-7-p0061:b12"
+      ],
+      "boundary_reviewed": true,
+      "boundary_basis": "Theorem statement and Brownian construction proof.",
+      "context_references": [
+        "theorem 6.2"
+      ],
+      "selection_reason_outside_model_inputs": "Initial-condition and index consistency; earlier theorem context may be partial.",
+      "original_physical_pages": [
+        166
+      ]
+    },
+    {
+      "id": "c05",
+      "block_ids": [
+        "klebaner-ch4-7-p0107:b3",
+        "klebaner-ch4-7-p0107:b4",
+        "klebaner-ch4-7-p0107:b5",
+        "klebaner-ch4-7-p0107:b6",
+        "klebaner-ch4-7-p0107:b7",
+        "klebaner-ch4-7-p0107:b8",
+        "klebaner-ch4-7-p0107:b9",
+        "klebaner-ch4-7-p0107:b10",
+        "klebaner-ch4-7-p0107:b11"
+      ],
+      "boundary_reviewed": true,
+      "boundary_basis": "Nonnegative local-martingale proof and resulting theorem.",
+      "context_references": [],
+      "selection_reason_outside_model_inputs": "Limiting/index reasoning; earlier definitions may require unavailable context.",
+      "original_physical_pages": [
+        212
+      ]
+    },
+    {
+      "id": "c06",
+      "block_ids": [
+        "klebaner-ch4-7-p0100:b5",
+        "klebaner-ch4-7-p0100:b6",
+        "klebaner-ch4-7-p0100:b7",
+        "klebaner-ch4-7-p0100:b8",
+        "klebaner-ch4-7-p0100:b9",
+        "klebaner-ch4-7-p0100:b10",
+        "klebaner-ch4-7-p0100:b11",
+        "klebaner-ch4-7-p0100:b12"
+      ],
+      "boundary_reviewed": true,
+      "boundary_basis": "Optional-stopping theorem and its proof.",
+      "context_references": [
+        "equation 7.7"
+      ],
+      "selection_reason_outside_model_inputs": "Tests what bounded earlier context can and cannot establish.",
+      "original_physical_pages": [
+        205
+      ]
+    },
+    {
+      "id": "c07",
+      "block_ids": [
+        "klebaner-ch4-7-p0100:b13",
+        "klebaner-ch4-7-p0100:b14",
+        "klebaner-ch4-7-p0100:b15",
+        "klebaner-ch4-7-p0100:b16",
+        "klebaner-ch4-7-p0100:b17",
+        "klebaner-ch4-7-p0100:b18",
+        "klebaner-ch4-7-p0101:b2",
+        "klebaner-ch4-7-p0101:b3",
+        "klebaner-ch4-7-p0101:b4"
+      ],
+      "boundary_reviewed": true,
+      "boundary_basis": "Complete hitting-time example crossing a page boundary; running headers excluded, all intervening mathematical paragraphs included.",
+      "context_references": [
+        "equation 7.7"
+      ],
+      "selection_reason_outside_model_inputs": "Full-paragraph preservation challenge; PDF 205 b15 remains entire original paragraph.",
+      "original_physical_pages": [
+        205,
+        206
+      ]
+    },
+    {
+      "id": "c08",
+      "block_ids": [
+        "klebaner-ch4-7-p0071:b2",
+        "klebaner-ch4-7-p0071:b3",
+        "klebaner-ch4-7-p0071:b4",
+        "klebaner-ch4-7-p0071:b5",
+        "klebaner-ch4-7-p0071:b6",
+        "klebaner-ch4-7-p0071:b7",
+        "klebaner-ch4-7-p0071:b8"
+      ],
+      "boundary_reviewed": true,
+      "boundary_basis": "Stopped-process theorem and complete displayed proof.",
+      "context_references": [
+        "section 6.4 exit times from an interval"
+      ],
+      "selection_reason_outside_model_inputs": "Prior second-opinion false-alarm check, with diagnosis excluded from request.",
+      "original_physical_pages": [
+        176
+      ]
+    }
+  ]
+}

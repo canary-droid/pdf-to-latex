@@ -1,8 +1,58 @@
 # PDF-to-LaTeX compatibility and fidelity probe 0.1
 
+**26 October: the [fresh Gatheral chapter run](docs/SIMPLE-CHAPTER-GLM.md) is
+prepared offline, not running.** Both conversion and critic now receive unchanged
+native MinerU material plus cached native PDF text, with mathematical/factual meaning
+and complete references as the objective. Initial and post-critic accuracy notes,
+material-change records, initial TeX and any revised working TeX remain separate.
+All Gatheral Chapters 1–11 receive fresh conversions and immediate critics, followed
+by the postscript and bibliography. No old GLM drafts, skip list or Klebaner comparison
+is inherited. Scope is PDF 32–198 (167 pages); front matter, blank 199 and index remain
+outside this run. Earlier runs and their calls are preserved separately.
+No overall/generation deadline, sampling change, automatic retry or block-output
+protocol is introduced. Streamed reasoning, cumulative calls and isolated compiler
+recovery remain intact. New failures remain visible gaps. Use the one
+persistent launch command in the runbook; offline checks do not establish accuracy.
+
+**Development update, 25 October:** the eight-passage GLM calibration and its
+selected four-passage MiMo stage are completed; their evidence stays frozen.
+Task 2 changes were prepared in an ordinary development copy. See [TASK2-DEVELOPMENT.md](docs/TASK2-DEVELOPMENT.md) for copy-back guards,
+critic v3 field repair, coherent local context and the new owned-page recovery
+adapter. Gatheral extraction must finish before integrating these changes.
+The [Gatheral review runbook](docs/GATHERAL-REVIEW.md) describes the protected
+small gate and resumable expansion. It has been checked offline only; no actual
+Gatheral review preparation or live review has been created by Task 2.
+
+The older preparation descriptions below are dated history, not instructions to
+replay the completed calibrations.
+
 Start with **START-HERE.md**. This package implements design 1.1's milestone 0B;
-it is a bounded diagnostic package, not the later application. All inference is
-local. No OpenRouter feature or credential is supported.
+it is a bounded diagnostic package, not the later application. Conversion and the
+default critic remain local. The next operator step is the eight-passage
+[candidate-only GLM critic](docs/CANDIDATE-CRITIC.md), then a reviewed, costed
+selection of at most four MiMo second opinions. Python-bound anchors replace
+model-transcribed quotations in this new protocol; legacy schemas stay readable.
+The [twelve-passage comparison](docs/GLM-MIMO-CRITIC-PILOT.md) is completed and frozen.
+MiMo uses pinned Xiaomi FP8 via OpenRouter with explicit opt-in, no fallback and a
+USD 10 cumulative ceiling including previous spending. Future increases require
+user approval. No local failure silently dispatches remotely.
+The user accepts documented retention below 100 days (Xiaomi: 30 days); no training opt-in or account privacy change is enabled.
+Credentials are read privately only at operator runtime. No cloud OCR or whole-book
+review is authorized. The intended workflow is MinerU → Qwen visual review →
+versioned candidate → GLM text critic → selected MiMo → unresolved review queues.
+DeepSeek remains selectable. Candidate-only is the new production default; paired
+X/Y requests remain an experimental option. Do not run heavy local phases together.
+The [Gatheral intake and integration plan](docs/GATHERAL-PLAN.md) records the
+received 210-page PDF and the remaining whole-book visual-recovery adapter work.
+
+23 October: the next opt-in [recovery and text-critic experiment](docs/RECOVERY-CRITIC-TRIAL.md)
+is prepared offline. It adds typed conservative TeX support, shared bounded
+JSON/conditional reasoning/compiler feedback, experimental candidate export and
+an exact-text mathematical critic with local bibliography provenance. Use that
+runbook for the fixed Qwen gate/continuation, isolated compiler and subsequent
+DeepSeek text phase. All proposals remain UNACCEPTED; this does not change the
+default conversion workflow. [Selective sciwrite-lint reuse](docs/SCIWRITE-REUSE.md)
+does not install or invoke its application.
 
 For the completed fixture OCR and the next page-review experiment, use
 [docs/SPARK-OPERATIONS.md](docs/SPARK-OPERATIONS.md). `export --run ...` creates a
@@ -16,13 +66,37 @@ and dependent-group accounting. `review --mode regions --preview-only` prepares
 selected-block comparisons from that derivative; whole-page review remains available. The runbook gives actual saved paths, bounds and the
 separate OCR/GLM memory-phase procedure. Candidate review remains the default.
 
-The current Klebaner trial uses `review-batch --preview-only` to prepare an
+The completed 100-page Klebaner trial used `review-batch --preview-only` to prepare an
 explicit owned-page range with block and visual-omission coverage, then
 `review-batch --preview ... --preflight ...` to run sequentially. It checkpoints
 each request, permits at most one retry per unit across resumes, and never
 accepts proposals. `batch-status --run ...` monitors a live job without taking
 its writer lock. See the runbook for the prepared 100-page Flash Next inputs,
 fresh preflight, persistent terminal, resume and partial-bundle commands.
+
+An explicit offline experiment, `python -m probe.native_text_pilot`, compares
+positioned PyMuPDF characters with saved OCR. It freezes a development/holdout
+sample and rules, preserves disagreements and ambiguous matches, and creates
+neutral review inputs without accepting or applying alternatives. It is separate
+from conversion and model review. See the native-text pilot section of
+[the operator runbook](docs/SPARK-OPERATIONS.md) for actual results and limits.
+
+Task 5 (21 October) is an opt-in paired Qwen experiment over the 267
+native-pilot regions: source/OCR alone versus identical inputs plus native text.
+It has no automatic retries or acceptance, a twelve-pair reliability gate and a
+cumulative nine-hour review admission budget. No live Task 5 calls have been run
+by Codex. Use the [exact tmux launch and resume instructions](docs/QWEN-NATIVE-TRIAL.md);
+the launcher captures and validates fresh preflight evidence without pasted paths.
+As inspected on 22 October, the operator's Qwen run has completed all 534 attempts
+(476 structurally completed, 58 failed). Those are usability counts, not accuracy.
+
+The completed comparison is [DeepSeek vs historical Qwen Arm A](docs/DEEPSEEK-ARM-A-TRIAL.md):
+all 267 identical Arm A inputs, changing only the model field. Its separate
+operator wrapper binds successful deployment evidence, runs fresh project
+preflight, checks the first twelve responses and enforces eight-hour cumulative
+admission with no retries. The operator completed it: 256 usable responses and
+eleven schema/JSON failures. No proposals are accepted. Its dated preparation
+instructions and completed evidence are preserved; do not relaunch it.
 
 ## Inputs and provenance
 
@@ -158,3 +232,10 @@ No test uses the real GLM address or downloads OCR weights. Local HTTP tests use
 loopback mock servers. The package's `docs/PROJECT-STATE.md` separates implementation,
 local validation and deployment status. Keep run folders and result bundles;
 they are the evidence for the next decision, independent of conversation memory.
+
+For the authorized annotated Gatheral derivative, section-output recovery and
+subsequent Bergomi conversion/critics, see [the editorial continuation](docs/EDITORIAL-CHAPTERS.md).
+It reuses completed OCR, preserves historical drafts, and attributes visible
+corrections. This is an experimental working edition; successful JSON, generation
+or compilation does not certify mathematical correctness. The isolated-development
+bootstrap must finish its extraction and destination-conflict checks before copy-back.

@@ -1,0 +1,426 @@
+{
+  "path": "/home/mdi/projects/pdf-to-latex/inputs/gatheral/source.pdf",
+  "sha256": "6010ddf7fe8456398d35dc7d94b16d1f8c853da5e1671d763c7f92083169a988",
+  "pages": 210,
+  "metadata": {
+    "format": "PDF 1.4",
+    "title": "",
+    "author": "",
+    "subject": "",
+    "keywords": "",
+    "creator": "",
+    "producer": "",
+    "creationDate": "D:20080214015024+01'00'",
+    "modDate": "D:20080302160737+01'00'",
+    "trapped": "",
+    "encryption": null
+  },
+  "encrypted": false,
+  "toc": [
+    [
+      1,
+      "The Volatility Surface: A Practitioner's Guide",
+      6
+    ],
+    [
+      2,
+      "Contents",
+      10
+    ],
+    [
+      2,
+      "Figures",
+      16
+    ],
+    [
+      2,
+      "Tables",
+      22
+    ],
+    [
+      2,
+      "Foreword",
+      24
+    ],
+    [
+      2,
+      "Preface",
+      26
+    ],
+    [
+      3,
+      "HOW THIS BOOK IS ORGANIZED",
+      28
+    ],
+    [
+      2,
+      "Acknowledgments",
+      30
+    ],
+    [
+      2,
+      "Chapter 1: Stochastic Volatility and Local Volatility",
+      32
+    ],
+    [
+      3,
+      "STOCHASTIC VOLATILITY",
+      32
+    ],
+    [
+      3,
+      "LOCAL VOLATILITY",
+      38
+    ],
+    [
+      2,
+      "Chapter 2: The Heston Model",
+      46
+    ],
+    [
+      3,
+      "THE PROCESS",
+      46
+    ],
+    [
+      3,
+      "THE HESTON SOLUTION FOR EUROPEAN OPTIONS",
+      47
+    ],
+    [
+      3,
+      "DERIVATION OF THE HESTON CHARACTERISTIC FUNCTION",
+      51
+    ],
+    [
+      3,
+      "SIMULATION OF THE HESTON PROCESS",
+      52
+    ],
+    [
+      2,
+      "Chapter 3: The Implied Volatility Surface",
+      56
+    ],
+    [
+      3,
+      "GETTING IMPLIED VOLATILITY FROM LOCAL VOLATILITIES",
+      56
+    ],
+    [
+      3,
+      "LOCAL VOLATILITY IN THE HESTON MODEL",
+      62
+    ],
+    [
+      3,
+      "IMPLIED VOLATILITY IN THE HESTON MODEL",
+      64
+    ],
+    [
+      3,
+      "THE SPX IMPLIED VOLATILITY SURFACE",
+      67
+    ],
+    [
+      2,
+      "Chapter 4: The Heston-Nandi Model",
+      74
+    ],
+    [
+      3,
+      "LOCAL VARIANCE IN THE HESTON-NANDI MODEL",
+      74
+    ],
+    [
+      3,
+      "A NUMERICAL EXAMPLE",
+      75
+    ],
+    [
+      3,
+      "DISCUSSION OF RESULTS",
+      80
+    ],
+    [
+      2,
+      "Chapter 5: Adding Jumps",
+      81
+    ],
+    [
+      3,
+      "WHY JUMPS ARE NEEDED",
+      81
+    ],
+    [
+      3,
+      "JUMP DIFFUSION",
+      83
+    ],
+    [
+      3,
+      "CHARACTERISTIC FUNCTION METHODS",
+      87
+    ],
+    [
+      3,
+      "STOCHASTIC VOLATILITY PLUS JUMPS",
+      96
+    ],
+    [
+      2,
+      "Chapter 6: Modeling Default Risk",
+      105
+    ],
+    [
+      3,
+      "MERTON\u2019S MODEL OF DEFAULT",
+      105
+    ],
+    [
+      3,
+      "CAPITAL STRUCTURE ARBITRAGE",
+      108
+    ],
+    [
+      3,
+      "LOCAL AND IMPLIED VOLATILITY IN THE JUMP-TO-RUIN MODEL",
+      110
+    ],
+    [
+      3,
+      "THE EFFECT OF DEFAULT RISK ON OPTION PRICES",
+      113
+    ],
+    [
+      3,
+      "THE CREDITGRADES MODEL",
+      115
+    ],
+    [
+      2,
+      "Chapter 7: Volatility Surface Asymptotics",
+      118
+    ],
+    [
+      3,
+      "SHORT EXPIRATIONS",
+      118
+    ],
+    [
+      3,
+      "THE MEDVEDEV-SCAILLET RESULT",
+      120
+    ],
+    [
+      3,
+      "INCLUDING JUMPS",
+      124
+    ],
+    [
+      3,
+      "LONG EXPIRATIONS: FOUQUE, PAPANICOLAOU, AND SIRCAR",
+      126
+    ],
+    [
+      3,
+      "SMALL VOLATILITY OF VOLATILITY: LEWIS",
+      127
+    ],
+    [
+      3,
+      "EXTREME STRIKES: ROGER LEE",
+      128
+    ],
+    [
+      3,
+      "ASYMPTOTICS IN SUMMARY",
+      131
+    ],
+    [
+      2,
+      "Chapter 8: Dynamics of the Volatility Surface",
+      132
+    ],
+    [
+      3,
+      "DYNAMICS OF THE VOLATILITY SKEW UNDER STOCHASTIC VOLATILITY",
+      132
+    ],
+    [
+      3,
+      "DYNAMICS OF THE VOLATILITY SKEW UNDER LOCAL VOLATILITY",
+      133
+    ],
+    [
+      3,
+      "STOCHASTIC IMPLIED VOLATILITY MODELS",
+      134
+    ],
+    [
+      3,
+      "DIGITAL OPTIONS AND DIGITAL CLIQUETS",
+      134
+    ],
+    [
+      2,
+      "Chapter 9: Barrier Options",
+      138
+    ],
+    [
+      3,
+      "DEFINITIONS",
+      138
+    ],
+    [
+      3,
+      "LIMITING CASES",
+      139
+    ],
+    [
+      3,
+      "THE REFLECTION PRINCIPLE",
+      140
+    ],
+    [
+      3,
+      "THE LOOKBACK HEDGING ARGUMENT",
+      143
+    ],
+    [
+      3,
+      "PUT-CALL SYMMETRY",
+      144
+    ],
+    [
+      3,
+      "QUASISTATIC HEDGING AND QUALITATIVE VALUATION",
+      145
+    ],
+    [
+      3,
+      "ADJUSTING FOR DISCRETE MONITORING",
+      148
+    ],
+    [
+      3,
+      "PARISIAN OPTIONS",
+      151
+    ],
+    [
+      3,
+      "SOME APPLICATIONS OF BARRIER OPTIONS",
+      151
+    ],
+    [
+      3,
+      "CONCLUSION",
+      152
+    ],
+    [
+      2,
+      "Chapter 10: Exotic Cliquets",
+      153
+    ],
+    [
+      3,
+      "LOCALLY CAPPED GLOBALLY FLOORED CLIQUET",
+      153
+    ],
+    [
+      3,
+      "REVERSE CLIQUET",
+      156
+    ],
+    [
+      3,
+      "NAPOLEON",
+      158
+    ],
+    [
+      2,
+      "Chapter 11: Volatility Derivatives",
+      164
+    ],
+    [
+      3,
+      "SPANNING GENERALIZED EUROPEAN PAYOFFS",
+      164
+    ],
+    [
+      3,
+      "VARIANCE AND VOLATILITY SWAPS",
+      167
+    ],
+    [
+      3,
+      "VALUING VOLATILITY DERIVATIVES",
+      177
+    ],
+    [
+      3,
+      "LISTED QUADRATIC-VARIATION BASED SECURITIES",
+      187
+    ],
+    [
+      3,
+      "SUMMARY",
+      192
+    ],
+    [
+      2,
+      "Postscript",
+      193
+    ],
+    [
+      2,
+      "Bibliography",
+      194
+    ],
+    [
+      2,
+      "Index",
+      200
+    ]
+  ],
+  "page_labels": [
+    {
+      "startpage": 0,
+      "prefix": "C",
+      "firstpagenum": 1,
+      "style": "D"
+    },
+    {
+      "startpage": 3,
+      "prefix": "",
+      "firstpagenum": 1,
+      "style": "r"
+    },
+    {
+      "startpage": 31,
+      "prefix": "",
+      "firstpagenum": 1,
+      "style": "D"
+    }
+  ],
+  "pages_with_native_text": 202,
+  "checked_on": "2026-10-25",
+  "method": "Read-only PyMuPDF inspection in the existing controller; no OCR/model calls",
+  "title_from_native_title_page": "The Volatility Surface: A Practitioner\u2019s Guide",
+  "author_from_native_title_page": "Jim Gatheral",
+  "title_author_metadata": "PDF metadata title/author fields empty; title page identifies the book",
+  "scope": "Received source only: not registered, prepared, converted, reviewed or compiled",
+  "edition_identity": "Exact file hash; bibliography/printed labels not independently verified beyond native text and PDF bookmarks",
+  "proposed_first_chapter": {
+    "physical_pages": [
+      32,
+      45
+    ],
+    "pages": 14,
+    "pdf_labels": [
+      "1",
+      "14"
+    ],
+    "not_launched": true
+  }
+}

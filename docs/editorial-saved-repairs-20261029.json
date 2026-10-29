@@ -1,0 +1,62 @@
+{
+  "parent": "/home/mdi/projects/pdf-to-latex/runs/editorial-chapters-trial-20261028T215454Z-8ef98f",
+  "rows": [
+    {
+      "key": "gatheral-11-s02-part05",
+      "source_label": "critic-call-050",
+      "source_sha256": "1619bf67f17158f2f3fe0bff3f086ac5503c0929a3462342c4acd804d3fa9fcf",
+      "text_fingerprint": "2c26ea511d345144eeffebe74d544e0ab4705516a35e198a663038ffcd7ff938",
+      "edits": [
+        {
+          "id": "mathbb-package",
+          "old": "\\usepackage{graphicx}",
+          "new": "\\usepackage{graphicx}\n\\usepackage{amsfonts}"
+        },
+        {
+          "id": "inline-delimiter",
+          "old": "\\(\\mathbb{E}[\\Sigma_{T}]$$",
+          "new": "\\(\\mathbb{E}[\\Sigma_{T}]\\)"
+        },
+        {
+          "id": "repair-attribution",
+          "old": "\\end{document}",
+          "new": "\\par\\smallskip\\noindent\\textbf{Codex technical repair (29 October 2026).} Added the missing amsfonts dependency and paired the inline-math delimiter in the saved editorial appendix. The mathematical content of the GLM draft is unchanged.\\par\n\\end{document}"
+        }
+      ]
+    },
+    {
+      "key": "bergomi-01-s01",
+      "source_label": "critic-call-064",
+      "source_sha256": "12ed076646be1b8ad871af2219fbc63023a18112b42bd31481b3ca2bf66563a1",
+      "text_fingerprint": "1f3bf1354383973197d3afd7cce62458d05ebdc7e5b7d113ecf01e128d7e0bed",
+      "edits": [
+        {
+          "id": "variance-note-1",
+          "old": "(an averaged sum would give variance\n$2\\hsig^4$)",
+          "new": "(Codex editorial correction: replacing the sum by its average while retaining $\\hsig^2/N$ gives variance $2\\hsig^4/N^3$, since $\\operatorname{Var}(\\sum_i z_i^2)=2N$)"
+        },
+        {
+          "id": "variance-note-2",
+          "old": "(an averaged sum would give variance $2\\hsig^{4}$)",
+          "new": "(Codex editorial correction: replacing the sum by its average while retaining $\\hsig^2/N$ gives variance $2\\hsig^4/N^3$, since $\\operatorname{Var}(\\sum_i z_i^2)=2N$)"
+        },
+        {
+          "id": "omit-log-furniture-c518fb659f",
+          "old": "\\item \\textbf{[bergomi-01-s01-convert-call-063-c518fb659f]} --- contextual: empty finding; no content, no action.\n",
+          "new": ""
+        },
+        {
+          "id": "omit-log-furniture-f078704e82",
+          "old": "\\item \\textbf{[bergomi-01-s01-convert-call-063-f078704e82]} --- contextual (informational): accuracy log header for Chapter 1, Introduction.\n",
+          "new": ""
+        },
+        {
+          "id": "omit-log-furniture-4243e8abb3",
+          "old": "\\item \\textbf{[bergomi-01-s01-convert-call-063-4243e8abb3]} --- applied (verified): umbrella finding; every correction below is applied and linked to a visible GLM editorial correction note.\n",
+          "new": ""
+        }
+      ]
+    }
+  ],
+  "assessment": "Codex bounded saved-output repair, not full-source verification. No inference. Original documents/raw logs preserved. GLM verification claims remain model claims."
+}

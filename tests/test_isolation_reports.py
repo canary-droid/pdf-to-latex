@@ -169,8 +169,8 @@ class IsolationReportTests(unittest.TestCase):
         self.assertFalse((interrupted / 'completion.json').exists())
 
     def test_converter_preserves_and_launches_real_symlinked_venv(self):
-        # Use the project only as a temporary parent so ~ expansion can be tested
-        # without modifying HOME or creating either operational environment.
+        # Keep the temporary environment inside this checkout, including when
+        # development runs under /tmp rather than beneath the user's home.
         with tempfile.TemporaryDirectory(prefix='test-venv-', dir=Path(__file__).resolve().parents[1]) as directory:
             env = Path(directory) / 'environment'
             venv.EnvBuilder(symlinks=True, with_pip=False).create(env)
@@ -187,12 +187,16 @@ class IsolationReportTests(unittest.TestCase):
                 self.assertNotEqual(prefix, base)
                 self.assertEqual(Path(actual_executable), executable)
 
-            for value in (str(executable), os.path.relpath(executable),
-                          '~/' + executable.relative_to(Path.home()).as_posix()):
+            for value in (str(executable), os.path.relpath(executable)):
                 selected = cli.converter_executable(value)
                 self.assertEqual(selected, executable)
                 self.assertTrue(selected.is_symlink())
                 verify(selected)
+
+            # Tilde expansion is a path operation; no file/environment under
+            # the real home directory needs creating or modifying to test it.
+            self.assertEqual(cli.converter_executable('~/test-only-environment/bin/python'),
+                             Path.home() / 'test-only-environment/bin/python')
 
             # Exercise cmd_convert's wiring too. Its discovery hook really launches
             # the selected interpreter; the stub OCR worker is never executed.

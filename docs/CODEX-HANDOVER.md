@@ -1,5 +1,48 @@
 # Codex handover — 17 October 2026
 
+27 October extraction task: [BERGOMI-EXTRACTION.md](BERGOMI-EXTRACTION.md) is prepared,
+not running from Codex (Docker/tmux sandbox access denied). Bergomi's actual PDF is
+Stochastic Volatility Modeling, CRC Press ©2016, 520 pages/12 chapters. All pages are
+registered and native text cached; the supplied PDF lacks the index listed in its
+contents. Use the one operator command there. Task 2 must use an independent copy
+while extraction is unfinished. Gatheral's latest two-source run has now exited
+finished_with_gaps: Chapters 6/7/11 truncated, bibliography conversion/review complete;
+preserve its 24 calls. The earlier "not running" entries below are dated preparation
+history, not the latest observed execution status.
+
+Current simple-chapter update (26 October): use [SIMPLE-CHAPTER-GLM.md](SIMPLE-CHAPTER-GLM.md)
+and the latest PROJECT-STATE entry. The fresh two-source meaning-focused preparation is
+`runs/simple-chapter-glm-trial-20261026T212942Z-533351`, not running. It starts at Gatheral
+Chapter 1 and pairs each new conversion immediately with its critic through Chapter 11,
+then postscript and bibliography. Chapters 3/5 have fresh authorized attempts. No
+Klebaner, old drafts or skip list is inherited. PDF pages 32–198 are included; front
+matter 1–31, blank 199 and index 200–210 are excluded, so this is not the complete book.
+The earlier 11 calls remain unchanged in previous runs. This separately authorized
+experiment starts with zero calls and the existing 80-call ceiling across resumes.
+No overall/generation deadline; connection timeout remains separate. Before/after
+accuracy notes and document versions are retained. Historical failures remain in
+their original evidence. This does not restart Qwen, DeepSeek or structured critics.
+
+Task 2 development continuity (25 October): read
+[TASK2-DEVELOPMENT.md](TASK2-DEVELOPMENT.md) before integration. Work lives in
+`/tmp/pdf-to-latex-critic-development-20261025`; the extraction checkout is separate.
+The selected GLM/MiMo calibration described below has completed. New context,
+reporting, field-repair and Gatheral-adapter changes must not alter an unfinished
+conversion's code fingerprints. Preserve the patch bundle outside temporary storage.
+
+Current policy note (25 October): the conversion remains local. The user authorized
+[candidate-only GLM-first criticism and selected MiMo escalation](CANDIDATE-CRITIC.md).
+Qwen remains the source-image reviewer; DeepSeek is a selectable text critic.
+The twelve-passage [GLM/MiMo comparison](GLM-MIMO-CRITIC-PILOT.md) is complete and
+frozen. Next is eight anchored GLM passages, then at most four explicitly selected
+MiMo passages; no automatic service-failure fallback. The USD 10 cumulative ceiling
+includes the prior USD 0.1717154424, unknown charges and all new readiness/follow-ups.
+The configurable budget is sealed; approved increases preserve consumed costs/calls.
+Documented retention below 100 days is
+accepted for nonpersonal published book material; Xiaomi's 30-day policy qualifies.
+No training opt-in, account privacy change, cloud OCR or whole-book upload follows
+from this exception. Read the latest PROJECT-STATE entry before continuing.
+
 This repository starter preserves the application and test bytes from
 `PDF_to_LaTeX_Local_Probe_v0_1.zip` and adds development instructions. It is not
 a new converter release. No Git repository, commit or remote has been created

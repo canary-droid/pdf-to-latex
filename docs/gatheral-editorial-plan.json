@@ -1,0 +1,530 @@
+{
+  "version": 1,
+  "assessment": "Codex assessment, incorporating user-supplied ChatGPT source-image audit; not complete-book verification",
+  "chapters": {
+    "gatheral-01": {
+      "text_fingerprint": "d5697ba9a1d2f2b69a047c8157b7107c99814e8399655f5f57257f821e70ee2d",
+      "file_sha256": "92cb16fd21d33a5ef0bde45e7ba24f10763300ae779a10749ea7909ca7a840a7",
+      "edits": [
+        {
+          "id": "G1-eta-portfolio",
+          "old": "\\left\\{ \\phi ( S , \\nu , t ) d t + d Z _ { 2 } \\right\\}",
+          "new": "\\left\\{ \\phi ( S , \\nu , t ) d t + \\eta d Z _ { 2 } \\right\\}"
+        },
+        {
+          "id": "G1-eta-risk-neutral",
+          "old": "d \\nu = \\alpha ' d t + \\beta \\sqrt { \\nu } d Z _ { 2 }\n\\end{equation*}",
+          "new": "d \\nu = \\alpha ' d t + \\eta \\beta \\sqrt { \\nu } d W _ { 2 }\n\\end{equation*}"
+        },
+        {
+          "id": "G1-phi-interpretation",
+          "old": "We see that the extra return per unit of volatility risk\n$d Z _ { 2 }$ is given by $\\phi ( S , \\nu , t ) d t$ and so in analogy with\nthe Capital Asset Pricing Model, $\\phi$ is known as the market price of\nvolatility risk.\\footnote{\\textbf{Editorial note:} combining the valuation\nequation (1.3) with the SDE (1.2) as printed (diffusion\n$\\eta \\beta \\sqrt { \\nu } d Z _ { 2 }$) gives a noise term\n$\\eta \\beta \\sqrt { \\nu } \\frac { \\partial V } { \\partial \\nu } d Z _ { 2 }$,\nwhereas the final line of the display above reads\n$\\beta \\sqrt { \\nu } \\frac { \\partial V } { \\partial \\nu } d Z _ { 2 }$.\nThe printed reading is internally consistent with the risk-neutral SDE\n$d \\nu = \\alpha ' d t + \\beta \\sqrt { \\nu } d Z _ { 2 }$ printed below if\nvolatility risk is measured per unit of $\\beta \\sqrt { \\nu } d Z _ { 2 }$\n(i.e., $d Z _ { 2 }$ rescaled by $\\eta$, or $\\eta = 1$, from this point on);\ntaken literally with (1.2), the factor $\\eta$ is missing. Preserved as\nprinted; both extractions agree on the absence of $\\eta$, so inspection of\nprinted p.~7 would be confirmatory only.}",
+          "new": "The excess drift is $\\beta\\sqrt{\\nu}\\,V_\\nu\\phi\\,dt$ and the diffusion is $\\eta\\beta\\sqrt{\\nu}\\,V_\\nu dZ_2$. Thus $\\phi$ retains the convention used in (1.3); the drift-to-diffusion risk premium is $\\phi/\\eta$ when $\\eta\\ne0$. A change of drift to a risk-neutral standard Brownian motion does not change the diffusion coefficient.\\footnote{\\textbf{Codex editorial correction [G1-eta].} PDF 38 / printed 7: restore the two missing $\\eta$ factors. Substitution of (1.2) into the delta-hedged portfolio and use of (1.3) gives $\\beta\\sqrt{\\nu}V_\\nu(\\phi\\,dt+\\eta\\,dZ_2)$. The PDE and $\\alpha'=\\alpha-\\beta\\sqrt{\\nu}\\phi$ are unchanged. Rescaling a standard Brownian motion changes its quadratic variation and does not justify the printed omission.}"
+        }
+      ],
+      "findings": [
+        {
+          "id": "G1-eta",
+          "location": "PDF 35–38 / printed 4–7",
+          "status": "applied_verified",
+          "category": "material",
+          "attribution": "Codex",
+          "text": "Restored eta in portfolio and risk-neutral diffusion; PDE and alpha-prime unchanged. Explicit SDE/PDE substitution fixes phi interpretation.",
+          "source_inspected": "PDF 35–38 / printed 4–7",
+          "verification": "source image and/or explicit local argument; not whole-chapter certification"
+        },
+        {
+          "id": "G1-period",
+          "location": "Figure 1.1 / PDF 33–34",
+          "status": "unresolved",
+          "category": "material",
+          "attribution": "Codex",
+          "text": "The prose says 15 years and caption says 20 years. The graph has no labelled time axis that resolves this; dates/data provenance are needed, not a speculative rescaling or guessed period.",
+          "source_inspected": "Figure 1.1 / PDF 33–34",
+          "verification": "source image and/or explicit local argument; not whole-chapter certification"
+        }
+      ],
+      "superseded_model_findings": {
+        "gatheral-01-critic-73b009622d": "G1-eta",
+        "gatheral-01-critic-f819febec9": "G1-period"
+      }
+    },
+    "gatheral-02": {
+      "text_fingerprint": "5bda60fbb11117f0900b6037201c1da11d5822dad179a51a188dac23baf8e465",
+      "file_sha256": "339d07380786da9f6ae4e69fe7e515a2a23ecec23d7caa9b416fbf00c58fbff9",
+      "edits": [
+        {
+          "id": "G2-drift-note",
+          "old": "\\footnote{{\\itshape Transcription note:} as printed, the exponent omits the deterministic drift $\\int_0^t\\mu_s\\,ds$ implied by (2.16); transcribed as printed.}",
+          "new": "\\footnote{\\textbf{Codex editorial correction [G2-drift].} PDF 54 / printed 23: include $\\int_0^t\\mu_s\\,ds$ in the exponential to solve the stock SDE (2.16). It vanishes only under an explicit zero-drift assumption; no such author intent is presumed.}"
+        },
+        {
+          "id": "G2-drift",
+          "old": "S_t&=S_0\\exp\\left\\{-\\frac{1}{2}\\int_0^t\\nu_s\\,ds",
+          "new": "S_t&=S_0\\exp\\left\\{\\int_0^t\\mu_s\\,ds-\\frac{1}{2}\\int_0^t\\nu_s\\,ds"
+        },
+        {
+          "id": "G2-nu0",
+          "old": "\\footnote{{\\itshape Transcription note:} as printed (both supplied extractions agree), the list ends ``$\\nu_t$ and $\\nu_0$''. Since $\\nu_0$ is deterministic, its inclusion among quantities whose means and variances are sought looks like a misprint; preserved as printed.}",
+          "new": "\\footnote{\\textbf{Codex contextual clarification [G2-nu0].} With $\\nu_0$ fixed as in the preceding simulation, its mean is $\\nu_0$ and its variance is zero. Its inclusion in this list is redundant, not evidence for a different unprinted random variable. No replacement of the listed variables is warranted.}"
+        }
+      ],
+      "findings": [
+        {
+          "id": "G2-retained",
+          "location": "PDF 52,54 / printed 21,23",
+          "status": "retained_verified",
+          "category": "material",
+          "attribution": "Codex",
+          "text": "Retained GLM repairs: dk in (2.15), eta squared in (2.19), and its explicit quadratic root. Printed wrong readings confirmed; this does not validate the stochastic discretization as an approximation.",
+          "source_inspected": "PDF 52,54 / printed 21,23",
+          "verification": "source image and/or explicit local argument; not whole-chapter certification"
+        },
+        {
+          "id": "G2-drift",
+          "location": "PDF 52,54 / printed 21,23",
+          "status": "applied_verified",
+          "category": "material",
+          "attribution": "Codex",
+          "text": "Added drift integral to exact stock solution by Ito/log-SDE integration of (2.16).",
+          "source_inspected": "PDF 52,54 / printed 21,23",
+          "verification": "source image and/or explicit local argument; not whole-chapter certification"
+        },
+        {
+          "id": "G2-nu0",
+          "location": "PDF 55 / printed 24",
+          "status": "contextual",
+          "category": "material",
+          "attribution": "Codex",
+          "text": "Fixed nu0 has mean nu0 and variance zero; redundant moment request clarified without inventing the author’s intended replacement variable.",
+          "source_inspected": "PDF 55 / printed 24",
+          "verification": "source image and/or explicit local argument; not whole-chapter certification"
+        }
+      ],
+      "superseded_model_findings": {
+        "gatheral-02-critic-a128a8ab6b": "G2-drift",
+        "gatheral-02-critic-e8afa73b2f": "G2-nu0"
+      }
+    },
+    "gatheral-03": {
+      "text_fingerprint": "36aeb93130bc4a5961c2318be6a4e3e6ccb1e2fb44a561153d25fb22415838be",
+      "file_sha256": "e8e67a8dc3d219273dc01139697fdafdabec0ddd94435a83146b31e2523c33e7",
+      "edits": [],
+      "findings": [
+        {
+          "id": "G3-retained",
+          "location": "PDF 56–73",
+          "status": "retained_model_corrections",
+          "category": "material",
+          "attribution": "Codex",
+          "text": "Retained existing GLM missing-time, density-symbol, extra inner 1/T in (3.19) and ATM variance corrections. The ATM display is PDF 70 / printed 39. These are retained model corrections, not a new complete derivation audit.",
+          "source_inspected": "PDF 56–73",
+          "verification": "source image and/or explicit local argument; not whole-chapter certification"
+        },
+        {
+          "id": "G3-sign",
+          "location": "Chapter 3 / Chapter 2 log-strike definitions",
+          "status": "unresolved",
+          "category": "material",
+          "attribution": "Codex",
+          "text": "Distinguish log-moneyness x=log(S/K) from log-strike k=log(K/S)=-x. A focused editorial check uses Chapter 2 definitions before applying any additional sign change. Equivalent wording, including usual/unusual, is not a material issue.",
+          "source_inspected": "Chapter 3 / Chapter 2 log-strike definitions",
+          "verification": "source image and/or explicit local argument; not whole-chapter certification"
+        }
+      ],
+      "superseded_model_findings": {
+        "gatheral-03-critic-5ea9e176f6": "G3-retained"
+      }
+    },
+    "gatheral-04": {
+      "text_fingerprint": "e1c3b6db0d4f4996f824204c59285197dc60722f620c8e728768b9394a254215",
+      "file_sha256": "769e45648eff0f14cee9c620c86a6ced93c1e9842055d3c45d846bb881f7be60",
+      "edits": [
+        {
+          "id": "G4-qualification",
+          "old": "\\tag{4.1}\n\\end{align*}",
+          "new": "\\tag{4.1}\n\\end{align*}\\par\\noindent\\textbf{Codex editorial qualification [G4-local].} The simplified second line of (4.1) uses the special initial condition $\\nu=\\bar\\nu$ in this approximation, as in the numerical example (4.2). It is not an exact model identity for general initial variance. The integral expression and its approximation context must be retained.\\par"
+        }
+      ],
+      "findings": [
+        {
+          "id": "G4-local",
+          "location": "PDF 75,77 / printed 44,46",
+          "status": "applied_verified",
+          "category": "material",
+          "attribution": "Codex",
+          "text": "Made nu=nubar qualification visible; retained swapped exact/approximate label repair and running time t in the local-variance coefficient. This is an approximation, not a general exact identity.",
+          "source_inspected": "PDF 75,77 / printed 44,46",
+          "verification": "source image and/or explicit local argument; not whole-chapter certification"
+        }
+      ],
+      "superseded_model_findings": {
+        "gatheral-04-critic-f087924d81": "G4-local",
+        "gatheral-04-critic-2f504c0647": "G4-local",
+        "gatheral-04-critic-91ab8109ef": "G4-local"
+      }
+    },
+    "gatheral-05": {
+      "text_fingerprint": "7762d07c1d043f32913c37060a5392baefc20f6b30be8972f74518fab5ad1fd3",
+      "file_sha256": "d4bbc18aa66f77b1a2812b8c7f32b5a2731f37720a72b70f77272ac8c7b5121c",
+      "edits": [
+        {
+          "id": "G5-table-bar",
+          "old": "Author(s) & Model & $\\lambda$ & $\\eta$ & $\\rho$ & $v$ & $\\lambda_J$",
+          "new": "Author(s) & Model & $\\lambda$ & $\\eta$ & $\\rho$ & $\\bar v$ & $\\lambda_J$"
+        },
+        {
+          "id": "G5-hats",
+          "old": "with $C(u,T)$ and $D(u,T)$ given by",
+          "new": "with $\\hat C(u,T)$ and $\\hat D(u,T)$ given by"
+        }
+      ],
+      "findings": [
+        {
+          "id": "G5-bar",
+          "location": "Table 5.4 / PDF 100 / printed 69",
+          "status": "applied_verified",
+          "category": "material",
+          "attribution": "Codex",
+          "text": "Restored mean-variance overbar in the editable Table 5.4 header from the source image. Table 5.5 v=0.0158 and vbar=0.0439 retained, confirmed PDF 102 / printed 71.",
+          "source_inspected": "Table 5.4 / PDF 100 / printed 69",
+          "verification": "source image and/or explicit local argument; not whole-chapter certification"
+        },
+        {
+          "id": "G5-hats",
+          "location": "PDF 99 / printed 68",
+          "status": "applied_verified",
+          "category": "material",
+          "attribution": "Codex",
+          "text": "Restored hat-C and hat-D introduction to agree with the following definitions. Retained GLM auxiliary integral prefactor 1/(eta squared T); its correct locator is PDF 99 / printed 68.",
+          "source_inspected": "PDF 99 / printed 68",
+          "verification": "source image and/or explicit local argument; not whole-chapter certification"
+        },
+        {
+          "id": "G5-time",
+          "location": "Characteristic time T-star, Table 5.3 / Chapter 5",
+          "status": "unresolved",
+          "category": "material",
+          "attribution": "Codex",
+          "text": "The stated jump/diffusion matching equation and tabulated T-star values disagree. Preserve the square-root time scaling and printed table as distinct evidence; a numerical inconsistency does not justify changing the scaling solely to fit the table.",
+          "source_inspected": "Characteristic time T-star, Table 5.3 / Chapter 5",
+          "verification": "source image and/or explicit local argument; not whole-chapter certification"
+        }
+      ],
+      "superseded_model_findings": {
+        "gatheral-05-critic-a5772d238b": "G5-hats",
+        "gatheral-05-critic-cf8778e6c6": "G5-bar",
+        "gatheral-05-critic-e6457a05fb": "G5-bar",
+        "gatheral-05-critic-df544c227d": "G5-hats"
+      }
+    },
+    "gatheral-08": {
+      "text_fingerprint": "2abb9cf3b3985bbffd72a4be0f4d914a06adeb96f63a68640535acee2b4d6110",
+      "file_sha256": "c0a96bc6cf4cf3e54875a3fe6fbd21ec0d2e52caad99d7c477eb4800f1a37530",
+      "edits": [
+        {
+          "id": "G8-differentiation",
+          "old": "Differentiating with respect to $x$ and considering only the leading term in",
+          "new": "Differentiating with respect to $k$ and considering only the leading term in"
+        },
+        {
+          "id": "G8-coupons",
+          "old": "(48\\%) or 5.76\\% of Notional",
+          "new": "(24\\%) or 2.88\\% of Notional"
+        }
+      ],
+      "findings": [
+        {
+          "id": "G8-coupons",
+          "location": "PDF 137 / printed 106",
+          "status": "applied_verified",
+          "category": "material",
+          "attribution": "Codex",
+          "text": "Under the stated five-year deal with annual 6% coupons, excluding the first leaves four: 4 × 6% = 24%; 12% of 24% = 2.88% of notional. Corrected printed 48% and 5.76%, without changing term or coupon.",
+          "source_inspected": "PDF 137 / printed 106",
+          "verification": "source image and/or explicit local argument; not whole-chapter certification",
+          "note_tex": "PDF 137 / printed 106. The stated five annual $6\\%$ coupons, excluding the first, leave $4\\times6\\%=24\\%$; $0.12\\times24\\%=2.88\\%$ of notional. The printed $48\\%$ and $5.76\\%$ are corrected without changing the assumptions."
+        },
+        {
+          "id": "G8-coordinate",
+          "location": "PDF 133 / printed 102",
+          "status": "applied_verified",
+          "category": "material",
+          "attribution": "Codex",
+          "text": "Changed prose differentiation variable x to k: the recalled formula and all differentiated terms are in k; Chapter 1 definition k=log(K/F) applies. No unrecorded sign transformation.",
+          "source_inspected": "PDF 133 / printed 102",
+          "verification": "source image and/or explicit local argument; not whole-chapter certification"
+        }
+      ],
+      "superseded_model_findings": {
+        "gatheral-08-critic-0b8f9326e1": "G8-coupons",
+        "gatheral-08-critic-f8f5bf81b3": "G8-coordinate"
+      }
+    },
+    "gatheral-09": {
+      "text_fingerprint": "0813b92d1d4a1a3a821168ce08a131d618169bd184e4021c52fc409a1eb89a2c",
+      "file_sha256": "3291fe9f6887a978089f1ef92f8950ba4fbac76e5896c8cd431319939b197f89",
+      "edits": [],
+      "findings": [
+        {
+          "id": "G9-delta",
+          "location": "PDF 144 / printed 113",
+          "status": "retained_verified",
+          "category": "material",
+          "attribution": "Codex",
+          "text": "First draft remains current after findings-only critic. Retained missing Delta K repair: 2 N(d2)|S=K Delta K = Delta K when N=1/2. Markdown-fenced updated notes recovered; the source prints the missing-factor step.",
+          "source_inspected": "PDF 144 / printed 113",
+          "verification": "source image and/or explicit local argument; not whole-chapter certification"
+        }
+      ],
+      "superseded_model_findings": {
+        "gatheral-09-critic-83a0d16ec5": "G9-delta"
+      }
+    },
+    "gatheral-10": {
+      "text_fingerprint": "ace5d2e1baf8d5b90a2ae6caa6a73e04d60b3f5e7be2e445672b21a9105ca545",
+      "file_sha256": "b6e0cde1a4a60f64dfba894f95cdf316a57dc78d0076b38169628c30625bdfe8",
+      "edits": [
+        {
+          "id": "G10-floor",
+          "old": "When minCoupon~$=-1\\%$\non the other hand,",
+          "new": "When minCoupon~$\\leq-12\\%$\non the other hand,"
+        },
+        {
+          "id": "G10-floor-note",
+          "old": "\\footnote{Editorial note: each monthly\nterm is floored at $-1\\%$, so their sum is at least $-12\\%$; a global floor of $-1\\%$\ntherefore still binds whenever the sum of the capped monthly returns falls below\n$-1\\%$, and the structure equals the strip of European call spreads exactly only for\na global floor at or below $-12\\%$. The sentence is preserved as printed --- apparently\nthe author's shorthand for the no-global-floor limit.}",
+          "new": "\\footnote{\\textbf{Codex editorial correction [G10-floor].} Twelve monthly floors of $-1\\%$ imply a lower bound of $-12\\%$ on the sum. A global annual floor of $-1\\%$ can still bind; the no-global-floor limit requires a floor at or below $-12\\%$. The printed $-1\\%$ condition is corrected, not excused as shorthand.}"
+        },
+        {
+          "id": "G10-Jeffery",
+          "old": "\\noindent\\textbf{Reference (as cited in the text).} Jeffery (2004): article in\n\\emph{RISK} magazine, February 2004. (No title, author initial or other bibliographic\ndetails are given in this chapter.)\n\n",
+          "new": "\\noindent\\textbf{Reference (resolved from this book's bibliography).} Jeffery, Christopher (2004), ``Reverse cliquets: end of the road?'', \\emph{Risk Magazine} 17, 20--22.\\par\n\n"
+        }
+      ],
+      "findings": [
+        {
+          "id": "G10-return",
+          "location": "PDF 153 / printed 122",
+          "status": "retained_verified",
+          "category": "material",
+          "attribution": "Codex",
+          "text": "Retained GLM removal of extra -1 in the monthly-return formula; corrected locator to PDF 153 / printed 122.",
+          "source_inspected": "PDF 153 / printed 122",
+          "verification": "source image and/or explicit local argument; not whole-chapter certification"
+        },
+        {
+          "id": "G10-floor",
+          "location": "Chapter 10 no-global-floor discussion",
+          "status": "applied_verified",
+          "category": "material",
+          "attribution": "Codex",
+          "text": "Twelve monthly -1% floors imply -12% lower bound. Corrected -1% annual no-global-floor assertion to at-or-below -12%.",
+          "source_inspected": "Chapter 10 no-global-floor discussion",
+          "verification": "source image and/or explicit local argument; not whole-chapter certification"
+        },
+        {
+          "id": "G10-denominator",
+          "location": "PDF 157 / printed 126",
+          "status": "unresolved",
+          "category": "material",
+          "attribution": "Codex",
+          "text": "The printed reverse-cliquet denominator is basket_i; glyph verified. Contract-intended denominator remains substantive, requiring contract documentation. Conventional loss comparison is -(B_(i-1)-B_i)^+/B_(i-1), not the critic notes’ opposite sign region.",
+          "source_inspected": "PDF 157 / printed 126",
+          "verification": "source image and/or explicit local argument; not whole-chapter certification",
+          "note_tex": "PDF 157 / printed 126 visibly prints denominator $B_i$. The contract-intended denominator remains unresolved and needs contract evidence. The conventional negative loss comparison is $-(B_{i-1}-B_i)^+/B_{i-1}$; the prior critic notes used the opposite sign region. This corrects those notes, not the existing TeX footnote."
+        },
+        {
+          "id": "G10-Jeffery",
+          "location": "Bibliography PDF 197 / printed 166",
+          "status": "applied_verified",
+          "category": "material",
+          "attribution": "Codex",
+          "text": "Resolved Christopher Jeffery and article from the completed same-book bibliography; replaced chapter-only unavailable-metadata notice.",
+          "source_inspected": "Bibliography PDF 197 / printed 166",
+          "verification": "source image and/or explicit local argument; not whole-chapter certification"
+        }
+      ],
+      "superseded_model_findings": {
+        "gatheral-10-critic-e5b3467114": "G10-Jeffery",
+        "gatheral-10-critic-0bbb63b634": "G10-denominator",
+        "gatheral-10-critic-8c61914ff8": "G10-floor",
+        "gatheral-10-critic-9334bd635d": "G10-return"
+      }
+    },
+    "gatheral-postscript": {
+      "text_fingerprint": "f7ac0c1adafd005cb06141665bae24bbe7d445d6280867ee2c35844b0b9fcd17",
+      "file_sha256": "d5d3c6a5200ab06c7795c8a8d94f26fc6970650533b61acf90020f86a26a6a87",
+      "edits": [],
+      "findings": [
+        {
+          "id": "POST-control",
+          "location": "PDF 193 / printed 162",
+          "status": "unchanged_control",
+          "category": "material",
+          "attribution": "Codex",
+          "text": "Document body retained byte-for-byte; no offline substantive correction. Model completion is not independent accuracy verification.",
+          "source_inspected": "PDF 193 / printed 162",
+          "verification": "source image and/or explicit local argument; not whole-chapter certification"
+        }
+      ]
+    },
+    "gatheral-bibliography": {
+      "text_fingerprint": "abe3d92b271b6901e0d34169ef024f77306d0e8554640c137d7396668242f4ad",
+      "file_sha256": "df47d4213913bb086e25526fa0d64bd51482b4b0baef1a82e6bfede0ea10642b",
+      "edits": [
+        {
+          "id": "BIB-repeat-3",
+          "old": "\\bibentry{, and Rupert Brotherton-Ratcliffe. 2001. Extended LIBOR market models with stochastic volatility. Discussion paper Banc of America Securities and Gen Re Securities.}",
+          "new": "\\bibentry{Andersen, Leif, and Rupert Brotherton-Ratcliffe. 2001. Extended LIBOR market models with stochastic volatility. Discussion paper Banc of America Securities and Gen Re Securities.}"
+        },
+        {
+          "id": "BIB-repeat-16",
+          "old": "\\bibentry{, and Roger W. Lee. 2005. Robust replication of volatility derivatives. Discussion paper Bloomberg LP and University of Chicago.}",
+          "new": "\\bibentry{Carr, Peter, and Roger W. Lee. 2005. Robust replication of volatility derivatives. Discussion paper Bloomberg LP and University of Chicago.}"
+        },
+        {
+          "id": "BIB-repeat-17",
+          "old": "\\bibentry{, and Dilip Madan. 1998. Towards a theory of volatility trading. In Robert A. Jarrow, ed., \\emph{Volatility: New Estimation Techniques for Pricing Derivatives}, Chap.~29, pp.~417--427 (Risk Books).}",
+          "new": "\\bibentry{Carr, Peter, and Dilip Madan. 1998. Towards a theory of volatility trading. In Robert A. Jarrow, ed., \\emph{Volatility: New Estimation Techniques for Pricing Derivatives}, Chap.~29, pp.~417--427 (Risk Books).}"
+        },
+        {
+          "id": "BIB-repeat-18",
+          "old": "\\bibentry{, and Dilip B. Madan. 1999. Option valuation using the fast Fourier transform. \\emph{The Journal of Computational Finance} 2, 61--73.}",
+          "new": "\\bibentry{Carr, Peter, and Dilip B. Madan. 1999. Option valuation using the fast Fourier transform. \\emph{The Journal of Computational Finance} 2, 61--73.}"
+        },
+        {
+          "id": "BIB-repeat-28",
+          "old": "\\bibentry{. 1998. Stochastic implied trees: Arbitrage pricing with stochastic term and strike structure of volatility. \\emph{International Journal of Theoretical and Applied Finance} 1, 61--110.}",
+          "new": "\\bibentry{Derman, Emanuel, and Iraj Kani. 1998. Stochastic implied trees: Arbitrage pricing with stochastic term and strike structure of volatility. \\emph{International Journal of Theoretical and Applied Finance} 1, 61--110.}"
+        },
+        {
+          "id": "BIB-repeat-29",
+          "old": "\\bibentry{, and Neil Chriss. 1996. Implied trinomial trees of the volatility smile. \\emph{Journal of Derivatives} 3, 7--22.}",
+          "new": "\\bibentry{Derman, Emanuel, Iraj Kani, and Neil Chriss. 1996. Implied trinomial trees of the volatility smile. \\emph{Journal of Derivatives} 3, 7--22.}"
+        },
+        {
+          "id": "BIB-repeat-32",
+          "old": "\\bibentry{, and Kenneth J. Singleton. 1999. Modeling term structures of defaultable bonds. \\emph{Review of Financial Studies} 12, 687--720.}",
+          "new": "\\bibentry{Duffie, Darrell, and Kenneth J. Singleton. 1999. Modeling term structures of defaultable bonds. \\emph{Review of Financial Studies} 12, 687--720.}"
+        },
+        {
+          "id": "BIB-repeat-35",
+          "old": "\\bibentry{. 1994. Pricing with a smile. \\emph{Risk} 7, 18--20.}",
+          "new": "\\bibentry{Dupire, Bruno. 1994. Pricing with a smile. \\emph{Risk} 7, 18--20.}"
+        },
+        {
+          "id": "BIB-repeat-36",
+          "old": "\\bibentry{. 1996. A unified theory of volatility, Discussion paper Paribas Capital Markets, reprinted in ``Derivatives Pricing: The Classic Collection'', edited by Peter Carr, 2004 (Risk Books, London).}",
+          "new": "\\bibentry{Dupire, Bruno. 1996. A unified theory of volatility, Discussion paper Paribas Capital Markets, reprinted in ``Derivatives Pricing: The Classic Collection'', edited by Peter Carr, 2004 (Risk Books, London).}"
+        },
+        {
+          "id": "BIB-repeat-37",
+          "old": "\\bibentry{. 1998. A new approach for understanding the impact of volatility on option prices, ICBI Global Derivatives 98, Paris.}",
+          "new": "\\bibentry{Dupire, Bruno. 1998. A new approach for understanding the impact of volatility on option prices, ICBI Global Derivatives 98, Paris.}"
+        },
+        {
+          "id": "BIB-repeat-38",
+          "old": "\\bibentry{. 2005. Volatility derivatives modeling, \\url{www.math.nyu.edu/carrp/mfseminar/bruno.ppt}.}",
+          "new": "\\bibentry{Dupire, Bruno. 2005. Volatility derivatives modeling, \\url{www.math.nyu.edu/carrp/mfseminar/bruno.ppt}.}"
+        },
+        {
+          "id": "BIB-repeat-44",
+          "old": "\\bibentry{. 2000. Mean-reverting stochastic volatility. \\emph{SIAM J. Control and Optimization} 31, 470--493.}",
+          "new": "\\bibentry{Fouque, Jean-Pierre, George Papanicolaou, and K. Ronnie Sircar. 2000. Mean-reverting stochastic volatility. \\emph{SIAM J. Control and Optimization} 31, 470--493.}"
+        },
+        {
+          "id": "BIB-repeat-52",
+          "old": "\\bibentry{, and S. Nandi. 1998. Preference-free option pricing with path-dependent volatility: A closed-form approach. Discussion paper, Federal Reserve Bank of Atlanta.}",
+          "new": "\\bibentry{Heston S., and S. Nandi. 1998. Preference-free option pricing with path-dependent volatility: A closed-form approach. Discussion paper, Federal Reserve Bank of Atlanta.}"
+        },
+        {
+          "id": "BIB-repeat-59",
+          "old": "\\bibentry{. 2004. The moment formula for implied volatility at extreme strikes. \\emph{Mathematical Finance} 14, 469--480.}",
+          "new": "\\bibentry{Lee, Roger W. 2004. The moment formula for implied volatility at extreme strikes. \\emph{Mathematical Finance} 14, 469--480.}"
+        },
+        {
+          "id": "BIB-repeat-60",
+          "old": "\\bibentry{. 2005. Implied volatility: Statics, dynamics, and probabilistic interpretation. In R. Baeza-Yates, J. Glaz, Henryk Gzyl, J\\\"urgen H\\\"usler, and Jos\\'e Luis Palacios, eds, \\emph{Recent Advances in Applied Probability}. Berlin: Springer Verlag.}",
+          "new": "\\bibentry{Lee, Roger W. 2005. Implied volatility: Statics, dynamics, and probabilistic interpretation. In R. Baeza-Yates, J. Glaz, Henryk Gzyl, J\\\"urgen H\\\"usler, and Jos\\'e Luis Palacios, eds, \\emph{Recent Advances in Applied Probability}. Berlin: Springer Verlag.}"
+        },
+        {
+          "id": "BIB-repeat-63",
+          "old": "\\bibentry{. 2000. Perturbative analysis of volatility smiles. \\url{http://www.math.columbia.edu/~smirnov/matytsin2000.pdf}.}",
+          "new": "\\bibentry{Matytsin, Andrew. 2000. Perturbative analysis of volatility smiles. \\url{http://www.math.columbia.edu/~smirnov/matytsin2000.pdf}.}"
+        },
+        {
+          "id": "BIB-Black-Scholes",
+          "old": "\\emph{Journal of Political Economy} 81, 631--659.",
+          "new": "\\emph{Journal of Political Economy} 81(3), 637--654. DOI: \\url{https://doi.org/10.1086/260062}."
+        },
+        {
+          "id": "BIB-Dumas",
+          "old": "\\emph{The Journal of Finance} 53.",
+          "new": "\\emph{The Journal of Finance} 53(6), 2059--2106. DOI: \\url{https://doi.org/10.1111/0022-1082.00083}."
+        }
+      ],
+      "findings": [
+        {
+          "id": "BIB-authors",
+          "location": "PDF 194–198 / printed 163–167",
+          "status": "applied_source_supported",
+          "category": "material",
+          "attribution": "Codex",
+          "text": "Expanded all repeated-author placeholders into explicit author lists from the printed sequence. Full author-list vs leading-author dashes require judgement; Carr 2005 carries Peter Carr (new coauthor Lee), Derman 1996 carries Emanuel Derman and Iraj Kani; Duffie 1999 carries Darrell Duffie. Original printed entries retained. These Codex readings are inspectable, not externally verified publication metadata.",
+          "source_inspected": "PDF 194–198 / printed 163–167",
+          "verification": "source image and/or explicit local argument; not whole-chapter certification"
+        },
+        {
+          "id": "BIB-Black-Scholes",
+          "location": "PDF 194 / printed 163",
+          "status": "applied_external_evidence",
+          "category": "material",
+          "attribution": "Codex",
+          "text": "Corrected printed 631–659 to 637–654, JPE 81(3), 1973; DOI 10.1086/260062. User-provided primary publisher verification by ChatGPT, 27 Oct 2026: https://www.journals.uchicago.edu/doi/10.1086/260062 . Not independently fetched by this offline run.",
+          "source_inspected": "PDF 194 / printed 163",
+          "verification": "source image and/or explicit local argument; not whole-chapter certification"
+        },
+        {
+          "id": "BIB-Dumas",
+          "location": "PDF 195 / printed 164",
+          "status": "applied_external_evidence",
+          "category": "material",
+          "attribution": "Codex",
+          "text": "Added Journal of Finance 53(6), 2059–2106, year 1998; DOI 10.1111/0022-1082.00083. User-provided ChatGPT publisher verification 27 Oct 2026: https://onlinelibrary.wiley.com/doi/10.1111/0022-1082.00083 . Enrichment, not replacement of issue year with posting date.",
+          "source_inspected": "PDF 195 / printed 164",
+          "verification": "source image and/or explicit local argument; not whole-chapter certification"
+        },
+        {
+          "id": "BIB-breve",
+          "location": "PDF 195 / printed 164",
+          "status": "retained_verified",
+          "category": "material",
+          "attribution": "Codex",
+          "text": "Retained GLM Dr\\u{a}gulescu breve correction; source shows breve, not caron.",
+          "source_inspected": "PDF 195 / printed 164",
+          "verification": "source image and/or explicit local argument; not whole-chapter certification"
+        },
+        {
+          "id": "BIB-URL",
+          "location": "PDF 196–197 / printed 165–166",
+          "status": "unresolved",
+          "category": "material",
+          "attribution": "Codex",
+          "text": "Underscores in fellows_fin_math and E2C_JPM_CDconference.pdf confirmed visually. Matytsin ~smirnov remains a proposed/unverified restoration; copied in historical draft only, not a verified working URL. No URL availability claim. Risk-Metrics hyphen is a cosmetic line-break question, not material uncertainty.",
+          "source_inspected": "PDF 196–197 / printed 165–166",
+          "verification": "source image and/or explicit local argument; not whole-chapter certification"
+        }
+      ],
+      "superseded_model_findings": {
+        "gatheral-bibliography-critic-bd22e36da8": "BIB-breve",
+        "gatheral-bibliography-critic-27e309e507": "BIB-URL",
+        "gatheral-bibliography-critic-d549da6040": "BIB-Black-Scholes"
+      }
+    }
+  },
+  "editorial_requests": [
+    "gatheral-03",
+    "gatheral-05",
+    "gatheral-10"
+  ]
+}

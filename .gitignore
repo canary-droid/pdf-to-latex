@@ -44,3 +44,6 @@ Thumbs.db
 *.pth
 
 # Deliberately no blanket *.pdf or docs/ ignore: retain project reports.
+
+# Existing project-wide writer lock is runtime state, not checkpoint content.
+.probe.lock

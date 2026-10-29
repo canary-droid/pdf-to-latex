@@ -1,0 +1,87 @@
+{
+  "checked_on": "2026-10-25",
+  "kind": "Public documentation checked offline; not live model qualification",
+  "endpoint_source": "https://openrouter.ai/api/v1/models/xiaomi/mimo-v2.6-pro/endpoints",
+  "selected_endpoint": {
+    "name": "Xiaomi | xiaomi/mimo-v2.6-pro-20260921",
+    "model_id": "xiaomi/mimo-v2.6-pro",
+    "model_name": "Xiaomi: MiMo-V2.6-Pro",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.000000435",
+      "completion": "0.00000087",
+      "input_cache_read": "0.0000000036",
+      "discount": 0
+    },
+    "provider_name": "Xiaomi",
+    "tag": "xiaomi/fp8",
+    "service_tier": null,
+    "quantization": "fp8",
+    "max_completion_tokens": 131072,
+    "max_prompt_tokens": null,
+    "supported_parameters": [
+      "reasoning",
+      "include_reasoning",
+      "max_tokens",
+      "temperature",
+      "top_p",
+      "stop",
+      "response_format",
+      "tools",
+      "tool_choice",
+      "frequency_penalty",
+      "presence_penalty",
+      "structured_outputs"
+    ],
+    "supports_tool_choice": {
+      "none": false,
+      "auto": true,
+      "required": true,
+      "function": false
+    },
+    "status": 0,
+    "uptime_last_30m": 100,
+    "uptime_last_5m": 100,
+    "uptime_last_1d": 100,
+    "supports_implicit_caching": true,
+    "native_tools": {},
+    "supports_voice_cloning": false,
+    "supports_multiple_audio_references": false,
+    "supports_image_reference": false,
+    "supports_diarization": false,
+    "latency_last_30m": null,
+    "throughput_last_30m": null
+  },
+  "retention": {
+    "source": "https://openrouter.ai/providers",
+    "provider": "Xiaomi",
+    "training": "No",
+    "retention_days": 30,
+    "user_accepted_days_exclusive": 100,
+    "authority": "Explicit user clarification 25 October 2026; nonpersonal published book material. No account privacy changes or training opt-in.",
+    "routing": {
+      "data_collection": "allow",
+      "zdr": false
+    },
+    "not_claimed": [
+      "API-attested retention",
+      "EU/UK residency",
+      "mathematical OCR accuracy"
+    ]
+  },
+  "reasoning": {
+    "openrouter_source": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
+    "xiaomi_source": "https://mimo.mi.com/docs/en-US/quick-start/usage-guide/other/deep-thinking",
+    "requested": {
+      "enabled": true
+    },
+    "mapping": "OpenRouter explicitly enabled default reasoning; Xiaomi documents thinking enabled/disabled. No claim of graded high/medium semantics or equal computation to GLM high.",
+    "live_status": "untested"
+  },
+  "budget": {
+    "limit_usd": 1,
+    "key_policy_source": "https://openrouter.ai/docs/api_reference/limits",
+    "routing_source": "https://openrouter.ai/docs/guides/routing/provider-selection",
+    "structured_output_source": "https://openrouter.ai/docs/guides/features/structured-outputs"
+  }
+}

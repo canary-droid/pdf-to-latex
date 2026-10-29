@@ -33,8 +33,27 @@ a goal; figures may remain extracted images. Current work is a compatibility
 and fidelity probe: one complete paper, one selected book chapter and synthetic
 fixtures. The full-book application is later work.
 
-The conversion pipeline uses local GLM 5.3 Flash and local specialist OCR.
+The production direction is local MinerU extraction, local Qwen source-image
+review, a versioned candidate, then local regular GLM as the default TEXT critic.
+DeepSeek remains explicitly selectable. GLM text criticism does not replace Qwen's
+visual comparison. Review the current candidate once; paired baseline/candidate
+experiments are optional. Do not run heavy local phases concurrently.
 Do not enable OpenRouter or other cloud inference in the conversion program.
+User-authorized exception (25 October 2026): explicitly selected text passages may
+receive a MiMo second opinion through OpenRouter `xiaomi/mimo-v2.6-pro`, pinned
+to `xiaomi/fp8`, with no fallback and a USD 10 cumulative ceiling. The completed
+twelve-passage pilot stays frozen. The next calibration is eight candidate-only
+GLM passages followed by at most four selected MiMo passages and two shared paid
+recovery calls, plus separately bounded readiness. Follow-ups retain parent/global
+allowances across linked stages; cloud routing is never an automatic response to
+a failed local service. Cost/selection review precedes explicit operator dispatch.
+The amount is sealed at preparation; future increases require explicit user
+approval and a new linked preparation preserving consumed costs and allowances.
+For this project's nonpersonal published book material, documented provider
+retention below 100 days is acceptable; Xiaomi's published 30-day retention
+qualifies. Zero retention is not required. Do not enable training opt-ins or
+change account-wide privacy settings. This does not authorize cloud OCR or
+whole-book uploads. Credentials are supplied privately by the operator at runtime.
 Codex's OpenAI connection for development is separate from that program.
 Never silently replace GLM with another served model. Verify the intended alias
 against actual model-discovery results and the user's launcher information.
@@ -59,6 +78,9 @@ downloads and actual inference are separate, explicit operator steps.
   original page maps, failed attempts and unaccepted model proposals.
 - Do not simplify mathematics, omit conditions, summarise source prose, silently
   repair source errors, or treat image-only formulas as editable transcription.
+- Prioritise mathematical meaning over cosmetic polishing. Explicitly recorded
+  corrections of obvious source typos are permitted; uncertain mathematical
+  changes remain unresolved. Model agreement is not proof or acceptance.
 - Use `python -m unittest discover -s tests -v` in the project controller
   environment when available. Some tests use mock loopback HTTP servers;
   distinguish a sandbox socket restriction from an application regression.

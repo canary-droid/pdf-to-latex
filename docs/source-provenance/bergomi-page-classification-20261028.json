@@ -1,0 +1,99 @@
+{
+  "source_id": "bergomi",
+  "source_sha256": "35fd11fb3fe46e9c3de01db6b22dc1e2c848c04b352121fe13c3ccf0fba38413",
+  "basis": "Codex inspected original page images and saved native blocks on 2026-10-28. These are intentional blanks WITH a printed notice, not empty OCR pages. Preserve the notice as content. Original intake classification remains historical.",
+  "intake_record": "docs/source-provenance/bergomi-intake-20261027.json",
+  "verified_empty_pages": [],
+  "pages": [
+    {
+      "physical_pdf_page": 5,
+      "classification": "intentional_blank_with_notice",
+      "recognized_content": [
+        {
+          "type": "text",
+          "text": "This page intentionally left blank"
+        }
+      ]
+    },
+    {
+      "physical_pdf_page": 119,
+      "classification": "intentional_blank_with_notice",
+      "recognized_content": [
+        {
+          "type": "text",
+          "text": "This page intentionally left blank"
+        }
+      ]
+    },
+    {
+      "physical_pdf_page": 149,
+      "classification": "intentional_blank_with_notice",
+      "recognized_content": [
+        {
+          "type": "text",
+          "text": "This page intentionally left blank"
+        }
+      ]
+    },
+    {
+      "physical_pdf_page": 217,
+      "classification": "intentional_blank_with_notice",
+      "recognized_content": [
+        {
+          "type": "text",
+          "text": "This page intentionally left blank"
+        }
+      ]
+    },
+    {
+      "physical_pdf_page": 323,
+      "classification": "intentional_blank_with_notice",
+      "recognized_content": [
+        {
+          "type": "text",
+          "text": "This page intentionally left blank"
+        }
+      ]
+    },
+    {
+      "physical_pdf_page": 373,
+      "classification": "intentional_blank_with_notice",
+      "recognized_content": [
+        {
+          "type": "text",
+          "text": "This page intentionally left blank"
+        }
+      ]
+    },
+    {
+      "physical_pdf_page": 407,
+      "classification": "intentional_blank_with_notice",
+      "recognized_content": [
+        {
+          "type": "text",
+          "text": "This page intentionally left blank"
+        }
+      ]
+    },
+    {
+      "physical_pdf_page": 437,
+      "classification": "intentional_blank_with_notice",
+      "recognized_content": [
+        {
+          "type": "text",
+          "text": "This page intentionally left blank"
+        }
+      ]
+    },
+    {
+      "physical_pdf_page": 469,
+      "classification": "intentional_blank_with_notice",
+      "recognized_content": [
+        {
+          "type": "text",
+          "text": "This page intentionally left blank"
+        }
+      ]
+    }
+  ]
+}
