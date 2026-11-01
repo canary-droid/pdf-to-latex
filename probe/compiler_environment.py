@@ -15,20 +15,24 @@ from . import tex_compile
 
 STANDARD = ('texlive-latex-base', 'texlive-latex-recommended', 'texlive-latex-extra',
             'texlive-fonts-recommended', 'texlive-science', 'texlive-pictures', 'lmodern', 'cm-super')
-OPTIONAL = ('texlive-plain-generic',)
+OPTIONAL = ('texlive-plain-generic', 'texlive-lang-french')
 PACKAGES = {'enumitem.sty': 'texlive-latex-extra', 'lmodern.sty': 'lmodern',
             'caption.sty': 'texlive-latex-recommended', 'subcaption.sty': 'texlive-latex-extra',
             'siunitx.sty': 'texlive-science', 'tikz.sty': 'texlive-pictures',
             'mathtools.sty': 'texlive-latex-recommended', 'booktabs.sty': 'texlive-latex-recommended',
             'microtype.sty': 'texlive-latex-recommended', 'amsthm.sty': 'texlive-latex-base',
-            'ulem.sty': 'texlive-plain-generic'}
+            'ulem.sty': 'texlive-plain-generic', 'french.ldf': 'texlive-lang-french'}
 
 
 def missing_dependency(log):
     match = re.search(r"LaTeX Error: File [`']([^`'\n]+)' not found", log)
+    if not match:
+        # Babel reports a missing language definition through its option error,
+        # rather than the usual LaTeX 'File ... not found' diagnostic.
+        match = re.search(r'language definition file\s+(french\.ldf)\s+was not found', log)
     if not match: return None
     name = match[1]
-    return {'filename': name, 'kind': 'package' if name.endswith(('.sty', '.cls')) else 'asset_or_include',
+    return {'filename': name, 'kind': 'language_dependency' if name.endswith('.ldf') else 'package' if name.endswith(('.sty', '.cls')) else 'asset_or_include',
             'approved_debian_package': PACKAGES.get(name), 'diagnostic': match[0]}
 
 

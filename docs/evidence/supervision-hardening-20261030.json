@@ -1,0 +1,103 @@
+{
+  "recorded_at": "2026-10-30T17:13:53.952918+00:00",
+  "authorization": {
+    "path": "/home/mdi/Downloads/Codex-harden-supervision-boundaries-20261030.txt",
+    "sha256": "cbfde604ff9cbd877b8e9281774440c1d27315886c8a0e2af90ed78a58635cc6",
+    "read_in_full": true
+  },
+  "status": {
+    "hardened": true,
+    "qualified": false,
+    "armed": false,
+    "automatic_promotion_enabled": false,
+    "live_transport_compiler_adapter_enabled": false
+  },
+  "runtime": {
+    "configuration_parse_exit": 0,
+    "kernel_confinement_exercised": false,
+    "resource_limits_exercised": false,
+    "real_codex_repair_launched": false,
+    "real_glm_requests": 0,
+    "storage_failure_path_established": false,
+    "storage_diagnostic_blocker": "PTRACE_TRACEME: Operation not permitted",
+    "qualification_only_result": "/home/mdi/projects/pdf-to-latex/results/supervision-hardening-20261030/qualification-1793377775758711606/result.json",
+    "qualification_only_status": "blocked",
+    "qualification_only_reason": "Normal terminal required: refusing user-service launch from a Codex tool session"
+  },
+  "tests": {
+    "full": {
+      "ran": 665,
+      "passed": 646,
+      "errors": 15,
+      "failures": 0,
+      "skipped": 4,
+      "seconds": 223.171,
+      "errors_scope": "Mock loopback socket creation denied with EPERM",
+      "error_tests": [
+        "test_cli_preflight_with_mock_server_and_portable_fixture_manifest (test_local_model.LocalModelTests.test_cli_preflight_with_mock_server_and_portable_fixture_manifest)",
+        "test_cli_review_text_only_proposal_does_not_change_source (test_local_model.LocalModelTests.test_cli_review_text_only_proposal_does_not_change_source)",
+        "test_duplicate_json_keys_and_missing_control_do_not_qualify (test_local_model.LocalModelTests.test_duplicate_json_keys_and_missing_control_do_not_qualify)",
+        "test_incomplete_http_body_and_oversize_are_rejected (test_local_model.LocalModelTests.test_incomplete_http_body_and_oversize_are_rejected)",
+        "test_length_reasoning_only_and_tool_calls_are_rejected (test_local_model.LocalModelTests.test_length_reasoning_only_and_tool_calls_are_rejected)",
+        "test_model_selection_ambiguous_and_exact (test_local_model.LocalModelTests.test_model_selection_ambiguous_and_exact)",
+        "test_model_selection_prefers_single_glm_and_no_fuzzy_match (test_local_model.LocalModelTests.test_model_selection_prefers_single_glm_and_no_fuzzy_match)",
+        "test_proxy_environment_is_ignored_and_key_not_saved (test_local_model.LocalModelTests.test_proxy_environment_is_ignored_and_key_not_saved)",
+        "test_redirect_is_not_followed (test_local_model.LocalModelTests.test_redirect_is_not_followed)",
+        "test_reflected_api_key_is_redacted_in_raw_and_report (test_local_model.LocalModelTests.test_reflected_api_key_is_redacted_in_raw_and_report)",
+        "test_successful_vision_control_probe_and_request_bounds (test_local_model.LocalModelTests.test_successful_vision_control_probe_and_request_bounds)",
+        "test_timeout_has_no_retry (test_local_model.LocalModelTests.test_timeout_has_no_retry)",
+        "test_truncated_json_is_retained_and_rejected (test_local_model.LocalModelTests.test_truncated_json_is_retained_and_rejected)",
+        "test_unsupported_json_and_vision_are_recorded (test_local_model.LocalModelTests.test_unsupported_json_and_vision_are_recorded)",
+        "test_vision_mismatch_does_not_erase_text_success (test_local_model.LocalModelTests.test_vision_mismatch_does_not_erase_text_success)"
+      ]
+    },
+    "hardening_focused": 19,
+    "supervisor_focused": 17,
+    "retained_repair_focused": 7,
+    "scope_check_original_reporting_import": "passes unchanged and with existing import retained",
+    "path_redirection": "scope acceptance demonstrated statically; both confined execution probes prepared but blocked here"
+  },
+  "retained_suite": {
+    "run": "/home/mdi/projects/pdf-to-latex/runs/overnight-suite-20261030T085252Z-fae4ce",
+    "state": "prepared_offline",
+    "calls": 7,
+    "pending": 38,
+    "files": {
+      "/home/mdi/projects/pdf-to-latex/runs/overnight-suite-20261030T085252Z-fae4ce/state.json": "d45ee3fa9ff2e0dacce921862e6b6cafbf272994e0fcd84eeb40d7d78c609ee8",
+      "/home/mdi/projects/pdf-to-latex/runs/overnight-suite-20261030T085252Z-fae4ce/binding.json": "ee4b3567d5734522ad88b8407659951ad9d586625077d3e85862fb083b53a357",
+      "/home/mdi/projects/pdf-to-latex/results/overnight-suite-current.json": "b8c78353abad17bec15977692dd86cce8df33a8af9abbb152bd4354a60d3e397",
+      "/home/mdi/projects/pdf-to-latex/results/editorial-chapters-current.json": "4837571432fbdef70ae848f8768ba311522d760be6cf1113a8b65adc13449e2a"
+    }
+  },
+  "implementation_hashes": {
+    "scripts/supervision_policy.py": "11484ebd099d5d9ed66046dd9ff2e48185093b2dd2b445822887967747e56103",
+    "scripts/supervision_qualification.py": "dd4551eb2dc063583a09fc39895a885f8a5f26172e4ecaa4afc56c3065406b8f",
+    "scripts/supervision_service_guard.py": "32ad6a1b8b8fd6978911c21aeb03a497a17ad97d03c39dd32fb57d6872743d30",
+    "scripts/supervision_isolation.py": "99a23a9b01564993f77cff804c812995ed3c3c7f02752ad4a268ccfe85a28ef2",
+    "scripts/supervision_checks.py": "18708d50ec641b57890caea79b6d3e4fdce0713915a833cd3a1fea434be551e9",
+    "scripts/overnight_supervisor.py": "04f826fff5478ac99da20c9a5e650193cf0378d837df6f2bb8ba4821894a6cee",
+    "tests/test_supervision_hardening.py": "cc8ef0682f6775f1620ca49df5cad1cb4ebb309662dc8e16c535eb4978e22b23",
+    "tests/test_overnight_supervisor.py": "235cea27639249115bd74bb0b2d4b82ab10dc48467133d6f8ad9b00471f9e5ea"
+  },
+  "checks": {
+    "configuration_syntax": "accepted by installed CLI with model-profile values supplied inline for app-server diagnostic",
+    "no_global_permission_config_changes": true,
+    "no_git_mutations": true,
+    "no_queue_resume": true
+  },
+  "normal_terminal_command": "cd /home/mdi/projects/pdf-to-latex && bash scripts/run-supervised-overnight.sh qualify-only --run runs/overnight-suite-20261030T085252Z-fae4ce",
+  "sources": [
+    "https://learn.chatgpt.com/docs/permissions",
+    "https://learn.chatgpt.com/docs/config-file/config-reference"
+  ],
+  "evidence_hashes": {
+    "results/supervision-hardening-20261030/full-tests.log": "d7517478811c94b11b640849c9bc512d0e9bc2a0e1bfb35ddb7ea403664de5b2",
+    "results/supervision-hardening-20261030/hardening-tests.log": "1a29289dd28a656889066a9e490cbac224620e5ab960003950a85b2da7fd35a9",
+    "results/supervision-hardening-20261030/supervisor-tests.log": "9064b5d229c5d3e356894d4dd385bb4118279e86d783c7138a57f239ed6591f4",
+    "results/supervision-hardening-20261030/retained-repair-tests.log": "bc09573605fc774b9c0f5c5b2fbace708627db88d070c35702478a0afb3140c4",
+    "results/supervision-hardening-20261030/final-qualification-only-attempt.log": "0d2f1f7fd23bd499410ef1e8961e6e55500d34162f2c55b786e41124c73e7fe3",
+    "results/supervision-hardening-20261030/discovery/configuration-parse-corrected.json": "4d7a85a7978ae438e15e582d006a542f78f1ee29ef4d0c2058d36defdce36aaa",
+    "results/supervision-hardening-20261030/runtime-storage-diagnostic-corrected/storage-diagnostic.json": "bc4deb60a1b2257aa68df07ddf9f3f6de64695efea9010ae85b8e4f0c261bebd"
+  },
+  "snapshot_context": "Read-only copies of required project documents supplied; current qualification scope overrides dated launch instructions."
+}

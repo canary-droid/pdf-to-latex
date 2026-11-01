@@ -1,0 +1,23 @@
+## Critic findings — draft verified against both extractions
+
+**Verdict:** The draft is materially accurate. All equations (4.1)–(4.74), theorems, definitions, corollaries, remarks, examples, and exercises 4.1–4.19 are present and match the sources; all nine applied corrections are supported by the extractions and the surrounding mathematics. No revised document is required. Remaining observations:
+
+**1. Supported corrections — verified:**
+- Example 4.1 ($c_2, c__3 \to c_1, c_2$): both extractions show the misprint; with $c_i = X(t_{i+1})$ (giving $c_0=-1, c_1=1, c_2=2$) the printed indices are impossible. Correction is well-supported.
+- Example 4.8 ($ds \to dB(s)$): both extractions show $ds$; the displayed values of $Y(t)$ (telescoping in $B$) confirm $dB$.
+- Index $k$ vs $i$ in (4.14), (4.15), (4.17), Remark 4.4: both extractions show $\sum_{k=0}^{n-1}$ with summands indexed by $i$. Correction supported. (Minor: the inline note after (4.15) covers (4.17), but the Remark 4.4 instance is corrected silently in the body — it is only listed in the end-matter summary. Acceptable, but an inline flag there would be cleaner.)
+- $B_2(t_{i+1^n}) \to B_2(t_{i+1}^n)$, Remark 4.9's "$B_1$ and $B_2$ $W$", Example 4.25's redundant $(t)$ factor, missing parenthesis in (4.39): all match the extractions and are supported.
+- $\Var(T_n)$ missing $Z_i^2$ (Example 4.24): both extractions omit it; $\Var(Z^2)=3$ is invoked in the same sentence, so restoration is justified.
+
+**2. One over-claimed correction (no material impact):**
+- Theorem 4.14 proof: the printed "$\le \delta 2\,\E\sum\dots$" is arguably $\delta\cdot 2$, which **equals** $2\delta$ — a reordering, not a value change. The inline note frames this as a correction ("the constant is $2\delta$"); it should instead say the printed $\delta\,2$ reads as $\delta\cdot 2 = 2\delta$ (consistent with $(\Delta t_i)^2 \le \delta\,\Delta t_i$). The mathematics in the document is already correct; only the note's framing slightly overstates.
+
+**3. Unresolved issue — correctly preserved:**
+- Theorem 4.12's garbled sentence ("covariance function $t$, $u\ge0$") is flagged inline and restored consistently with (4.27). Appropriate handling.
+
+**4. Cosmetic (non-material):**
+- The end-matter "Editorial corrections and unresolved issues" section contains literal markdown artifacts (`**`, `\textbackslash{}`, inline `$...$` in text mode). It compiles and the content is correct, but it renders messily; a plain-text cleanup is recommended.
+- Source typos deliberately preserved (e.g., "quadratic Variation" in Theorem 4.9, "any number $n$ of process driven", "Stratanovich") — correct policy for a knowledge-library source.
+- The unnumbered display after (4.41) (decomposition of $[Y](t)$) is correctly left unnumbered, matching the book.
+
+No unsupported additions, omissions of substantive content, or mathematical errors were found in the draft body.

@@ -7,6 +7,7 @@ import copy
 from concurrent.futures import ThreadPoolExecutor, wait, FIRST_COMPLETED
 import json
 import time
+import traceback
 from pathlib import Path
 from . import chapter_glm as runtime, chapter_protocol as protocol
 from .common import atomic_json, fingerprint, read_json, sha
@@ -22,7 +23,15 @@ GOOD = {'conversion_completed','critic_revised','critic_unchanged'}
 SHARED = {'identity','adapter_exception','operator_stop'}
 
 
-def health_limits(health,owned=0):
+def exception_trace(run,exc,context):
+    """Keep complete local failure evidence outside immutable HTTP call seals."""
+    path=run/'diagnostics'/('exception-'+str(time.time_ns())+'.txt')
+    path.parent.mkdir(parents=True,exist_ok=True)
+    path.write_text(context+'\n\n'+''.join(traceback.format_exception(type(exc),exc,exc.__traceback__)),encoding='utf-8')
+    return str(path.relative_to(run))
+
+
+def health_limits(health,owned=0,*,minimum_slots=2):
     streams=health.get('streams',{})
     values=[streams.get('decoding'),streams.get('prefilling',streams.get('filling')),
             streams.get('paused'),streams.get('max'),health.get('context_length'),health.get('pool_tokens')]
@@ -34,12 +43,12 @@ def health_limits(health,owned=0):
         raise runtime.Fatal('Unowned active GLM request; no further dispatch, services left untouched; '
                             f'server running={running}, decoding={decoding}, prefilling={filling}, '
                             f'local owned at sample={owned}, busy={health.get("busy")}')
-    if slots<2 or context<131072 or pool<=0:raise runtime.Fatal('Existing GLM cannot admit two long requests; deployment unchanged')
+    if slots<minimum_slots or context<131072 or pool<=0:raise runtime.Fatal('Existing GLM cannot admit '+('two long requests' if minimum_slots==2 else 'the required long-request slots')+'; deployment unchanged')
     return {'slots':slots,'context':context,'pool':pool,'active':decoding+filling,'paused':paused}
 
 
-def room(body,budgets,health,owned):
-    limits=health_limits(health,owned)
+def room(body,budgets,health,owned,*,minimum_slots=2):
+    limits=health_limits(health,owned,minimum_slots=minimum_slots)
     budget=protocol.budget(body,limits['context'])
     used=sum(b['combined_upper_estimate'] for b in budgets)
     # The installed pool evicts unowned kept prefixes (multi.py fits/_room/_grow).
@@ -159,16 +168,27 @@ def write_report(run,state):
 
 
 def coordinate(run,state,tasks,*,body_for,finish,verify,changed,sample,checkpoint=lambda:None,
-               transport=runtime.perform_reserved,poll_seconds=None):
+               transport=runtime.perform_reserved,poll_seconds=None,fixed_level=None,before_reserve=None):
     """Caller holds project + run locks. No second writer, no worker state writes."""
     if state['concurrency_policy']!=POLICY:raise runtime.Fatal('Changed sealed concurrency policy')
+    # An explicitly frozen experiment stage may use 1/2/4 slots. This does not
+    # change the production policy or permit its automatic four-slot promotion.
+    suite_levels={'bounded-speed-suite-v1':(1,2,4),'overnight-workflow-suite-v1':(1,2),
+                  'book-completion-v1':(2,)}
+    if fixed_level is not None and fixed_level not in suite_levels.get(state.get('suite_protocol'),()):
+        raise runtime.Fatal('Fixed concurrency requires a bounded suite stage')
+    maximum=fixed_level or POLICY['maximum_in_flight']
+    minimum_slots=1 if fixed_level is not None else 2
     mark_uncertain(state,tasks)
     progress=state.setdefault('concurrency_progress',{'phase':'two','qualified_level':None,'trials':{},'sessions':[]})
+    if fixed_level is not None:progress.update(phase='suite_stage',qualified_level=fixed_level)
     session={'started_at':runtime.now(),'started_epoch':time.time()};progress['sessions'].append(session)
     period=POLICY['sampling_seconds'] if poll_seconds is None else poll_seconds
     jobs={};last_sample=0;observation=None;stop=None;window_start=time.monotonic();collected=[]
     def save():
-        runtime.save(run,state);write_report(run,state);changed()
+        runtime.save(run,state)
+        if fixed_level is None:write_report(run,state)
+        changed()
     def time_account():
         nonlocal window_start
         now=time.monotonic()
@@ -187,12 +207,13 @@ def coordinate(run,state,tasks,*,body_for,finish,verify,changed,sample,checkpoin
         path=run/'concurrency-stops'/('stop-'+str(time.time_ns())+'.json')
         atomic_json(path,record);session['stop_record']=str(path.relative_to(run))
         session['stop_requested_at']=record['at'];session['diagnostic']=str(exc)
+        state.update(status='draining',diagnostic=str(exc))
         save()
     try:
-        with ThreadPoolExecutor(max_workers=POLICY['maximum_in_flight'],thread_name_prefix='chapter-http') as pool:
+        with ThreadPoolExecutor(max_workers=maximum,thread_name_prefix='chapter-http') as pool:
             while True:
                 time_account()
-                if (run/'pause.json').exists() or (run/'stop.json').exists():stopped(runtime.StopRun('Operator pause/stop; all dispatched streams drained and retained'))
+                if (run/'pause.json').exists() or (run/'stop.json').exists():stopped(runtime.StopRun('Operator pause/stop requested; draining owned requests and finalization before releasing writer'))
                 # Always collect already-finished responses before capacity/dispatch decisions.
                 for future in [f for f in jobs if f.done()]:
                     call,task,body,budget=jobs.pop(future)
@@ -206,14 +227,20 @@ def coordinate(run,state,tasks,*,body_for,finish,verify,changed,sample,checkpoin
                         if any(result[k]!=call[k] for k in ('id','parent','request_sha256')):raise runtime.Fatal('Worker returned a different reserved task')
                         response_binding(run,result,body)
                         call.update(result);runtime.account_response(state,call)
-                        if (call.get('metadata',{}).get('http_status') or 0)>=500:
+                        http_status=call.get('metadata',{}).get('http_status') or 0
+                        if http_status>=500 or (fixed_level is not None and http_status>=400):
                             raise runtime.Fatal('Server/infrastructure failure: '+str(call.get('error')))
                         if call.get('failure_kind') in SHARED:raise runtime.Fatal('Shared request failure: '+str(call.get('error')))
+                        if fixed_level is not None and call.get('failure_kind') in ('connection','connection_timeout','transport'):
+                            raise runtime.Fatal('Shared transport failure; no experiment-stage retry: '+str(call.get('error')))
                         finish(run,state,task,answer,call)
                         if state.get('connection_failures',0)>=2:raise runtime.StopRun('Repeated connection failures; drain before operator diagnosis')
                     except BaseException as exc:
+                        diagnostic_file=exception_trace(run,exc,'Completion/finalization: '+task['id']+' / '+call['id'])
                         task.update(status='interrupted_unresolved' if call['status']=='in_progress' else 'coordinator_failure',
-                                    error=type(exc).__name__+': '+str(exc),call=call['id'])
+                                    error=type(exc).__name__+': '+str(exc),call=call['id'],diagnostic_file=diagnostic_file)
+                        state['diagnostic_file']=diagnostic_file
+                        print(task['error']+'; traceback: '+str(run/diagnostic_file),flush=True)
                         stopped(exc)
                     save()
                 if stop:
@@ -221,7 +248,7 @@ def coordinate(run,state,tasks,*,body_for,finish,verify,changed,sample,checkpoin
                     wait(jobs,timeout=min(period,1),return_when=FIRST_COMPLETED);continue
                 candidates=eligible(state,tasks)
                 phase=progress['phase'];level=2 if phase=='two' else 4 if phase=='four' else progress['qualified_level']
-                if level is not None and level>POLICY['maximum_in_flight']:
+                if level is not None and level>maximum:
                     stopped(runtime.Fatal('Saved concurrency level exceeds the sealed two-slot continuation'));continue
                 trial=phase_record(progress,level) if phase in ('two','four') else None
                 goal=POLICY['two_request_sample'] if level==2 else POLICY['four_request_sample']
@@ -241,7 +268,7 @@ def coordinate(run,state,tasks,*,body_for,finish,verify,changed,sample,checkpoin
                         observation=sample(len(owned_calls));last_sample=time.monotonic()
                         observation['coordinator_owned_calls']=owned_calls
                         observation['coordinator_sampled_at']=runtime.now()
-                        limits=health_limits(observation['health'],len(jobs))
+                        limits=health_limits(observation['health'],len(jobs),minimum_slots=minimum_slots)
                         memory=observation['memory_available_bytes']
                         if len(memory)!=2 or any(type(v)is not int or v<POLICY['minimum_available_bytes'] for v in memory.values()):
                             pressure='Less than 2 GiB unadjusted available memory on a node'
@@ -260,6 +287,8 @@ def coordinate(run,state,tasks,*,body_for,finish,verify,changed,sample,checkpoin
                     if trial:trial.update(status='not_qualified',reason=progress['drain_to_two'],finished_epoch=time.time(),metrics=trial_metrics(state,trial))
                     progress.update(phase='production',qualified_level=2);progress.pop('drain_to_two');save();continue
                 if level==4 and limits['slots']<4:
+                    if fixed_level is not None:
+                        stopped(runtime.Fatal('Four-slot capacity changed after suite admission'));continue
                     if jobs:wait(jobs,timeout=min(period,1),return_when=FIRST_COMPLETED);continue
                     if trial:trial.update(status='not_admitted',reason='Current server has fewer than four slots')
                     progress.update(phase='production',qualified_level=2);save();continue
@@ -273,17 +302,22 @@ def coordinate(run,state,tasks,*,body_for,finish,verify,changed,sample,checkpoin
                         if task.get('preview_hash') and fingerprint(body)!=task['preview_hash']:raise runtime.Fatal('Prepared request changed')
                         # Guard the snapshot against its own ownership set;
                         # capacity reservations still include every current job.
-                        fits,budget=room(body,[v[3] for v in jobs.values()],observation['health'],len(observation['coordinator_owned_calls']))
+                        fits,budget=room(body,[v[3] for v in jobs.values()],observation['health'],len(observation['coordinator_owned_calls']),minimum_slots=minimum_slots)
                         if not fits:
-                            if jobs:continue
+                            if jobs:
+                                task.setdefault('admission_wait',{'reason':'Full shared-pool reservations require serialization','at':runtime.now()})
+                                continue
                             raise runtime.StopRun('Full request plus output does not fit conservative shared-pool reservation; no clipping or setting change')
+                        if before_reserve:before_reserve(state,task,body)
                         call=runtime.reserve(state,task['id'],fingerprint(body))
                         task.pop('error',None);task.update(status='running',call=call['id'])
                         call['concurrency_binding']={'key':task['key'],'phase':task['phase'],'stage':phase,
                             'source_key':task['source_key'],'input_version':state.get('current_versions',{}).get(task['key']) if task['phase']=='critic' else None,
                             'input_version_sha256':state.get('versions',{}).get(task['key'],{}).get(state.get('current_versions',{}).get(task['key']),{}).get('sha256') if task['phase']=='critic' else None}
                         if trial:trial['calls'].append(call['id']);trial['status']='running'
-                        state['stage']='concurrent_'+phase;save() # reservation durable BEFORE thread starts
+                        if fixed_level is None:state['stage']='concurrent_'+phase
+                        else:state['stage']='Suite stage '+str(state['active_stage'])+': requests and document finalization'
+                        save() # reservation durable BEFORE thread starts
                         future=pool.submit(transport,run,copy.deepcopy(call),body,continuous=True,admission_budget=budget,health_evidence=observation['evidence'])
                         jobs[future]=(call,task,body,budget);admitted=True
                     except protocol.ContextBudgetGap as exc:task.update(status='context_budget_gap',error=str(exc));save()

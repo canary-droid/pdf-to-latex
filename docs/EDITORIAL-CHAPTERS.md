@@ -1,6 +1,52 @@
 # Annotated simple chapters — 27 October 2026
 
-## Current operator path — 29 October 2026: ownership repair, two slots only
+**1 November 2026:** the active operator path is
+[the reconciled finite book completion](BOOK-COMPLETION.md). Production remains
+historically paused at 113 calls; speed and overnight finished at 20/46 calls.
+Do not rerun those suites or resume their old bound queue to finish the books.
+The new completion pointer preserves their outputs and admits only missing spans.
+All earlier operator paths below are dated history.
+
+## Current operator path — 29 October 2026: overnight finite suite
+
+The earlier speed suite finished (19 work calls, one readiness; four Low calls
+skipped after a renderer probe error). Production remains paused at113 calls.
+Use [OVERNIGHT-WORKFLOW-SUITE.md](OVERNIGHT-WORKFLOW-SUITE.md): a separate linked
+44-request preparation, at most two in flight, automatic final stop, no production
+adoption or continuation. No generation/overall deadline or service change.
+
+```bash
+cd /home/mdi/projects/pdf-to-latex && bash scripts/run-overnight-suite.sh run
+```
+
+Same wrapper: `status`, `pause`, `resume`, `bundle`. It captures readiness and
+refreshes a small Downloads progress file automatically. Exact scope, repairs,
+source checks and untested behavior are in the new runbook. The following entries
+are historical; do not rerun the completed suite or resume old code-bound production.
+
+## Historical operator path — 29 October 2026: bounded speed suite, automatic stop
+
+The production continuation below has since run and safely paused at113 calls.
+Both Chapter4 critics completed; no writer remains. The new authorized work is a
+separate five-stage experiment, **at most23 work calls**, followed by an unconditional
+stop for inspection. It does not resume the book queue or adopt experimental output.
+Read [the bounded-suite instructions](BOUNDED-SPEED-SUITE.md) for the exact targets,
+capacity controls, saved comparisons and source-check limitations.
+
+```bash
+cd /home/mdi/projects/pdf-to-latex && bash scripts/run-speed-suite.sh run
+```
+
+This automatically captures readiness inside persistent tmux after required tests
+and checks of the existing regular GLM deployment. No service changes or manual path
+pasting. Use the same wrapper with `status`, `pause`, `resume` or `bundle`. Pause
+means admission stops and active requests/finalization drain; `paused` is published
+only after writer release. A finished suite run/resume causes zero model requests.
+All later production adoption, edit-only criticism, deterministic rendering and
+runtime upgrades remain separate. The old production pointer/evidence are unchanged;
+changed code requires a later linked production preparation, not a resealed old run.
+
+## Historical launch preparation — 29 October 2026: ownership repair, two slots only
 
 **Prepared, not running:** `runs/editorial-chapters-trial-20261029T165410Z-1f2179`.
 The authoritative wrapper pointer selects this linked continuation of

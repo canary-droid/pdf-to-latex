@@ -267,7 +267,7 @@ def perform_reserved(run,call,body,*,continuous,admission_budget,health_evidence
         'requested_reasoning_effort':body.get('reasoning_effort','server-default'),
         'effective_reasoning_effort':'not attested by response; installed mapping documented separately',
         'thinking_and_sampling':'effort explicit where recorded; sampling overrides omitted'})
-    print(f'Book: {"Bergomi, Stochastic Volatility Modeling" if "bergomi-" in parent else "Klebaner comparison" if parent.startswith("klebaner") else "Gatheral, The Volatility Surface"}. '
+    print(f'Book: {"Bergomi, Stochastic Volatility Modeling" if "bergomi-" in parent else "Klebaner comparison" if "klebaner" in parent else "Gatheral, The Volatility Surface"}. '
           f'Phase/chapter: {parent}. Model: {protocol.MODEL}. Action: reserved request {call["id"]}. Result: {run}',flush=True)
     try:
         if new_client:

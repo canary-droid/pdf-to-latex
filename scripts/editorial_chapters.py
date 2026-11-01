@@ -950,14 +950,16 @@ def finish_task(run,state,task,answer,call):
     document,info=chapter_accuracy.envelope(answer,simple.extract_document)
     key=task['key'];phase=task['phase'];label=phase+'-'+call['id']
     previous=state.get('current_versions',{}).get(key)
+    recorded_replacement=False
     if document is not None and chapter_accuracy.complete_document(document):
         remember(run,state,key,label,document,{'call':call['id'],'extraction':info})
+        recorded_replacement=True
         state['current_versions'][key]=label
         task['status']='conversion_completed' if phase=='convert' else 'critic_revised'
         expected=task['section']['text'] if task.get('section') else (run/('bergomi/inputs' if task['source_key'].startswith('bergomi-') else 'inputs')/task['source_key']/'source.tex').read_text()
         task['structural_observations']=simple.document_observations(document,expected,set(selected_assets(run,task['source_key'])))
     elif phase=='critic':
-        task['status']='critic_revision_unusable' if info.get('status')=='ambiguous' and r'\documentclass' in answer else 'critic_unchanged';task['revision_diagnostic']='No unambiguous complete revision; current draft preserved'
+        task['status']='critic_revision_unusable' if r'\documentclass' in answer or r'\begin{document}' in answer else 'critic_unchanged';task['revision_diagnostic']='No unambiguous complete revision; current draft preserved'
     else:
         task.update(status='complete_answer_without_document',error='Final answer retained but no unambiguous complete LaTeX document');return
     previous_notes=state.get('accuracy_records',{}).get(key)
@@ -974,8 +976,12 @@ def finish_task(run,state,task,answer,call):
                 remember(run,state,key,ann,annotated,{'from':current,'notes':state['accuracy'][key]})
                 state['current_versions'][key]=ann
         runtime.save(run,state)
-        if document is not None:compile_version(run,state,key,label)
-        compile_version(run,state,key,state['current_versions'][key])
+        # Unfenced findings can be a non-None extraction without being TeX.
+        # Compile only the replacement actually created, and the real selected
+        # retained/annotated version; never manufacture a model revision.
+        if recorded_replacement:compile_version(run,state,key,label)
+        if not recorded_replacement or state['current_versions'][key]!=label:
+            compile_version(run,state,key,state['current_versions'][key])
 
 
 def extraction_complete(root=ORIGINAL):
@@ -1299,13 +1305,18 @@ def worker(run):
             except runtime.Fatal as exc:
                 state.update(status='stopped_error',diagnostic=str(exc));print('INTEGRITY/IDENTITY STOP:',exc,flush=True)
             except runtime.StopRun as exc:
-                state.update(status='paused',diagnostic=str(exc));print('PAUSED:',exc,flush=True)
+                state.update(status='draining',diagnostic=str(exc));print('DRAINING / FINALIZING:',exc,flush=True)
             except BaseException as exc:
                 state.update(status='stopped_error',diagnostic=type(exc).__name__+': '+str(exc));print('ERROR:',exc,flush=True)
                 raise
             finally:
-                finalize(run,state)
+                if state['status']=='draining':
+                    runtime.save(run,state);report(run,state)
+                else:finalize(run,state)
                 print('Status:',state['status'],'Report:',run/'report.html','Log:',run/'terminal.log',flush=True)
+        if state['status']=='draining':
+            # No paused claim while the coordinator still owns either lock.
+            state.update(status='paused',writer_released_at=runtime.now());finalize(run,state)
 
 
 # Exact installed system executable only, never a PID, process title or substring.

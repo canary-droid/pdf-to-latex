@@ -1,0 +1,174 @@
+{
+  "recorded_at": "2026-10-30T11:24:19.742086+00:00",
+  "status": {
+    "implemented": true,
+    "qualified": false,
+    "armed": false,
+    "running": false
+  },
+  "phase1": {
+    "thread": "01a18c70-11f6-7023-b87a-1b389cecd101",
+    "observed": {
+      "model": "gpt-6-astra",
+      "reasoning_effort": "xhigh",
+      "authentication": "ChatGPT; login status and current ChatGPT backend session",
+      "effective_context": 760000,
+      "auto_compact_limit": 650000,
+      "auto_compact_scope": "Total",
+      "cli_version": "0.166.0",
+      "executing_sandbox_image": "/home/mdi/.codex/packages/standalone/releases/0.166.0-aarch64-unknown-linux-musl/bin/codex",
+      "server_transport": "in-process",
+      "client_name": "codex-tui",
+      "client_version": "0.166.0",
+      "server_process_identity": "pid:1132698:8782f94b-a7d0-4b79-9436-1ac4ebec36e5",
+      "host_proc_exe_directly_visible": false,
+      "executing_sandbox_image_sha256": "f2e6c980c937e734644bed1b4a9a018d3e63a0ccbe71aafc85c86a8c6e4b462a",
+      "executing_sandbox_matches_selected_release": true
+    },
+    "configured": {
+      "model": "gpt-6-astra",
+      "model_reasoning_effort": "xhigh",
+      "model_context_window": 800000,
+      "model_auto_compact_token_limit": 650000,
+      "model_auto_compact_token_limit_scope": "total",
+      "forced_login_method": "chatgpt"
+    },
+    "catalog": {
+      "slug": "gpt-6-astra",
+      "context_window": 272000,
+      "max_context_window": 872000,
+      "effective_context_window_percent": 95,
+      "supports_experimental_context": false,
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Fast responses with lighter reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Balances speed and reasoning depth for everyday tasks"
+        },
+        {
+          "effort": "high",
+          "description": "Greater reasoning depth for complex problems"
+        },
+        {
+          "effort": "xhigh",
+          "description": "Extra high reasoning depth for complex problems"
+        },
+        {
+          "effort": "max",
+          "description": "Maximum reasoning depth for the hardest problems"
+        },
+        {
+          "effort": "ultra",
+          "description": "Maximum reasoning with automatic task delegation"
+        }
+      ]
+    },
+    "long_context_exercised": false,
+    "setup_repeated": false
+  },
+  "phase2": {
+    "focused_tests": 7,
+    "saved_stage_a_responses_replayed": 6,
+    "additional_generation": 0,
+    "findings_status": "critic_unchanged",
+    "selected_version": "critic-call-005-annotated",
+    "bound_code_unchanged": true
+  },
+  "phase3": {
+    "focused_tests": 20,
+    "full_tests": {
+      "run": 649,
+      "passed": 630,
+      "errors": 15,
+      "failures": 0,
+      "skipped": 4,
+      "seconds": 226.339,
+      "errors_scope": "test_local_model mock loopback socket creation: EPERM",
+      "error_tests": [
+        "test_cli_preflight_with_mock_server_and_portable_fixture_manifest (test_local_model.LocalModelTests.test_cli_preflight_with_mock_server_and_portable_fixture_manifest)",
+        "test_cli_review_text_only_proposal_does_not_change_source (test_local_model.LocalModelTests.test_cli_review_text_only_proposal_does_not_change_source)",
+        "test_duplicate_json_keys_and_missing_control_do_not_qualify (test_local_model.LocalModelTests.test_duplicate_json_keys_and_missing_control_do_not_qualify)",
+        "test_incomplete_http_body_and_oversize_are_rejected (test_local_model.LocalModelTests.test_incomplete_http_body_and_oversize_are_rejected)",
+        "test_length_reasoning_only_and_tool_calls_are_rejected (test_local_model.LocalModelTests.test_length_reasoning_only_and_tool_calls_are_rejected)",
+        "test_model_selection_ambiguous_and_exact (test_local_model.LocalModelTests.test_model_selection_ambiguous_and_exact)",
+        "test_model_selection_prefers_single_glm_and_no_fuzzy_match (test_local_model.LocalModelTests.test_model_selection_prefers_single_glm_and_no_fuzzy_match)",
+        "test_proxy_environment_is_ignored_and_key_not_saved (test_local_model.LocalModelTests.test_proxy_environment_is_ignored_and_key_not_saved)",
+        "test_redirect_is_not_followed (test_local_model.LocalModelTests.test_redirect_is_not_followed)",
+        "test_reflected_api_key_is_redacted_in_raw_and_report (test_local_model.LocalModelTests.test_reflected_api_key_is_redacted_in_raw_and_report)",
+        "test_successful_vision_control_probe_and_request_bounds (test_local_model.LocalModelTests.test_successful_vision_control_probe_and_request_bounds)",
+        "test_timeout_has_no_retry (test_local_model.LocalModelTests.test_timeout_has_no_retry)",
+        "test_truncated_json_is_retained_and_rejected (test_local_model.LocalModelTests.test_truncated_json_is_retained_and_rejected)",
+        "test_unsupported_json_and_vision_are_recorded (test_local_model.LocalModelTests.test_unsupported_json_and_vision_are_recorded)",
+        "test_vision_mismatch_does_not_erase_text_success (test_local_model.LocalModelTests.test_vision_mismatch_does_not_erase_text_success)"
+      ]
+    },
+    "real_qualification": {
+      "status": "blocked",
+      "identity": "3c3c6815e1950b32c05501966af24d95675024837f6b3e08aa019a6d312f621f",
+      "evidence": "/home/mdi/projects/pdf-to-latex/results/overnight-supervision/overnight-suite-20261030T085252Z-fae4ce/qualification-1793358381119538295",
+      "reason": "Codex exec unavailable/denied/failed; see /home/mdi/projects/pdf-to-latex/results/overnight-supervision/overnight-suite-20261030T085252Z-fae4ce/qualification-1793358381119538295/incidents/88b199173e7ca4e3f01af10eeabddaf62f5b52b58c0bbc7fe9a76157386d4984/1/codex.jsonl"
+    },
+    "real_exec_exit": 1,
+    "real_exec_reason": "failed to initialize in-process app-server client: Read-only file system (os error 30)",
+    "isolated_compilation": "unavailable: docker.sock permission denied; compilation_claim=false",
+    "qualification_applies_to_final_code": false,
+    "normal_terminal_required": true
+  },
+  "suite": {
+    "run": "/home/mdi/projects/pdf-to-latex/runs/overnight-suite-20261030T085252Z-fae4ce",
+    "status": "prepared_offline",
+    "calls": 7,
+    "completed_tasks": 6,
+    "pending_tasks": 38,
+    "project_lock_free": true,
+    "run_lock_free": true,
+    "production_launched": false
+  },
+  "implementation_files_sha256": {
+    "scripts/overnight_supervisor.py": "c30cee120e748a4a48f5707c4aff080b38e83a74128886d361091015d4190f41",
+    "scripts/supervision_policy.py": "771af72837a9edba9d52e6989f9da199b9149d59cd75c8ce77b1592a51535756",
+    "scripts/supervision_checks.py": "98b104dc3f6c0252a02f8e6d1bd25a8a939dd98baeab600c301298a503866353",
+    "scripts/run-supervised-overnight.sh": "9b0a2372524a6fc3e48e223daff759fa3dd1c16c3bf5dde98c8641d059296e55",
+    "tests/test_overnight_supervisor.py": "55a878e6251265cb886d213d637984bbcd4bc3c9f8ea7aceeb1c3c29a56e1c26"
+  },
+  "implementation_identity": "7b4bbd4e44448d2d4455068f183246a51a800086c9b63fffca6f09777258d1d6",
+  "evidence_files": [
+    {
+      "path": "results/supervision-review-20261030/session-runtime.json",
+      "sha256": "61d32d1981f473a014f74bb240a74d1cc785a3156066fc5b3167ac1c13edafe9"
+    },
+    {
+      "path": "results/supervision-review-20261030/phase2-tests.log",
+      "sha256": "214a97b4e816d43e7ec562f8897d6c0d924cc8090fa68417fb331cac7421f3d9"
+    },
+    {
+      "path": "results/supervision-review-20261030/supervisor-focused.log",
+      "sha256": "cbc7da195f69ae3258b4a25b9ba12f87d77b88a7069f61b2727f1121f63521b4"
+    },
+    {
+      "path": "results/supervision-review-20261030/full-tests.log",
+      "sha256": "56f647968a59c0a4b20c4868119ce5e9ca6952b3244957beb518bee7a8342bb5"
+    },
+    {
+      "path": "results/supervision-review-20261030/independent-finalization-replay/replay-result.json",
+      "sha256": "8faf8cd57d3f0ce1b3c9915c39178a6fde67b370764bd4114128a9ba1634dbc6"
+    },
+    {
+      "path": "results/overnight-supervision/overnight-suite-20261030T085252Z-fae4ce/qualification.json",
+      "sha256": "421ae4ef912148f3da58ade2627a9079dce4c50cc1d4ed73a8236ef553e223f1"
+    },
+    {
+      "path": "results/overnight-supervision/overnight-suite-20261030T085252Z-fae4ce/qualification-1793358381119538295/capabilities.json",
+      "sha256": "640ceaa47b13ab4831ba47569715fd3e2a32a29e5c0837c7ab18b9e5aa572623"
+    },
+    {
+      "path": "results/overnight-supervision/overnight-suite-20261030T085252Z-fae4ce/qualification-1793358381119538295/incidents/88b199173e7ca4e3f01af10eeabddaf62f5b52b58c0bbc7fe9a76157386d4984/1/codex.jsonl",
+      "sha256": "8e3330eeb312ddb37b9da73c3ece4a8aa7e2ade4b7bb255573aa487bc89f0f58"
+    }
+  ],
+  "operator_command": "cd /home/mdi/projects/pdf-to-latex && bash scripts/run-supervised-overnight.sh start --run runs/overnight-suite-20261030T085252Z-fae4ce",
+  "git": "All changes unstaged; no index/history/branch/remote mutation"
+}

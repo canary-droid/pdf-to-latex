@@ -1,5 +1,18 @@
 # PDF-to-LaTeX compatibility and fidelity probe 0.1
 
+**Latest, 1 November 2026:** the saved-work finalisation is delivered. See
+`results/book-finalisation-current.json` and the linked run's `FINAL-INDEX.md`
+for both reading PDFs and editable/TeX-only/complete-source exports. All 34
+Gatheral and 61 Bergomi selected parts are included. This is a working edition,
+not a claim of whole-book mathematical verification. No further queue is started.
+
+**1 November 2026: [finite Gatheral/Bergomi completion](docs/BOOK-COMPLETION.md).**
+The current task reconciles saved production and experimental work, repairs
+demonstrated defects in new derivatives, and prepares one missing-content-only
+High/Max GLM queue with automatic final assembly/packaging. No inference is run
+during coding. Use its separate completion pointer and wrapper; earlier launch
+instructions below are historical and must not replay completed suites.
+
 **26 October: the [fresh Gatheral chapter run](docs/SIMPLE-CHAPTER-GLM.md) is
 prepared offline, not running.** Both conversion and critic now receive unchanged
 native MinerU material plus cached native PDF text, with mathematical/factual meaning

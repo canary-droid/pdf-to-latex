@@ -80,6 +80,8 @@ def notes_text(answer, info=None):
     if info and info.get('status') not in ('ambiguous','unfenced'):
         text,status=accuracy.outside_notes(answer,info)
         if text.strip():return text,status
+        embedded=embedded_accuracy_log(answer,info)
+        if embedded:return embedded,'captured'
     if not answer.strip():return '', 'unavailable'
     if r'\documentclass' in answer or r'\begin{document}' in answer:
         return answer,'unavailable_unparsed'
@@ -87,6 +89,39 @@ def notes_text(answer, info=None):
     fences=list(re.finditer(r'(?ms)^```(?:markdown|md)\s*\n(.*?)^```\s*$',answer))
     if len(fences)==1 and re.search(r'(?i)accuracy|issue|review|finding',answer):return fences[0][1],'captured'
     return answer,'captured'
+
+
+def embedded_accuracy_log(answer, info):
+    """Recover an explicit final accuracy section from a complete TeX response.
+
+    This reads the saved final answer, never reasoning or inferred dispositions.
+    Ambiguous/partial document envelopes retain the existing refusal behavior.
+    """
+    if not info or info.get('status') in ('ambiguous','unfenced'):
+        return ''
+    document=answer[info.get('start',0):info.get('end',len(answer))]
+    if not accuracy.complete_document(document):return ''
+    start=document.find(r'\begin{document}')
+    match=re.search(r'(?im)^[ \t]*\\(?:sub)?section\*?\{(?:Updated\s+)?Accuracy (?:log|notes)[^{}]*\}',document[start:])
+    if not match:return ''
+    return document[start+match.start():document.rfind(r'\end{document}')].strip()
+
+
+def tex_accuracy_entries(text):
+    """Use the existing note classifier for explicit headings in a TeX log."""
+    if not re.match(r'\s*\\(?:sub)?section\*?\{(?:Updated\s+)?Accuracy (?:log|notes)',text,re.I):return []
+    marks=list(re.finditer(r'\\(?:sub)?section\*?\{([^{}]+)\}',text));result=[]
+    for i,m in enumerate(marks):
+        end=marks[i+1].start() if i+1<len(marks) else len(text)
+        raw=text[m.start():end].strip();body=text[m.end():end].strip();title=m[1]
+        if re.match(r'(?i)(?:Updated )?Accuracy (?:log|notes)',title):
+            title='Review outcome: '+title if not re.search(r'\\begin\{(?:tabular|enumerate|itemize)',body) else 'Recorded accuracy findings'
+        elif title.lower().startswith('extraction repairs'):
+            title='Applied '+title+' (reported)'
+        elif title.lower().startswith('unresolved') and body.rstrip('.').strip().lower()=='none':
+            title='No unresolved issues (reported)'
+        result.append(('**'+title+'**\n'+body,raw))
+    return result
 
 
 def note_entries(text):
@@ -122,7 +157,9 @@ def note_furniture(text):
 
 def notes_record(key, text, *, captured='captured', complete=True, attribution='GLM', phase='critic'):
     items=[];section_status=''
-    entries=note_entries(text) if captured=='captured' else []
+    embedded=tex_accuracy_entries(text) if captured=='captured' else []
+    source_tex=dict(embedded)
+    entries=([x[0] for x in embedded] if embedded else note_entries(text)) if captured=='captured' else []
     for entry in entries:
         clean=entry.replace('**','')
         if note_furniture(entry):continue
@@ -157,6 +194,9 @@ def notes_record(key, text, *, captured='captured', complete=True, attribution='
         refs+=re.findall(r'`[^`\n]*?-([a-f0-9]{10})`',entry)
         items.append({'id':key+'-'+phase+'-'+fingerprint(entry)[:10], 'text':entry,'category':kind,'status':status,
                       'references':refs,'claimed_status':claimed or None,'attribution':attribution,'independent_verification':False})
+        if entry in source_tex:
+            items[-1]['note_tex']=source_tex[entry]
+            items[-1]['capture_location']='explicit in-document accuracy log'
     return {'chapter':key,'version':VERSION,'phase':phase,'capture_status':captured if complete else 'review_incomplete',
             'raw_notes':text,'items':items,'certification':False}
 
@@ -229,8 +269,10 @@ def annotate(document, entries):
 
 def linked_visible_note(document, entry):
     """Only an explicit quoted note label matches; never infer semantic resolution."""
-    labels=re.findall(r'(?i)(?:TeX note|document note)\s*[“\"]([^”\"\n]+)[”\"]',entry.get('text',''))
     normalized=' '.join(document.split())
+    if entry.get('capture_location')=='explicit in-document accuracy log' and entry.get('note_tex'):
+        if ' '.join(entry['note_tex'].split()) in normalized:return True
+    labels=re.findall(r'(?i)(?:TeX note|document note)\s*[“\"]([^”\"\n]+)[”\"]',entry.get('text',''))
     return any(' '.join(label.split()) in normalized for label in labels if label.startswith(('GLM ', 'Codex ')))
 
 

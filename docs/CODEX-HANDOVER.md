@@ -1,4 +1,45 @@
-# Codex handover — 17 October 2026
+# Active handover — 1 November 2026
+
+**Latest: revised, unified finalisation completed from saved outputs.** Read the
+latest PROJECT-STATE entry and `results/book-finalisation-current.json`.
+The controlling instruction is
+`/home/mdi/Downloads/Codex-Book-Finalisation-2026-11-01.txt`, whose opening explicitly
+identifies it as the REVISED, UNIFIED task. The 35-call completion run has finished;
+do not launch it again to obtain these finalisation results. The linked derivative
+is `runs/book-finalisation-20261101T154901Z-466f18`; its `FINAL-INDEX.md` lists the
+reading PDFs and all exports. Gatheral has 34/34 selected PDF parts and Bergomi
+61/61, with no PDF gaps. This is not a mathematical-verification certificate.
+
+Converter/critic prompts, mathematical correction policy, reasoning and acceptance
+rules are unchanged. Finalisation used no new inference. The specifically
+authorized French dependency was added only to a versioned isolated compiler
+image; no global host package, service or permission change was made. Stop after
+delivery; article processing, another queue and supervision remain out of scope.
+
+## Earlier 1 November completion preparation — historical
+
+The user explicitly authorized completion of the existing Gatheral and Bergomi
+working editions. Read [BOOK-COMPLETION.md](BOOK-COMPLETION.md) and the latest
+PROJECT-STATE entry. The controlling instruction is
+`/home/mdi/Downloads/Codex-Finish-Gatheral-Bergomi-2026-11-01.txt`.
+Reconcile saved production/speed/overnight outputs before scheduling genuinely
+missing content; do not blindly resume the old production queue or repeat suites.
+
+The approved route uses native MinerU plus corroborating native PDF text, full
+coherent assigned spans, High GLM conversion and Max own-draft criticism, 131072
+output tokens and at most two owned requests. Existing outputs/drafts remain
+traceable; grouped documents occur once. No OCR rerun, model installation, service
+switch, cloud dispatch, permission change or autonomous code promotion is part
+of this completion. Supervision qualification is a separate unfinished project.
+
+Implementation/preparation is not inference authorization during the coding task.
+The one normal-terminal completion launch performs its own required checks and
+fresh readiness, processes the finite missing-only queue, assembles and packages
+both books, and exits without inspection stops. Explicit pause/resume remain.
+Read the current completion pointer/state before launch; a prepared run is not
+running. Compilation, target accounting and critic claims are not fidelity proof.
+
+## Historical handover — 17 October 2026
 
 27 October extraction task: [BERGOMI-EXTRACTION.md](BERGOMI-EXTRACTION.md) is prepared,
 not running from Codex (Docker/tmux sandbox access denied). Bergomi's actual PDF is

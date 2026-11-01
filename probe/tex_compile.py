@@ -47,7 +47,7 @@ def classify_log(text,returncode):
         return 'adapter_configuration_failure'
     if returncode==0:
         return 'passed_with_unresolved_references' if re.search(r'(undefined references|Citation .* undefined|Reference .* undefined)',text,re.I) else 'passed'
-    if 'LaTeX Error: File ' in text and 'not found' in text:return 'missing_package_or_asset'
+    if ('LaTeX Error: File ' in text and 'not found' in text) or re.search(r'language definition file\s+french\.ldf\s+was not found',text):return 'missing_package_or_asset'
     if 'Unicode character' in text or 'requires either XeTeX or LuaTeX' in text:return 'wrong_engine_or_encoding'
     if 'Undefined control sequence' in text:return 'missing_context_or_macro'
     if any(x in text for x in ('Missing $ inserted','Extra },','Missing } inserted','Emergency stop','Runaway argument')):return 'syntax_failure'

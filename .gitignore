@@ -47,3 +47,5 @@ Thumbs.db
 
 # Existing project-wide writer lock is runtime state, not checkpoint content.
 .probe.lock
+.overnight-development.lock
+.overnight-supervisor.lock

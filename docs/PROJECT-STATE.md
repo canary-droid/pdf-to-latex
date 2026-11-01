@@ -4915,3 +4915,1109 @@ Prepared136 explicit paths and a normal-terminal completion command under ignore
 results/checkpoint-20261029. It refuses changed source hashes, wrong branch/remote
 or remote divergence; it uses no force, fetch/reconciliation or branch switching.
 The user can run: bash results/checkpoint-20261029/finish.sh from project root.
+
+
+### 2026-10-29 — separate bounded five-stage speed suite, prepared offline
+
+User completed the preceding checkpoint. Read-only HEAD is
+08a452d88f0a18875fac2f2eec64df84b4849e39, main tracking origin/main. Initial tree had
+only the unrelated untracked pdf-to-latex-codex-next-step.txt; preserved. No Git
+metadata operation, service operation, OCR, model call, paid request or credential
+read was performed for this task. All new changes remain unstaged.
+
+Authoritative production pointer still selects
+runs/editorial-chapters-trial-20261029T165410Z-1f2179. State paused,113 calls plus24
+earlier calls, no in-progress reservation, project/run locks released. Calls112 and
+113 both completed normally and compiled; final drain ended18:20:54 UTC. The saved
+17:59:27 pause diagnostic incorrectly said streams had already drained. Historical
+evidence is unchanged; new reporting says draining until requests/finalization
+finish and writer ownership is released. The264 admitted production tasks have22
+completed conversions,22 completed critics, two unusable-document conversions and
+two unavailable critics,108 pending conversions/108 pending critics. No completed
+conversion currently awaits criticism.2-s10 call083 has finish_reason stop and37,323
+final characters, but the document parser records an ambiguous surrounded fence;
+the critic was never dispatched because no eligible complete draft was selected.
+That raw response and the2-s07/2-s10 production gaps remain intact.
+
+Historical two-slot evidence102/103/105/106:4 usable outputs,3,662.3495 active batch
+seconds across two sessions,218,533 completion tokens =177,142 reasoning +41,391
+other completion tokens. No matched serial speedup or source accuracy is inferred.
+The paused production pointer was not redirected to this experiment.
+
+Implemented one separate finite suite coordinator reusing the existing streaming
+HTTP client, reservation allocator, ownership-race repair, resource admission,
+document/accuracy-version handling, isolated compiler and writer locks. Production
+max2/no-overall-call-limit behavior is retained. Explicit suite-only fixed levels
+admit up to4 in Stage1 and a frozen reference2 (or common serial if unavailable)
+in Stages2–5. No stage overlap, new target refill, hidden repair, completed-work
+replay, service switch or book continuation. One attempt per frozen work ID,23 total
+maximum; readiness separate, once per actual launch/resume. Terminal run/resume is
+zero inference including readiness. Shared identity/integrity/ownership, memory and
+HTTP/connection faults stop admission and retain/drain owned responses. Local
+content failures leave their dependent critics unavailable and independent stages
+can proceed. No wall-clock/generation deadlines; connection establishment10s.
+
+Frozen stages:
+1. Four pending Bergomi sections4-s03 PDF157–167,5-s01 168–169,6-s01 218–219,
+   6-s06 223–230 with own critics:8 calls, production High/Max bodies unchanged.
+2. Adjacent digest groups2-s11+s12 PDF113 and2-s15+s16 PDF116–117:4 High/Max calls;
+   saved individual controls084–087,092–095. Headings/repetitions/blocks retained.
+3. High critics on exact historical input drafts for Bergomi4-s01,4-s02 and pilot
+   Gatheral7-s05:3 calls; only effort differs from Max112/113/037.
+4. Complete Klebaner4, original PDF106–136 / selected1–31, dual versus native-only
+   text with identical asset locators, same short prompt and focused Max critic:
+   4 calls. No Chapter5, image API, markers, sentinels, JSON or answer key.
+5. Low conversions of Bergomi4-s01/4-s02 with Max critics:4 calls; exact High
+   conversion controls110/111 and Max112/113. Installed Low support must verify;
+   otherwise skip, never substitute none or change runtime.
+
+Actual preparation: runs/speed-suite-20261029T191756Z-3933e0.
+Report: same directory/report.html and report.md; manifest:suite-manifest.json;
+compact ZIP path:last-inspection.json. Separate pointer:results/speed-suite-current.json.
+Only offline preparation; zero new generations. Earlier unlaunched preparation
+validation artifacts remain local; the operator pointer selects only the final one.
+Both sources, exact controls, assets and target/context ownership were exercised
+against actual saved records.13 concrete bodies fit the recorded1,048,576 context
+window with conservative byte-based bounds204,766–600,310 including full131,072
+output and4,096 template margin; no clipping. Ten dependent critics bind their own
+future draft, exact notes, sources and template and receive a fresh budget check.
+Four initial conversion reservations total1,180,532 versus the last recorded90%
+pool budget1,813,708; live both-node capacity/memory still must be checked.
+The cached template hash41cff9af7b3a86c96751b107a8444f245fbda0bd5320b636a5bb1f7f4ba1a5c3
+matches saved serving metadata and explicitly names Low. Controller Jinja2 is absent;
+no dependency installed. The normal-terminal launcher evaluates installed request
+mapping/template rendering read-only in the existing container before Stage5.
+
+Bounded independent Codex source checks are recorded in
+docs/evidence/bounded-speed-suite-source-checks-20261029.md and source-checks/ in the
+preparation. Four selected pages: Bergomi113,151,154 and Gatheral128. Confirmed the
+adjacent recap statements, printed missing square in the volatility drift, the
+terminal-density/local PDE evidence, and the printed J(3) brace tending to3. The
+saved Max beta0-divergence assertion is not independently established without J(2).
+No new experiment output exists to score; source checks/diagnoses are outside model
+requests and are not whole-page/book certification. No production correction adopted.
+
+Pending grouping opportunities were recalculated without changing production:
+44 untouched apparent recap targets,69,641 native characters across seven chapters.
+Classification/adjacency/source preservation must be checked before later production
+grouping. All six roadmap items remain in docs/BOUNDED-SPEED-SUITE.md: concurrency,
+grouping, High critic, simple native/dual chapter, Low conversion (edit-only criticism
+and deterministic MinerU correction still deferred), then separately pinned runtime
+trials with rollback. No stage winner changes other arms or automatically resumes
+either book. Planning ranges total roughly2–16h with large uncertainty, particularly
+the whole-chapter arm; estimates are not execution cutoffs or whole-book promises.
+
+Validation:604-test full offline suite once,217.705s:585 passed,15 sandbox-denied
+mock-loopback binds,4 optional real compiler skips; zero assertion failures. All23
+new suite tests and19 existing concurrency tests passed. Exact selected evidence
+hashes, body equality/effort-only differences, assets and source mapping passed.
+AST/shell syntax and git diff --check passed. Actual new serving concurrency, live
+readiness/capacity/Low rendering and new Docker compilation were not performed.
+The one operator launcher runs remaining normal-terminal tests once per code/test
+identity, then read-only workload/alias checks, automatic readiness and tmux.
+
+Next: cd /home/mdi/projects/pdf-to-latex && bash scripts/run-speed-suite.sh run
+Session:pdf-speed-suite. Same wrapper:status/pause/resume/bundle (stop explicitly
+preserves partial streams). Actual log:the prepared run/terminal.log after launch.
+After Stage5 it saves report/inspection ZIP, releases ownership and exits. The live
+operator wrapper/worker copies concise diagnostic files to /home/mdi/Downloads;
+Codex offline output stays within project/results and /tmp. Production resumption
+later requires a separately authorized linked preparation for changed code.
+
+Files changed:probe/chapter_concurrency.py,probe/chapter_glm.py,
+scripts/editorial_chapters.py; new probe/speed_suite.py,scripts/speed_suite.py,
+scripts/run-speed-suite.sh,tests/test_speed_suite.py,docs/BOUNDED-SPEED-SUITE.md,
+docs/evidence/bounded-speed-suite-source-checks-20261029.md; updated
+docs/EDITORIAL-CHAPTERS.md and docs/PROJECT-STATE.md. AGENTS.md unchanged.
+
+### 29 October 2026 — finite overnight suite prepared; no inference launched
+
+Read the new overnight task and rediscovered actual pointers/locks. Finished suite
+`runs/speed-suite-20261029T191756Z-3933e0` is suite_finished_for_inspection:
+20 calls (19 work +1 readiness),18 normal work responses, Max009 truncated,
+four Low tasks skipped. No in-progress reservation. Production remains paused at
+`runs/editorial-chapters-trial-20261029T165410Z-1f2179`:113 calls +24 earlier calls;
+admitted scope22 completed conversions/22 critics,2 unusable conversions with
+unavailable critics,216 pending tasks. Both run locks and the root writer lock free;
+no actual worker found. Original pointers, state, sealed calls, controls and book
+sources were preserved. No service/API/credential access or inference during work.
+
+New linked preparation (PREPARED, NOT RUNNING):
+`runs/overnight-suite-20261029T233239Z-708fe8`.
+Separate pointer `results/overnight-suite-current.json`.
+Report: same directory/report.html; exact table:frozen-selection.md;
+manifest:suite-manifest.json; offline-validation.json records checks.
+Inspection ZIP:
+`results/speed-suite-inspection-overnight-suite-20261029T233239Z-708fe8-1793317056212025643.zip`
+(15,044,649 bytes at preparation). Earlier unlaunched development preparations
+are retained; preparation-lineage.json identifies the superseded one. No old
+bindings were patched or resealed. Existing code-bound production needs its usual
+explicit linked preparation before future resume, not a forced old-code match.
+
+Extended the existing finite-suite coordinator/manifest, not another scheduler.
+New protocol freezes44 work IDs: A six High critics on exact historical Max input
+(only effort changed); B the two unchanged skipped Low inputs with own Max critics;
+C four new adjacent digest groups from chapters5/7/8/9; D thirteen coherent larger
+Bergomi units, High conversion/Max critic, source pages170–212,234–317,324–368,
+374–403,408–435,438–466,470–510. Source scope is explicit target blocks; shared
+boundary pages/whole parent context do not count twice.4,314 distinct target blocks
+across C/D. No overlap with the earlier successful pending-unit experiments.
+No adoption, completed conversion replay, fill-in targets, hidden retries or
+production fall-through. One attempt per frozen request; readiness once per genuine
+launch/resume, no model calls after terminal completion. All stages use at most2;
+no four-slot arm, model/runtime/sampling changes or global production ceilings.
+
+D retains simple chapter-style instructions, full native MinerU target, native PDF
+pages, complete parent dual-source context and existing local references. No answer
+keys or new diagnoses are injected.25 concrete requests fit recorded1,048,576 context
+under full UTF-8 JSON +4,096 template margin +131,072 output (254,478–888,223).
+No tokenizer installed/clipping.19 dependent critics check their exact new drafts
+and full context at dispatch. Unfit requests become explicit gaps without splitting.
+Two-slot central planning estimate~9.8h before extra compiler/admission overhead;
+broad6.4–29.5h range, not a deadline. Updated within-stage ranges avoid extrapolating
+recap timing to large work. No overall/generation timeout; connection timeout10s.
+First two larger pairs yield a nonblocking diagnostic; independent work continues.
+
+Reporting now associates each row with versions produced by its own call. A failed
+critic cannot inherit its conversion's compilation; findings-only reviews do not
+claim a returned/applied replacement. Historical corrected reporting is NEW under
+historical-report/version-specific-results.json. Original old reports remain as
+recorded. Raw findings, annotations and actual replacements stay distinguishable;
+arbitrary suggested prose is never spliced automatically.
+
+Separate offline-repairs contain original/repaired TeX and diffs for tag4.14
+(outside aligned, no mathematical change), Bergomi4-s01's explanatory volga divisor
+(d1_sigma=-d2/sigma, hence vega*d1*d2/sigma), and Lewis beta0 qualification (J2 absent;
+J3/beta2 source inconsistency retained). These are Codex-attributed, never new
+benchmark inputs. Both historical Max and High had the volga error. Existing
+qualified compiler image b9505ed9122f83fd4bb4ae2ab79a1a7ad82187ca712fda0e8868e4e374296211
+is retained; real compilation is pending operator access. One read-only Docker
+inspection was denied at docker.sock; no permission change/repeated probe.
+The launcher compiles saved repairs before readiness without model regeneration.
+
+Low's old failure was the probe's Jinja environment (unknown break tag), not proof
+of unsupported Low. The new read-only probe discovers installed serving Jinja
+options/extensions (prefers cuda/chat_template.py) or verified delegated rendering;
+records renderer/mapping/template hashes and Low/High/Max labels. Distinguishes
+supported, unsupported and probe_error. Live installed rendering remains untested
+in this sandbox; only Low stage skips on probe_error, never substitutes none.
+
+Bounded source inspection: Bergomi151/155 confirmed source missing square and
+(4.14) structure;212/317/368/403 confirmed selected recap classification and visible
+mathematical conditions. Klebaner122/131 confirmed2delta bound and printed erroneous
+Var(Z²)=3. Dual017/Max019 retain3; native018/Max020 correct to2. Compilation/normal
+finish therefore does not establish correctness. Lewis128 J3 evidence from earlier
+inspection reused with explicit beta0 limitation. Full source checks and references
+are in docs/evidence/overnight-source-checks-20261029.md. New outputs have no source
+assessment yet; compact pack provides representative images/locators for later work.
+
+Validation at final code/test identity:617 tests in217.464s;598passed;15errors all
+PermissionError at mock loopback socket creation;4 opt-in real compiler skips;
+zero assertion failures. All13 new overnight,23 existing finite-suite and19 existing
+concurrency tests passed. Exact controls/draft hashes, full body effort-only deltas,
+new span uniqueness, both sources, budgets and consumed original file hashes checked.
+AST (including installed probe program), Bash syntax and git diff --check passed.
+Normal-terminal full suite is mandatory once per new code/test identity and is
+included in the launcher. New model behavior/streaming, actual template rendering,
+real Docker repair compilation and output fidelity remain untested here.
+
+Next single command:
+`cd /home/mdi/projects/pdf-to-latex && bash scripts/run-overnight-suite.sh run`
+Persistent session:pdf-overnight-suite. Same wrapper:status/pause/resume/bundle.
+Readiness and actual paths are automatic. Progress file written by operator only:
+`/home/mdi/Downloads/overnight-suite-20261029T233239Z-708fe8-progress.json`.
+Pause drains requests/finalization then releases locks; final completion bundles and
+exits, leaving GLM serving. No production resumption. Full roadmap retained in
+OVERNIGHT-WORKFLOW-SUITE.md: later four-slot matched test if useful, High qualification,
+coherent grouping/larger units, Low, deferred edit-only/deterministic routes, and
+separate pinned runtime/model updates with rollback.
+
+Files edited in this task:probe/speed_suite.py,probe/chapter_concurrency.py,
+scripts/speed_suite.py,docs/BOUNDED-SPEED-SUITE.md,docs/EDITORIAL-CHAPTERS.md,
+docs/PROJECT-STATE.md. New:scripts/overnight_suite.py,scripts/run-overnight-suite.sh,
+tests/test_overnight_suite.py,docs/OVERNIGHT-WORKFLOW-SUITE.md,
+docs/evidence/overnight-source-checks-20261029.md. Earlier unrelated/uncommitted
+changes preserved. AGENTS.md unchanged; all changes unstaged; no Git mutations.
+
+## 30 October 2026 — overnight finalization/probe repair; continuation PREPARED
+
+Read the complete `Codex-repair-overnight-suite-20261030.txt` task. Read-only
+inspection found the actual overnight pointer still at
+`runs/overnight-suite-20261029T233239Z-708fe8`, status `stopped_error`, writer released
+at 00:16:13 UTC. Project, suite and paused-production locks were free; no active
+suite/editorial/MinerU writer was found. Ordinary production remains paused at
+`runs/editorial-chapters-trial-20261029T165410Z-1f2179`.
+
+All seven calls (one readiness and six High critics) returned HTTP 200, exact
+`glm53-regular`, finish_reason `stop`. Five complete replacements have passing
+compiler records; all three separate offline repairs also compiled. Call-005
+completed at 00:12:34 UTC with findings and an explicit statement that no revised
+document was needed. Its raw answer and original/annotated versions survive.
+The last call-007 completed at 00:16:11 and was finalized before writer release.
+No model response needs replaying. The saved normal-terminal log reports **617
+tests, OK (skipped=4), 223.707 seconds** for the earlier implementation.
+
+Two concrete defects were repaired:
+
+- `finish_task` treated the non-None prose returned by envelope extraction as a
+  document at compilation time, despite correctly declining to register a
+  replacement earlier. Creation and compilation now share the explicit
+  recorded-replacement invariant; retained/annotated versions use their actual
+  registry identity. Partial/ambiguous document attempts remain unusable. No
+  broad KeyError suppression, invented replacement, or suggested edit application.
+- The separate Low probe tried `inspect.getfile` on Transformers' cached helper
+  and raised `TypeError ... _lru_cache_wrapper`. It now inspects/hashes
+  `inspect.unwrap(helper)` while rendering with the actual installed cached
+  callable. Installed mapping/template/High/Max identity checks remain enforced.
+  Unverifiable Low skips only B; identity mismatch stops the suite.
+
+New linked continuation:
+`runs/overnight-suite-20261030T085252Z-fae4ce` — **PREPARED, NOT RUNNING**.
+The frozen manifest is byte-identical to the parent; all seven call records and
+sealed request/output files are inherited unchanged. Prepared source, targets,
+grouping, prompts, settings, output allowance, runtime/compiler bindings and
+coverage remain unchanged. Parent snapshot and independent copied evidence hashes
+were checked. Original run state, responses, notes and sealed artifacts were not
+rewritten. `continuation-lineage.json` records implementation changes and ancestry;
+`historical-run/` retains the failed state/diagnostic and old implementation binding.
+
+`local-recovery/call-005.json` records a verified, idempotent offline recovery of
+the already-written notes and annotation. It preserves the historical
+`coordinator_failure` separately and marks the new task `critic_unchanged`, with
+no model replacement and no suggestions applied. Existing immutable version paths
+were not replayed or overwritten. The annotation itself still requires compilation
+at operator launch; its original draft remains byte-identical. Findings-only and
+compilation do not establish mathematical correctness.
+
+Stage A is now `finished_for_inspection` (five revisions, one findings-only result).
+Exactly **38** untouched frozen requests remain: B4 (two Low/own-Max pairs, only
+if Low verifies), C8 (four recap pairs), D26 (thirteen larger Bergomi pairs).
+Readiness is separately recorded once per genuine launch. The next call number
+follows the seven consumed calls; no reset/refill. At most two requests, one
+attempt per frozen task, 131072 output allowance, no overall/generation deadline,
+10-second connection timeout, final stop after D. No production adoption or
+fall-through. Terminal run/resume still makes zero calls.
+
+Future coordinator/finalization failures retain full tracebacks outside HTTP
+seals in `diagnostics/`, with cause/path in task/state/progress and terminal output.
+The small uploadable progress JSON now references the latest bundle after bundling,
+including the copy inside the ZIP. New report/log are respectively
+`runs/overnight-suite-20261030T085252Z-fae4ce/report.html` and `terminal.log` (created
+at launch). `last-inspection.json` points to the actual compact ZIP.
+
+Validation: seven new focused tests passed, including the exact saved call-005
+answer, fenced findings, partial/complete/ambiguous TeX, unchanged original bytes,
+idempotent partial-finalization recovery and tamper rejection, all six real saved
+responses through real finalization with compilation stubbed, the actual cached
+function fallback branch, real threaded coordinator traversal of the remaining
+38 fake requests with dependencies/accounting and terminal no-op, complete error
+tracebacks, and ZIP progress refresh. The full suite ran once at the final code
+state: **624 tests in 218.137 seconds; 605 passed, 15 errors, four skipped; zero
+assertion failures**. Every error was `test_local_model` failing to create its
+mock loopback socket with `PermissionError: [Errno 1] Operation not permitted`.
+Four optional real-compiler tests were skipped. Python syntax, wrapper syntax and
+`git diff --check` passed. Details/log are in the new run's `repair-validation.json`
+and `repair-offline-tests.log`; the copied `offline-validation.json` is historical.
+
+A single read-only attempt to execute the installed effort-rendering probe was
+denied at `/var/run/docker.sock`. No permission changes or repeated attempts.
+The launcher performs the repaired installed probe and recovered-annotation
+compilation in the normal terminal; neither was claimed successful here. No
+inference, service operation, credential access, OCR or paid request occurred.
+
+Next operator command:
+`cd /home/mdi/projects/pdf-to-latex && bash scripts/run-overnight-suite.sh run`
+It runs outstanding full checks once for the changed code/test identity, checks
+the existing regular GLM/workloads, starts persistent tmux `pdf-overnight-suite`,
+captures readiness automatically and continues B/C/D only. Same wrapper actions:
+`status`, `pause`, `resume`, `bundle`. Pause drains before releasing ownership;
+resume skips consumed work. No manual readiness path or service switch.
+
+Files changed in this repair: `scripts/editorial_chapters.py`,
+`probe/chapter_concurrency.py`, `probe/speed_suite.py`, `scripts/speed_suite.py`,
+`scripts/overnight_suite.py`, `tests/test_overnight_repair.py`,
+`tests/fixtures/overnight-findings-only/answer.txt`,
+`tests/fixtures/overnight-findings-only/provenance.json`,
+`docs/OVERNIGHT-WORKFLOW-SUITE.md`, `docs/PROJECT-STATE.md`.
+All unrelated edits preserved; AGENTS unchanged, no Git mutations, everything
+unstaged. No new experiment, source-quality audit or production inference started.
+
+## 30 October 2026 — Codex configuration handoff before independent review/supervision
+
+Read the complete controlling task
+`/home/mdi/Downloads/Codex-configure-review-and-supervise-20261030.txt`. Its ordered
+Phase1 requires a fresh, explicitly configured session before Phases2/3. This
+session cannot write the standalone installation or `~/.codex` profile directory;
+the sandbox exposes them read-only. No permission relaxation or denied mutation
+was attempted. The installed CLI supports the session-local `--no-daemon` route,
+so updating/opening the new CLI need not restart the shared daemon.
+
+Read-only snapshot around09:32–09:40UTC: the current pointer still names
+`runs/overnight-suite-20261030T085252Z-fae4ce`, state `prepared_offline`; project
+writer lock free, run lock absent. Seven inherited calls, five revised critics,
+one findings-only critic,38 pending tasks. No worker visible in this sandbox
+process namespace. All bound controller file hashes still match the prepared
+binding. No run/state/evidence or application code was changed by this phase.
+
+Confirmed CLI0.163.0 at
+`/home/mdi/.codex/packages/standalone/releases/0.163.0-aarch64-unknown-linux-musl/bin/codex`;
+`codex login status` confirms ChatGPT (no credential contents read or displayed).
+Global model/effort remain gpt-6-astra/xhigh, context/compaction unset. Cached and
+bundled model metadata advertise272000 default,872000 maximum and95% effective
+factor, with xhigh available. The prior active session's observed effective258400
+and244800 Total compaction remain the verified runtime values, not800000/650000.
+0.165.0/0.166.0 server packages and changing cache-client versions do not prove the
+executing host daemon version; its recorded PID is outside this sandbox namespace.
+No shared server was restarted. Current public stable will be resolved by the
+documented native updater at operator execution, not blindly pinned to0.166.0.
+
+Added `scripts/start-codex-supervision-task.py`: normal-terminal Phase1 helper,
+not a supervisor or book launcher. It records executable/version rollback data,
+uses `codex update`, checks stable-version syntax and ChatGPT auth, refreshes
+account model metadata, then installs only
+`~/.codex/pdf-to-latex-supervision.config.toml`. Existing profile bytes/mode are
+backed up and unrelated entries retained; base config/auth/permissions unchanged.
+Preferred800000 nominal/650000 total compaction, gpt-6-astra/xhigh; supported
+default fallback if advertised maximum is smaller. It opens one fresh
+`--no-daemon --profile pdf-to-latex-supervision --strict-config` task with the full
+task-file path, concise handover and actual setup record automatically supplied.
+Requested settings and expected headroom are explicitly unverified until the new
+session reads its own runtime evidence. No artificial full-window exercise.
+
+`docs/CODEX-SUPERVISION-HANDOVER-20261030.md` records current evidence, applicable
+prior tests, limitations, rollback and the remaining Phase2/3 instructions. The
+new session must independently assess the existing repair, implement the narrow
+supervisor, run actual disposable Codex-exec qualification, and distinguish
+implemented/qualified/armed/running before continuing the frozen suite. No claim
+that these remaining phases have already happened; the user explicitly required
+this fresh-session boundary. No production queue fall-through is authorized.
+
+Validation: all5 `test_codex_profile_setup.py` checks passed. They verify supported
+window/fallback, backup/mode/unrelated-TOML preservation and idempotence, symlink
+rejection, preview/API-key refusal, and fresh-task arguments without permission
+overrides. Python syntax and `git diff --check` passed. No updater, profile write,
+new Codex/model session, GLM call or compiler invocation was executed. No unrelated
+full-suite repetition; the new session owns the next review/qualification checks.
+
+This phase changes only the new setup helper/test/handover and
+`docs/OVERNIGHT-WORKFLOW-SUITE.md`, `docs/PROJECT-STATE.md`. Every prior repair and
+unrelated edit remains unstaged. Next operator command:
+
+`cd /home/mdi/projects/pdf-to-latex && .venv-control/bin/python scripts/start-codex-supervision-task.py`
+
+## 30 October 2026 — fresh-session review and narrow supervision, qualification BLOCKED
+
+This is the requested fresh session, thread
+`01a18c70-11f6-7023-b87a-1b389cecd101`. Read the complete consolidated authorization,
+the supervision handover, setup record and project instructions. The setup had
+already selected stable standalone Codex0.166.0; no installation/update, profile
+rewrite, authentication change, shared-daemon restart or historical chat resume
+was repeated.
+
+**Phase1 observed runtime:** gpt-6-astra/xhigh, existing ChatGPT authentication,
+effective context760000, automatic compaction650000 **Total**. Configured nominal
+window800000 is recorded separately. The current catalog still reports
+default272000/maximum872000 and95% effective factor. Runtime logs identify the
+0.166.0 codex-tui client with an in-process app server, process identity
+`pid:1132698:8782f94b-a7d0-4b79-9436-1ac4ebec36e5`. The executing sandbox image's
+path/hash matches the selected standalone release. Direct host `/proc/.../exe`
+inspection remains outside this PID namespace; no cache or shared-daemon binary
+is presented as that missing direct observation. **long_context_exercised=false**;
+no padding exercise or model-catalog modification. Sanitized evidence is in
+`results/supervision-review-20261030/session-runtime.json`.
+
+Rediscovery before implementation and after validation found the same current run,
+`runs/overnight-suite-20261030T085252Z-fae4ce`, status `prepared_offline`. The project
+lock is free, the run lock is absent/free, and no worker was launched. Its original
+bound code hashes still match both the frozen binding and the initial snapshot.
+Seven inherited calls, six completed StageA tasks and38 pending B/C/D tasks are
+unchanged. All original responses, proposals, compilations and the failed parent
+remain preserved. Ordinary Bergomi production was never launched.
+
+**Phase2 independently checked:** the existing finalizer uses the same actual
+registered-replacement invariant for creation and compilation. Findings-only notes
+retain the real draft/annotation identity; partial/ambiguous TeX remains unusable.
+The effort probe inspects `inspect.unwrap` and renders with the installed cached
+callable. No corrective edit to these prior repairs was needed. All7 focused
+tests passed, including all6 actual saved StageA responses, the real lru_cache
+fixture, byte preservation, partial-finalization idempotence, the actual threaded
+fake38-request continuation and terminal no-op. A separate trusted-helper replay
+also recovered only `critic-call-005-annotated`, retained `critic_unchanged`, and
+rebuilt disposable reports/bundles with zero generation. Compilation remains a
+separate outcome, not proof of mathematical correctness.
+
+**Phase3 IMPLEMENTED, NOT QUALIFIED/ARMED/RUNNING.** Added the independent persistent
+supervisor, fixed verification helper and programmatic patch policy. The persistent
+normal-terminal entry point performs qualification before worker admission. It
+binds an explicit frozen suite/continuation lineage; monitors actual process
+PID/start/boot/executable/command identity through final bundling, including the
+legacy lock-release interval; and keeps pause/disable intent latched across links
+and restarts. A pause arriving during repair/application prevents later relaunch.
+Disable leaves healthy work alone. Explicit resume can reattach compatible healthy
+work after supervision was disabled. Long requests have no new deadline.
+
+Repairs run in separate ordinary copies using the verified Codex executable and
+explicit project profile, ChatGPT login, workspace-write sandbox and no interactive
+approval prompt. Up to2 attempts per normalized incident are persisted. Candidate
+patches are confined to finalization/reporting function bodies and new regression
+files; path/symlink/hardlink, AST, existing-test, capability/text/check and baseline
+hash checks protect the remaining project and supervisor policy. New regressions
+must reproduce the baseline failure and pass with the repair under the sandbox;
+fixed existing tests and the actual saved failure are checked independently. No
+agent-supplied shell command is executed by the supervisor. Application holds the
+project/run/development locks, preserves file modes and rollback snapshots, and
+rejects conflicting user edits. Parent snapshots and completed work are retained
+in general settled-stage links; terminal reporting repairs remain terminal.
+Uncertain reservations, protected failures and unsupported repair scopes block.
+See [OVERNIGHT-SUPERVISION.md](OVERNIGHT-SUPERVISION.md) for exact scope and limits.
+
+Validation of the final implementation: **20 focused supervisor tests passed**.
+They include actual disposable worker failure/recovery, zero-exit stopped_error,
+process identity/loss, detached post-lock finalization, pause during repair,
+immediate pause latching, healthy disable/reattach, duplicate ownership, persisted
+allowances, unavailable Codex, scope/symlink/conflict rejection, and an actual
+linked copy of the saved failure preserving all7 calls,38 pending tasks and prior
+successful compilations. Compiler callbacks are explicit stubs in that link test.
+
+The final full suite ran649 tests in226.339s: **630 passed,15 errors,4 skipped,
+zero assertion failures**. Every error is `test_local_model` failing to create a
+mock loopback socket with `PermissionError: [Errno1] Operation not permitted`.
+Four optional real-compiler checks were skipped. These are not claimed passes.
+Earlier full logs are retained for the earlier code identities; the later runs
+followed actual control/ownership fixes, not repetition against unchanged code.
+Python AST parsing, shell syntax and `git diff --check` passed. Final log:
+`results/supervision-review-20261030/full-tests.log`. Selected hashes and counts:
+`docs/evidence/supervision-review-20261030.json`.
+
+Real qualification was attempted in
+`results/overnight-supervision/overnight-suite-20261030T085252Z-fae4ce/qualification-1793358381119538295`.
+The disposable fake worker saved2 requests, hit the intended missing-version
+failure and exited0. The supervisor detected the saved failure and invoked the
+actual installed Codex exec. It exited1 before generating a patch:
+`failed to initialize in-process app-server client: Read-only file system (os error30)`.
+No mocked Codex reply is presented as real qualification. The consumed attempt is
+preserved by the qualification allowance ledger on normal-terminal continuation.
+Subsequent offline control hardening does not qualify the final code automatically.
+
+Read-only capability audit: project/controller access works; ChatGPT login status
+works; Docker inspection and a harmless actual isolated compilation were denied at
+docker.sock; tmux socket access was denied; peer SSH DNS and GLM discovery failed
+in the network-restricted sandbox. The compile result is `unavailable`,
+`compilation_claim=false`. No Linux group/socket/account defect is inferred from
+those messages. The full capability table, distinctions between the restricted
+repair agent and fixed normal-terminal supervisor helpers, and minimum actions
+are in the supervision runbook. No permission/configuration relaxation was made
+or established as necessary. Normal-terminal real repair/resume qualification,
+compiler/launcher access, model/runtime verification and full tests remain required.
+
+One operator command completes those checks persistently and only then admits the
+already-authorized pending overnight suite:
+
+```bash
+cd /home/mdi/projects/pdf-to-latex && bash scripts/run-supervised-overnight.sh start --run runs/overnight-suite-20261030T085252Z-fae4ce
+```
+
+The same wrapper accepts `status`, `pause`, `resume`, `disable`. Status/progress and
+the current qualification blocker are in the bound supervision directory; no
+active supervisor/worker is claimed. The production pointer stays untouched.
+
+Files added by this fresh session: `scripts/overnight_supervisor.py`,
+`scripts/supervision_policy.py`, `scripts/supervision_checks.py`,
+`scripts/run-supervised-overnight.sh`, `tests/test_overnight_supervisor.py`,
+`docs/OVERNIGHT-SUPERVISION.md`, `docs/evidence/supervision-review-20261030.json`.
+Updated `.gitignore` only for the two new runtime lock files, the existing suite
+runbook, the concise supervision handover and this dated state entry. The new
+locks remain on disk; no lock was deleted to force progress. All prior unrelated
+edits are preserved; AGENTS unchanged; every change is unstaged and no Git
+index/history/branch/remote mutation occurred.
+
+## 30 October 2026 — supervisor inspection pack and permissions boundary review
+
+Prepared the requested small independent-review ZIP, named
+`pdf-to-latex-supervisor-inspection-20261030T114134Z.zip`, with destination
+`/home/mdi/Downloads/`. Its working-tree copy and build/delivery records live in
+`results/supervisor-inspection-20261030T114134Z/`. It includes the runbook, exact
+implementation and relevant tests, selected qualification/test/compiler evidence,
+safe permission/configuration observations, a per-file SHA-256 manifest and the
+new `docs/evidence/SUPERVISOR-PERMISSIONS-INSPECTION-20261030.md` report. Credentials,
+auth files, whole configurations, environment values, historical chats, source PDFs
+and large raw runs are excluded.
+
+The report distinguishes the observed interactive sandbox from the requested but
+unobserved repair-child sandbox: real exec failed before a child permission record
+existed. It also identifies the host-execution boundary explicitly: fixed
+verification helpers import and execute candidate Python outside the repair
+sandbox before promotion; existing-test commands also execute that implementation
+on the host. Patch-scope/AST filters are not an OS security boundary or proof that
+accepted code preserves every constraint. Broad temporary writes, inherited
+environment and unverified regression-sandbox resolution are documented. No
+permission relaxation is established as necessary; the candidate execution boundary
+needs independent review/hardening before being treated as confined.
+
+This packaging task makes no implementation, permission, service, supervisor
+control or inference changes. It preserves the previous qualification failure and
+test counts rather than rerunning qualification. Validation is archive CRC and
+manifest/hash consistency, explicit content allowlisting/secret-pattern screening,
+unchanged implementation/run hashes and `git diff --check`. Delivery to Downloads
+requires the existing filesystem boundary to authorize only that file copy; it
+does not grant any permission to the repair agent. All documentation edits remain
+unstaged.
+
+## 30 October 2026 — supervision boundary hardening; qualification-only, UNARMED
+
+Found and read all40 lines/8289 bytes of the explicit authorization at
+`/home/mdi/Downloads/Codex-harden-supervision-boundaries-20261030.txt`, then the
+current runbook, state and permissions inspection. Its hash is retained in
+`docs/evidence/supervision-hardening-20261030.json`. The independent review's
+host-execution concerns were confirmed. This task makes no inference, queue,
+service, global permission/configuration, Codex installation or Git changes.
+
+The active pointer remains `runs/overnight-suite-20261030T085252Z-fae4ce`,
+`prepared_offline`:7 recorded calls and38 pending requests. Original controller
+bindings, state and both suite/production pointers remain unchanged. Initial
+read-only writer inspection found free project/run locks and no recorded
+supervisor/worker identity. Host process visibility is limited by this session's
+PID namespace; no absence of other host jobs is inferred. No bound pipeline file
+was edited and no running model/job was stopped.
+
+The unsafe host candidate execution paths were removed from
+`scripts/overnight_supervisor.py`. Direct application, linking, worker launch,
+resume and activation now refuse before imports, control mutation or dispatch.
+There is no environment/CLI bypass switch. `status`, durable `pause` and `disable`
+remain; disabling does not signal healthy inference. **Automatic live promotion
+is disabled**, even if qualification passes. The existing authorization for the
+finite overnight suite remains available for a later explicit start after review;
+it was not exercised here.
+
+Added one confined executor using installed Codex named filesystem permissions
+and bounded transient user services. Candidate imports, replay/finalization,
+new/existing tests and private fixture releases all use it; there is no fallback
+to ordinary host Python. It requests deny-by-default file access, explicit
+runtime/code/dependency/evidence reads, only two source-file write grants for
+repair, private temp/output writes, and no host network/socket access. Existing
+tests and policy are read-only. New regressions are returned separately as bounded
+data, checked for collisions/symlinks and copied into the validation snapshot.
+Client storage/auth/network remain separate from tool access; child environments
+are explicit, without credential/proxy/SSH-agent inheritance. Nonlocal tools,
+hooks, plugins and automatic agents are disabled for the repair session.
+
+Validation snapshots are private, copied after repair descendants stop, mounted
+read-only, and hashed before/after execution. Integration for qualification is
+only a private release copied from those exact checked bytes. Conflicting baseline
+edits stop integration. Systemd user-service limits request4GiB aggregate memory,
+no swap,128 tasks, NoNewPrivileges and bounded file descriptors/files; controller
+logs and private trees also have limits. A fixed owner-identity watchdog plus
+KillMode=control-group handles controller death/background descendants. There is
+no Codex generation wall deadline or change to GLM generation settings. The
+controller explicitly refuses to contact the host service manager from a Codex
+tool session, preventing an outer-sandbox workaround.
+
+Fixed the independent AST regression: unchanged `speed_suite.py` and its existing
+`import statistics` now pass, including when another scoped body changes. New
+imports, duplicate scoped definitions, out-of-scope changes and oversize inputs
+remain rejected. The AST filter is explicitly a **scope check only**. The actual
+`run = run.parent` example still passes that check; two disposable qualification
+probes are prepared to require OS rejection through validation and the private
+post-integration path. Those runtime probes have not passed here.
+
+The new qualification-only path uses harmless mock credentials/evidence and local
+socket canaries; it requires actual permission/resource observations before real
+Codex dispatch. It prepares a controlled finalizer failure, baseline-fail/candidate-
+pass regression, fixed existing failure-path tests, safe private integration,
+fake queue resume, terminal completion and repeated-launch zero redispatch. The
+two-attempt incident ledger is retained; migration imports the prior denied
+attempt rather than resetting it. No new repair attempt was dispatched here.
+The original failed qualification and all earlier inspection artifacts remain.
+
+**Observed checks:** the installed CLI is still0.166.0; help/schema/feature
+discovery and official documentation informed the supported configuration.
+Strict configuration parsing succeeded. This release does not accept `--profile`
+on app-server diagnostics, so the diagnostic supplies only the verified model
+profile's six scalar values inline. Runtime exec/sandbox still explicitly select
+the profile. No profile/base-config file was edited.
+
+Nested namespace creation and user-bus access were denied in this Codex
+environment. The final qualification-only invocation stops at the explicit
+normal-terminal placement guard, with no Codex repair/model request or queue
+action. A no-prompt startup trace was also blocked: strace reported
+`PTRACE_TRACEME: Operation not permitted`. Therefore the earlier exact failing
+Codex storage path remains **unestablished**, not guessed. No Docker group/socket,
+global namespace or home-directory permission change has been established as
+necessary. Normal-terminal checks must distinguish those capabilities from the
+outer interactive restriction; nothing is relaxed automatically.
+
+Offline validation:19 new hardening tests,17 supervisor tests and7 retained-repair
+tests passed. The final full suite ran **665 tests in223.171s:646 passed,15 errors,
+4 skipped, zero assertion failures**. All15 errors are `test_local_model` mock
+loopback socket creation denied with EPERM. Four optional compiler checks remain
+skipped. Logs/code hashes are in `results/supervision-hardening-20261030/`; earlier
+full logs are retained for intermediate code identities. AST/shell syntax and
+`git diff --check` passed. Unit tests/configuration acceptance are not presented
+as live confinement, real Codex repair or compiler qualification.
+
+The live data-only transport/compiler adapter is deliberately **not enabled or
+implemented** here. Candidate code receives no Docker/SSH bridge, and cannot
+obtain host execution by passing tests. Fake finalization uses explicit compiler
+callbacks. A future live implementation must provide reviewed restricted
+interfaces before automatic promotion/resumption can be enabled.
+
+The last snapshot correction supplies read-only copies of the project documents
+required by AGENTS, while explicitly overriding their dated launch instructions
+with this qualification-only scope. Raw runs, inputs and credentials stay outside
+the snapshot. The added context-selection regression passed; the final full test
+run follows that correction. The earlier664-test inspection ZIP is preserved as
+an intermediate snapshot, not silently replaced.
+
+One normal-terminal command performs only qualification:
+
+```bash
+cd /home/mdi/projects/pdf-to-latex && bash scripts/run-supervised-overnight.sh qualify-only --run runs/overnight-suite-20261030T085252Z-fae4ce
+```
+
+Even success remains UNARMED and yields only a private fixture release/review
+patch. Small inspection records/ZIPs are under `results/inspection/`; there is no
+mandatory write to `/home/mdi/Downloads`. The compact uploadable review archive is
+`/home/mdi/projects/pdf-to-latex/results/inspection/pdf-to-latex-supervision-hardening-20261030T164815Z.zip`.
+That initial archive is preserved; the final archive path is recorded in
+`results/supervision-hardening-20261030/inspection-build.json` and printed at
+delivery. It includes the permissions matrix, source/tests and blocked qualification evidence,
+with per-file hashes; credentials/auth files and secret environment values are
+excluded. The current runbook contains the observed/proposed/tested matrix.
+
+Changed: `scripts/overnight_supervisor.py`, `scripts/supervision_policy.py`,
+`scripts/supervision_checks.py`, `tests/test_overnight_supervisor.py`, the supervision
+runbook, suite runbook, handover and this state entry. Added
+`scripts/supervision_isolation.py`, `scripts/supervision_qualification.py`,
+`scripts/supervision_service_guard.py`, `tests/test_supervision_hardening.py` and
+`docs/evidence/supervision-hardening-20261030.json`. The existing launcher is reused.
+All changes remain unstaged; unrelated edits and completed evidence are preserved.
+
+## 30 October 2026 — complete working-tree review ZIP
+
+Prepared an upload package covering every current tracked change versus HEAD and
+every non-ignored untracked file, including pre-existing edits and earlier work.
+It contains exact current files, baseline copies for changed tracked files, a
+combined diff including additions, supporting source/test context, selected
+validation evidence and a ChatGPT review guide. It excludes credentials, auth
+files, environments, model weights, source PDFs and large raw run directories.
+The ZIP path and validation receipt are recorded under `results/inspection/`.
+Only this packaging note was added to project documentation; no implementation,
+permissions, model settings, qualification or queue state changed. ZIP CRC,
+per-file SHA-256 and change-list coverage are checked; tests were not repeated.
+
+**Standing user delivery preference (30 October 2026):** include a fresh,
+uploadable ChatGPT review ZIP with future project-change deliveries, without
+requiring another request. Cover all current tracked/untracked changes, the diff,
+supporting context and relevant evidence; exclude secrets and large raw data.
+Save it under `results/inspection/`, verify its manifest/hashes, and print its
+absolute path. A ZIP is inspection material, not authorization to run anything.
+
+## 30 October 2026 — explicit sandbox permission-profile invocation fix
+
+Read the operator's failed qualification at
+`results/supervision-hardening-20261030/qualification-1793388130965908740/`.
+Its resource gate recorded4GiB memory, zero swap and128 tasks, but the first
+boundary command failed argument parsing because `--permission-profile` was
+missing. No boundary harness or repair model ran in that attempt. Installed
+CLI0.166.0 help confirms the named selector.
+
+The shared `sandbox_arguments()` builder now passes
+`sandbox --permission-profile incident-only --cd ...`, taking the selector from
+the same generated `default_permissions` value. Both snapshot validation and the
+repair-tool precheck use this builder; the source search found no other real
+sandbox command constructor. Historical invocations and failed evidence are
+preserved. The separate model/config profile and all generated permission values
+remain unchanged.
+
+A harmless `/usr/bin/true` invocation then exposed a second CLI compatibility
+error: sandbox rejects `--strict-config`. It is now omitted for sandbox only;
+exec retains it. The corrected invocation passed argument parsing and reached
+bubblewrap construction, which this Codex environment blocked with
+`app-server socket directory must be a user-owned directory with mode 0700`.
+No permission/mode change was made, and this is not a successful sandbox or
+runtime qualification. The normal-terminal qualification must still be rerun.
+
+The new regression failed before the fix in all12 stage/editability combinations.
+After the fix,20 hardening tests and17 supervisor tests passed. The regression
+checks every fixed sandbox stage in both modes, matching the explicit selector
+to the generated profile definition, preserving the model profile/configuration,
+and excluding the unsupported strict flag. No unrelated full-suite rerun.
+Python AST/shell syntax and `git diff --check` passed. Logs and preservation hashes
+are under `results/supervision-hardening-20261030/permission-profile-fix/`.
+
+The failed qualification, existing allowances, model/base configuration, seven
+recorded calls,38 pending tasks, run binding and queue pointers remain unchanged.
+Live promotion stays disabled. No inference, global configuration/permission
+change or Git mutation occurred. Changes are unstaged in
+`scripts/supervision_isolation.py`, the related explanatory comment in
+`scripts/supervision_qualification.py`, `tests/test_supervision_hardening.py`,
+the supervision runbook and this state entry.
+
+Normal-terminal rerun, qualification only:
+
+```bash
+cd /home/mdi/projects/pdf-to-latex && bash scripts/run-supervised-overnight.sh qualify-only --run runs/overnight-suite-20261030T085252Z-fae4ce
+```
+
+## 30 October 2026 — bubblewrap bootstrap denial; ordinary experiment independent
+
+Read the actual result, boundary log, command and requested-permission records in
+`results/supervision-hardening-20261030/qualification-1793390329959254879/`.
+The precise failure is `bwrap: execvp .../bin/codex: Permission denied`: bubblewrap
+could not execute Codex's own bootstrap inside the new sandbox, before Python's
+boundary harness ran. Its output directory is empty. The resource gate passed;
+CLI argument parsing is no longer the failure. This command does not use Docker,
+so this evidence does not establish a Docker setup defect.
+
+The Codex binary is a statically linked ARM64 executable with mode0755 and
+searchable ancestors; execution/version reporting outside the failed sandbox
+works. The requested profile explicitly permits the runtime files under the
+broader denied Codex home. Documented specificity rules support such exceptions;
+the broad deny alone is not proof of the actual enforcing cause. The exact
+namespace mount/access or host security rule responsible remains unestablished.
+Sandbox-log and kernel-journal searches exposed no additional matching evidence
+here. No speculative permission broadening, chmod, host configuration change or
+supervisor code rewrite was made. The diagnostic handover for independent review
+is `docs/evidence/supervisor-bootstrap-denial-20261030.md`.
+
+Separately verified the actual ordinary pointer and `scripts/speed_suite.py:verify()`:
+current code hashes, frozen manifest/tasks, prepared/consumed evidence, all saved
+call seals/request hashes, inherited accounting and registered version hashes pass.
+The pointer is still `runs/overnight-suite-20261030T085252Z-fae4ce`, prepared_offline.
+All7 calls are settled; Stage A is finished (5 revised,1 findings-only); B4/C8/D26
+remain pending. No in-progress reservations or pause/stop flags; project/run
+writer locks free at inspection. No completed work was reset or replayed.
+
+The ordinary wrapper invokes the existing overnight controller directly and has
+no supervisor/Codex/bubblewrap qualification dependency. Its normal full-test,
+workload, runtime/model, compiler and fresh-readiness checks still apply. Completed
+Stage A is skipped; only pending frozen work is admitted, with existing Low/skip
+policies and the final inspection stop. No production fall-through. No live
+service readiness, compilation or inference was launched during this verification.
+
+43 relevant offline tests passed:7 saved-response/repair,13 overnight-suite,
+23 scheduler/resume. This includes real threaded fake traversal of38 remaining
+requests while preserving7 inherited calls, pause/resume accounting, and terminal
+zero-request behavior. Evidence and preserved-file hashes are under
+`results/supervision-hardening-20261030/bootstrap-exec-diagnosis/`; all110 recorded
+failure/allowance/state/binding/pointer file hashes match after inspection.
+
+The user's explicit instruction now separates ordinary continuation from the
+still-disabled automatic supervisor. Updated the suite and supervision runbooks
+accordingly; further supervisor development is not a prerequisite for this run.
+Only documentation/evidence and the refreshed review ZIP changed; implementation
+and permissions remain unchanged, and all edits are unstaged.
+
+Normal-terminal continuation of the ordinary experiment:
+
+```bash
+cd /home/mdi/projects/pdf-to-latex && bash scripts/run-overnight-suite.sh resume --run runs/overnight-suite-20261030T085252Z-fae4ce
+```
+
+## 31 October 2026 — offline Bergomi source export
+
+Read-only discovery now observes the ordinary overnight suite
+`runs/overnight-suite-20261030T085252Z-fae4ce` at
+`suite_finished_for_inspection`, with 46 recorded calls. The speed suite is also
+finished (20 calls); the ordinary editorial run remains paused (113 calls).
+No matching editorial/suite/supervisor writer was observed during inspection.
+This export did not dispatch, resume, compile, change permissions or operate any
+service. Automatic supervision was not enabled.
+
+Created the self-contained source collection
+`results/bergomi-source-export-20261031T095646Z-complete.zip`
+(220,760,347 bytes; SHA256
+`bbb359b060b5418c3a937184090cbf4d85373fde75284f8e368e8f43696e265b`).
+It contains the exact supplied 520-page original PDF; latest existing Bergomi
+assembly and compiled master; all underlying editable TeX, figures and inline
+macros; raw bibliography/epilogue and full extracted source context; original
+OCR block/page maps; accuracy/review notes; inherited call evidence; version
+identities; and explicit missing-section/dependency reports. The one-off
+collector and verification record are in
+`results/bergomi-source-export-20261031T095646Z/`.
+
+The latest saved master is still `bergomi-1793296295851700898`: a PDF-inclusion
+assembly with 21 retained text parts and 17 compiled section PDFs out of 133
+planned parts, not a master compiling chapter text directly. Later production
+Chapter 4 outputs and completed speed/overnight alternatives remain separate.
+The export preserves 196 registered version records representing 189 distinct
+TeX hashes, plus two separate existing editorial repairs with originals/diffs.
+All 357 historical Bergomi manuscript files discovered under run version trees
+match exported hashes; no unique older manuscript was replaced by a benchmark.
+
+Across the frozen input-target maps, 36 planned parts have no registered output.
+This accounting does not certify the other parts' fidelity. In particular,
+overnight `d-large-02-bergomi-05` targets physical pages 193–212 but its saved
+notes explicitly exclude the timer-option and lognormal-perturbation appendices.
+The archive reports that scope mismatch, existing build failures, unfinished
+recap material, unreviewed epilogue/bibliography, and the index absent from the
+supplied original PDF. No corrected bibliography or missing content was invented.
+
+Validation: all 6,827 ZIP entries passed CRC, SHA256 and size checks; 8,318
+collected source/report paths were rehashed unchanged during collection.
+All 1,046 scanned literal TeX file references resolve to included bytes.
+Existing figures were copied to each standalone document's referenced path
+where necessary; no TeX content or historical compilation status changed.
+External TeX packages are listed separately. No fresh compilation, mathematical
+audit, model inference or production test was run. Assembly into a direct-text
+master and source-fidelity/cross-reference review remain future work.
+Only export artifacts and this dated checkpoint were added by this task;
+previous working-tree changes remain unstaged and untouched.
+
+### 31 October 2026 — compact Bergomi text-only packaging
+
+Created `results/bergomi-tex-only-20261031.zip` (138,057 bytes) from the verified
+source export above. It contains only the saved assembly's 21 selected editable
+TeX documents, a README and a small manifest: no PDFs, images, alternate versions,
+raw call evidence or build dependencies. Each TeX file is byte-identical to its
+assembly source; all 44 image-reference filenames, captions and embedded editorial
+notes are preserved. The README distinguishes the 112 parts absent from this
+selection from the wider collection's 36 missing parts and retains the known
+Chapter 5 appendix gap. Image-only chart information and the Chapter 1 math
+fragments with recorded textual reconstructions are identified separately.
+All 23 ZIP entries passed CRC and exact-byte/hash checks; the source ZIP hash
+is unchanged. No compilation, inference, regeneration or code change occurred.
+Original artifacts and prior unstaged edits are preserved. Source fidelity and
+future master assembly remain unqualified.
+
+## 1 November 2026 — reconciled finite book completion, PREPARED NOT RUNNING
+
+Read the user's full `Codex-Finish-Gatheral-Bergomi-2026-11-01.txt` instruction
+and the current inspection package. Rediscovered the production/speed/overnight
+pointers, released project/run locks and unchanged state hashes before editing.
+Production remains paused at 113 calls with its separately retained 24-call
+earlier history; speed and overnight remain finished at 20 and 46 calls. Their
+states, requests, original drafts and completed evidence were not resealed or
+modified. No new model inference occurred during this task.
+
+Active prepared generation:
+`runs/book-completion-20261101T095516Z-b24cfa`.
+Separate pointer: `results/book-completion-current.json`.
+The earlier unlaunched preparations remain preserved; compatible successful
+document builds were carried forward rather than rerun after a code-only change.
+The current run has zero new calls and status `prepared_offline`.
+
+Implemented `probe/book_completion.py`, `scripts/book_completion.py`,
+`scripts/run-book-completion.sh` and focused completion regressions. The existing
+two-request scheduler is reused through a narrowly allowed completion protocol.
+No supervisor, Bubblewrap repair or general autonomous code promotion is needed.
+The user-authorized current GLM scope is now stated in AGENTS, the active handover,
+README and the new completion runbook; earlier workflow instructions remain dated
+history. Git/credential/service/permission restrictions remain intact.
+
+Reconciliation retains 78 coherent saved reading documents: Gatheral's recovered
+34 parts and 44 Bergomi documents, including grouped outputs once only. It records
+source PDF/extraction/asset hashes, original version ancestry, actual target
+blocks, adoption choices, original drafts, technical diffs and content-preservation
+indicators. Gatheral's selected Lewis note already qualifies beta_2 for nonzero
+rho and leaves beta_0 cancellation unresolved without J^(2); it was retained.
+The existing Chapter 4 volatility-derivative repair is reused; the already-valid
+production Chapter 4 second section is retained without duplicating the separate
+High tag repair. Shorter or merely newer experimental alternatives do not displace
+fuller production selections by default.
+
+The four omitted Bergomi appendix bodies were removed from adopted coverage:
+Ch5 timer options `bergomi-p0197:b4`–`bergomi-p0205:b11` (145 blocks), Ch5 density
+perturbation `bergomi-p0205:b12`–`bergomi-p0211:b12` (101), Ch10 jump/Lévy appendix
+`bergomi-p0424:b2`–`bergomi-p0434:b9` (183), and Ch11 correlation-estimator appendix
+`bergomi-p0463:b6`–`bergomi-p0465:b4` (29). Missing digest headings are restored from
+the existing extraction into saved recaps or retained with their missing digest
+tail; a recap never replaces an appendix body.
+
+The canonical ledger still identifies 36 fully uncovered parts and four partial
+parts (the three appendix-containing targets plus the Chapter 12 boundary digest
+heading). The frozen missing-only queue contains **17 coherent units / 34 work
+requests**, covering 1,242 unretained source blocks: four appendix bodies, four
+coherent substantive units representing the seven missing substantive sections,
+seven grouped digest tails, epilogue and bibliography. No adopted block is queued
+again. Twelve units retain full separate parent context, three use bounded exact
+references, and the two end-matter units are complete chapter targets. Admission
+reserves the unchanged output allowance and conservative critic-draft space;
+actual runtime context/pool checks remain mandatory and never clip source text.
+
+The completion request builder derives its scope from every assigned block and
+nested heading, including appendices. It does not use the historical narrower
+`larger_body()` output-title override; historical frozen requests remain unchanged.
+Conversion and criticism share the same scope. Lightweight checks expose missing
+headings/appendix bodies, required charts/tables, explicit numbered sequences and
+broken labels while recording uncertainty about automatic/unnumbered mathematics.
+Source/target accounting, output completeness, model review, compilation and
+individually verified findings remain separate.
+
+Applied exact derivative repairs for the observed paragraph-in-textcolor note
+macros, unmatched note brace, missing AMS symbol package, ornamental U+2767,
+misplaced tags 7.1/9.15/9.33, undefined textcompss in a quoted editorial reading,
+and the fragile footnote macro inside a Chapter 9 caption. Real compilation exposed
+the additional ornament in 2-s14 and the caption footnote after earlier failures
+were fixed; neither repair rewrites mathematics. Figure 10.9 was restored from
+existing block `bergomi-p0419:b2` and asset
+`d6bde87360b133c396f7d878.jpg`, with its native-PDF-corroborated caption and explicit
+qualification of the original misleading completeness claim. Actual compiler AUX
+records confirm labels `fig:109 = 10.9` and `fig:1010 = 10.10`.
+
+All **78 selected documents have successful compatible isolated build evidence**.
+Both current partial reading masters compile: Gatheral 34/34 selected PDF parts,
+Bergomi 44/44 selected PDF parts with the 17 unconverted units visibly missing.
+Reading PDFs, selected TeX/assets, source/version/coverage manifests, unresolved
+issues, compact TeX-only ZIPs and complete-source ZIPs were produced under the
+run's `editions/` and `results/book-completion/`. These are working/partial
+deliveries, not certificates of complete source fidelity. The existing immutable
+Docker image was used through approved execution after outer-sandbox socket
+denial; no installation, host fallback, service switch or permission change.
+
+Validation: 17 focused tests passed. The full suite ran 683 tests in the Codex
+sandbox with zero assertion failures, 15 mock-loopback socket PermissionErrors
+and four opt-in compiler skips. Approved normal-terminal-context rerun:
+**683 tests, 679 passed, four opt-in skips, zero failures/errors**, in 227.332s.
+Logs are in `results/book-completion-validation-20261101/`; the run's
+`validation.json` and `normal-terminal-checks.json` record identities and results.
+The successful full check is cached for this exact code/test identity so launch
+does not repeat it without a changed identity. Real serving/workload/capacity and
+fresh GLM readiness remain runtime checks, not claims from mocks.
+
+One persistent normal-terminal launch, with automatic readiness, the whole
+approved queue, final assembly and packaging:
+
+```bash
+cd /home/mdi/projects/pdf-to-latex && bash scripts/run-book-completion.sh run --run runs/book-completion-20261101T095516Z-b24cfa
+```
+
+The same wrapper provides read-only `status`, draining `pause`, settled-output
+`resume`, and `bundle`. Terminal run/resume is zero-dispatch, including readiness.
+Generation/build failures remain explicit and independent safe work continues;
+shared ownership/integrity/scope faults stop admission. No uncertain request is
+automatically resent. No completed experiment or old production queue is resumed.
+Status/report paths and actual delivery ZIPs are listed in the run's `report.md`
+and `results/book-completion/book-completion-20261101T095516Z-b24cfa-progress.json`.
+`terminal.log` is created by the persistent worker at launch. Planning latency
+from saved overnight work is roughly 4.1 ideal two-slot / 8.2 serial hours before
+checks/build overhead; this is uncertain, not a deadline or performance promise.
+
+All project changes remain unstaged; unrelated pre-existing edits were preserved.
+
+## 1 November 2026 — REVISED, UNIFIED finalisation delivered
+
+Read `Codex-Book-Finalisation-2026-11-01.txt` in full and confirmed its opening
+identifies the REVISED, UNIFIED task. Actual parent state superseded the earlier
+prepared snapshot: `book-completion-20261101T095516Z-b24cfa` finished all 35 calls
+(one readiness, 17 conversions and 17 critics), all normal `glm53-regular`
+responses. No project writer was visible and project/parent locks were free.
+The parent remains unchanged at SHA256
+`ccfe81aa4f6cbb9c4c35a8d3c1b1d1db03599a25b6a8b94a838bdb0051fff9f3`.
+
+Linked derivative: `runs/book-finalisation-20261101T154901Z-466f18`.
+Pointer: `results/book-finalisation-current.json`.
+**DELIVERED: Gatheral 34/34 and Bergomi 61/61 selected PDF parts, both masters
+compiled, no PDF gaps.** All 133 Bergomi canonical targets are mechanically
+accounted for through grouping. No model/OCR/critic/benchmark work was repeated;
+the derivative retains the 35 inherited calls and records zero new model calls.
+No article job, production continuation or supervision was launched.
+
+The two failures were verified from actual compiler logs. U+2767 in the Chapter 9
+digest now uses the existing narrow ornamental fallback, without removing math
+or arbitrary Unicode. Babel's missing `french.ldf` is recorded as a language
+dependency, not invalid TeX. The explicitly authorized `texlive-lang-french`
+dependency was supplied through the existing isolated compiler-image workflow.
+New immutable image:
+`sha256:4dd82c02ee37a6df7ee09991a3071d48ee9ea772276b165171697ce03ae62894`.
+Only that versioned image was provisioned; no host packages, model services,
+credentials or permission settings were changed. TeX builds remain offline,
+non-root, read-only-source, no-shell-escape Docker builds with the prior limits.
+
+Compared all 17 actual hash-verified documents sent to critics with their selected
+revisions and exported compact diffs. The existing comparison function is now
+called for future critic finalisation too. No removed explicit equation numbers,
+image references, condition-word decreases or large body contraction were found
+in these 17 pairs; these signals are not proof of mathematical preservation.
+Substantive inspected changes and harmless formatting are discussed separately
+in the derivative's source-review records. Raw inputs, responses and parent
+accuracy logs remain untouched and locatable.
+
+Local original PDF images were inspected at physical pages 199, 200, 201, 264 and
+431. Page 431 confirms a printed extra inner lambda in (10.27), as well as
+extraction damage to grouping. The justified correction from the displayed
+forward equation and the small-jump limit is retained; only its source-check note
+was updated. Timer footnotes 23/25 and budget/running-variation symbols are
+supported by pages 199–201. The Chapter 11 epsilon_ii correction, leading bias and
+variance are retained; prose now specifies independence across time and the
+existing correlation across assets. No model assumptions were changed.
+
+The timer critic's full Accuracy log was recovered from inside its fenced TeX.
+The shared parser supports this explicit form and avoids rendering an exact
+already-present log again. The duplicate generated timer suffix was removed in
+the derivative; every finding remains available in the readable log and preserved
+sidecars. Model-reported resolutions remain unverified claims unless a particular
+local observation is separately recorded. Prompts, correction policy, reasoning
+settings and acceptance rules were fingerprinted unchanged.
+
+Recorded 12 exact-version reviewed flag groups without weakening global checks.
+Flagged headings exist as accents, macros, bold/centred titles or maketitle.
+Source page 264 confirms split Table 7.4 was recombined and retains the single-
+maturity row 01-Jan-11, 63.8%, 64.9%, 319%, 325%. A separate real numbering defect
+was fixed: the saved article had printed Tables 1–5. New compiler AUX verifies
+Tables 7.2–7.6 and Figures 7.6–7.7. No table rows or captions were removed.
+
+Applied only the supplied secondary corrections: La Fontaine VI; Durrleman [43]
+14(2), 157–177 (2010), DOI 10.1007/s00780-009-0112-1; Carmona–Nadtochiy [21]
+13(1), 1–48 (2009), DOI 10.1007/s00780-008-0078-4; Nachman [74] retained as
+1(3), 311–328 (1988), DOI 10.1093/rfs/1.3.311. Stale contradictory/duplicate notes
+are withdrawn in the derivative and explicitly superseded in current accuracy
+dispositions; original evidence remains. These are operator-supplied findings,
+not claims that Codex or GLM browsed the cited records. No bibliography audit,
+external-fact verification system or more hesitant mathematical critic was added.
+
+Validation: eight focused reusable-change regressions passed. Full offline suite
+in the approved normal-terminal context: **691 tests, 687 passed, four optional
+compiler skips, zero failures/errors**, 225.831s. Log:
+`results/book-finalisation-audit-20261101/full-tests.log`.
+Real compilation is separate: seven affected documents and both new masters
+compiled successfully; 88 unchanged compatible part PDFs were reused after hash
+and dependency checks. All 95 selected documents have passing build evidence.
+The source parent, actual draft hashes and immutable policy identities still match.
+
+Delivery index: `runs/book-finalisation-20261101T154901Z-466f18/FINAL-INDEX.md`.
+It lists actual reading PDFs, editable part directories, small TeX-only ZIPs and
+complete-source ZIPs with build-environment/dependency records. The master remains
+a PDF-inclusion assembly; editable text is in individual standalone parts. Original
+front/back/index supplements are honestly labelled PDF source pages, not editable
+transcription; the missing Bergomi source index was not invented. Case-specific
+source inconsistencies and mathematical uncertainties remain explicit; successful
+conversion, criticism and compilation do not mathematically verify either book.
+
+Implementation changes: `probe/book_completion.py` (narrow ornament helper),
+`probe/chapter_editorial.py` (in-document accuracy capture/deduplication),
+`scripts/book_completion.py` (actual critic-input comparisons and reviewed-flag
+reporting), `probe/compiler_environment.py` / `probe/tex_compile.py` (French
+dependency handling), `probe/book_finalisation.py`, `scripts/book_finalisation.py`,
+`tests/test_book_finalisation.py`, and dated handover/runbook/state documentation.
+All changes remain unstaged. Unrelated earlier edits and all completed generations
+are preserved. Stop after this delivery; do not start another queue.
+
+## 1 November 2026 — local checkpoint and laptop-transfer copies
+
+The user explicitly authorized one local commit of the current relevant project
+changes on `main`, with no push, branch switch, remote change or history rewrite.
+This is a task-specific exception to the normal working-tree-only rule; the
+standing project instructions are not broadened. The older standalone instruction
+file `pdf-to-latex-codex-next-step.txt` is outside this checkpoint and remains local.
+
+Reused the recorded successful 691-test finalisation validation after checking
+the current finalisation code hashes, reconstructing the preceding code/test
+identity, and matching the new finalisation test file and supporting workflow
+sources against their saved inspection snapshots. Only checkpoint documentation
+and transfer copies were added in this task; no inference, OCR, compilation or
+book regeneration was performed. Git diff/whitespace and candidate-file checks
+exclude credentials, book PDFs/converted editions, generated runs/results,
+environments and model files from the commit.
+
+Copied the existing archives identified by
+`runs/book-finalisation-20261101T154901Z-466f18/state.json` into the ignored directory
+`results/laptop-transfer/2026-11-01/` as `Gatheral-complete.zip`,
+`Bergomi-complete.zip`, `Gatheral-tex-only.zip` and `Bergomi-tex-only.zip`.
+All four copies match the recorded delivery SHA256 hashes. Archive CRC checks
+passed; the complete archives contain the delivered reading PDFs, editable part
+TeX and assets. `SHA256SUMS` contains only the four relative filenames and passes
+`sha256sum --check`. Original archives and edition directories are unchanged.
+The four archives total 63,566,623 bytes. The transfer directory remains outside
+Git under the existing `/results/` ignore rule. No push is authorized or performed
+by this checkpoint; the operator will push personally.

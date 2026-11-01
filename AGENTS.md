@@ -29,17 +29,28 @@ The user reviews, stages, commits and pushes personally.
 ## Project scope
 
 Prioritise complete content and mathematical fidelity. Layout matching is not
-a goal; figures may remain extracted images. Current work is a compatibility
-and fidelity probe: one complete paper, one selected book chapter and synthetic
-fixtures. The full-book application is later work.
+a goal; figures may remain extracted images. The user-authorized task of
+1 November 2026 is to reconcile and finish traceable working editions of Gatheral
+and Bergomi using saved work and one finite missing-content-only completion run.
+The earlier paper/chapter compatibility-probe scope is historical. No article
+library batch or general autonomous repair campaign is authorized by this task.
 
-The production direction is local MinerU extraction, local Qwen source-image
-review, a versioned candidate, then local regular GLM as the default TEXT critic.
-DeepSeek remains explicitly selectable. GLM text criticism does not replace Qwen's
-visual comparison. Review the current candidate once; paired baseline/candidate
-experiments are optional. Do not run heavy local phases concurrently.
+For this completion use saved native MinerU text/formulas plus corroborating
+native PDF text, coherent complete target spans (including assigned appendices),
+immediate own-draft text criticism, and explicit editorial/source-error notes.
+Use the existing exact local `glm53-regular` service: High conversion, Max critic,
+131072 output tokens, streaming/accounting preserved, at most TWO concurrent
+requests through the existing ownership/capacity scheduler. Do not rerun OCR or
+completed experiments. Grouped outputs appear once; partial adoption retains
+omitted content as a gap. No overall generation deadline or arbitrary inherited
+global call ceiling; finite per-unit allowances and uncertain-call protections
+remain. This does not authorize overlapping other heavy model/OCR jobs.
+The prior Qwen/DeepSeek framework direction remains historical context; visual
+review is not a prerequisite for this approved GLM completion, and text criticism
+does not become proof of source-image verification or mathematical correctness.
 Do not enable OpenRouter or other cloud inference in the conversion program.
-User-authorized exception (25 October 2026): explicitly selected text passages may
+Historical user-authorized exception (25 October 2026), not authority for new
+cloud work in the 1 November completion: explicitly selected text passages may
 receive a MiMo second opinion through OpenRouter `xiaomi/mimo-v2.6-pro`, pinned
 to `xiaomi/fp8`, with no fallback and a USD 10 cumulative ceiling. The completed
 twelve-passage pilot stays frozen. The next calibration is eight candidate-only
@@ -73,7 +84,8 @@ downloads and actual inference are separate, explicit operator steps.
 
 - The delivered probe passed 59 offline tests in the authoring workspace.
   This is not a Spark result or evidence of OCR accuracy.
-- No live GLM/OCR or Spark installation was performed before this handover.
+- The original October handover had no live GLM/OCR or Spark installation evidence;
+  later dated run records supersede that historical status. Verify actual states.
 - Keep source files and completed attempt evidence unchanged. Preserve hashes,
   original page maps, failed attempts and unaccepted model proposals.
 - Do not simplify mathematics, omit conditions, summarise source prose, silently
