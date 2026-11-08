@@ -292,6 +292,10 @@ def run(args: argparse.Namespace) -> int:
         if expected_count < 1:
             raise PreflightBlocked("PDF contains no pages")
         summary["input"] = {"name": pdf.name, "sha256": sha256_file(pdf), "page_count": expected_count}
+        if getattr(args, 'warp_diagnostics', False):
+            sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+            from probe.ocr_diagnostics import install
+            install(output, repair=getattr(args, 'qualify_subpixel_crops', False))
         from mineru.config import VlmConfig
         from mineru.parser import ParseResult, parse
         from mineru.parser.writer import FileBasedDataWriter
@@ -330,6 +334,8 @@ def run(args: argparse.Namespace) -> int:
         return 2
     except Exception as exc:
         summary.update(status="failed", error_type=type(exc).__name__, error=str(exc))
+        import traceback
+        (output / "traceback.txt").write_text(traceback.format_exc())
         return 3
     finally:
         summary["elapsed_seconds"] = round(time.monotonic() - started, 3)
@@ -345,7 +351,11 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--engine", choices=("vllm",))
     parser.add_argument("--models-dir")
     parser.add_argument("--probe-runtime", action="store_true", help="Check dependencies/readiness and hash model files; do not open a PDF or run inference")
+    parser.add_argument("--warp-diagnostics", action="store_true")
+    parser.add_argument("--qualify-subpixel-crops", "--qualified-warp-recovery", dest="qualify_subpixel_crops", action="store_true")
     args = parser.parse_args(argv)
+    if args.qualify_subpixel_crops and not args.warp_diagnostics:
+        parser.error("Qualified crop repair requires diagnostics")
     try:
         return run(args)
     except (PreflightBlocked, OSError) as exc:

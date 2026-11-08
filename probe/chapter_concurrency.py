@@ -174,7 +174,8 @@ def coordinate(run,state,tasks,*,body_for,finish,verify,changed,sample,checkpoin
     # An explicitly frozen experiment stage may use 1/2/4 slots. This does not
     # change the production policy or permit its automatic four-slot promotion.
     suite_levels={'bounded-speed-suite-v1':(1,2,4),'overnight-workflow-suite-v1':(1,2),
-                  'book-completion-v1':(2,)}
+                  'book-completion-v1':(2,), 'originals-batch-v1':(2,), 'focused-local-recovery-v1':(2,),
+                  'extraction-comparison-v1':(2,), 'source-image-review-v1':(1,2)}
     if fixed_level is not None and fixed_level not in suite_levels.get(state.get('suite_protocol'),()):
         raise runtime.Fatal('Fixed concurrency requires a bounded suite stage')
     maximum=fixed_level or POLICY['maximum_in_flight']

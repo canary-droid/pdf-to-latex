@@ -223,7 +223,11 @@ class LocalClient:
         if not health and (method, endpoint) not in (("GET", "/models"), ("POST", "/chat/completions")):
             raise ValueError("Only model discovery and chat completion endpoints are allowed.")
         body = None if payload is None else json.dumps(payload, ensure_ascii=False, allow_nan=False).encode("utf-8")
-        if body is not None and len(body) > MAX_REQUEST_BYTES:
+        image_request = bool(payload and self.purpose == 'simple_chapter' and any(
+            isinstance(m.get('content'), list) and any(p.get('type') == 'image_url' for p in m['content'])
+            for m in payload.get('messages', [])))
+        request_limit = 16 * 1024 * 1024 if image_request else MAX_REQUEST_BYTES
+        if body is not None and len(body) > request_limit:
             raise ProbeError("Request body exceeds the local probe limit.")
         with self._lock:
             attempts = Path(output_dir) / "attempts"

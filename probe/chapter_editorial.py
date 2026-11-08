@@ -257,7 +257,7 @@ def annotation(entry):
 
 def annotate(document, entries):
     if not accuracy.complete_document(document):raise ValueError('Cannot annotate an incomplete document')
-    appendix='\n\\clearpage\n\\section*{Editorial corrections and unresolved issues}\n'
+    appendix='\n% PDF2TEX_GENERATED_NOTES_BEGIN\n\\clearpage\n\\section*{Editorial corrections and unresolved issues}\n'
     visible=[e for e in entries if e.get('category','material')=='material' and
              e.get('status')!='superseded_with_recorded_disposition' and
              not any(ref in document for ref in [e['id'],*e.get('references',[])]) and

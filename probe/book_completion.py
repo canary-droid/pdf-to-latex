@@ -192,15 +192,44 @@ def image_references(document):
     return result
 
 
-def body_only(document):
-    # Generated notes must not satisfy a required source-body heading/figure.
-    markers = list(re.finditer(r'\\(?:section|subsection)\*?\{(?:Editorial|Accuracy|GLM accuracy|Notes and)', document, re.I))
-    return document[:markers[0].start()] if markers else document
+def body_only(document, source_headings=None):
+    """Only program-owned notes, never a source heading with an English prefix."""
+    marker='% PDF2TEX_GENERATED_NOTES_BEGIN'
+    if marker in document:return document.split(marker,1)[0]
+    # Historical annotations carry an exact generated heading AND hashed finding
+    # identifiers. A source Accuracy/Editorial/Notes heading alone is not enough.
+    match=re.search(r'\\section\*\{Editorial corrections and unresolved issues\}',document)
+    if match and re.search(r'(?:convert|critic)-call-[0-9]+-[a-f0-9]{10}',document[match.end():]):return document[:match.start()]
+    if source_headings is not None:
+        source_names={plain(x) for x in source_headings}
+        generated_titles={'editorial notes','accuracy notes','glm accuracy notes','editorial corrections and unresolved issues'}
+        for m in re.finditer(r'\\(?:section|subsection)\*?\s*\{([^{}]+)\}',document):
+            name=plain(m[1])
+            if name in generated_titles and name not in source_names:return document[:m.start()]
+    return document
 
 
 def coverage_check(document, native, ids):
-    blocks = selected_blocks(native, ids); body = body_only(document)
+    blocks = selected_blocks(native, ids)
+    source_headings=[h for b in blocks if b['kind']=='paragraph_title' for h in headings(b['tex'])]
+    body = body_only(document,source_headings)
     got_headings = [plain(h) for h in headings(body)]
+    for m in re.finditer(r'\\title\s*\{',body):
+        try:got_headings.append(plain(braced(body,m.end()-1)[0]))
+        except ValueError:pass
+    for m in re.finditer(r'\\begin\{(theorem|lemma|assumption)\}\[([^\]]+)\]',body):
+        got_headings.append(plain(m[1]+' '+m[2]))
+    if r'\begin{abstract}' in body:got_headings.append('abstract')
+    if r'\begin{thebibliography}' in body:got_headings.append('references');got_headings.append('bibliography')
+    # A source heading may be a caption or table title. Match bounded structural
+    # text, never an arbitrary mention in surrounding prose/editorial notes.
+    for match in re.finditer(r'\\(?:caption|shortstack)\s*\*?(?:\[[^]]*\])?\s*\{',body):
+        try:got_headings.append(plain(braced(body,match.end()-1)[0]))
+        except ValueError:pass
+
+    for match in re.finditer(r'\\begin\{center\}(.*?)\\end\{center\}',body,re.S):
+        following=body[match.end():match.end()+160]
+        if re.match(r'\s*(?:\\begin\{center\}\s*)?\\begin\{(?:tabular|tabularx|longtable)',following):got_headings.append(plain(match[1]))
     expected_headings = [h for b in blocks if b['kind'] == 'paragraph_title' for h in headings(b['tex'])]
     missing_headings = []
     for h in expected_headings:
@@ -222,11 +251,20 @@ def coverage_check(document, native, ids):
             if not nested and len(plain(segment)) < 40:
                 empty_heading_bodies.append(title)
     images = set(image_references(body)); basenames = {PurePosixPath(p).name for p in images}
+    verified_groups=native.get('verified_figure_groups',[])
+    represented=set(basenames)
+    duplicated=[]
+    for group in verified_groups:
+        canonical=PurePosixPath(group['canonical']).name;members={PurePosixPath(a).name for a in group['members']}
+        if canonical in basenames:
+            represented.update(members)
+            if members & basenames:duplicated.append(group['id'])
+        elif members <= basenames:represented.add(canonical)
     missing_charts = []
     tables = []
     for b in blocks:
         if b['kind'] in ('chart', 'image'):
-            absent = [a for a in b.get('assets', []) if PurePosixPath(a).name not in basenames]
+            absent = [a for a in b.get('assets', []) if PurePosixPath(a).name not in represented]
             if absent:
                 missing_charts.append({'block': b['id'], 'assets': absent})
         if b['kind'] == 'table':
@@ -240,7 +278,7 @@ def coverage_check(document, native, ids):
     labels = set(re.findall(r'\\label\{([^}]+)\}', body))
     references = set(re.findall(r'\\(?:ref|eqref|pageref|autoref)\{([^}]+)\}', body))
     missing_numbers = sorted(numbered-explicit) if explicit and not auto else []
-    return {'target_blocks': len(ids), 'target_sha256': fingerprint(list(ids)),
+    return {'duplicated_verified_figures':duplicated,'target_blocks': len(ids), 'target_sha256': fingerprint(list(ids)),
             'missing_heading_candidates': missing_headings, 'missing_required_charts': missing_charts,
             'empty_appendix_body_candidates': empty_heading_bodies,
             'table_count_warning': len(tables) > table_envs+image_tables,

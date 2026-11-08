@@ -90,6 +90,9 @@ class ContextBudgetGap(ValueError):
 
 
 def budget(body,context_length=None):
+    if any(isinstance(m.get("content"),list) and any(p.get("type")=="image_url" for p in m["content"]) for m in body.get("messages",[])):
+        from .image_review import image_budget
+        return image_budget(body,context_length)
     size=len(json.dumps(body,ensure_ascii=False,allow_nan=False).encode())
     if size>MAX_REQUEST_BYTES:raise ContextBudgetGap('Complete chapter request exceeds transport bytes; nothing clipped')
     # Tokenizers is not installed in controller. UTF-8 bytes conservatively bound

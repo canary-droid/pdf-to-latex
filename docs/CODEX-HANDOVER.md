@@ -1,4 +1,306 @@
+# Current execution — 8 November 2026
+
+
+## 8 November 2026, 11:42 UTC — revision2 next30 batch RUNNING
+
+Observed persistent worker PID1771618, tmux `pdf-library-first`, run
+`runs/library-next30-20261108T113644Z`. Final982 repository tests passed with4
+optional skips (256.676s), matching final code/test identity in the run's
+normal-terminal-checks.json. The authorized wrapper was executed by Codex.
+
+Smile Risk and Lee were published as new immutable working generations from
+saved sources, without inference; library58ready/34partial/1excluded after
+registering the exact30new PDFs. Boyarchenko and Lewis recovery remain queued.
+The owned idle two-node GLM service was stopped through its existing helper;
+MinerU Pro is loading in the qualified peer container for397new pages, Kienitz
+first.103 old successfulOCR pages remain reused. Fresh7USD exposure is0 so far.
+Extraction and restoredGLM stages continue unattended; no production queue follows.
+
+Main log: `runs/library-next30-20261108T113644Z/terminal.log`. During peerOCR,
+detailed live log: `host-operations/pro-extraction-1794138176597142722.log` under
+that run. Durable peer page state: `/home/mdi/projects/pdf-to-latex-comparisons/
+library-next30-20261108T113644Z/outputs/mineru_pro/state.json`; the head collects
+it after the phase. `progress.json` tracks controller/publication/paid state.
+Use `bash scripts/run-library-first.sh status|pause|resume|bundle --run` with
+this exactrun; resume requires`--allow-owned-handoff`. Finished resume is inert.
+The code is now bound to the worker: do not edit it underneath the active run.
+
+
+# Preserved previous handover
+
+# Current collected result — 8 November 2026
+
+
+## 8 November 2026 — overnight results collected (no retries)
+
+Run library-overnight-20261108T040405Z finished07:16:47 UTC after154.25minutes.
+All four deliveries remain partial/unselected at paper level.103 Pro pages
+completed; the only failed page is genuinely blank Boyarchenko p38, which blocked
+its downstream planning.46 local responses completed, including2 unusable conversion
+answers and5 invalid review answers;16 Kimi responses recovered useful derivatives.
+Two further Kimi reviews were blocked by the inherited16-call gate, not the7USD cap.
+Confirmed Kimi cost1.219735230USD; total shared exposure2.680224254USD including
+held pre-dispatch reservations and a0.005USD Mathpix estimate. No allowance changed.
+Lee/Smile/caption checker false positives and17 repeated Smile equation tags need
+reconciliation. appeigenfunction has53 genuinely outstanding source blocks on pp8–13.
+Compilation was not requested. Library counts remain56 useful,6 partial,1 excluded.
+Inspection pointer: results/overnight-results-review-current.json. Report:
+results/overnight-results-review-20261108/REPORT.md. Packaging/assessment only;
+no inference, service changes, code fixes, tests or source promotion during collection.
+
+# Historical handover follows
+
+# Current handover — 8 November 2026
+
+## 8 November 2026 — productive paper queue prepared, not launched
+
+Current run: `/home/mdi/projects/pdf-to-latex/runs/library-overnight-20261108T040405Z`. Active pointer:
+results/library-first-batch-current.json. Parent
+runs/library-first-20261107T212314Z-prelaunch-115000 remains unchanged, with zero
+calls/launches. The new preparation also has zero calls/launches.
+
+Library:56 useful PDF identities (55 works),6 partial,1 excluded. Thirteen saved
+research papers covering314 original pages were reconciled without inference.
+Specific saved corrections and targeted flag dispositions are in
+results/library-overnight-20261107/promotions and REPORT.md; originals, prior TeX,
+failed builds, unresolved claims and review limitations remain. All63 originals,
+library copies and selected-generation seals were reverified. Content readiness
+is not mathematical certification; author-version distinctions remain explicit.
+
+Finite queue: Smile Risk missing333 blocks on pp16–25, retaining332 completed
+blocks; Lee27pages; Boyarchenko–Levendorskii multi-factor38pages; appeigenfunction
+39pages.104 new MinerU Pro pages plus the10-page missing scope using saved native
+extraction. Smile has5 coherent new units. Other units/allowances are sealed after
+extraction before GLM admission. High conversion/High original-image review,
+max2 local requests, unchanged image limits, compilation disabled, no deadline.
+Matrix norms and Kai lecture/presentation material are out of overnight inference;
+Cooking remains excluded. Ready sources are not reconverted;350-paper audit deferred.
+
+Both recovery routes are connected and armed under ONE combined7USD new-spend cap:
+Mathpix subset submission -> existing ID polling/download -> source/asset/page
+validation -> direct adequate TeX or coherent downstream conversion/review;
+Kimi K3 exact source/draft/images -> validated separate derivative -> publication,
+with recovered conversions receiving their planned local review. No extra budget
+per provider/paper/restart. Exact scopes register under frozen source approval;
+immutable shared reservation proofs prevent reset. Unknown charges stay reserved;
+only provider-confirmed actual costs settle. Current route/private allowance checks
+occur at dispatch. No credentials were read or paid requests made in preparation.
+
+Raw response seals now remain immutable: derived accuracy/findings/diffs are in
+call-results/ with state-bound hashes. Resume uses the real request-binding and
+shared-failure checks before settlement; transport faults cannot turn into paid
+content retries. Partial recovery uses new sibling delivery directories and
+immutable generations; crash after selecting a recovery generation before controller
+checkpointing resumes its exact expected publication. Pause blocks new admissions
+and drains owned reservations; finished resume is inert. Reused historical reviews
+are not relabelled as new full-scope image reviews.
+
+Validation:968-test required suite passed (4 optional skips),255.213seconds,
+matching final code/test identity.61 focused library checks,38 Kimi checks and8
+Mathpix checks passed. Mocked transport/resource observations; no live inference,
+paid plumbing test, new compiler build, service operation or model download.
+
+Exact operator launch (NOT executed):
+```bash
+bash /home/mdi/projects/pdf-to-latex/scripts/run-library-first.sh run --run /home/mdi/projects/pdf-to-latex/runs/library-overnight-20261108T040405Z --allow-owned-handoff
+```
+
+Status/pause/resume/bundle use scripts/run-library-first.sh with --run above;
+resume includes --allow-owned-handoff. Tmux:pdf-library-first. Log:terminal.log;
+progress:progress.json. Inspection pointer:results/library-overnight-current.json.
+All changes remain unstaged; no commit, push, branch or Git-index change.
+
+# Earlier preserved handover
+
+# Current handover — 7 November 2026 evening
+
+## 7 November 2026 evening — content-first library, author intake, no launch
+
+The controlling instruction is Downloads/Codex-Wiki-Source-First-2026-11-07.txt,
+read in full. The old zero-call100-page preparation remains unchanged. New linked
+preparation: `/home/mdi/projects/pdf-to-latex/runs/library-first-20261107T212314Z-prelaunch-115000` (pointer results/library-first-batch-current.json).
+It contains only Implied_Vol_Lee27 and Boyarchenko multi-factor38 pages:65 total,
+zero calls/launches. High conversion/High original-image review, max2 requests,
+131072 completion allowance, unchanged2048/16384/50 image limits. Compile_pdf is
+false, paid routes disabled0USD, no deadline. Exact coherent scopes/finite tasks
+are sealed after extraction before GLM reservation; outstanding content prevents
+complete status. No OCR, inference, paid request or service operation was launched.
+
+Library /home/mdi/llm-wiki/sources now has43 useful PDF entries,19 partial,1 excluded
+(Cooking). Fifteen author packages were imported for16 PDF identities; the two
+Homescu PDFs are one work, with identical native text and rendered pixels on all40
+pages despite different file hashes. Total known works62, useful subset42. Nine
+imports correspond to original versions, six are explicitly alternative, and
+Bayer/Breneis correspondence remains unresolved. Noether Tavel translation is not
+Delphenich. Alternative text does not claim coverage of the original PDF. Raw
+sources/packages, macros, bibliography, figure assets, original PDFs and all prior
+selected generations/history are preserved. Only targeted0906.0103v4 was downloaded;
+the350-paper audit remains deferred.
+
+Four saved texts are promoted despite historical build failure: Market_Generator,
+Liu Slides with option bounds, Markovian_Projection and smoothing. Their complete
+assigned content/portable assets remain unchanged; mathematical corrections are
+not thereby certified. Other partial content/coverage/damaged-math issues remain.
+Library preparation, preflight, saved version selection, publication and reporting
+now use substantive content checks independent of optional compilation. Builds are
+off by default; not_requested is distinct from failed. Source identity, exact edits,
+missing assets/includes, truncation, outstanding scopes and uncertain-call/replay
+safeguards remain. Earlier book-edition/compiler workflows are unchanged.
+
+Validation:49 focused checks passed. The required normal-host suite passed939
+tests with4 optional skips (248.019seconds), matching the linked plan code/test
+identity. The first sandbox run had15 loopback-socket permission errors; preserved
+as environment-restriction evidence, then passed outside the sandbox. All20 new
+library generations, selected pointers and content/asset hashes reverified.
+
+Evidence: results/wiki-source-first-20261107 (REPORT.md, author-imports,
+reassessment, publication, source/version/figure/dependency records). The current
+inspection and exact size are indexed by results/wiki-source-first-current.json.
+Both current wiki Markdown files are included in the inspection. Code remains
+unstaged. No staging, commit, push, branch or other Git mutation.
+
+Future launch (not executed):
+```bash
+bash /home/mdi/projects/pdf-to-latex/scripts/run-library-first.sh run --run /home/mdi/projects/pdf-to-latex/runs/library-first-20261107T212314Z-prelaunch-115000 --allow-owned-handoff
+```
+
 # Active handover — 1 November 2026
+
+**Historical earlier7 November pre-launch correction:** long sections now use safe smaller structural
+units with explicit outstanding-scope accounting; an outstanding passage prevents
+complete-paper promotion. The results bundle includes actual TeX/assets/PDFs,
+findings/diffs, diagnostics, timings and flagged original pages. Current pointer
+`results/library-first-batch-current.json` selects the linked never-started
+`library-first-20261107T191405Z-prelaunch-546226`. Sources/settings/history unchanged;
+0 calls, no launch.32 focused checks and922 full-suite tests passed (4 optional
+skips). See LIBRARY-FIRST.md; earlier prepared-run paths remain historical.
+
+**Historical earlier7 November: library-first work implemented/imported; next batch PREPARED.**
+Read [LIBRARY-FIRST.md](LIBRARY-FIRST.md). Actual source index:
+`/home/mdi/llm-wiki/sources/LIBRARY-FIRST-INDEX.md`:30 ready working,28 partial,
+5 deferred/excluded. Three corrected/reconciled generations and five unselected
+recovery supplements are published; originals/vault/old generations remain.
+CF/Spectral bounded saved corrections compile. Review schema/literal TeX/scope
+reporting reliability fixes passed the912-test suite (4 skips), matching current
+code/test identity. No new inference, paid call, install or service change.
+`results/library-first-batch-current.json` selects the final zero-call prepared
+100-page Lee/Path Integrals/Multi-factor batch. High image review is the practical
+default for this workflow; Max explicit. Paid fallbacks stay disabled at0USD until
+separately scoped/budgeted/qualified. Do not resume old queues. This preparation
+does not establish runtime completion or mathematical accuracy of future outputs.
+
+**Latest collected,7 November: image-review recovery FINISHED at08:51:49 UTC.**
+The12-request run took80.90minutes wall time:11 usable reviews/builds; CF Case19
+Max exhausted131072 reasoning tokens with no final answer. Both complete-paper
+assemblies compile. New ChatGPT collection is located by
+`results/image-review-recovery-chatgpt-current.json` after packaging.
+Read its REPORT.md and SOURCE-CHECKS.md: both efforts detected the seeded sign
+error, but High's proposal lacked required fields. The only newly adopted CF edit
+adds infinity limits that the original does NOT print; its visual-evidence claim
+is false and its editorial justification requires assessment. Spectral's reported
+nu-to-u defect is also a false alarm: the exact draft already contains newline
+followed by u, and the proposed old anchor is absent. No output was changed while
+collecting results. Preserve the prior and new editions for review. High/selective
+policy adoption remains deferred. Dated RUNNING descriptions below are historical.
+
+**Latest observed,7 November07:33 UTC: finite image-review recovery RUNNING.**
+Read [IMAGE-REVIEW-RECOVERY.md](IMAGE-REVIEW-RECOVERY.md) and
+`results/image-review-recovery-current.json`. Run `image-review-recovery-20261106T215705Z`
+was prepared6 November and launched7 November07:30:55 UTC in tmux
+`pdf-image-review-recovery`. First High response completed, its images verified
+and derivative compiled; matched Max response streaming. Final suite890 tests,
+4 skips, passed. Twelve finite requests, no production continuation or service
+change. Inspect actual progress; this dated snapshot is not live state.
+Annotation repair passed isolated compilation/render inspection. Historical failed
+reviews/allowances and corrected editions remain. Recommendation5 (broad selective
+review/corpus-wide High adoption) is deferred pending assessment. No continuous
+Codex source adjudication is implied by the unattended worker. Older summaries below
+are historical; do not resume their queues.
+
+
+**Latest, 4 November: two-request Kimi own-draft experiment PREPARED, NOT RUNNING.**
+Read [KIMI-ESCALATION.md](KIMI-ESCALATION.md) and
+`results/kimi-prepared-current.json`. Plan `kimi-plan-20261104T173035Z-5b9553`
+converts complete CF Cases13–18 (physical pp4–6), then reviews the exact new Kimi
+draft in a fresh conversation, without converter reasoning/accuracy guidance.
+It reuses the observed route qualification, so there is no extra paid control.
+High/32768 and the exact K3/Sail US FP4 route are unchanged; updated public prices
+give a $2.021392384 conservative reservation under the proposed $2.10 plan cap.
+Native PDF text is assessed and quarantined; original images and saved MinerU
+material are supplied. Cooking with Collateral remains excluded. No paid call or
+credential read occurred while preparing this follow-up. Ordinary work stays local.
+
+The preceding pilot `kimi-trial-20261104T163217Z-5bdcc1` actually finished at
+16:37:25 UTC with three responses/builds and cost $0.1473857802. It converted only
+Case17 and separately reviewed a GLM draft; it did not test own-draft criticism.
+The exact-anchor validator rejected its proposed numbering edit. Cumulative saved
+spending is now $0.3871025088; the historical $10 key ceiling is not renewed and
+live remaining allowance is unknown. Successful transport/compilation does not
+establish mathematical fidelity or independent image understanding. The earlier
+local focused trial finished at 09:06:19 UTC with 36 recorded calls. All historical
+run bindings, outputs, logs and allowances remain unchanged.
+
+**Logging correction integrated at the same idle boundary:** source filename/title,
+section and phase are recorded; readiness uses Model readiness and unknown identity
+never defaults to Gatheral. See `results/pending-source-logging-integration.json`.
+Historical logs and the original staged-patch ZIP remain unchanged. Any unfinished
+older run still needs an appropriate linked continuation rather than resealing.
+
+**Current, 4 November: finite local recovery trial.** Read
+[FOCUSED-RECOVERY.md](FOCUSED-RECOVERY.md), the latest PROJECT-STATE entry and
+`results/focused-recovery-current.json`. Selected linked run:
+`focused-recovery-20261103T223632Z-d9c8f9`, preserving the initial trial's three
+requests and all original-batch history. The source scope is five named failures
+plus Anfuso/Breaking Barriers/Information Geometry checks; Cooking with Collateral
+is excluded. Maximum remains 61 model requests including inherited work, with
+58 remaining after the first reviews. A captured Spectral failure established
+that an existing width<3 rejection ran after a zero-width crop; the qualified
+process-local correction moves that same raw-coordinate rejection before cropping.
+The first Pathint review and Anfuso correction both have passing builds. The
+Anfuso end-note summaries remain explicitly unresolved outside the edit scope.
+Check actual runtime status; preparation/launch requests are not proof of progress.
+No production queue, paid/cloud request, credentials or autonomous supervisor.
+
+**Later 2 November High/Max follow-up:** the user reports the MinerU-only Low
+CF draft is much better and compiled after manually removing `\tag{33}`. That
+manual copy is not adopted into the immutable run. Call-080 and its saved versions
+remain; the Max critic call-082 exhausted its allowance without final text.
+The user cancelled the unstarted CF syntax task (no call reserved). After Lee
+call-084 drained, a new sealed `mineru_high_continuation` authorizes one complete
+MinerU-only High conversion and its own-draft Max critic, preserving four arXiv
+deferrals and every historical attempt. Read the latest PROJECT-STATE entry and
+actual run state for launch/result status; preparation is not completion.
+
+**Later 2 November one-off:** Characteristic Functions has one newly authorized
+MinerU-only Low conversion and conditional MinerU-only Max critic. Read the current
+`mineru_only_continuation` and state; old High/dual-source Low failures remain.
+The four arXiv deferrals and normal dual-source High/Max papers are preserved.
+
+**2 November bounded recovery continuation:** read
+[ORIGINALS-RECOVERY.md](ORIGINALS-RECOVERY.md) and the current run state. The existing
+four arXiv deferrals remain. Three exact syntax-only saved derivatives have passing
+isolated builds; the linked continuation also authorizes one same-prompt Low
+conversion for Characteristic Functions and at most one scoped Low syntax patch
+per failed selected-version lineage. Normal High/Max work and the two-slot owner
+remain. End-of-batch bundles now contain focused review material; Anfuso equation
+(13) is explicitly unresolved mathematical review work, not accepted by syntax repair.
+
+**2 November queue selection:** the existing originals run retains its frozen
+63-PDF inventory with 59 included and four deferred for arXiv-source intake.
+Read its sealed selection continuation and [ORIGINALS-BATCH.md](ORIGINALS-BATCH.md).
+Attention and COS had already started and are retained; Calibrating Heston stays
+included. All previous calls/allowances and completed work remain. The deferred
+failure-diagnosis repairs and misleading Gatheral display label are unchanged.
+
+**Current task: the separately authorized original 63-PDF collection.** See
+[ORIGINALS-BATCH.md](ORIGINALS-BATCH.md) and the latest PROJECT-STATE entry. The
+originals inventory remains 63 distinct PDFs/1,502 pages and matches the prior
+intake hashes. The 376-source intake union is excluded. This task authorizes
+the documented owned-idle-GLM OCR handoff, with unchanged serving configuration;
+earlier book-only and no-service-switch preparation notes below are historical.
+The completed book editions and experiments must remain unchanged. The new
+controller is separate; consult `results/originals-batch-current.json` for actual
+preparation/run state. Code being present is not evidence of a live worker.
 
 **Latest: revised, unified finalisation completed from saved outputs.** Read the
 latest PROJECT-STATE entry and `results/book-finalisation-current.json`.
@@ -161,3 +463,6 @@ Codex changes working-tree files only. The user reviews and runs all staging,
 commit, branch and push commands. Suggested commit messages are welcome.
 Read `AGENTS.md` for the exact boundary. Source credentials and Codex auth files
 must not be copied into the repository. This archive contains none.
+
+
+Verified peer observation 2026-11-08T11:47:20Z: {'completed': 23, 'running': 1} out of397new pages. Kienitz all7pages completed; independent second paper progressed. No new local downstream/paid calls yet. Existing regularGLM will be restored by the owned controller afterOCR.

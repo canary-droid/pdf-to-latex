@@ -46,6 +46,82 @@ def now():return datetime.now(timezone.utc).isoformat()
 def save(run,state):atomic_json(run/'state.json',state)
 
 
+def request_identity(state, parent):
+    """Snapshot explicit task/source metadata; never infer a book from an ID."""
+    if parent == 'readiness':
+        return {'kind': 'readiness'}
+    tasks = state.get('tasks') or []
+    if isinstance(tasks, dict):
+        tasks = list(tasks.values())
+    if not isinstance(tasks, (list, tuple)):
+        tasks = []
+    task = next((t for t in tasks if isinstance(t, dict) and t.get('id') == parent), {})
+    units = state.get('source_units') or {}
+    unit = units.get(task.get('key'), {}) if isinstance(units, dict) else {}
+    if not isinstance(unit, dict):
+        unit = {}
+    source_id = task.get('source_key') or unit.get('source_key')
+    if source_id is None and isinstance(task.get('source'), str):
+        source_id = task['source']
+    if not isinstance(source_id, str):
+        source_id = None
+    documents = state.get('documents') or {}
+    document = documents.get(source_id, {}) if isinstance(documents, dict) else {}
+    source = task.get('source')
+    if not isinstance(source, dict):
+        source = {}
+    sources = state.get('sources', {})
+    declared_source = sources.get(source_id, {}) if isinstance(sources, dict) else {}
+    if not isinstance(declared_source, dict):
+        declared_source = {}
+
+    def label(value):
+        # Labels are plain single-line display data, not terminal controls.
+        if not isinstance(value, str):
+            return None
+        value = ''.join(c if c.isprintable() else ' ' for c in value)
+        return ' '.join(value.split()) or None
+
+    def field(explicit, names):
+        value = label(task.get(explicit))
+        if value:
+            return value
+        for record in (source, document, declared_source):
+            if isinstance(record, dict):
+                for name in names:
+                    value = label(record.get(name))
+                    if value:
+                        return value
+        return None
+
+    def section_label(value):
+        return label(value.get('title')) if isinstance(value, dict) else label(value)
+
+    section_title = (label(task.get('section_title')) or section_label(task.get('section'))
+                     or section_label(unit.get('section')))
+    return {'kind': 'document', 'source_id': label(source_id),
+            'filename': field('source_filename', ('filename', 'preferred_original_name', 'original_filename')),
+            'title': field('source_title', ('title',)),
+            'section': section_title, 'phase': label(task.get('phase'))}
+
+
+def reservation_message(run, call):
+    """Format the reservation snapshot; historical records need no migration."""
+    identity = call.get('display_identity') or {}
+    if call.get('parent') == 'readiness' or identity.get('kind') == 'readiness':
+        label = 'Model readiness'
+    else:
+        filename, title = identity.get('filename'), identity.get('title')
+        source = ' — '.join(x for i, x in enumerate((filename, title))
+                            if x and x not in (filename, title)[:i]) or 'Unknown source'
+        if source == 'Unknown source' and identity.get('source_id'):
+            source += ' (' + identity['source_id'] + ')'
+        label = (f'Source: {source}. Section: {identity.get("section") or "Unknown section"}. '
+                 f'Phase: {identity.get("phase") or "Unknown phase"}')
+    return (f'{label}. Task: {call["parent"]}. Model: {protocol.MODEL}. '
+            f'Action: reserved request {call["id"]}. Result: {run}')
+
+
 def reserve(state,parent,body_hash,wall=None):
     """Reserve before dispatch. Idle time and uncertain calls remain consumed."""
     wall=time.time() if wall is None else wall
@@ -69,7 +145,8 @@ def reserve(state,parent,body_hash,wall=None):
         raise StopRun('Task shared additional-call allowance exhausted')
     if state['first_dispatch'] is None:state['first_dispatch']=wall
     c={'id':f'call-{len(state["calls"])+1:03d}','parent':parent,'request_sha256':body_hash,
-       'status':'in_progress','reserved_at':now(),'reserved_epoch':wall}
+       'status':'in_progress','reserved_at':now(),'reserved_epoch':wall,
+       'display_identity':request_identity(state,parent)}
     state['calls'].append(c)
     return c
 
@@ -267,8 +344,7 @@ def perform_reserved(run,call,body,*,continuous,admission_budget,health_evidence
         'requested_reasoning_effort':body.get('reasoning_effort','server-default'),
         'effective_reasoning_effort':'not attested by response; installed mapping documented separately',
         'thinking_and_sampling':'effort explicit where recorded; sampling overrides omitted'})
-    print(f'Book: {"Bergomi, Stochastic Volatility Modeling" if "bergomi-" in parent else "Klebaner comparison" if "klebaner" in parent else "Gatheral, The Volatility Surface"}. '
-          f'Phase/chapter: {parent}. Model: {protocol.MODEL}. Action: reserved request {call["id"]}. Result: {run}',flush=True)
+    print(reservation_message(run,call),flush=True)
     try:
         if new_client:
             client.timeout=10
@@ -616,7 +692,7 @@ def persistent(mode):
     if mode=='resume':cmd.append('--resume')
     command='cd '+shlex.quote(str(ROOT))+' && '+shlex.join(cmd)
     subprocess.run(['tmux','new-session','-d','-s',SESSION,command],check=True,capture_output=True,text=True)
-    print(f'Book: Gatheral, The Volatility Surface (Klebaner Chapter 4 first). Phase: chapter experiment. '
+    print(f'Chapter experiment. '
           f'Model: {protocol.MODEL}. Action: offline checks, then captured text readiness.\n'
           f'Persistent session started: {SESSION}. Inference has not yet been confirmed.\nRun: {run}\nLog: {launch/"terminal.log"}\nStatus: bash scripts/run-chapter-glm.sh status',flush=True)
     time.sleep(.5)
@@ -629,7 +705,7 @@ def worker(run,launch,resume):
         os.dup2(f.fileno(),1);os.dup2(f.fileno(),2)
         result=1
         try:
-            print('Book: Gatheral, The Volatility Surface. Phase: full offline tests, preparation checks, then regular GLM chapter conversion/review.',flush=True)
+            print('Chapter experiment: full offline tests, preparation checks, then regular GLM conversion/review.',flush=True)
             env={**os.environ,'PYTHONDONTWRITEBYTECODE':'1'};env.pop('PDF2TEX_COMPILER_IMAGE',None)
             # Full normal-terminal suite once for a code version; resume reuses
             # that exact passing check. Real compiler executes during the job.

@@ -182,26 +182,35 @@ def execute_window(command, attempt, minimum, timeout):
     return reason or ('completed' if code==0 else 'failed')
 
 
-def cmd_convert(args):
+def cmd_convert(args, *, source_records=None, runtime=None, run_path=None,
+                after_window=None, max_unit_attempts=None, worker_options=(), initial_units=None):
     import fitz
-    c=config(args); sources=selected_sources(args.source)
+    if any(x not in ('--warp-diagnostics','--qualify-subpixel-crops','--qualified-warp-recovery') for x in worker_options):
+        raise ValueError('Unsupported opt-in worker argument')
+    c=config(args); sources=selected_sources(args.source) if source_records is None else source_records
+    # Collection controllers may supply frozen records without editing the
+    # project's historical sources.json. Apply the same path/hash boundary.
+    for source in sources.values():
+        if sha(contained(ROOT, source['pdf'])) != source['sha256']:
+            raise ValueError('Changed supplied collection source')
     python=converter_executable(args.converter_python)
     models=Path(args.models_dir).expanduser().resolve()
     minimum=int((args.min_free_gib if args.min_free_gib is not None else c['minimum_available_gib_'+args.tier])*1024**3)
     if minimum<1024**3: raise ValueError('Minimum headroom must be at least 1 GiB.')
     if args.tier=='standard' and not args.quiet_window_confirmed:
         raise ValueError('Standard requires --quiet-window-confirmed after checking/stopping only your identified GLM service if needed.')
-    sig=runtime_signature(python,models)
+    sig=runtime_signature(python,models) if runtime is None else runtime
     settings={'tier':args.tier,'sources':sources,'window_pages':c['window_pages'],'overlap_pages':c['overlap_pages'],
               'runtime':sig,'minimum_available_bytes':minimum,'timeout':c['conversion_timeout_seconds'],
-              'code_hashes':{p.name:sha(p) for p in sorted((ROOT/'probe').glob('*.py'))},'ocr_isolation':args.ocr_isolation,'network_isolation':isolation_description(args.ocr_isolation)}
+              'worker_options':list(worker_options),'code_hashes':{p.name:sha(p) for p in sorted((ROOT/'probe').glob('*.py'))},'ocr_isolation':args.ocr_isolation,'network_isolation':isolation_description(args.ocr_isolation)}
     key=fingerprint(settings)
-    run=get_run(args.resume) if args.resume else new_run('convert-'+args.tier)
+    run=get_run(args.resume) if args.resume else (Path(run_path) if run_path else new_run('convert-'+args.tier))
+    run.mkdir(parents=True, exist_ok=True)
     if args.resume:
         state=read_json(run/'state.json')
         if state['fingerprint']!=key: raise ValueError('Resume inputs/runtime/settings changed; start a new run.')
     else:
-        state={'fingerprint':key,'settings':settings,'units':{},'status':'created'}
+        state={'fingerprint':key,'settings':settings,'units':__import__('copy').deepcopy(initial_units or {}),'status':'created'}
         atomic_json(run/'state.json',state)
     print('Conversion run:',run,flush=True)
     isolation = isolation_probe(args.ocr_isolation)
@@ -219,6 +228,10 @@ def cmd_convert(args):
             if previous and previous['status']=='completed':
                 if not completed_integrity(run,previous): raise ValueError('Completed output or source evidence changed: '+unit)
                 print('Resume: preserved',unit,flush=True); continue
+            if max_unit_attempts is not None and len(list((run/'attempts').glob(unit+'-*'))) >= max_unit_attempts:
+                state.update(status='unit_allowance_exhausted', failed_unit=unit)
+                atomic_json(run/'state.json',state)
+                return 2
             policy=memory_policy(memory_inventory(),minimum)
             if policy['status']!='meets_minimum':
                 state.update(status='paused_memory',memory_policy=policy)
@@ -242,6 +255,7 @@ def cmd_convert(args):
             cmd=[str(python),str(ROOT/'probe/mineru_worker.py'),
                  '--input',str(attempt/'input.pdf'),'--output',str(attempt/'output'),'--tier',args.tier,
                  '--ocr-mode',source['ocr_mode'],'--models-dir',str(models)]
+            cmd += list(worker_options)
             if args.ocr_isolation == 'namespace':
                 cmd=['unshare','--user','--map-root-user','--net']+cmd
             if args.tier=='standard': cmd+=['--engine','vllm']
@@ -269,6 +283,7 @@ def cmd_convert(args):
                     record.update(status='failed_output_validation',error=str(exc))
             atomic_json(attempt/'completion.json',record)
             atomic_json(run/'state.json',state)
+            if after_window: after_window(run, state, record)
             if record['status']!='completed':
                 state['status']=record['status'];atomic_json(run/'state.json',state)
                 report_run(run);bundle_run(run)

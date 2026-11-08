@@ -92,7 +92,9 @@ def compile_saved(run, state, root, document, folder, assets, *, compiler=tex_co
     if missing:
         first['missing_dependency'] = missing
         package = missing['approved_debian_package']
-        if package and package not in environment['packages']:
+        if package and package not in environment['packages'] and state.get('disable_dependency_downloads'):
+            first['dependency_recovery'] = 'deferred: this workflow forbids dependency downloads; existing compiler retained'
+        elif package and package not in environment['packages']:
             image = provision(run, state, root, extra=(package,))
             second = compiler(document, folder / 'attempt-2', image=image, assets=assets, passes=2)
             second['path'] = str((folder / 'attempt-2').relative_to(run)); attempts.append(second)

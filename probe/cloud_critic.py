@@ -151,12 +151,17 @@ def key_allowance(response,budget_usd=DEFAULT_BUDGET_USD):
 
 
 class Ledger:
-    def __init__(self,run,*,create=False):
+    def __init__(self,run,*,create=False,cost_estimator=None,token_estimator=None,rates=None):
         self.run=Path(run);self.path=self.run/'billing.json'
         self.binding=sha(self.run/'binding.json')
         binding=read_json(self.run/'binding.json');self.ceiling=budget_amount(binding['config']['budget_usd'])
         self.budget=decimal(self.ceiling);self.inherited=binding.get('inherited_billing')
+        self.cost_estimator=cost_estimator or cost_bound;self.token_estimator=token_estimator or token_bound
+        self.rates=copy.deepcopy(RATES if rates is None else rates)
+        self.pilot_budget=decimal(budget_amount(binding['config']['pilot_budget_usd'])) if 'pilot_budget_usd' in binding['config'] else None
         self.stage_limits=binding['config'].get('paid_limits')
+        self.call_allowance_policy=binding['config'].get('call_allowance_policy')
+        self.allocation_id=binding['config'].get('allocation_id')
         self.prior=binding.get('prior_billing')
         if not self.path.exists():
             if not create:raise IntegrityError('Cloud budget ledger missing; never reset consumed charges')
@@ -207,23 +212,39 @@ class Ledger:
     def admit(self,body,remaining):
         d=self.read()
         if d['halt']:raise AdmissionError(d['halt'])
-        amount=cost_bound(body);pending=sum((decimal(x['reserved_usd']) for x in d['reservations'] if 'actual_cost_usd' not in x),Decimal(0))
+        amount=self.cost_estimator(body);pending=sum((decimal(x['reserved_usd']) for x in d['reservations'] if 'actual_cost_usd' not in x),Decimal(0))
         # Conservatively subtract ambiguous charges even if the provider may already count them.
+        if self.pilot_budget is not None and self.exposure(d)+amount>self.pilot_budget:
+            raise AdmissionError('Explicit pilot budget exhausted; global key ceiling is not a new allocation')
         prior=self.prior_summary();prior_exposure=decimal(prior.get('actual_reported_usd',0))+decimal(prior.get('unresolved_reserved_usd',0))
         if prior_exposure+self.exposure(d)+amount>self.budget or pending+decimal(prior.get('unresolved_reserved_usd',0))+amount>remaining:
             raise AdmissionError(f'Insufficient remaining USD {self.ceiling} budget after actual costs and unresolved charge reservations; no request admitted')
         return amount
 
-    def reserve(self,body,folder,remaining,phase):
-        amount=self.admit(body,remaining);d=self.read();folder=str(Path(folder).resolve().relative_to(self.run.resolve()))
-        if any(x['folder']==folder for x in d['reservations']):raise AdmissionError('Request already reserved; no blind paid retry')
-        inherited=len(read_json(Path(self.inherited['path']))['reservations']) if self.inherited and self.stage_limits else 0
+    def admit_phase(self,phase,folder=None,body=None):
+        d=self.read();inherited=len(read_json(Path(self.inherited['path']))['reservations']) if self.inherited and self.stage_limits else 0
         count=sum(x['phase']==phase for x in d['reservations'][inherited:])
+        if self.call_allowance_policy=='registered_source_phases':
+            if phase!='trial' or not self.allocation_id or folder is None:raise AdmissionError('Unregistered paid phase')
+            from . import library_fallbacks as shared
+            approval=read_json(self.run/'approval.json');witness=read_json(Path(folder)/'phase-authority.json')
+            scope=read_json(Path(approval['ledger_root'])/'scopes'/(witness['scope_sha256']+'.json'))
+            if scope['approval_sha256']!=fingerprint(approval) or witness['approval_sha256']!=fingerprint(approval):raise IntegrityError('Phase authorisation changed')
+            if shared.reservation_identity(scope['record'],approval)!=witness['phase_identity']:raise IntegrityError('Phase identity mismatch')
+            if body is not None and witness['request_sha256']!=fingerprint(body):raise IntegrityError('Different paid request')
+            if any(r.get('phase_identity')==witness['phase_identity'] for r in d['reservations']):raise AdmissionError('Phase already consumed; no duplicate dispatch')
+            if self.stage_limits is None:return witness['phase_identity']
         limit=self.stage_limits['readiness_calls' if phase=='readiness' else 'trial_calls'] if self.stage_limits else (2 if phase=='readiness' else 16)
         if count>=limit:raise AdmissionError('Paid readiness/trial call ceiling exhausted')
+        return None
+
+    def reserve(self,body,folder,remaining,phase):
+        phase_identity=self.admit_phase(phase,folder,body)
+        amount=self.admit(body,remaining);d=self.read();folder=str(Path(folder).resolve().relative_to(self.run.resolve()))
+        if any(x['folder']==folder for x in d['reservations']):raise AdmissionError('Request already reserved; no blind paid retry')
         identity=f'{len(d["reservations"])+1:04d}'
         item={'id':identity,'folder':folder,'phase':phase,'request_sha256':fingerprint(body),
-            'reserved_usd':str(amount),'prompt_token_bound':token_bound(body),'output_limit':body['max_tokens'],'rates':RATES}
+            'reserved_usd':str(amount),'prompt_token_bound':self.token_estimator(body),'output_limit':body['max_tokens'],'rates':self.rates,**({'phase_identity':phase_identity} if phase_identity else {})}
         p=self.run/'billing'/identity/'reservation.json';atomic_json(p,item)
         # Crash between reservation and index fails closed on next read; never frees money.
         d['reservations'].append({**item,'evidence':str(p.relative_to(self.run)),'evidence_sha256':sha(p)})
@@ -282,25 +303,30 @@ class CloudClient:
 
     def _connection(self,timeout):return http.client.HTTPSConnection('openrouter.ai',443,timeout=timeout,context=ssl.create_default_context())
 
+    def _control_paths(self):return ('/models/xiaomi/mimo-v2.6-pro/endpoints','/key')
+
     def _http(self,method,path,body=None):
         """Fixed origin, verified TLS, no environment proxies, redirects, retries or tools."""
-        allowed=('/models/xiaomi/mimo-v2.6-pro/endpoints','/key')
+        allowed=self._control_paths()
         if not ((method=='GET' and (path in allowed or re.fullmatch(r'/generation\?id=[A-Za-z0-9_-]{1,200}',path))) or (method=='POST' and path=='/chat/completions')):
             raise AdmissionError('Remote operation outside selected critic scope')
-        timeout=self.timeout if method=='POST' else 30;conn=None;start=time.monotonic();raw=bytearray();timer=None
+        unlimited=method=='POST' and self.config.get('no_generation_deadline') is True
+        timeout=None if unlimited else self.timeout if method=='POST' else 30;conn=None;start=time.monotonic();raw=bytearray();timer=None
         def expire():
             if conn and conn.sock:
                 try:conn.sock.shutdown(socket.SHUT_RDWR)
                 except OSError:pass
         try:
-            conn=self._connection(timeout)
-            timer=threading.Timer(timeout,expire);timer.daemon=True;timer.start();conn.connect()
+            conn=self._connection(30 if unlimited else timeout)
+            if not unlimited:timer=threading.Timer(timeout,expire);timer.daemon=True;timer.start()
+            conn.connect()
+            if unlimited and conn.sock:conn.sock.settimeout(None)
             conn.request(method,'/api/v1'+path,body=None if body is None else json.dumps(body,ensure_ascii=False).encode(),
                 headers={'Authorization':'Bearer '+self._key,'Content-Type':'application/json','Accept':'application/json','User-Agent':'pdf2tex-opt-in-critic/1'})
             resp=conn.getresponse();status=resp.status
             while True:
-                left=timeout-(time.monotonic()-start)
-                if left<=0:raise TimeoutError()
+                left=None if unlimited else timeout-(time.monotonic()-start)
+                if left is not None and left<=0:raise TimeoutError()
                 if conn.sock:conn.sock.settimeout(left)
                 b=resp.read1(min(65536,8*1024*1024+1-len(raw)))
                 if not b:break
