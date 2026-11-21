@@ -148,13 +148,19 @@ def validate_publication(prepared,document):
     if record['source_sha256']!=document['sha256']:raise ValueError('Publication source mismatch')
     from . import author_source
     ready=record['status']=='ready_working_source'
-    for item in record['selected_tex']:
+    if 'output_format' in record:
+        from .source_formats import identity
+        identity(record)
+    for item in record.get('selected_sources',record['selected_tex']):
         p=prepared/item['path']
         if not p.resolve().is_relative_to(prepared.resolve()) or sha(p)!=item['sha256']:raise ValueError('Selected text changed/nonportable')
         if record.get('source_kind')=='author_tex':continue
         assets={str(x.relative_to(p.parent)):x for x in p.parent.rglob('*') if x.is_file()}
         if record.get('selected_master'):assets.update({str(x.relative_to(prepared)):x for x in prepared.rglob('*') if x.is_file()})
-        check=author_source.generated_content(p.read_text(),assets,require_envelope=not bool(record.get('selected_master')))
+        if record.get('output_format')=='markdown':
+            from .source_formats import validate
+            check=validate(p.read_text(),assets)
+        else:check=author_source.generated_content(p.read_text(),assets,require_envelope=not bool(record.get('selected_master')))
         if ready and not check['usable']:raise ValueError('Incomplete substantive content: '+str(check['content_issues']))
     if record.get('selected_master'):
         master=prepared/record['selected_master']
@@ -166,6 +172,6 @@ def validate_publication(prepared,document):
         if not version.get('identifier') or version.get('correspondence') not in ('same','alternative','unresolved'):raise ValueError('Missing declared source version')
         check,_=author_source.inspect_tree(prepared/'sources',record['entry_point'])
         if ready and not check['complete_content_dependencies']:raise ValueError('Missing author-source content dependencies')
-    if ready and (not record['selected_tex'] or record['content_status'] not in ('complete_assigned_source','complete_declared_version') or record.get('outstanding_scopes')):
+    if ready and (not record.get('selected_sources',record['selected_tex']) or record['content_status'] not in ('complete_assigned_source','complete_declared_version') or record.get('outstanding_scopes')):
         raise ValueError('Incomplete source cannot masquerade as ready')
     return record

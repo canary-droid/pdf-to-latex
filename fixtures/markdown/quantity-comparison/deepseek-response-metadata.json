@@ -1,0 +1,21 @@
+{
+  "model": "DeepSeek-V4.1-Flash-TF",
+  "usage": {},
+  "tensorfold": {
+    "prompt": 3735,
+    "cached": 0,
+    "ttft_s": 3.8402,
+    "finish": "done",
+    "completion": 12451,
+    "prefill_s": 3.7882,
+    "decode_s": 151.2858,
+    "rounds": 3566,
+    "drafted": 12067,
+    "accepted": 8885
+  },
+  "stream_evidence": {
+    "done_seen": true,
+    "events": 3540,
+    "note": "Locally assembled deltas; original wire response is response.raw"
+  }
+}

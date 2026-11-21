@@ -231,8 +231,24 @@ def coverage_check(document, native, ids):
         following=body[match.end():match.end()+160]
         if re.match(r'\s*(?:\\begin\{center\}\s*)?\\begin\{(?:tabular|tabularx|longtable)',following):got_headings.append(plain(match[1]))
     expected_headings = [h for b in blocks if b['kind'] == 'paragraph_title' for h in headings(b['tex'])]
+    # OCR titles include styled proof pointers and individual bibliography lines.
+    # Accept their complete normalized text in these bounded representations,
+    # not a loose word match anywhere in prose (or in generated notes).
+    alternate_titles = []
+    for match in re.finditer(r'\\(?:textit|textbf|emph)\s*\{', body):
+        try: alternate_titles.append(plain(braced(body, match.end()-1)[0]))
+        except ValueError: pass
+    bibliography = re.search(r'\\(?:section|subsection)\*?\s*\{(?:REFERENCES|References|Bibliography|BIBLIOGRAPHY)\}', body)
+    if bibliography:
+        tail = body[bibliography.end():]
+        tail = re.split(r'\\(?:section|subsection)\*?\s*\{', tail, maxsplit=1)[0]
+        alternate_titles.extend(plain(x) for x in re.findall(r'\\item(?:\[[^]]*\])?\s*(.*?)(?=\\item|\\end\{(?:itemize|enumerate)\}|\Z)', tail, re.S))
+    for env in re.findall(r'\\begin\{thebibliography\}.*?\\end\{thebibliography\}', body, re.S):
+        alternate_titles.extend(plain(x) for x in re.findall(r'\\bibitem(?:\[[^]]*\])?\{[^}]*\}(.*?)(?=\\bibitem|\\end\{thebibliography\})', env, re.S))
     missing_headings = []
     for h in expected_headings:
+        if any(' '+plain(h)+' ' in ' '+a+' ' for a in alternate_titles):
+            continue
         words = {w for w in plain(h).split() if not w.isdigit() and len(w) > 2}
         if words and not any(len(words & set(g.split())) / len(words) >= .65 for g in got_headings):
             missing_headings.append(h)

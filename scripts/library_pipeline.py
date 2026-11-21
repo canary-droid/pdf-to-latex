@@ -10,20 +10,28 @@ from probe.common import read_json,atomic_json,sha,fingerprint,writer_lock,files
 from probe.experiment import InputGuard,seal,verify_seal
 from probe import library_first as policy,library_fallbacks as fallback,source_library as library
 from probe import focused_recovery as requests,image_review as vision,chapter_glm as runtime,chapter_concurrency as scheduler
-from probe import chapter_accuracy,compiler_environment,book_completion,followup_lifecycle,tex_syntax_repair,author_source
+from probe import chapter_accuracy,compiler_environment,book_completion,followup_lifecycle,tex_syntax_repair,author_source,source_formats
 from scripts import extraction_comparison as base,library_reconcile as reconcile,simple_chapter_glm as simple
 POINTER=ROOT/'results/library-first-batch-current.json';SESSION='pdf-library-first';TERMINAL='library_batch_finished'
+def format_contract(run):return source_formats.identity(read_json(Path(run)/'plan.json'))
+
+def task_fields(plan):return ('id','key','source_key','phase','reasoning_effort')+(('output_format','format_protocol') if 'output_format' in plan else ())
+
 RUNTIME_FIELDS=('chapter_contract','timing_policy','compiler_environment','runtime_image','remote_models','remote')
 
 def save(run,s):
     plan=read_json(run/'plan.json');approval=plan.get('paid_approval',{});cloud=Path(approval.get('cloud_run',run));budget=fallback.budget_folder(run,approval)
-    runtime.save(run,s);atomic_json(run/'progress.json',{'at':runtime.now(),'run':str(run),'status':s['status'],'stage':s.get('stage'),'diagnostic':s.get('diagnostic'),
+    runtime.save(run,s);atomic_json(run/'progress.json',{'at':runtime.now(),'run':str(run),'status':s['status'],**source_formats.identity(plan),'stage':s.get('stage'),'diagnostic':s.get('diagnostic'),
       'documents':{sid:{**{k:d.get(k) for k in ('filename','status','units','failed_pages','outstanding_scopes','delivery','publication','selected_new_generation','reused_units')},'selected_units':sum(k in s['current_versions'] for k in d['units']),'pages_with_selected_text':sorted({n for k in d['units'] if k in s['current_versions'] for n in s['source_units'][k]['physical_pages']}),'mathpix_status':d.get('mathpix',{}).get('status')} for sid,d in s['documents'].items()},'tasks':[{k:t.get(k) for k in ('id','status','call','scope_review','pending_suggestions','paid_stage','paid_recovery')} for t in s['tasks']],
       'calls':[{'id':c['id'],'task':c['parent'],'status':c['status'],'seconds':c.get('elapsed_seconds'),'usage':c.get('metadata',{}).get('usage')} for c in s['calls']],
       'paid_execution':{'kimi_response_records':sum(1 for _ in (budget/'attempts').glob('*/outcome.json')),'kimi_provider_reservations':len(read_json(cloud/'billing.json')['reservations']) if (cloud/'billing.json').exists() else 0,'mathpix_confirmed_new_jobs':sum(bool(d.get('mathpix',{}).get('provider_record',{}).get('pdf_id')) and not d.get('mathpix',{}).get('reused_historical_job',False) for d in s['documents'].values()),'mathpix_reused_jobs':sum(bool(d.get('mathpix',{}).get('reused_historical_job')) for d in s['documents'].values())},
       'paid_routes':read_json(run/'plan.json').get('paid_approval',{'enabled':False}), 'paid_accounting':fallback.budget_summary(run,read_json(run/'plan.json').get('paid_approval')), 'ready_baseline':s.get('ready_baseline'), 'ready_added_offline':s.get('ready_added_offline'), 'newly_selected':sum(bool(d.get('selected_new_generation')) for d in s['documents'].values()),'log':str(run/'terminal.log'),'inspection':s.get('inspection')})
+    if plan.get('night_day'):
+        progress=read_json(run/'progress.json');progress.update(night_day_checkpoints=s.get('night_day_checkpoints',{}),extraction_finished_sources=s.get('extraction_finished_sources',[]),paid_policy='No paid allocation for these60 sources');atomic_json(run/'progress.json',progress)
+    if plan.get('completion_phase'):
+        progress=read_json(run/'progress.json');progress['lineage']=plan['lineage'];progress['paid_counter_scope']='Entire inherited allocation; no new budget';progress['repair_total_local_calls']=len(s['calls']);progress['new_local_calls']=len(s['calls'])-s.get('inherited_call_count',0);atomic_json(run/'progress.json',progress)
 
-def prepare(source_ids,review_effort='high',compile_pdf=False):
+def prepare(source_ids,review_effort='high',compile_pdf=False,output_format='markdown'):
     if review_effort not in ('high','max'):raise ValueError('Choose High default or explicit Max')
     if not source_ids or len(set(source_ids))!=len(source_ids):raise ValueError('Explicit finite unique source list required')
     if not base.books.speed.idle(ROOT):raise ValueError('Project writer active; do not prepare bound files underneath it')
@@ -52,6 +60,7 @@ def prepare(source_ids,review_effort='high',compile_pdf=False):
     s['execution_limits']={'calls':None,'attempts_per_unit':1}
     if s.get('compiler_environment') and (ancestor/s['compiler_environment']['path']).exists():shutil.copytree(ancestor/s['compiler_environment']['path'],run/s['compiler_environment']['path'])
     shutil.copyfile(ancestor/'effort-support-offline.json',run/'effort-support-offline.json')
+    contract=source_formats.explicit(output_format);s.update(contract)
     settings=dict(policy.DEFAULTS,review_effort=review_effort,compile_pdf=bool(compile_pdf));frozen_docs=[];reuse=[]
     import fitz
     for d in docs:
@@ -83,7 +92,7 @@ def prepare(source_ids,review_effort='high',compile_pdf=False):
             import struct
             w,h=struct.unpack('>II',path.read_bytes()[16:24]);document['pages'].append({'physical_pdf_page':n,'image':str(path.relative_to(run)),'path':str(path.relative_to(run)),'sha256':sha(path),'dimensions':[w,h]})
         frozen_docs.append(document)
-    plan={'status':'frozen','workflow':policy.VERSION,'settings':settings,'documents':frozen_docs,'workloads':{'mineru_pro':[[d['source_id'],p] for d in frozen_docs for p in d['physical_pages']]},
+    plan={**contract,'status':'frozen','workflow':policy.VERSION,'settings':settings,'documents':frozen_docs,'workloads':{'mineru_pro':[[d['source_id'],p] for d in frozen_docs for p in d['physical_pages']]},
       'reuse':reuse,'next_stage':'Missing Pro pages, then one conversion/High image-review per coherent structural unit; derive and seal exact units before first GLM reservation.',
       'paid_enabled':False,'spend_cap_usd':'0','no_recursive_splitting_or_retry':True,'historical':str(reconcile.PARENT),'runtime_image':s['runtime_image'],'remote_models':s['remote_models'],'runtime_contract':{k:s[k] for k in RUNTIME_FIELDS}}
     policy.validate_extraction_plan(plan,run);atomic_json(run/'plan.json',plan)
@@ -101,13 +110,29 @@ def verify(run):
     if b['code']!=base.code_binding() or b['plan_sha256']!=sha(run/'plan.json'):raise runtime.Fatal('Frozen implementation or plan changed')
     if p.get('runtime_contract')!={k:s.get(k) for k in RUNTIME_FIELDS}:raise runtime.Fatal('Frozen runtime/compiler/timing contract changed')
     InputGuard(b['files']).check()
+    contract=source_formats.identity(p)
+    if 'output_format' in p:
+        if any(s.get(k)!=v for k,v in contract.items()):raise runtime.Fatal('Run output-format identity changed')
+        if p.get('paid_enabled') and contract['output_format']=='markdown':raise runtime.Fatal('Markdown paid recovery is not qualified or enabled')
+        for t in s['tasks']:
+            if any(t.get(k)!=v for k,v in contract.items()):raise runtime.Fatal('Task output-format identity changed')
+        for u in s['source_units'].values():
+            if any(u.get(k)!=v for k,v in contract.items()):raise runtime.Fatal('Source-unit output-format identity changed')
+        for versions in s['versions'].values():
+            for v in versions.values():
+                if any(v.get(k)!=value for k,value in contract.items()):raise runtime.Fatal('Version format differs from run; no cross-format cache reuse')
     live_path=reconcile.LIBRARY/'library-first-status.json';live_rows={x['source_id']:x for x in read_json(live_path)['sources']} if live_path.exists() else {}
     for doc in p['documents']:
         sid=doc['source_id'];folder=reconcile.LIBRARY/doc['library_document']['folder'];pointer=read_json(folder/'current.json') if (folder/'current.json').exists() else None
         expected=s['documents'][sid].get('historical_selection');own='generations/'+generation_name(run,s['documents'][sid])
-        if pointer!=expected and (pointer or {}).get('generation') not in (own,s['documents'][sid].get('publication',{}).get('generation')):raise runtime.Fatal('Source selection changed after preparation; no duplicate processing')
+        if not p.get('isolated_publication') and pointer!=expected and (pointer or {}).get('generation') not in (own,s['documents'][sid].get('publication',{}).get('generation')):raise runtime.Fatal('Source selection changed after preparation; no duplicate processing')
         attempt=live_rows.get(sid,{}).get('latest_attempt')
-        if attempt and attempt['run'] not in (str(run),p.get('parent_run')):raise runtime.Fatal('Another library attempt exists; reconcile before dispatch')
+        if not p.get('isolated_publication') and attempt and attempt['run'] not in (str(run),p.get('parent_run')) and attempt!=doc.get('inherited_latest_attempt'):raise runtime.Fatal('Another library attempt exists; reconcile before dispatch')
+    if p.get('night_day'):
+        from probe.library_night_day import validate_plan
+        validate_plan(p)
+        for rec in s.get('night_day_checkpoints',{}).values():
+            if sha(run/rec['path'])!=rec['sha256']:raise runtime.Fatal('Saved checkpoint changed')
     if p.get('overnight'):
         from probe.library_paid import verify as verify_paid
         verify_paid(run,s,p,b)
@@ -128,7 +153,7 @@ def verify(run):
     if s.get('task_plan_sha256'):
         if sha(run/s.get('task_plan_path','task-plan.json'))!=s['task_plan_sha256'] or ids!=read_json(run/s.get('task_plan_path','task-plan.json'))['task_ids']:raise runtime.Fatal('Derived finite task plan changed')
         expected=read_json(run/s.get('task_plan_path','task-plan.json'))['task_definitions']
-        if [{k:t[k] for k in ('id','key','source_key','phase','reasoning_effort')} for t in s['tasks']]!=expected:raise runtime.Fatal('Derived task settings changed')
+        if [{k:t[k] for k in task_fields(p)} for t in s['tasks']]!=expected:raise runtime.Fatal('Derived task settings changed')
         outstanding=read_json(run/s.get('task_plan_path','task-plan.json'))['outstanding_scopes']
         if outstanding!={sid:d.get('outstanding_scopes',[]) for sid,d in s['documents'].items()}:raise runtime.Fatal('Outstanding source scopes changed')
     return s
@@ -187,50 +212,77 @@ def refresh_prepared(parent,*,source_ids=None,content_first=False):
             (run/'normal-terminal-checks.json').rename(run/('parent-validation-'+sha(parent/'binding.json')[:12]+'.json'))
         save(run,state);verify(run);atomic_json(POINTER,{'run':str(run),'status':'PREPARED_NOT_RUNNING'});print(run);return run
 
-def extract(run,s):
+def extract(run,s,source_ids=None):
     if s.get('extraction_done'):return
-    p=read_json(run/'plan.json');policy.validate_extraction_plan(p,run);required=p['workloads']['mineru_pro'];records=s['extraction'].get('mineru_pro',{}).get('pages',{})
-    if all(records.get(f'{sid}-p{n}',{}).get('status')=='completed' for sid,n in required):s['extraction_done']=True;save(run,s);return
+    if source_ids and set(source_ids)<=set(s.get('extraction_finished_sources',[])):return
+    p=read_json(run/'plan.json');policy.validate_extraction_plan(p,run)
+    if source_ids:
+        p=copy.deepcopy(p);p['documents']=[d for d in p['documents'] if d['source_id'] in source_ids];p['workloads']['mineru_pro']=[x for x in p['workloads']['mineru_pro'] if x[0] in source_ids]
+    required=p['workloads']['mineru_pro'];records=s['extraction'].get('mineru_pro',{}).get('pages',{})
+    if all(records.get(f'{sid}-p{n}',{}).get('status')=='completed' for sid,n in required):
+        if source_ids:
+            s['extraction_finished_sources']=sorted(set(s.get('extraction_finished_sources',[]))|set(source_ids));s['extraction_done']=set(s['documents'])<=set(s['extraction_finished_sources'])
+        else:s['extraction_done']=True
+        save(run,s);return
     if not s.get('allow_owned_handoff'):raise runtime.Fatal('Missing OCR requires explicit --allow-owned-handoff at operator launch; no service change performed')
     # This path ONLY uses the already pinned image/weights. No install/download branch.
     actual=subprocess.check_output(base.ssh('docker image inspect '+shlex.quote(s['runtime_image'])+" --format '{{.Id}}'"),text=True).strip()
     if actual!=s['runtime_image']:raise runtime.Fatal('Qualified Pro image absent or changed')
     helpers=base.books.speed.module();base.collection.resource_handoff(run,s,helpers)
     try:
-        remote=s['remote'];base.command(run,'owned-pro-directories',base.ssh('mkdir -p '+shlex.quote(remote+'/input')+' '+shlex.quote(remote+'/outputs/mineru_pro')))
+        remote=s['remote']+('/scope-'+fingerprint(sorted(source_ids))[:12] if source_ids else '');base.command(run,'owned-pro-directories',base.ssh('mkdir -p '+shlex.quote(remote+'/input')+' '+shlex.quote(remote+'/outputs/mineru_pro')))
         base.command(run,'clear-owned-pause',base.ssh('rm -f '+shlex.quote(remote+'/outputs/mineru_pro/pause.json')))
         archive=run/'peer-input.tar'
         with tarfile.open(archive,'w') as tar:
-            tar.add(run/'plan.json',arcname='plan.json');tar.add(run/'sources',arcname='sources')
+            execution_plan=run/'extraction-scopes'/('scope-'+fingerprint(p)+'.json');atomic_json(execution_plan,p)
+            tar.add(execution_plan,arcname='plan.json')
+            for doc in p['documents']:tar.add(run/'sources'/doc['source_id'],arcname='sources/'+doc['source_id'])
             for name in ['probe/__init__.py','probe/extraction_comparison.py','probe/extraction_followup.py','scripts/extraction_followup_candidate.py']:
                 tar.add(ROOT/name,arcname='scripts/extraction_candidate_worker.py' if name.endswith('extraction_followup_candidate.py') else name)
         base.command(run,'transfer',['scp',str(archive),base.PEER+':'+remote+'/input.tar'])
         if subprocess.check_output(base.ssh('sha256sum '+shlex.quote(remote+'/input.tar')),text=True).split()[0]!=sha(archive):raise runtime.Fatal('Transferred input changed')
         base.command(run,'unpack',base.ssh('tar -xf '+shlex.quote(remote+'/input.tar')+' -C '+shlex.quote(remote+'/input')))
         dest=run/'arms/mineru_pro';dest.mkdir(parents=True,exist_ok=True)
-        if (dest/'state.json').exists():base.command(run,'reuse-pages',['scp','-r',str(dest)+'/.',base.PEER+':'+remote+'/outputs/mineru_pro/'])
+        if source_ids:
+            from probe.library_night_day import extraction_seed
+            seed=extraction_seed(run,s,source_ids)
+            exists=subprocess.run(base.ssh('test -f '+shlex.quote(remote+'/outputs/mineru_pro/state.json')),capture_output=True)
+            if exists.returncode not in (0,1):raise runtime.Fatal('Cannot establish remote extraction ownership/state; no overwrite')
+            if exists.returncode==1:base.command(run,'seed-wave',['scp','-r',str(seed)+'/.',base.PEER+':'+remote+'/outputs/mineru_pro/'])
+        elif (dest/'state.json').exists():base.command(run,'reuse-pages',['scp','-r',str(dest)+'/.',base.PEER+':'+remote+'/outputs/mineru_pro/'])
         def observe():
             if (run/'pause.json').exists():
                 subprocess.run(base.ssh('touch '+shlex.quote(remote+'/outputs/mineru_pro/pause.json')),capture_output=True)
-        base.command(run,'pro-extraction',base.ssh(shlex.join(base.container_args(s,'mineru_pro'))),observe=observe)
-        base.command(run,'collect-pro',['scp','-r',base.PEER+':'+remote+'/outputs/mineru_pro/.',str(dest)])
-        s['extraction']['mineru_pro']=read_json(dest/'state.json')
+        try:
+            base.command(run,'pro-extraction',base.ssh(shlex.join(base.container_args(dict(s,remote=remote),'mineru_pro'))),observe=observe)
+        finally:
+            base.command(run,'collect-pro',['scp','-r',base.PEER+':'+remote+'/outputs/mineru_pro/.',str(dest)])
+            incoming=read_json(dest/'state.json')
+            if source_ids:
+                from probe.library_night_day import merge_extraction
+                atomic_json(run/'extraction-waves'/('scope-'+fingerprint(sorted(source_ids))[:12])/'returned-state.json',incoming)
+                incoming=merge_extraction(s['extraction']['mineru_pro'],incoming,source_ids)
+            s['extraction']['mineru_pro']=incoming;atomic_json(dest/'state.json',incoming)
         for record in s['extraction']['mineru_pro']['pages'].values():
             for f in record.get('outputs',[]):
                 if sha(dest/f['path'])!=f['sha256']:raise runtime.Fatal('Pro output integrity failure')
         if s['extraction']['mineru_pro']['status']=='paused':raise runtime.StopRun('Paused after owned OCR window')
-        s['extraction_done']=True
+        if source_ids:
+            s['extraction_finished_sources']=sorted(set(s.get('extraction_finished_sources',[]))|set(source_ids))
+            s['extraction_done']=set(s['documents'])<=set(s['extraction_finished_sources'])
+        else:s['extraction_done']=True
     finally:
         if s.get('glm_owned_before_ocr'):
             if base.collection.helper_hashes(helpers)!=read_json(run/'service-helper-binding.json'):raise runtime.Fatal('Owned helper changed; no unsafe restoration')
             base.books.book.arrange_glm(run);scheduler.capture_build(helpers,run);base.collection.verify_restart_configuration(run,helpers);s['resource_phase']='glm_restored'
         save(run,s)
 
-def plan_units(run,s):
+def plan_units(run,s,source_ids=None):
     if s['inputs_prepared']:return
     from probe.extraction_followup import pro_export
     p=read_json(run/'plan.json');records=s['extraction']['mineru_pro']['pages']
     for d in p['documents']:
+        if source_ids and d['source_id'] not in source_ids:continue
         sid=d['source_id'];blocks=[];allassets={};inferred=[]
         if s['documents'][sid].get('planning_done'):continue
         bad=[] if d.get('fixed_native') else [n for n in d['physical_pages'] if (records.get(f'{sid}-p{n}',{}).get('status')!='completed' or n in s['documents'][sid].get('garbled_or_failed_pages',[])) and f'{sid}-p{n}' not in s.get('mathpix_pages',{}) and str(n) not in d.get('blank_pages',{})]
@@ -243,7 +295,9 @@ def plan_units(run,s):
                     for n in bad:pdf.insert_pdf(original,from_page=n-1,to_page=n-1)
                     pdf.save(subset);pdf.close()
             s['documents'][sid].update(status='extraction_incomplete',failed_pages=bad);fallback.proposal(run,{'id':sid,'source_id':sid,'source_sha256':d['sha256'],'physical_pages':bad,'subset':str(subset),'subset_sha256':sha(subset),'original_to_subset':{str(n):i+1 for i,n in enumerate(bad)}},'extraction','incomplete')
-            if not p.get('allocation_id') or not s['documents'][sid].get('mathpix_final'):continue
+            if p.get('night_day'):
+                s['documents'][sid]['paid_recovery_unavailable']='No allocation for this source scope; preserve failed pages and continue independent local content'
+            elif not p.get('isolated_publication') and (not p.get('allocation_id') or not s['documents'][sid].get('mathpix_final')):continue
         if d.get('fixed_native'):
             fixed=read_json(run/d['fixed_native']);blocks=copy.deepcopy(fixed['blocks']);allassets=copy.deepcopy(fixed['assets'])
         for n in ([] if d.get('fixed_native') else d['physical_pages']):
@@ -272,7 +326,7 @@ def plan_units(run,s):
         # after the finite OCR fallback settles; the gaps remain outstanding.
         segments=[[]]
         for block in blocks:
-            if segments[-1] and any(segments[-1][-1]['page']['original_physical_page']<n<block['page']['original_physical_page'] for n in bad):segments.append([])
+            if segments[-1] and (block['page']['original_physical_page']>segments[-1][-1]['page']['original_physical_page']+1 or any(segments[-1][-1]['page']['original_physical_page']<n<block['page']['original_physical_page'] for n in bad)):segments.append([])
             segments[-1].append(block)
         rows=[];offset=0
         for segment in segments:
@@ -302,7 +356,7 @@ def plan_units(run,s):
             quality=read_json(run/'sources'/sid/'secondary-assessment.json')
             secondary='' if quality.get('manual_quarantine') else '\n\n'.join('Physical page '+str(p['physical_pdf_page'])+'\n'+p['text'] for p in quality['pages'] if p['physical_pdf_page'] in u['physical_pages'])
             preceding=blocks[:u['source_order_start']]
-            unit=dict(u,source_key=sid,title=f'{d["filename"]} — coherent unit {i}/{len(units)}',
+            unit=dict(u,**(source_formats.identity(p) if 'output_format' in p else {}),source_key=sid,title=f'{d["filename"]} — coherent unit {i}/{len(units)}',
               context=d.get('earlier_context','')+'\nEarlier source definitions/context only, not repeated output. Outstanding earlier passages remain context, NOT assigned output in this unit:\n'+'\n\n'.join(b['tex'] for b in preceding),
               context_blocks=[b['id'] for b in preceding],secondary=secondary,assets=allassets)
             chosen=preceding[:6]+preceding[-12:] if len(preceding)>18 else preceding
@@ -310,8 +364,12 @@ def plan_units(run,s):
             unit['cloud_context_blocks']=[b['id'] for b in chosen]
             unit['cloud_context_policy']='Complete opening and immediate preceding source blocks; omitted broad history is context, never omitted assigned output. If still too large, cloud dispatch is blocked without clipping.'
             unit['secondary_policy']=quality.get('manual_quarantine',quality['policy'])
+            if 'output_format' in p:
+                unit['page_mappings']=[{k:v for k,v in page.items() if k in ('physical_pdf_page','printed_page','printed_label_status','path','sha256','dimensions')} for page in d['pages'] if page['physical_pdf_page'] in u['physical_pages']]
+                for mapping in unit['page_mappings']:
+                    mapping.setdefault('printed_page',None);mapping.setdefault('printed_label_status','Not independently established; original image retained')
             atomic_json(folder/'unit.json',unit);s['source_units'][key]=unit;s['derived_inputs'][str((folder/'unit.json').relative_to(run))]=sha(folder/'unit.json');s['documents'][sid]['units'].append(key)
-            for phase,effort in [('convert','high'),('critic',p['settings']['review_effort'])]:s['tasks'].append({'id':key+'/'+phase,'key':key,'source_key':sid,'section_title':unit['title'],'phase':phase,'status':'pending','reasoning_effort':effort})
+            for phase,effort in [('convert','high'),('critic',p['settings']['review_effort'])]:s['tasks'].append({'id':key+'/'+phase,'key':key,'source_key':sid,'section_title':unit['title'],'phase':phase,'status':'pending','reasoning_effort':effort,**(source_formats.identity(p) if 'output_format' in p else {})})
         if d.get('unit_insertion_after'):
             order=s['documents'][sid]['units'];old=[k for k in order if k not in new_keys]
             if d['unit_insertion_after'] not in old:raise runtime.Fatal('Missing-scope insertion anchor absent')
@@ -344,7 +402,7 @@ def plan_units(run,s):
     for pth in (run/'inputs/assets').glob('*'):
         if pth.is_file():s['derived_inputs'][str(pth.relative_to(run))]=sha(pth)
     task_path='task-plan.json' if not s.get('task_plan_sha256') else 'task-plans/task-plan-'+str(time.time_ns())+'.json'
-    atomic_json(run/task_path,{'task_ids':s['production_stage']['task_ids'],'task_definitions':[{k:t[k] for k in ('id','key','source_key','phase','reasoning_effort')} for t in s['tasks']],'unit_count':len(s['source_units']),'primary_request_allowance':len(s['tasks']),'automatic_retries':0,'paid_attempts':len(s['tasks']) if p.get('overnight') else 0,'mathpix_subset_allowance':sum(not d.get('fixed_native') for d in p['documents']) if p.get('overnight') else 0,'source_ownership':{k:u['blocks'] for k,u in s['source_units'].items()},'outstanding_scopes':{sid:d.get('outstanding_scopes',[]) for sid,d in s['documents'].items()}})
+    atomic_json(run/task_path,{'task_ids':s['production_stage']['task_ids'],'task_definitions':[{k:t[k] for k in task_fields(p)} for t in s['tasks']],'unit_count':len(s['source_units']),'primary_request_allowance':len(s['tasks']),'automatic_retries':0,'paid_attempts':len(s['tasks']) if p.get('overnight') else 0,'mathpix_subset_allowance':sum(not d.get('fixed_native') for d in p['documents']) if p.get('overnight') else 0,'source_ownership':{k:u['blocks'] for k,u in s['source_units'].items()},'outstanding_scopes':{sid:d.get('outstanding_scopes',[]) for sid,d in s['documents'].items()}})
     s.update(task_plan_path=task_path,task_plan_sha256=sha(run/task_path),inputs_prepared=True);save(run,s)
 
 def review_images(run,s,t):
@@ -372,11 +430,11 @@ def body_for(run,s,t):
     u=s['source_units'][t['key']]
     if t['phase']=='convert':
         ownership='OUTPUT OWNERSHIP: emit only the assigned primary source, once. Secondary full pages and earlier definitions are corroboration/context, not permission to emit neighbouring equations or prose. Do not extend the ending from secondary text. First owned source block: '+u['native_blocks'][0]['tex']+'\nLast owned source block: '+u['native_blocks'][-1]['tex']+'\n'
-        return requests.conversion_request(u['text'],u['secondary'],ownership+u['context'],effort='high',assets=u['assets'])
+        return source_formats.conversion_request(u['text'],u['secondary'],ownership+u['context'],u['assets'],format_contract(run))
     v=s['versions'][t['key']][s['current_versions'][t['key']]];draft=(run/v['path']).read_text()
     if sha(run/v['path'])!=v['sha256']:raise runtime.Fatal('Own-draft review identity changed')
     records=read_json(run/'inputs'/t['key']/'images.json')
-    return requests.critic_request(draft,u['text'],u['secondary'],u['context'],effort=t['reasoning_effort'],images=vision.image_parts(records,run))
+    return source_formats.critic_request(draft,u['text'],u['secondary'],u['context'],t['reasoning_effort'],vision.image_parts(records,run),format_contract(run))
 
 def before(run,s,t,body):
     verify(run)
@@ -384,16 +442,19 @@ def before(run,s,t,body):
     if body!=body_for(run,s,t):raise runtime.Fatal('Prepared source/draft differs')
     if t['phase']=='critic':
         payload=vision.request_payload(body);t['draft_sha256']=payload['base_sha256']
+        contract=format_contract(run)
+        if contract['format_protocol']!='legacy-latex' and any(payload.get(k)!=v for k,v in contract.items()):raise runtime.Fatal('Review request format mismatch')
         # Existing installed CPU image/tokenizer path, no extra model request.
         program=(ROOT/'scripts/verify_image_prompt.py').read_text();result=subprocess.run(['docker','exec','-i','glm53-flash-tf','python','-c',program],input=json.dumps({t['id']:body}),text=True,capture_output=True,check=True)
         expected=json.loads(result.stdout);t['cpu_expectation']=expected['requests'][t['id']];atomic_json(run/'cpu-verification'/(t['key']+'.json'),expected)
         if expected['limits']!=policy.DEFAULTS['image_limits'] or t['cpu_expectation']['image_rows']!=vision.image_budget(body)['image_tokens']:raise runtime.Fatal('Image runtime allocation changed')
 
 def compilation_requested(run):
-    return read_json(run/'plan.json')['settings'].get('compile_pdf',False)
+    return format_contract(run)['output_format']=='latex' and read_json(run/'plan.json')['settings'].get('compile_pdf',False)
 
 def content_check(run,s,t,document):
     u=s['source_units'][t['key']]
+    if format_contract(run)['output_format']=='markdown':return source_formats.validate(document,u['assets'],u)
     result=author_source.generated_content(document,u['assets'])
     if 'native_blocks' in u:
         result['coverage']=unit_coverage(document,u)
@@ -402,22 +463,41 @@ def content_check(run,s,t,document):
     return result
 
 def unit_coverage(document,u):
+    if u.get('output_format')=='markdown':return source_formats.coverage(document,u)
     if u.get('saved_coverage_adjudication') and __import__('hashlib').sha256(document.encode()).hexdigest()==u['saved_coverage_adjudication']['draft_sha256']:
         return dict(u['saved_coverage_adjudication'],coverage_status='requires_source_review',semantic_completeness='Targeted recorded checks; no whole-paper mathematical verification')
-    return followup_lifecycle.coverage(document,dict(u.get('coverage_metadata',{}),blocks=u['native_blocks']),[b['id'] for b in u['native_blocks']])
+    from probe.library_completion import validate_figure_groups,apply_adjudications
+    validate_figure_groups(u)
+    result=followup_lifecycle.coverage(document,dict(u.get('coverage_metadata',{}),blocks=u['native_blocks']),[b['id'] for b in u['native_blocks']])
+    return apply_adjudications(document,u,result) if u.get('content_adjudications') else result
 
 def compile_version(run,s,t,document,label):
+    contract=format_contract(run)
+    if contract['output_format']=='markdown':
+        from probe import markdown_compat
+        original=document;document,compatibility=markdown_compat.normalize(original,s['source_units'][t['key']])
+        dest=run/'versions'/t['key']/label;dest.mkdir(parents=True,exist_ok=True);path=dest/'document.md';path.write_text(document)
+        (dest/'before-normalization.md').write_text(original)
+        (dest/'normalization.diff').write_text(''.join(difflib.unified_diff(original.splitlines(True),document.splitlines(True),fromfile='before-normalization.md',tofile='document.md')))
+        compatibility['critic_input_sha256']=t.get('draft_sha256') if t['phase']=='critic' else None
+        compatibility['post_review_format_change']=t['phase']=='critic' and compatibility['changed']
+        atomic_json(dest/'normalization.json',compatibility)
+        version={**contract,'path':str(path.relative_to(run)),'sha256':sha(path),'compatibility':compatibility,'compilation':{'status':'not_requested','reason':'Markdown rendering/build separate; no PDF compiler route qualified'},'content_check':content_check(run,s,t,document)}
+        if compatibility['unresolved']:
+            version['content_check']['content_issues'].append('Unresolved Markdown compatibility transformations')
+            version['content_check']['usable']=False
+        atomic_json(dest/'version.json',version);return version
     dest=run/'versions'/t['key']/label;dest.mkdir(parents=True,exist_ok=True);(dest/'document.tex').write_text(document)
     assets={name:Path(path) for name,path in s['source_units'][t['key']]['assets'].items()}
     if not compilation_requested(run):
-        version={'path':str((dest/'document.tex').relative_to(run)),'sha256':sha(dest/'document.tex'),'compilation':{'status':'not_requested','reason':'Content-first library; original PDF is reading copy'},'content_check':content_check(run,s,t,document)}
+        version={**(contract if contract['format_protocol']!='legacy-latex' else {}),'path':str((dest/'document.tex').relative_to(run)),'sha256':sha(dest/'document.tex'),'compilation':{'status':'not_requested','reason':'Content-first library; original PDF is reading copy'},'content_check':content_check(run,s,t,document)}
         atomic_json(dest/'version.json',version);return version
     if not (dest/'build/compilation.json').exists():
         if not s.get('compiler_environment'):atomic_json(dest/'build/compilation.json',{'status':'unavailable','reason':'Optional compiler not provisioned','attempts':[]})
         else:
             try:compiler_environment.compile_saved(run,s,ROOT,document,dest/'build',assets)
             except OSError as exc:atomic_json(dest/'build/compilation.json',{'status':'unavailable','reason':str(exc),'attempts':[]})
-    version={'path':str((dest/'document.tex').relative_to(run)),'sha256':sha(dest/'document.tex'),'compilation':read_json(dest/'build/compilation.json')}
+    version={**(contract if contract['format_protocol']!='legacy-latex' else {}),'path':str((dest/'document.tex').relative_to(run)),'sha256':sha(dest/'document.tex'),'compilation':read_json(dest/'build/compilation.json')}
     # Optional compiler failure remains recorded; it does not erase usable text.
     if version['compilation']['status']!='passed':
         log=dest/'build/attempt-1/console.log';error=tex_syntax_repair.first_error(log.read_text(errors='replace')) if log.exists() else None
@@ -426,7 +506,7 @@ def compile_version(run,s,t,document,label):
             derivative=dest/'deterministic';derivative.mkdir(exist_ok=True);(derivative/'document.tex').write_text(repaired);atomic_json(derivative/'edits.json',edits)
             if not (derivative/'build/compilation.json').exists():compiler_environment.compile_saved(run,s,ROOT,repaired,derivative/'build',assets)
             result=read_json(derivative/'build/compilation.json')
-            if result['status']=='passed':version={'path':str((derivative/'document.tex').relative_to(run)),'sha256':sha(derivative/'document.tex'),'compilation':result,'syntax_parent':version}
+            if result['status']=='passed':version={**(contract if contract['format_protocol']!='legacy-latex' else {}),'path':str((derivative/'document.tex').relative_to(run)),'sha256':sha(derivative/'document.tex'),'compilation':result,'syntax_parent':version}
     version['content_check']=content_check(run,s,t,(run/version['path']).read_text());atomic_json(dest/'version.json',version)
     return version
 
@@ -441,11 +521,21 @@ def finish(run,s,t,answer,call):
     if answer is None:
         t.update(status='failed',settled_call=call['id'])
     elif t['phase']=='convert':
-        document,info=chapter_accuracy.envelope(answer,simple.extract_document)
-        if document is None or not chapter_accuracy.complete_document(document):t.update(status='invalid_conversion',settled_call=call['id'])
+        contract=format_contract(run)
+        if contract['output_format']=='markdown':
+            try:document,info=source_formats.parse_markdown(answer,call.get('metadata',{}).get('finish_reason'))
+            except ValueError as exc:document=None;info={'error':str(exc)}
+        else:document,info=chapter_accuracy.envelope(answer,simple.extract_document)
+        if contract['output_format']=='latex' and document is None and read_json(run/'plan.json').get('accept_exact_fragments') and call.get('metadata',{}).get('finish_reason')=='stop':
+            from probe.library_completion import wrap_fragment
+            try:
+                wrapped,evidence=wrap_fragment(answer);document=wrapped.decode();info={'status':'source_body_preserved_generic_wrapper','notes_start':len(answer)-len(evidence['suffix']),'intro_end':len(evidence['prefix'])}
+                atomic_json(results/'fragment-provenance.json',evidence)
+            except ValueError:pass
+        if document is None or (contract['output_format']=='latex' and not chapter_accuracy.complete_document(document)):t.update(status='invalid_conversion',settled_call=call['id'])
         else:
             version=compile_version(run,s,t,document,'convert-'+call['id']);s['versions'].setdefault(key,{})['convert']=version;s['current_versions'][key]='convert';review_images(run,s,t)
-            t.update(status='conversion_completed',settled_call=call['id']);atomic_json(results/'accuracy.json',{'envelope':info,'notes':chapter_accuracy.outside_notes(answer,info),'source_verification':'not established'})
+            t.update(status='conversion_completed',settled_call=call['id']);atomic_json(results/'accuracy.json',{'envelope':info,'notes':info.get('notes','') if contract['output_format']=='markdown' else chapter_accuracy.outside_notes(answer,info),'source_verification':'not established'})
     else:
         matches=[v for v in s['versions'][key].values() if v['sha256']==t['draft_sha256']]
         if not matches:raise runtime.Fatal('Exact dispatched critic draft absent')
@@ -453,7 +543,7 @@ def finish(run,s,t,answer,call):
         if sha(run/v['path'])!=t['draft_sha256']:raise runtime.Fatal('Critic draft changed before settlement')
         try:
             from probe.library_repair import salvage_json
-            parsed=salvage_json(answer,t['draft_sha256']);revised,log=vision.apply_review(draft,parsed)
+            parsed=salvage_json(answer,t['draft_sha256']);contract=format_contract(run);revised,log=vision.apply_review(draft,parsed,output_format=contract['output_format'],format_protocol=contract['format_protocol'] if contract['format_protocol']!='legacy-latex' else None)
             log['response_normalization']={'method':'Unique valid JSON object with exact draft hash; no invented fields or fuzzy anchors','raw_answer_sha256':requests.digest(answer)}
         except (ValueError,KeyError,TypeError) as exc:t.update(status='invalid_review',review_response='invalid_findings',reason=str(exc),settled_call=call['id'])
         else:
@@ -484,7 +574,7 @@ def publish_settled(run,s,sid):
     if rec.get('published') and not rec.get('needs_republication'):return
     if rec.pop('needs_republication',False) and rec.get('published'):
         rec['publication_revision']=rec.get('publication_revision',1)+1;rec['published']=False;save(run,s)
-    d=next(d for d in read_json(run/'plan.json')['documents'] if d['source_id']==sid);out=run/'deliveries'/sid
+    d=next(d for d in read_json(run/'plan.json')['documents'] if d['source_id']==sid);contract=format_contract(run);ext=source_formats.suffix(contract['output_format']);out=run/'deliveries'/sid
     if rec.get('publication_revision',1)>1:out=run/'delivery-revisions'/sid/('revision-'+str(rec['publication_revision']))
     if (out/'manifest.json').exists():
         record=policy.validate_publication(out,d['library_document']);commit_publication(run,s,sid,d,out,record);return
@@ -492,9 +582,9 @@ def publish_settled(run,s,sid):
     for key in rec['units']:
         label=s['current_versions'].get(key)
         if not label:continue
-        v=s['versions'][key][label];text=(run/v['path']).read_text();target=out/'parts'/key/'document.tex';library.copy_verified(run/v['path'],target,v['sha256']);parts.append({'path':str(target.relative_to(out)),'sha256':v['sha256']})
+        v=s['versions'][key][label];text=(run/v['path']).read_text();target=out/'parts'/key/('document'+ext);library.copy_verified(run/v['path'],target,v['sha256']);parts.append({'path':str(target.relative_to(out)),'sha256':v['sha256']})
         for name,path in s['source_units'][key]['assets'].items():library.copy_verified(path,target.parent/name)
-        for name,version in s['versions'][key].items():library.copy_verified(run/version['path'],target.parent/(name+'-original.tex'))
+        for name,version in s['versions'][key].items():library.copy_verified(run/version['path'],target.parent/(name+'-original'+ext))
         atomic_json(target.parent/'versions.json',s['versions'][key])
         for origin in (run/'inputs'/key/'review-history').glob('*'):
             if origin.is_file():library.copy_verified(origin,target.parent/'review-history'/origin.name)
@@ -503,7 +593,10 @@ def publish_settled(run,s,sid):
             if origin.exists():library.copy_verified(origin,target.parent/'saved-reconciliation'/name)
         for name,version in s['versions'][key].items():
             raw=version.get('syntax_parent',version)
-            library.copy_verified(run/raw['path'],target.parent/(name+'-raw.tex'),raw['sha256'])
+            library.copy_verified(run/raw['path'],target.parent/(name+'-raw'+ext),raw['sha256'])
+            for artifact in ('before-normalization.md','normalization.json','normalization.diff'):
+                origin=(run/version['path']).parent/artifact
+                if origin.exists():library.copy_verified(origin,target.parent/'compatibility'/name/artifact)
             for index,attempt in enumerate(version['compilation'].get('attempts',[]),1):
                 log=run/attempt['path']/'console.log'
                 if log.exists():library.copy_verified(log,target.parent/'build-diagnostics'/name/str(index)/'console.log')
@@ -520,6 +613,8 @@ def publish_settled(run,s,sid):
             if not t.get('call'):continue
             path=result_file(run,t['call'],'findings.json')
             if path.exists():findings+=read_json(path)['findings'];library.copy_verified(path,target.parent/(t['phase']+'-findings.json'))
+            diff=result_file(run,t['call'],'changes.diff')
+            if diff.exists():library.copy_verified(diff,target.parent/(t['phase']+'-changes.diff'))
             accuracy=result_file(run,t['call'],'accuracy.json')
             if accuracy.exists():library.copy_verified(accuracy,target.parent/(t['phase']+'-accuracy.json'))
         if v['compilation']['status']=='passed':
@@ -532,11 +627,23 @@ def publish_settled(run,s,sid):
             with fitz.open(p) as doc:merged.insert_pdf(doc)
         merged.save(out/'reading.pdf');merged.close()
     from probe.library_repair import overlap_screen
-    overlap=overlap_screen([(k,(run/s['versions'][k][s['current_versions'][k]]['path']).read_text()) for k in rec['units'] if k in s['current_versions']])
-    if overlap['duplicate_equation_tags']:complete=False
-    atomic_json(out/'assembly-check.json',overlap)
-    ordered='\n\n'.join('% BEGIN OWNED PART '+key+'\n'+book_completion.body_only((run/s['versions'][key][s['current_versions'][key]]['path']).read_text())+'\n% END OWNED PART '+key for key in rec['units'] if key in s['current_versions'])
-    (out/'ordered-body.tex').write_text('% Machine-readable ordered bodies; original standalone preambles/macros remain in parts/. Compilation not requested.\n'+ordered)
+    texts=[(k,(run/s['versions'][k][s['current_versions'][k]]['path']).read_text()) for k in rec['units'] if k in s['current_versions']]
+    if contract['output_format']=='markdown':
+        ordered,overlap=source_formats.assembly(texts)
+        if not overlap['usable']:complete=False
+        (out/'source.md').write_text(ordered)
+        atomic_json(out/'assembly-check.json',overlap)
+    else:
+        overlap=overlap_screen([(k,(run/s['versions'][k][s['current_versions'][k]]['path']).read_text()) for k in rec['units'] if k in s['current_versions']])
+        if overlap['duplicate_equation_tags'] or (read_json(run/'plan.json').get('night_day') and overlap['repeated_substantive_paragraphs']):complete=False
+        if d.get('required_assembly_labels') or read_json(run/'plan.json').get('night_day'):
+            from probe.library_completion import reference_check
+            check=reference_check([(run/s['versions'][k][s['current_versions'][k]]['path']).read_text() for k in rec['units'] if k in s['current_versions']],d.get('required_assembly_labels',[]))
+            overlap['reference_check']=check
+            if any(check[k] for k in ('missing_required_labels','undefined_references','duplicate_labels')):complete=False
+        atomic_json(out/'assembly-check.json',overlap)
+        ordered='\n\n'.join('% BEGIN OWNED PART '+key+'\n'+book_completion.body_only((run/s['versions'][key][s['current_versions'][key]]['path']).read_text())+'\n% END OWNED PART '+key for key in rec['units'] if key in s['current_versions'])
+        (out/'ordered-body.tex').write_text('% Machine-readable ordered bodies; original standalone preambles/macros remain in parts/. Compilation not requested.\n'+ordered)
     review=policy.review_summary(tasks,findings)
     if rec.get('reused_units'):
         review['new_units_reviewed_full_scope_attested']=review['reviewed_full_scope_attested']
@@ -544,17 +651,22 @@ def publish_settled(run,s,sid):
         review['reused_review_coverage']={key:'Historical review retained in exact version provenance; no new full-scope image-review attestation' for key in rec['reused_units']}
     if rec.get('outstanding_scopes'):review.update(reviewed_full_scope_attested=False,outstanding_source_scopes=rec['outstanding_scopes'])
     record={'source_id':sid,'source_sha256':d['sha256'],'status':'ready_working_source' if complete else 'partial_source','content_status':'complete_assigned_source' if complete else 'incomplete_or_flagged',
-      'conversion':'complete' if len(parts)==len(rec['units']) and parts and not rec.get('outstanding_scopes') else 'incomplete',
+      'assigned_scope_notes':d.get('source_scope_notes'),'conversion':'complete' if len(parts)==len(rec['units']) and parts and not rec.get('outstanding_scopes') else 'incomplete',
       'model_review':review,'compilation':'passed' if compiled else ('not_requested' if not compilation_requested(run) else 'failed_or_partial'),'compilation_scope':'Produced parts only; outstanding passages are not built',
-      'selected_tex':parts,'source_verification':'Model reviewed, not independently mathematically verified','coverage':coverage,
+      'selected_tex':parts if ext=='.tex' else [],'selected_markdown':parts if ext=='.md' else [],'selected_sources':parts,**(contract if contract['format_protocol']!='legacy-latex' else {}),'source_verification':'Not independently verified; consult model_review for actual reviewed scopes and failed reviews','coverage':coverage,
       'outstanding_scopes':rec.get('outstanding_scopes',[]),'source_accounting':rec.get('source_accounting'),'output_ownership_check':overlap,'missing_conversion_scopes':[{'unit':k,'physical_pages':s['source_units'][k]['physical_pages'],'blocks':s['source_units'][k]['blocks']} for k in rec['units'] if k not in s['current_versions']],'paid_recovery':[t.get('paid_recovery') for t in tasks if t.get('paid_recovery')],'reused_units':rec.get('reused_units',[])}
-    atomic_json(out/'library-status.json',record);(out/'README.md').write_text('# '+d['filename']+'\n\nStatus: '+record['status']+'. Editable parts and assets are under parts/. The unchanged original PDF is the human reading copy. Optional compilation is independent of content readiness. Review omissions, suggestions and source checks are separate in library-status.json.\n')
+    if rec.get('parent_model_review') is not None:record['model_review']['parent_review_status_preserved']=rec['parent_model_review']
+    if rec.get('completion_ownership'):record['completion_ownership']=rec['completion_ownership']
+    atomic_json(out/'library-status.json',record);(out/'README.md').write_text('# '+d['filename']+'\n\nStatus: '+record['status']+'. Editable parts and assets are under parts/. The unchanged original PDF is the human reading copy. Optional compilation is independent of content readiness. Review omissions, suggestions and source checks are separate in library-status.json.\n'+('\n[Full assigned Markdown transcription](source.md) — not a wiki summary or independent fidelity certification.\n' if ext=='.md' else ''))
     atomic_json(out/'raw-evidence-locations.json',[{'call':c['id'],'path':str(run/'calls'/c['id']),'seal':c.get('seal'),'status':c['status'],'seconds':c.get('elapsed_seconds'),'usage':c.get('metadata',{}).get('usage')} for c in s['calls'] if any(t.get('call')==c['id'] for t in tasks)])
     seal(out);policy.validate_publication(out,d['library_document'])
     commit_publication(run,s,sid,d,out,record)
 
 def commit_publication(run,s,sid,d,out,record):
     rec=s['documents'][sid];complete=record['status']=='ready_working_source' and record['content_status']=='complete_assigned_source'
+    if read_json(run/'plan.json').get('isolated_publication'):
+        rec.update(status=record['status'],published=True,delivery=str(out),publication={'generation':'deliveries/'+sid,'manifest_sha256':sha(out/'manifest.json'),'status':record['status']},selected_new_generation=False)
+        save(run,s);return
     folder=reconcile.LIBRARY/d['library_document']['folder']
     with writer_lock(reconcile.LIBRARY):
         previous=read_json(folder/'current.json') if (folder/'current.json').exists() else None
@@ -605,7 +717,7 @@ def saved_response(run,call,body):
 def register_sources(run,s):
     """Manifest-backed intake only for the frozen new selection, before publication."""
     plan=read_json(run/'plan.json')
-    if not plan.get('allocation_id'):return
+    if plan.get('isolated_publication') or (not plan.get('allocation_id') and not plan.get('night_day')):return
     with writer_lock(reconcile.LIBRARY):
         path=reconcile.LIBRARY/'library-first-status.json';index=read_json(path)
         for d in plan['documents']:
@@ -615,7 +727,7 @@ def register_sources(run,s):
                 continue
             if any(x['source_sha256']==d['sha256'] or x['folder'].casefold()==d['library_document']['folder'].casefold() for x in index['sources']):raise runtime.Fatal('Library identity/folder collision')
             library.ensure_source(reconcile.LIBRARY,d['library_document'],d['original'])
-            index['sources'].append({'source_id':sid,'source_sha256':d['sha256'],'folder':d['library_document']['folder'],'filename':d['filename'],'pages':len(d['physical_pages']),'status':'partial','selected_generation':None,'document_type':d['library_document']['document_type'],'collection_membership':'Explicit selected30 master PDFs','introduced_by':str(run)})
+            index['sources'].append({'source_id':sid,'source_sha256':d['sha256'],'folder':d['library_document']['folder'],'filename':d['filename'],'pages':len(d['physical_pages']),'status':'partial','selected_generation':None,'document_type':d['library_document']['document_type'],'collection_membership':plan.get('collection_membership','Explicit selected30 master PDFs'),'introduced_by':str(run)})
         index['counts']={k:sum(x['status']==k for x in index['sources']) for k in ('ready','partial','deferred')};atomic_json(path,index)
 
 def worker(run):
@@ -633,6 +745,9 @@ def worker(run):
                     try:check=compiler_environment.compile_saved(run,s,ROOT,r'\documentclass{article}\begin{document}Compiler qualification.\end{document}',run/'compiler-preflight'/str(time.time_ns()),{})
                     except OSError as exc:check={'status':'unavailable','reason':str(exc)}
                     s['optional_compiler_preflight']=check;save(run,s)
+                if read_json(run/'plan.json').get('night_day'):
+                    from probe.library_night_day import execute
+                    execute(run,s,sys.modules[__name__]);s.update(status=TERMINAL,finished_at=runtime.now(),stage='finished60; no automatic next batch');return
                 extract(run,s)
                 if read_json(run/'plan.json').get('overnight'):
                     from probe import library_paid
@@ -674,9 +789,10 @@ def worker(run):
             finally:save(run,s);bundle(run,s)
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('action',choices=['prepare','refresh-prepared','revise-content-first','run','resume','worker','status','pause','bundle']);p.add_argument('--source-id',action='append',default=[]);p.add_argument('--review-effort',choices=['high','max'],default='high');p.add_argument('--compile-pdf',action='store_true');p.add_argument('--run',type=Path);p.add_argument('--allow-owned-handoff',action='store_true');a=p.parse_args()
-    if a.action=='prepare':prepare(a.source_id,a.review_effort,a.compile_pdf);return
+    p=argparse.ArgumentParser();p.add_argument('action',choices=['prepare','refresh-prepared','revise-content-first','run','resume','worker','status','pause','bundle']);p.add_argument('--source-id',action='append',default=[]);p.add_argument('--review-effort',choices=['high','max'],default='high');p.add_argument('--compile-pdf',action='store_true');p.add_argument('--output-format',choices=['markdown','latex'],help='New preparations default to markdown; existing runs retain their frozen format');p.add_argument('--run',type=Path);p.add_argument('--allow-owned-handoff',action='store_true');a=p.parse_args()
+    if a.action=='prepare':prepare(a.source_id,a.review_effort,a.compile_pdf,a.output_format or 'markdown');return
     run=(a.run or Path(read_json(POINTER)['run'])).resolve()
+    if a.output_format is not None and a.output_format!=format_contract(run)['output_format']:raise runtime.Fatal('Cannot change a frozen run output format; prepare a separate job')
     if a.action=='revise-content-first':refresh_prepared(run,source_ids=a.source_id or None,content_first=True);return
     if a.action=='refresh-prepared':refresh_prepared(run);return
     if a.action=='status':print(json.dumps(read_json(run/'progress.json'),indent=2));return

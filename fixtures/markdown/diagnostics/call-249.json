@@ -1,0 +1,38 @@
+{
+  "call": "call-249",
+  "original_answer": "/home/mdi/projects/pdf-to-latex/runs/library-first-20261109T234255Z-prelaunch-096252/calls/call-249/answer.txt",
+  "sha256": "8d6c136d07175f30f613568f801e0a33ddbf307e2c58159c36902507b52c5fa8",
+  "finish_reason": "stop",
+  "elapsed_seconds": 208.51832617912441,
+  "usage": {
+    "prompt_tokens": 75983,
+    "completion_tokens": 9063,
+    "total_tokens": 85046,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 255
+    }
+  },
+  "historical_status_preserved": true,
+  "promotion": false,
+  "complete_blocks": 2,
+  "byte_identical": true,
+  "offsets": [
+    [
+      9,
+      11085
+    ],
+    [
+      12152,
+      23228
+    ]
+  ],
+  "candidate_sha256": "a36fd80d8df62f3b02aacb8f6e4482d9ba93f5f2b8838bf2c6b1b1c875164b7e",
+  "assessment": "One exact complete block can be retained offline; duplicate response remains invalid in historical ledger. No source completeness/review claim.",
+  "current_parser": {
+    "status": "ambiguous",
+    "reason": "Expected one complete TeX fence; incomplete/multiple/unsupported fences retained for inspection"
+  }
+}

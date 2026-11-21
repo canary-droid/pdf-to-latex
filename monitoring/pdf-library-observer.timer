@@ -1,0 +1,11 @@
+[Unit]
+Description=Five-minute PDF library observer tick (requires explicit bound attachment)
+
+[Timer]
+OnCalendar=*-*-* *:0/5:00
+AccuracySec=15s
+Persistent=false
+Unit=pdf-library-observer.service
+
+[Install]
+WantedBy=timers.target

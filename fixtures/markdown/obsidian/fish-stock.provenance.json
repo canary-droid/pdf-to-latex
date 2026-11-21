@@ -1,0 +1,7 @@
+{
+  "run": "/home/mdi/projects/pdf-to-latex/runs/markdown-cookbook-20261116T041329Z-linked-470910",
+  "path": "/home/mdi/projects/pdf-to-latex/runs/markdown-cookbook-20261116T041329Z-linked-470910/versions/benchmark-escoffier-cb9fe0df4906189d-unit-003/review-call-007/document.md",
+  "unit": "benchmark-escoffier-cb9fe0df4906189d-unit-003",
+  "sha256": "0685972a55e8fe662e99f1b4afdcb2e6752c186364f97d5115f7d9bf91b04397",
+  "fixture": "Exact saved Markdown; source structure retained for offline regressions only"
+}

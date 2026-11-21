@@ -168,7 +168,7 @@ class LocalClient:
             raise ValueError("model must be a nonempty model ID, at most 512 characters.")
         if purpose not in ("capability_probe", "page_review", "text_critic", "chapter", "simple_chapter"):
             raise ValueError("Unknown local request purpose.")
-        timeout_limit = 2700 if purpose == "chapter" else 900 if purpose == "text_critic" else 600
+        timeout_limit = 7200 if purpose == 'simple_chapter' else 2700 if purpose == "chapter" else 900 if purpose == "text_critic" else 600
         unbounded_generation = purpose == 'simple_chapter' and timeout is None
         if not unbounded_generation and (isinstance(timeout, bool) or not isinstance(timeout, (int, float)) or not math.isfinite(timeout) or not 0 < timeout <= timeout_limit):
             raise ValueError(f"timeout must be between 0 and {timeout_limit} seconds.")

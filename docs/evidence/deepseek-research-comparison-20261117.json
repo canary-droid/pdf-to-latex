@@ -1,0 +1,72 @@
+{
+  "at": "2026-11-17T05:07:54.078386+00:00",
+  "execution_complete": true,
+  "grading_complete": true,
+  "scored": 64,
+  "usable_local": 32,
+  "usable_hosted": 30,
+  "scored_api_errors": [
+    "R01.r1.hosted_fp8",
+    "V01_image.r2.hosted_fp8"
+  ],
+  "generation_attempts": 71,
+  "hosted_attempts": 36,
+  "qualification_by_arm": {
+    "local": 3,
+    "hosted": 4
+  },
+  "undispatched": 0,
+  "worker_live": false,
+  "services_restored_verified": true,
+  "verified_billing_usd": "0.193324372",
+  "conservative_stream_ledger_usd": "0.19332437656",
+  "uncertain_hold_usd": "0.154140672",
+  "uncertain_reservation": "0036",
+  "remaining_experiment_allowance_usd": "9.65253495144",
+  "practical_scores": {
+    "local_exl3": 98.125,
+    "hosted_fp8": 91.28472222222223
+  },
+  "conditional_scores": {
+    "local_exl3": 98.125,
+    "hosted_fp8": 97.25694444444444
+  },
+  "scores_sha256": "74d89c6d0925d78a0e1576327bda1970b85ba309afcf14a1a34d78b7bff7b195",
+  "manifest_sha256": "cf0974ff27929ccec1434feb74dd469607576a6f7a2be7908eaeb08c83ae131e",
+  "report_sha256": "73be02f1bad79dd59fa8ec1ff0a8c32639de4c8e01a9445a575155a555f5903b",
+  "archive_path": "/home/mdi/projects/pdf-to-latex/results/inspection/deepseek-research-comparison-20261116T204610Z.zip",
+  "report": "results/deepseek-research-comparison-20261116/REPORT.md",
+  "archive_verification": {
+    "path": "/home/mdi/projects/pdf-to-latex/results/inspection/deepseek-research-comparison-20261116T204610Z.zip",
+    "sha256": "3eaa3c229b82a4b49fad8647aeec5b47123d749eba04fdd98e7f9cd000fb1f75",
+    "bytes": 2683729,
+    "payloads_verified": 1072,
+    "crc_and_extraction_hashes_passed": true,
+    "all_bound_implementation_files_included": true,
+    "runtime_credential_absent": true,
+    "request_reconstruction_verification": {
+      "at": "2026-11-17T05:23:01.698434+00:00",
+      "passed": true,
+      "archive_sha256": "3eaa3c229b82a4b49fad8647aeec5b47123d749eba04fdd98e7f9cd000fb1f75",
+      "public_conditions_reconstructed": 16,
+      "all_requests_reconstructed_byte_for_byte": 71,
+      "scored_manifest_matches": 64,
+      "qualification_kinds_reconstructed": 3,
+      "csv_cardinalities_verified": true,
+      "generation_calls": 0,
+      "frozen_scored_order_verified": true,
+      "serial_no_overlap_verified": true,
+      "qualification_before_scoring_verified": true,
+      "unique_attempt_ids": 71,
+      "both_failed_outcomes_preserved": true
+    }
+  },
+  "final_order_and_failure_checks": {
+    "at": "2026-11-17T05:23:01.698434+00:00",
+    "frozen_scored_order_verified": true,
+    "serial_no_overlap_verified": true,
+    "qualification_before_scoring_verified": true,
+    "unique_attempt_ids": 71,
+    "both_failed_outcomes_preserved": true
+  }
+}

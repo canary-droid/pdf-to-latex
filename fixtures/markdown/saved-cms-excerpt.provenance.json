@@ -1,0 +1,91 @@
+{
+  "parent_run": "runs/library-first-20261115T190611Z-power-recovery",
+  "source_id": "master-5f57f34a412e4d54",
+  "source_physical_pages": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "version": {
+    "path": "versions/master-5f57f34a412e4d54-unit-001/convert-call-001/document.tex",
+    "sha256": "31c758a483cfbe555466cdde9a4a87c8cd23b7a3beac54caae83fb9dba17905b",
+    "compilation": {
+      "status": "not_requested",
+      "reason": "Content-first library; original PDF is reading copy"
+    },
+    "content_check": {
+      "usable": true,
+      "content_issues": [],
+      "mathematical_confidence": "not independently established",
+      "compilation_required": false,
+      "coverage": {
+        "duplicated_verified_figures": [],
+        "target_blocks": 41,
+        "target_sha256": "93c20793161007c542ba286b52259c17910480dd8faae6432c7ce1fe8d8644fc",
+        "missing_heading_candidates": [],
+        "missing_required_charts": [],
+        "empty_appendix_body_candidates": [],
+        "table_count_warning": false,
+        "source_tables": 1,
+        "output_table_environments": 1,
+        "output_table_images": 0,
+        "missing_explicit_equation_numbers": [],
+        "source_numbered_equations": [
+          "1",
+          "2",
+          "3"
+        ],
+        "output_explicit_equation_numbers": [
+          "1",
+          "2",
+          "3"
+        ],
+        "equation_sequence_status": "automatic or unnumbered equations require inspection",
+        "undefined_labels": [],
+        "source_equation_blocks": 5,
+        "formula_images": "Equation/footnote crops may be replaced by editable mathematics; absent crop alone is not an omission.",
+        "semantic_completeness": "not established; no claim based on completion or compilation",
+        "verification": "deterministic risk indicators only; heading presence, tag counts and model claims are insufficient proof",
+        "equation_label_adjudications": [],
+        "heading_adjudications": [],
+        "empty_or_insubstantial_output": false,
+        "expected_figure_assets": [],
+        "missing_expected_assets": [],
+        "automatic_numbering_unverified": [],
+        "missing_substantive_span_candidates": [],
+        "coverage_status": "requires_source_review"
+      }
+    }
+  },
+  "parent_tex_sha256": "31c758a483cfbe555466cdde9a4a87c8cd23b7a3beac54caae83fb9dba17905b",
+  "fixture_sha256": "aaa263d4d5f83be4bd2222fccb7d24508ac7dc4c5d39e75cb2f046df8be78d97",
+  "selection": [
+    {
+      "kind": "equation",
+      "start": 8563,
+      "end": 8716
+    },
+    {
+      "kind": "table",
+      "start": 12102,
+      "end": 13391
+    },
+    {
+      "kind": "lemma",
+      "start": 10070,
+      "end": 10724
+    },
+    {
+      "kind": "proof",
+      "start": 10726,
+      "end": 11254
+    },
+    {
+      "kind": "footnote",
+      "start": 1711,
+      "end": 1882
+    }
+  ],
+  "purpose": "Exact saved technical syntax fixtures, no assertion model formulae are source-verified"
+}

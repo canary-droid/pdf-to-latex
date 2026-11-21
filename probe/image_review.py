@@ -12,6 +12,8 @@ REVIEW_EXAMPLE={'base_sha256':'EXACT_FULL_DRAFT_SHA256',
       **{k:'explicit factual evidence for '+k for k in EVIDENCE_FIELDS},'replacement_format':'tex'}]}
 LITERAL_PREFIX='EXACT DRAFT — literal TeX, not JSON-escaped text. Backslashes below are TeX commands; line breaks are line breaks.\n```latex\n'
 LITERAL_SUFFIX='\n```\nEND EXACT DRAFT'
+MARKDOWN_PREFIX='EXACT DRAFT — literal Markdown, not JSON-escaped text.\n````markdown\n'
+MARKDOWN_SUFFIX='\n````\nEND EXACT DRAFT'
 
 def validate_review_shape(data):
     if not isinstance(data,dict):raise ValueError('Review response must be a JSON object')
@@ -22,20 +24,23 @@ def validate_review_shape(data):
         if not isinstance(coverage,dict) or any(type(coverage.get(k)) is not bool for k in ('full_assigned_scope_reviewed','additional_findings_remain')) or not isinstance(coverage.get('unreviewed_scope'),str):
             raise ValueError('Invalid scope_review attestation')
         if not coverage['full_assigned_scope_reviewed'] and not coverage['unreviewed_scope'].strip():raise ValueError('Incomplete scope needs a locator/description')
+    samples=data.get('numerical_cell_checks',[])
+    if not isinstance(samples,list) or len(samples)>6 or any(not isinstance(x,dict) or any(not isinstance(x.get(k),str) for k in ('source','row','column','printed_source','draft_reading','result')) for x in samples):raise ValueError('Invalid located numerical-cell observations')
     return data
 
 def request_payload(body):
     content=body['messages'][0]['content'];first=content[0]['text'] if isinstance(content,list) else content
     payload=json.loads(first.split('\n',1)[1])
-    if payload.get('draft_encoding')=='literal_tex_content_part':
-        blocks=[p['text'] for p in content[1:] if p.get('type')=='text' and p.get('text','').startswith(LITERAL_PREFIX)]
-        if len(blocks)!=1 or not blocks[0].endswith(LITERAL_SUFFIX):raise ValueError('Missing/ambiguous literal draft')
-        payload['draft']=blocks[0][len(LITERAL_PREFIX):-len(LITERAL_SUFFIX)]
+    if payload.get('draft_encoding') in ('literal_tex_content_part','literal_markdown_content_part'):
+        prefix,suffix=(MARKDOWN_PREFIX,MARKDOWN_SUFFIX) if payload['draft_encoding']=='literal_markdown_content_part' else (LITERAL_PREFIX,LITERAL_SUFFIX)
+        blocks=[p['text'] for p in content[1:] if p.get('type')=='text' and p.get('text','').startswith(prefix)]
+        if len(blocks)!=1 or not blocks[0].endswith(suffix):raise ValueError('Missing/ambiguous literal draft')
+        payload['draft']=blocks[0][len(prefix):-len(suffix)]
     return payload
 
 def image_content(body):
     content=body['messages'][0]['content']
-    return [p for p in content[1:] if not (p.get('type')=='text' and p.get('text','').startswith(LITERAL_PREFIX))]
+    return [p for p in content[1:] if not (p.get('type')=='text' and p.get('text','').startswith((LITERAL_PREFIX,MARKDOWN_PREFIX)))]
 
 def geometry(width,height,cap=2048):
     align=lambda v:math.ceil(v/28)*28
@@ -58,7 +63,7 @@ def image_parts(records,root):
         parts += [{'type':'text','text':f"Original source physical page {r['physical_page']}; "+('full page' if r.get('crop') is None else 'detail crop, original pixel box '+str(r['crop']))}, {'type':'image_url','image_url':{'url':'data:image/png;base64,'+base64.b64encode(data).decode(),'detail':'high'}}]
     return parts
 
-def with_images(body,parts):
+def with_images(body,parts,output_format="latex",format_protocol=None):
     result=copy.deepcopy(body)
     text=result['messages'][0]['content']
     # Replace the inaccurate text-only statement, preserving exact input payload.
@@ -68,8 +73,18 @@ def with_images(body,parts):
     # Replace the obsolete short response example, rather than appending a second
     # contradictory schema. Missing factual evidence remains withheld, never invented.
     instruction=instruction.split('Return JSON only:',1)[0]
-    instruction+='Review all assigned content. At most8 located findings; if unfinished or additional findings remain, record that honestly in scope_review. An empty list is not an attestation of full scope. Do not invent evidence to fill fields. Return JSON only, following this example: '+json.dumps(REVIEW_EXAMPLE)+'. Status may be edit, suggestion or unresolved. replacement_format is one of '+','.join(REPLACEMENT_FORMATS)+'. Do not rewrite the complete draft.'
-    result['messages'][0]['content']=[{'type':'text','text':instruction+'\n'+json.dumps(payload,ensure_ascii=False)}, {'type':'text','text':LITERAL_PREFIX+draft+LITERAL_SUFFIX}]+copy.deepcopy(parts)
+    instruction+='Optionally report up to6 representative numerical_cell_checks as objects with source, row, column, printed_source, draft_reading and result strings; these are located model observations, not verified answers. Use an empty list when no numerical tables occur, and record unreadable cells as unresolved findings. Check representative numerical table cells directly against the source pixels, especially difficult layouts. Preserve signs, exponents, decimal points and row/column association; do not infer a cell from neighbouring patterns. Locate numerical discrepancies or unreadable cells in findings; do not claim an independent exhaustive table audit. Review all assigned content. At most8 located findings; if unfinished or additional findings remain, record that honestly in scope_review. An empty list is not an attestation of full scope. Do not invent evidence to fill fields. Return JSON only, following this example: '+json.dumps(REVIEW_EXAMPLE)+'. Status may be edit, suggestion or unresolved. replacement_format is one of '+','.join(REPLACEMENT_FORMATS)+'. Do not rewrite the complete draft.'
+    prefix,suffix=LITERAL_PREFIX,LITERAL_SUFFIX
+    if format_protocol is not None:
+        payload.update(output_format=output_format,format_protocol=format_protocol)
+        instruction+=' Echo output_format='+output_format+' and format_protocol='+format_protocol+' at the top level of the response. These bind the review to the source format as well as its draft hash.'
+    if output_format=='markdown':
+        from .source_formats import MARKDOWN_RULES
+        prefix,suffix=MARKDOWN_PREFIX,MARKDOWN_SUFFIX;payload['draft_encoding']='literal_markdown_content_part'
+        instruction=instruction.replace('TeX','Markdown').replace('"tex"','"markdown"').replace('tex,plain_annotation','markdown')
+        instruction+=' The preceding plain_annotation instructions are inapplicable to Markdown: do not insert program-generated TeX notes; keep commentary in findings. '+MARKDOWN_RULES+' Use replacement_format="markdown" for edits; annotations remain separate in findings. Retain exact table cells/rows, figure links, footnote IDs and equation tags.'
+    if output_format=='markdown':instruction=instruction.replace('\n',' ')
+    result['messages'][0]['content']=[{'type':'text','text':instruction+'\n'+json.dumps(payload,ensure_ascii=False)}, {'type':'text','text':prefix+draft+suffix}]+copy.deepcopy(parts)
     return result
 
 def annotation_ranges(draft):
@@ -77,7 +92,7 @@ def annotation_ranges(draft):
     pattern=r'\\par\\smallskip\\noindent\\textbf\{[^\n]*\[[^\]\n]*-[a-f0-9]{10}\]\.\} (.*?)\n\\par\\smallskip'
     return [(m.start(1),m.end(1)) for m in re.finditer(pattern,draft,re.S)]
 
-def apply_review(draft, proposal, ranges=None):
+def apply_review(draft, proposal, ranges=None, output_format="latex", format_protocol=None):
     """Image evidence and typed annotations before the existing exact-edit validator.
 
     Plain annotation replacements are escaped once. Intentional mathematical TeX
@@ -85,10 +100,12 @@ def apply_review(draft, proposal, ranges=None):
     """
     from . import focused_recovery as edits, chapter_editorial as editorial
     data=copy.deepcopy(validate_review_shape(proposal))
-    notes=annotation_ranges(draft)
+    if format_protocol is not None and (data.get('output_format')!=output_format or data.get('format_protocol')!=format_protocol):raise ValueError('Wrong or absent review format/protocol')
+    notes=annotation_ranges(draft) if output_format=='latex' else []
+    allowed=('markdown',) if output_format=='markdown' else REPLACEMENT_FORMATS
     for f in data.get('findings',[]):
         if f.get('status')!='edit':continue
-        if not all(isinstance(f.get(k),str) and f[k].strip() for k in EDIT_REQUIRED) or f.get('replacement_format') not in REPLACEMENT_FORMATS:
+        if not all(isinstance(f.get(k),str) and f[k].strip() for k in EDIT_REQUIRED) or f.get('replacement_format') not in allowed:
             f.update(status='suggestion',application_withheld='Missing separated source/draft/change/justification evidence or required exact-edit/format fields')
             continue
         old=f.get('old');a=draft.find(old) if isinstance(old,str) and old else -1
@@ -100,10 +117,22 @@ def apply_review(draft, proposal, ranges=None):
             elif isinstance(f.get('new'),str):
                 f['plain_annotation']=f['new'];f['new']=editorial.tex_escape(f['new'])
                 f['rendering']='Plain annotation escaped once by chapter_editorial.tex_escape; no source equation edit'
-        elif kind!='tex':
+        elif kind!=('markdown' if output_format=='markdown' else 'tex'):
             f.update(status='suggestion',application_withheld='Plain annotation outside a verified generated-note body')
+    if output_format=='markdown':
+        from .source_formats import structural_tokens
+        for f in data['findings']:
+            if f.get('status')=='edit':
+                old=f.get('old','');new=f.get('new','')
+                if isinstance(old,str) and old and isinstance(new,str) and draft.count(old)==1:
+                    candidate=draft.replace(old,new,1)
+                    if structural_tokens(draft)!=structural_tokens(candidate):
+                        f.update(status='suggestion',application_withheld='Markdown structure, assets, anchors or table rows changed; retain for explicit source adjudication')
     result,log=edits.apply_focused(draft,json.dumps(data),ranges=ranges)
+    if format_protocol is not None:log.update(output_format=output_format,format_protocol=format_protocol)
     scope=data.get('scope_review') or {'full_assigned_scope_reviewed':None,'additional_findings_remain':None,'unreviewed_scope':'Not attested by this response; legacy findings do not establish full review'}
+    log['numerical_cell_checks']=copy.deepcopy(data.get('numerical_cell_checks',[]))
+    log['numerical_cell_check_status']='Located model claims; not independently verified' if log['numerical_cell_checks'] else 'No located numerical-cell observations returned'
     log['scope_review']=dict(scope,attribution='Model attestation, not independent verification')
     log['pending_suggestions']=sum(f['disposition'] in ('unapplied_suggestion','rejected','unresolved') for f in log['findings'])
     log['review_complete_attested']=scope['full_assigned_scope_reviewed'] is True and scope['additional_findings_remain'] is False

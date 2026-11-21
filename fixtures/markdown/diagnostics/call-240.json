@@ -1,0 +1,42 @@
+{
+  "call": "call-240",
+  "original_answer": "/home/mdi/projects/pdf-to-latex/runs/library-first-20261109T234255Z-prelaunch-096252/calls/call-240/answer.txt",
+  "sha256": "d2d55cf7e069d1ef34739f4d9a43a6792b317626b1ffb41f1e5a5eac8cccb397",
+  "finish_reason": "stop",
+  "elapsed_seconds": 213.07365851989016,
+  "usage": {
+    "prompt_tokens": 74581,
+    "completion_tokens": 5145,
+    "total_tokens": 79726,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 3733
+    }
+  },
+  "historical_status_preserved": true,
+  "promotion": false,
+  "invalid_escape_insertions": [
+    {
+      "offset": 1934,
+      "following": "p"
+    },
+    {
+      "offset": 1980,
+      "following": "p"
+    },
+    {
+      "offset": 2015,
+      "following": "p"
+    }
+  ],
+  "exact_draft_verified": true,
+  "edit_dispositions": [
+    "unapplied_suggestion",
+    "unapplied_suggestion",
+    "unapplied_suggestion",
+    "unapplied_suggestion"
+  ],
+  "assessment": "Serialization-only offline candidate; mathematical claims and scope remain unverified, no historical promotion. Valid JSON escapes were not reinterpreted."
+}

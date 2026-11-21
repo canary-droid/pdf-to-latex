@@ -1,5 +1,11 @@
 # PDF-to-LaTeX compatibility and fidelity probe 0.1
 
+**15 November 2026:** newly prepared source jobs now default to
+[technical Markdown](docs/MARKDOWN-SOURCES.md), with explicit LaTeX selection and
+legacy-plan compatibility. Three technical units and a separate 28-page Escoffier
+benchmark are prepared offline, **not running**. The completed 60-paper queue and
+its monitor remain finished; no inference is launched by this format change.
+
 **Latest, 1 November 2026:** the saved-work finalisation is delivered. See
 `results/book-finalisation-current.json` and the linked run's `FINAL-INDEX.md`
 for both reading PDFs and editable/TeX-only/complete-source exports. All 34

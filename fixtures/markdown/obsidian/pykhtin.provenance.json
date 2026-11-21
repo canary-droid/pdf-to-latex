@@ -1,0 +1,7 @@
+{
+  "run": "/home/mdi/projects/pdf-to-latex/runs/markdown-technical-20261116T041328Z-saved-426889",
+  "path": "/home/mdi/projects/pdf-to-latex/runs/markdown-technical-20261116T041328Z-saved-426889/versions/master-80f0aef600c203bb-unit-001/review-saved-validation-267410195d0108b1/document.md",
+  "unit": "master-80f0aef600c203bb-unit-001",
+  "sha256": "267410195d0108b17f21e833e135037de43d1479311beb18360630cb4a55bd5a",
+  "fixture": "Exact saved Markdown; source structure retained for offline regressions only"
+}

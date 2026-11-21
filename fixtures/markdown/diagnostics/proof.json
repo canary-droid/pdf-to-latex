@@ -1,0 +1,32 @@
+{
+  "unit": "master-5f57f34a412e4d54-unit-003",
+  "original_draft": "/home/mdi/projects/pdf-to-latex/runs/library-first-20261115T190611Z-power-recovery/versions/master-5f57f34a412e4d54-unit-003/convert-call-005/document.tex",
+  "draft_sha256": "854b931e1c206733150fa732ab582f96df764189b0c10741578c1c839afc9c69",
+  "original_flagged": [
+    "Proof. See Appendix D"
+  ],
+  "remaining_heading_candidates": [],
+  "source_blocks": [
+    {
+      "id": "master-5f57f34a412e4d54-p10-r8",
+      "kind": "paragraph_title",
+      "tex": "\\section*{Proof. See Appendix D}",
+      "page": {
+        "original_physical_page": 10
+      },
+      "assets": [],
+      "native": {
+        "type": "title",
+        "bbox": [
+          0.105,
+          0.497,
+          0.299,
+          0.513
+        ],
+        "angle": 0,
+        "content": "Proof. See Appendix D"
+      }
+    }
+  ],
+  "fixture_sha256": "e21a14025ad7e5af194fbf1edd003d9ffd99623ff0ee2fc11a14ef1818b7eb0f"
+}

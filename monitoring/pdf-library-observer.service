@@ -1,0 +1,11 @@
+[Unit]
+Description=Read-only PDF library health observation and sparse Codex checkpoint
+
+[Service]
+Type=oneshot
+ExecStart=/home/mdi/projects/pdf-to-latex/.venv-control/bin/python -B /home/mdi/projects/pdf-to-latex/monitoring/observer.py tick
+WorkingDirectory=/home/mdi/projects/pdf-to-latex
+Environment=PYTHONDONTWRITEBYTECODE=1
+TimeoutStartSec=infinity
+UMask=0077
+# No conversion/service-control commands, no automatic restart, no generation deadline.

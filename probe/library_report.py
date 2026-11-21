@@ -4,7 +4,7 @@ from datetime import datetime
 from pathlib import Path
 from .common import atomic_json,read_json,sha,files_manifest
 from .experiment import verify_seal
-from . import source_library,book_completion
+from . import source_library,book_completion,source_formats
 
 def inspection(run,state,output_root):
     run=Path(run).resolve();folder=run/'report'/str(time.time_ns());folder.mkdir(parents=True)
@@ -40,7 +40,8 @@ def inspection(run,state,output_root):
     for name in ('plan.json','state.json','progress.json','binding.json','task-plan.json','normal-terminal-checks.json','preparation-link.json','effort-support-live.json'):
         add(name)
     for p in (run/'source-plans').glob('*.json'):add(p)
-    for base in ('authorization','historical-hold-releases','paid-accounting-snapshot','implementation'):
+    for p in (run/'extraction-waves').glob('*/returned-state.json'):add(p)
+    for base in ('authorization','historical-hold-releases','paid-accounting-snapshot','implementation','completion-evidence','historical','checkpoints'):
         for p in (run/base).rglob('*'):
             if p.is_file():add(p)
     add('review-salvage.json');add('input-dispositions.json')
@@ -91,8 +92,10 @@ def inspection(run,state,output_root):
                 # Preserve both original/model versions and any deterministic parent.
                 for candidate in [v]+([v['syntax_parent']] if v.get('syntax_parent') else []):
                     path=run/candidate['path'];add(path,expected=candidate['sha256'],required=True)
+                    for artifact in ('before-normalization.md','normalization.json','normalization.diff'):
+                        add(path.parent/artifact)
                     if path.is_file() and sha(path)==candidate['sha256']:
-                        for ref in book_completion.image_references(path.read_text()):
+                        for ref in (source_formats.image_references(path.read_text()) if candidate.get('output_format')=='markdown' else book_completion.image_references(path.read_text())):
                             source=unit['assets'].get(ref)
                             if source:add(source,destination=str(Path(candidate['path']).parent/ref),required=True)
                             else:missing.append({'path':ref,'version':candidate['path'],'required':True,'reason':'Required asset absent from source allowlist'})
@@ -108,7 +111,7 @@ def inspection(run,state,output_root):
                 if coverage.get('coverage_status')=='omission_risk':
                     chosen=[u for u in units if u['selected_version']]
                     flag(sid,chosen[index]['physical_pages'] if index<len(chosen) else doc['physical_pages'],'generated content/figure coverage flag')
-        summary.append({'source_id':sid,'filename':doc['filename'],'source_sha256':doc['sha256'],'physical_pages':doc['physical_pages'],
+        summary.append({'source_id':sid,'filename':doc['filename'],'source_sha256':doc['sha256'],'physical_pages':doc['physical_pages'],**source_formats.identity(plan),
           'status':record['status'],'diagnostic':record.get('diagnostic'),'source_accounting':record.get('source_accounting'),
           'outstanding_scopes':outstanding,'units':units,'publication':publication,'selected_new_generation':record.get('selected_new_generation',False),
           'delivery_integrity':delivery_integrity,'content_complete':bool(delivery_integrity=='verified' and publication and publication['content_status']=='complete_assigned_source' and not outstanding),
@@ -119,6 +122,10 @@ def inspection(run,state,output_root):
         if page is None:missing.append({'source_id':sid,'page':n,'reason':'Flagged page absent from original-page manifest','required':True});continue
         add(page['path'],expected=page['sha256'],required=True);images.append({'source_id':sid,'physical_page':n,'path':page['path'],'sha256':page['sha256'],'reasons':sorted(reasons)})
     atomic_json(folder/'PAPER-SUMMARY.json',summary);atomic_json(folder/'FLAGGED-SOURCE-PAGES.json',images)
+    if plan.get('completion_phase'):
+        before=read_json(run/'historical/parent-deliveries.json')
+        changes=[{'source_id':d['source_id'],'filename':d['filename'],'before':before[d['source_id']]['status'],'after':state['documents'][d['source_id']]['status'],'new_generation_selected':state['documents'][d['source_id']].get('selected_new_generation',False),'remaining_scopes':state['documents'][d['source_id']].get('outstanding_scopes',[])} for d in plan['documents']]
+        atomic_json(folder/'BEFORE-AFTER.json',{'documents':changes,'lineage':plan['lineage'],'new_local_calls':len(state['calls']),'before_paid_accounting':read_json(Path(plan['parent_run'])/'progress.json')['paid_accounting'],'after_paid_accounting':__import__('probe.library_fallbacks',fromlist=['budget_summary']).budget_summary(run,plan['paid_approval']),'new_allocation_usd':0})
     atomic_json(folder/'TIMINGS.json',timings);stream=io.StringIO()
     fields=('call','task','source','phase','status','seconds','reasoning_tokens','final_tokens','completion_tokens','cached_tokens')
     writer=csv.DictWriter(stream,fieldnames=fields);writer.writeheader();writer.writerows({k:r[k] for k in fields} for r in timings);(folder/'TIMINGS.csv').write_text(stream.getvalue())
@@ -129,11 +136,11 @@ def inspection(run,state,output_root):
     atomic_json(folder/'TIMING-SUMMARY.json',{'request_seconds_summed':sum(durations),'failed_request_seconds_included':sum(failed),'elapsed_batch_seconds':wall,
       'extraction':extraction,'interpretation':'Summed request durations overlap at concurrency two. Missing timings are unknown, not zero; extraction load/page measurements are separate.'})
     lines=['# Finite library batch results','', 'Status: '+state['status'], '',
-      'High conversion / High image review (unless explicit Max in plan); at most two local requests. '+('Conditional Mathpix/Kimi recovery uses ONE fresh combined $7 allocation; historical charges remain separate and provider allowance still applies.' if plan.get('allocation_id') else 'Paid recovery is explicitly approved in plan.json.' if plan.get('paid_enabled') else 'Paid routes disabled.')+' No overall deadline. This archive contains saved results, not mathematical certification.',
+      'High conversion / High image review (unless explicit Max in plan); at most two local requests. '+('This completion inherits the SAME shared $7 allocation and all consumed reservations; no new allocation.' if plan.get('completion_phase') else 'Conditional Mathpix/Kimi recovery uses ONE fresh combined $7 allocation; historical charges remain separate and provider allowance still applies.' if plan.get('allocation_id') else 'Paid recovery is explicitly approved in plan.json.' if plan.get('paid_enabled') else 'Paid routes disabled.')+' No overall deadline. This archive contains saved results, not mathematical certification.',
       '', '| Paper | Status | Content complete | Produced-part compilation | Outstanding source spans |', '|---|---|---|---|---:|']
     for row in summary:
         pub=row['publication'] or {};lines.append('| '+row['filename'].replace('|','/')+' | '+row['status']+' | '+str(row['content_complete'])+' | '+pub.get('compilation','not published')+' | '+str(len(row['outstanding_scopes']))+' |')
-    lines+=['','Read PAPER-SUMMARY.json for per-unit selected versions, review findings, pending/failed reviews and exact outstanding scopes. deliveries/ contains portable selected TeX/assets and reading PDFs where produced; versions/ also retains original/reviewed candidates, including unpublished results and failed builds. calls/ contains final responses, edit diffs and compact diagnostics. TIMINGS.csv separates calls/phases/failures. FLAGGED-SOURCE-PAGES.json identifies included ORIGINAL page images. No generated reading PDF is presented as source evidence.',
+    lines+=['','Read PAPER-SUMMARY.json for per-unit selected versions, review findings, pending/failed reviews and exact outstanding scopes. deliveries/ contains portable selected Markdown or TeX/assets and reading PDFs where produced; versions/ also retains original/reviewed candidates, including unpublished results and failed builds. calls/ contains final responses, edit diffs and compact diagnostics. TIMINGS.csv separates calls/phases/failures. FLAGGED-SOURCE-PAGES.json identifies included ORIGINAL page images. No generated reading PDF is presented as source evidence.',
       '', 'Source-plan accounting includes both scheduled and outstanding regions exactly once. A passing build of scheduled parts cannot make an incomplete paper complete. Missing/unavailable artifacts are explicit in MISSING-ARTIFACTS.json. OMITTED.json lists all run files excluded, with reasons. Credentials, model weights, environments, lengthy reasoning, repeated base64 request payloads and raw streams are excluded. Originals and full evidence remain at their saved local paths.']
     (folder/'START-HERE.md').write_text('\n'.join(lines)+'\n');atomic_json(folder/'MISSING-ARTIFACTS.json',missing)
     omitted=[]

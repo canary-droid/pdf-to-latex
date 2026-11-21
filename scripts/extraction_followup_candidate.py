@@ -295,7 +295,7 @@ def main():
                               process_lifetime_peak_rss_kib=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
                               memory_scope='This Python process/allocator; separate vLLM server allocations excluded')
                 save(folder/'outcome.json',record);save(state_path,state)
-            if (document,page)==smoke and record['status']!='completed':
+            if (document,page)==smoke and record['status']!='completed' and not plan.get('night_day'):
                 state['status']='qualification_failed';break
         else:state['status']='finished'
     except BaseException as exc:
